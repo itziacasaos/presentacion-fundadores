@@ -329,6 +329,11 @@
         .slide-10 .renewal-grid {
             margin-top: 0;
         }
+        /* Utilidad para ocultar una slide sin borrarla del código.
+           Actualmente aplicada a la slide 9 (Dashboard). */
+        .slide-hidden {
+            display: none !important;
+        }
 
         .modal-overlay {
             display: none;
@@ -510,8 +515,8 @@
     <div class="modal-overlay no-print" id="meta-modal">
         <div class="modal-box">
             <h3 style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); margin-top: 0;">Actualizar datos de Meta</h3>
-            <p style="font-size: 14px; color: #555;">Pega aquí el JSON con los datos de Meta (debe tener la misma estructura que <code>META</code> en el script).</p>
-            <textarea id="meta-json-input" placeholder='{ "clients": { ... } }'></textarea>
+            <p style="font-size: 14px; color: #555;">Pega aquí <strong>tal cual lo copiaste</strong> de la página de "Pauta Propiedades.com" (las tablas de "Comparativa por cliente" y/o "Detalle por publicación"). También acepta JSON si lo prefieres.</p>
+            <textarea id="meta-json-input" placeholder="Pega aquí el texto copiado de la página, o un JSON con la propiedad clients"></textarea>
             <div id="meta-status" class="status-msg" style="display:none;"></div>
             <div class="btn-group">
                 <button id="btn-meta-cancel" class="btn btn-secondary">Cancelar</button>
@@ -808,7 +813,7 @@
             </div>
         </div>
     </div>
-    <div class="slide slide-9">
+    <div class="slide slide-9 slide-hidden">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>Tu Dashboard</h2>
@@ -931,7 +936,7 @@ var SUPABASE_URL = 'TU_SUPABASE_URL';           // ej: https://xxxxxxxxxxxx.supa
 var SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY'; // Project Settings → API → anon public
 
 var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cataño Bienes Raíces", "propiedades_activas": 506, "propiedades_total": 2656, "series": [{"mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005}, {"mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212}, {"mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753}, {"mes": "Ago", "leads": 168, "contactos": 0, "eventos": 0, "impresiones": 430292, "vistas": 12903}]}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria Inmobiliaria", "propiedades_activas": 1, "propiedades_total": 823, "series": [{"mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0}, {"mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444, "vistas": 1529}, {"mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441, "vistas": 1860}, {"mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336, "vistas": 2466}, {"mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706, "vistas": 695}]}, "mint": {"id": "mint", "nombre": "MINT inmobiliaria MINT INMOBILIARIA", "propiedades_activas": 101, "propiedades_total": 551, "series": [{"mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227}, {"mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454}, {"mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637}, {"mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553, "vistas": 3462}]}}};
-var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 302.95, "eventos": 3108, "cpa": 0.1, "evpag": 3.13, "contactos": 1783, "cpl": 2.12, "anuncios": 5, "impresiones": 287475, "clics": 1806, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 28, "contactos": 406, "impresiones": 66393, "clics": 301, "ctr": 0.54, "gasto": 55.11, "cpm": 0.83, "cpc": 0.18}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 16, "contactos": 374, "impresiones": 61659, "clics": 194, "ctr": 0.41, "gasto": 55.07, "cpm": 0.89, "cpc": 0.28}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 33, "contactos": 283, "impresiones": 44866, "clics": 375, "ctr": 1.04, "gasto": 55.06, "cpm": 1.23, "cpc": 0.15}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 33, "contactos": 390, "impresiones": 66309, "clics": 648, "ctr": 1.02, "gasto": 54.97, "cpm": 0.83, "cpc": 0.08}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 33, "contactos": 330, "impresiones": 48248, "clics": 288, "ctr": 0.72, "gasto": 54.9, "cpm": 1.14, "cpc": 0.19}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 108, "gasto": 279.3, "eventos": 2373, "cpa": 0.12, "evpag": 3.42, "contactos": 1292, "cpl": 2.59, "anuncios": 5, "impresiones": 229820, "clics": 1534, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 19, "contactos": 267, "impresiones": 44127, "clics": 289, "ctr": 0.86, "gasto": 50.2, "cpm": 1.14, "cpc": 0.17}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 19, "contactos": 263, "impresiones": 50876, "clics": 264, "ctr": 0.62, "gasto": 50.12, "cpm": 0.99, "cpc": 0.19}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 24, "contactos": 267, "impresiones": 47300, "clics": 278, "ctr": 0.71, "gasto": 50.05, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 25, "contactos": 286, "impresiones": 49776, "clics": 207, "ctr": 0.49, "gasto": 49.98, "cpm": 1.0, "cpc": 0.24}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 21, "contactos": 209, "impresiones": 37741, "clics": 496, "ctr": 1.41, "gasto": 49.92, "cpm": 1.32, "cpc": 0.1}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 100, "gasto": 262.24, "eventos": 2315, "cpa": 0.11, "evpag": 2.7, "contactos": 1456, "cpl": 2.62, "anuncios": 4, "impresiones": 237434, "clics": 1111, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 22, "contactos": 313, "impresiones": 58004, "clics": 230, "ctr": 0.53, "gasto": 50.16, "cpm": 0.86, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 25, "contactos": 288, "impresiones": 46063, "clics": 431, "ctr": 1.06, "gasto": 50.11, "cpm": 1.09, "cpc": 0.12}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 14, "contactos": 295, "impresiones": 67426, "clics": 215, "ctr": 0.37, "gasto": 50.05, "cpm": 0.74, "cpc": 0.23}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 25, "contactos": 323, "impresiones": 65941, "clics": 235, "ctr": 0.42, "gasto": 49.97, "cpm": 0.76, "cpc": 0.21}]}, "pulppo": {"nombre": "Pulppo", "leads": 54, "gasto": 177.39, "eventos": 1545, "cpa": 0.11, "evpag": 5.12, "contactos": 963, "cpl": 3.28, "anuncios": 4, "impresiones": 211077, "clics": 856, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 11, "contactos": 183, "impresiones": 48238, "clics": 187, "ctr": 0.51, "gasto": 43.25, "cpm": 0.9, "cpc": 0.23}, {"publicacion": "31307357", "colonia": "Tamanché", "leads": 9, "contactos": 150, "impresiones": 55237, "clics": 220, "ctr": 0.45, "gasto": 42.73, "cpm": 0.77, "cpc": 0.19}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 15, "contactos": 233, "impresiones": 48485, "clics": 248, "ctr": 0.64, "gasto": 42.67, "cpm": 0.88, "cpc": 0.17}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 13, "contactos": 348, "impresiones": 59117, "clics": 201, "ctr": 0.39, "gasto": 42.52, "cpm": 0.72, "cpc": 0.21}]}}};
+var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 276.93, "eventos": 3162, "cpa": 0.09, "evpag": 4.06, "contactos": 1829, "cpl": 1.94, "anuncios": 5, "impresiones": 404598, "clics": 2543, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573, "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84, "cpc": 0.19}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525, "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9, "cpc": 0.27}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483, "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11, "cpc": 0.19}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534, "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85, "cpc": 0.09}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390, "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27, "cpc": 0.14}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 163, "gasto": 274.86, "eventos": 3036, "cpa": 0.09, "evpag": 4.33, "contactos": 1661, "cpl": 1.69, "anuncios": 5, "impresiones": 340501, "clics": 2381, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418, "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1, "cpc": 0.13}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346, "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34, "cpc": 0.11}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390, "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437, "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01, "cpc": 0.26}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386, "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95, "cpc": 0.16}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 122, "gasto": 236.89, "eventos": 2677, "cpa": 0.09, "evpag": 4.28, "contactos": 1667, "cpl": 1.94, "anuncios": 4, "impresiones": 354563, "clics": 1729, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461, "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86, "cpc": 0.2}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433, "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72, "cpc": 0.21}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504, "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465, "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09, "cpc": 0.11}]}, "pulppo": {"nombre": "Pulppo", "leads": 88, "gasto": 224.17, "eventos": 2144, "cpa": 0.1, "evpag": 5.24, "contactos": 1249, "cpl": 2.55, "anuncios": 4, "impresiones": 322236, "clics": 1358, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244, "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79, "cpc": 0.19}, {"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14, "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15, "cpm": 0.9, "cpc": 0.2}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508, "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73, "cpc": 0.23}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365, "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89, "cpc": 0.17}]}}};
 var PROMOS = {"promo_12_4": {"nombre": "Promo 12 + 4", "avisos": "Hasta 15 avisos activos", "vigencia": "16 meses (12 pagados + 4 de regalo)", "inversion": "$14,900 MXN/mes"}, "paga8_obten12": {"nombre": "Paga 8 y obtén 12", "avisos": "Hasta 15 avisos activos", "vigencia": "12 meses (pagas 8)", "inversion": "$14,900 MXN/mes"}, "anual_estandar": {"nombre": "Plan Anual Estándar", "avisos": "Hasta 10 avisos activos", "vigencia": "12 meses", "inversion": "$11,900 MXN/mes"}, "semestral": {"nombre": "Plan Semestral", "avisos": "Hasta 10 avisos activos", "vigencia": "6 meses", "inversion": "$13,400 MXN/mes"}};
 // RANKING: top de avisos por cliente. Se actualiza automáticamente todos los
 // días desde la tabla en vivo de Metabase (ver /api/sync-metabase.js) —
@@ -1186,7 +1191,7 @@ function renderClient() {
     for (var r = 0; r < 5; r++) {
         var p = ranking[r];
         if (p) {
-            setField('rank-' + r + '-nombre', p.codigo + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
+            setField('rank-' + r + '-nombre', p.property_id + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
             setField('rank-' + r + '-tipo', p.tipo_operacion || '—');
             setField('rank-' + r + '-vistas', fmtNum(p.vistas));
             setField('rank-' + r + '-leads', fmtNum(p.leads));
@@ -1212,16 +1217,128 @@ function renderPromo(promoKey) {
 }
 
 // ---- Actualizar META desde un objeto/JSON pegado o desde una URL ----
-function updateMetaData(newMeta) {
-    try {
-        if (typeof newMeta === 'string') newMeta = JSON.parse(newMeta);
-        if (!newMeta.clients || typeof newMeta.clients !== 'object') {
-            throw new Error('El JSON debe tener la propiedad "clients"');
+// ================================================================
+// Parser del texto que se copia y pega directamente de la página
+// de "Pauta Propiedades.com" (Metabase/Habi) — NO requiere convertir
+// nada a JSON. Reconoce dos bloques por su forma, sin importar el
+// orden en que aparezcan en el texto pegado:
+//
+//  1) "Comparativa por cliente" (una línea por cliente, 10 columnas)
+//  2) "Detalle por publicación" (una línea por aviso, 19-20 columnas)
+//
+// Las columnas vienen separadas por TAB al copiar la tabla del
+// navegador; como respaldo, si no hay tabs también acepta 2+ espacios.
+// ================================================================
+var KNOWN_CLIENT_NAMES = ['Cataño México', 'MINT Inmobiliaria', 'Cattori Inmobiliaria', 'Pulppo'];
+
+function splitCols(line) {
+    if (line.indexOf('\t') !== -1) return line.split('\t').map(function (s) { return s.trim(); });
+    return line.trim().split(/ {2,}/).map(function (s) { return s.trim(); });
+}
+function numMoney(s) { return s ? Number(String(s).replace(/[$,]/g, '')) : 0; }
+function numPlain(s) { return s ? Number(String(s).replace(/,/g, '')) : 0; }
+function numPct(s) { return s ? Number(String(s).replace('%', '')) : 0; }
+
+function parseMetaPastedText(text) {
+    var lines = text.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+    var clientsOut = {};
+    var detalleByClientName = {};
+
+    lines.forEach(function (line) {
+        var cols = splitCols(line);
+
+        // ---- Línea de "Comparativa por cliente" ----
+        // <Cliente> <anuncios> <$gasto> <eventos> <$cpa> <ev/pag> <pct%> <contactos> <leads> <$costo_lead>
+        if (KNOWN_CLIENT_NAMES.indexOf(cols[0]) !== -1 && cols.length === 10) {
+            var nombre = cols[0];
+            clientsOut[nombre] = {
+                nombre: nombre,
+                anuncios: numPlain(cols[1]),
+                gasto: numMoney(cols[2]),
+                eventos: numPlain(cols[3]),
+                cpa: numMoney(cols[4]),
+                evpag: Number(cols[5]) || 0,
+                contactos: numPlain(cols[7]),
+                leads: numPlain(cols[8]),
+                cpl: numMoney(cols[9]),
+                impresiones: 0,
+                clics: 0,
+                detalle: [],
+            };
+            return;
         }
-        META = newMeta;
+
+        // ---- Línea de "Detalle por publicación" ----
+        // <id 8 dígitos> <Cliente> <estado_ad> <estado_pub> <etapa> <eventos> <$cpa> <ev/pag>
+        // <contactos> <leads> <colonia> <$gasto> <impr> <clics> <ctr> <$cpm> <$cpc> <x> <y> [Ver ↗]
+        if (/^\d{6,9}$/.test(cols[0]) && KNOWN_CLIENT_NAMES.indexOf(cols[1]) !== -1 && cols.length >= 19) {
+            var cliente = cols[1];
+            detalleByClientName[cliente] = detalleByClientName[cliente] || [];
+            detalleByClientName[cliente].push({
+                publicacion: cols[0],
+                colonia: cols[10],
+                leads: numPlain(cols[9]),
+                contactos: numPlain(cols[8]),
+                impresiones: numPlain(cols[12]),
+                clics: numPlain(cols[13]),
+                ctr: Number(cols[14]) || 0,
+                gasto: numMoney(cols[11]),
+                cpm: numMoney(cols[15]),
+                cpc: numMoney(cols[16]),
+            });
+        }
+    });
+
+    if (Object.keys(clientsOut).length === 0) return null; // no se reconoció nada
+
+    Object.keys(detalleByClientName).forEach(function (nombre) {
+        if (clientsOut[nombre]) {
+            clientsOut[nombre].detalle = detalleByClientName[nombre];
+            clientsOut[nombre].impresiones = sumField(detalleByClientName[nombre], 'impresiones');
+            clientsOut[nombre].clics = sumField(detalleByClientName[nombre], 'clics');
+        }
+    });
+
+    // Traducir "nombre visible" -> id interno (catano/cattori/mint/pulppo),
+    // conservando propiedades_activas_portal si ya existía.
+    var NAME_TO_ID = { 'Cataño México': 'catano', 'MINT Inmobiliaria': 'mint', 'Cattori Inmobiliaria': 'cattori', 'Pulppo': 'pulppo' };
+    var result = { clients: {} };
+    Object.keys(clientsOut).forEach(function (nombre) {
+        var cid = NAME_TO_ID[nombre] || nombre.toLowerCase().replace(/[^a-z0-9]/g, '');
+        var prevPortalActivas = (META.clients[cid] && META.clients[cid].propiedades_activas_portal) || null;
+        var c = clientsOut[nombre];
+        result.clients[cid] = {
+            nombre: nombre,
+            leads: c.leads, gasto: c.gasto, eventos: c.eventos, cpa: c.cpa, evpag: c.evpag,
+            contactos: c.contactos, cpl: c.cpl, anuncios: c.anuncios,
+            impresiones: c.impresiones, clics: c.clics,
+            propiedades_activas_portal: prevPortalActivas,
+            detalle: c.detalle,
+        };
+    });
+    return result;
+}
+
+function updateMetaData(newMetaOrText) {
+    try {
+        var parsed;
+        if (typeof newMetaOrText === 'object') {
+            parsed = newMetaOrText; // ya viene como objeto (ej. cargado por fetch)
+        } else {
+            var raw = String(newMetaOrText).trim();
+            try {
+                parsed = JSON.parse(raw); // ¿es JSON válido?
+            } catch (jsonErr) {
+                parsed = parseMetaPastedText(raw); // si no, intenta como texto pegado del tablero
+            }
+        }
+        if (!parsed || !parsed.clients || typeof parsed.clients !== 'object' || !Object.keys(parsed.clients).length) {
+            throw new Error('No reconocí ningún dato de cliente en lo que pegaste. Copia desde "Comparativa por cliente" y/o "Detalle por publicación" (incluye esos encabezados o sus filas).');
+        }
+        META = parsed;
         META_CLIENT_IDS = Object.keys(META.clients);
         renderClient();
-        return { success: true, message: 'Datos de Meta actualizados correctamente.' };
+        return { success: true, message: 'Datos de Meta actualizados correctamente (' + META_CLIENT_IDS.length + ' clientes).' };
     } catch (e) {
         return { success: false, message: 'Error al actualizar datos: ' + e.message };
     }
