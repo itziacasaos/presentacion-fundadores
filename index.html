@@ -329,6 +329,11 @@
         .slide-10 .renewal-grid {
             margin-top: 0;
         }
+        .compact-table th,
+        .compact-table td {
+            padding: 5px 8px !important;
+            font-size: 11px !important;
+        }
         /* Utilidad para ocultar una slide sin borrarla del código.
            Actualmente aplicada a la slide 9 (Dashboard). */
         .slide-hidden {
@@ -564,26 +569,26 @@
     <div class="slide slide-3 slide-4">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
-            <h2 style="margin-bottom: 12px;">¿Qué está pasando con tus propiedades?</h2>
+            <h2 style="margin-bottom: 8px;">¿Qué está pasando con tus propiedades?</h2>
             <div class="grid-kpi" style="margin-top: 0;">
-                <div class="card-kpi" style="padding: 12px;">
-                    <div class="kpi-num editable" data-field="kpi-leads" style="font-size: 26px;">X</div>
+                <div class="card-kpi" style="padding: 9px;">
+                    <div class="kpi-num editable" data-field="kpi-leads" style="font-size: 22px;">X</div>
                     <div class="text-secundario" style="font-size: 12px;">Leads</div>
                 </div>
-                <div class="card-kpi" style="padding: 12px;">
-                    <div class="kpi-num editable" data-field="kpi-vistas" style="font-size: 26px;">X</div>
+                <div class="card-kpi" style="padding: 9px;">
+                    <div class="kpi-num editable" data-field="kpi-vistas" style="font-size: 22px;">X</div>
                     <div class="text-secundario" style="font-size: 12px;">Vistas</div>
                 </div>
-                <div class="card-kpi" style="padding: 12px;">
-                    <div class="kpi-num editable" data-field="kpi-impresiones" style="font-size: 26px;">X</div>
+                <div class="card-kpi" style="padding: 9px;">
+                    <div class="kpi-num editable" data-field="kpi-impresiones" style="font-size: 22px;">X</div>
                     <div class="text-secundario" style="font-size: 12px;">Impresiones</div>
                 </div>
-                <div class="card-kpi" style="padding: 12px;">
-                    <div class="kpi-num editable" data-field="kpi-activas" style="font-size: 26px;">X</div>
+                <div class="card-kpi" style="padding: 9px;">
+                    <div class="kpi-num editable" data-field="kpi-activas" style="font-size: 22px;">X</div>
                     <div class="text-secundario" style="font-size: 12px;">Propiedades activas</div>
                 </div>
             </div>
-            <p class="text-secundario historic-note" style="text-align: center; font-weight: bold; margin-top: 8px !important; margin-bottom: 0; font-size: 14px;">
+            <p class="text-secundario historic-note" style="text-align: center; font-weight: bold; margin-top: 6px !important; margin-bottom: 0; font-size: 12px;">
                 <span class="acento">▲ +<span class="editable" data-field="kpi-growth">XX%</span></span> leads vs. periodo histórico
             </p>
             <div class="evolution-grid" style="display: flex; gap: 28px; align-items: center; margin-top: 10px !important;">
@@ -613,19 +618,19 @@
                     </div>
                 </div>
                 <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <table style="margin-top: 0;">
+                    <table class="compact-table" style="margin-top: 0;">
                         <tr>
-                            <th>Trimestre</th>
+                            <th>Periodo</th>
                             <th>Leads</th>
                             <th>Var.</th>
                         </tr>
                         <tr>
-                            <td>T1 · Ene-Mar</td>
+                            <td>Ene-Mar</td>
                             <td class="editable" data-field="q1-leads">XX</td>
                             <td class="editable" data-field="q1-var">—</td>
                         </tr>
                         <tr>
-                            <td>T2 · Abr-Jun</td>
+                            <td>Abr-Jun</td>
                             <td class="editable" data-field="q2-leads">XX</td>
                             <td class="acento editable" data-field="q2-var">+X%</td>
                         </tr>
@@ -635,7 +640,7 @@
                             <td class="acento editable" data-field="q3-var">+X%</td>
                         </tr>
                     </table>
-                    <p class="editable" data-field="quarter-note" style="font-size: 10px; color: #888; margin-top: 6px; line-height: 1.35;">
+                    <p class="editable" data-field="quarter-note" style="font-size: 9px; color: #888; margin-top: 5px; line-height: 1.3;">
                         Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).
                     </p>
                 </div>
@@ -1135,16 +1140,12 @@ function renderClient() {
         }
     }
 
-    // ---- Slides 7 y 8: avatar de marca en los mockups de post/story ----
-    var avatarSrc = (clientId !== 'ALL' && CLIENT_LOGOS[clientId]) ? CLIENT_LOGOS[clientId] : 'logoperfil.png';
-    document.querySelectorAll('.brand-avatar').forEach(function (im) { im.src = avatarSrc; });
-
     // ---- Slide 3 KPIs ----
     setField('kpi-leads', fmtNum(metaAgg.leads));
     setField('kpi-vistas', fmtNum(metaAgg.clics));
     setField('kpi-impresiones', fmtNum(metaAgg.impresiones));
     var activas = getPortalActivas(clientId);
-    setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' anuncios Meta'));
+    setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' (Meta)'));
 
     // ---- Growth / análisis trimestral ----
     var chartCaption = document.querySelector('[data-field="chart-caption"]');
@@ -1285,7 +1286,7 @@ function renderClient() {
         setField('q1-leads', '—'); setField('q1-var', '—');
         setField('q2-leads', '—'); setField('q2-var', '—');
         setField('q3-leads', '—'); setField('q3-var', '—');
-        setField('quarter-note', 'Aún no hay histórico mensual disponible para este cliente.');
+        setField('quarter-note', 'Sin histórico mensual para este cliente todavía.');
         if (chartCaption) chartCaption.innerHTML = '<span class="acento">Pulppo</span> se incorporó recientemente a la pauta Meta — aún sin histórico en Propiedades.com';
         if (polyHist) polyHist.style.display = 'none';
         if (polyMeta) polyMeta.style.display = 'none';
