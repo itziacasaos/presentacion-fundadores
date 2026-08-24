@@ -1440,7 +1440,7 @@ function hidePdfProgress() {
 
 function generatePdf() {
     var noPrintEls = Array.prototype.slice.call(document.querySelectorAll('.no-print'));
-    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide:not(.slide-hidden)'));
     var btn = document.getElementById('btn-pdf');
 
     if (btn) btn.disabled = true;
