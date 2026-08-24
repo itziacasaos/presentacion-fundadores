@@ -20,8 +20,8 @@
 const METABASE_CSV_URL =
   process.env.METABASE_CSV_URL ||
   'https://metabase.propiedades.com/public/question/de7b8657-4116-4bf1-8cd7-ff0a34e04a77.csv';
+const SUPABASE_URL = (process.env.SUPABASE_URL || '').trim().replace(/\/+$/, '');
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const CRON_SECRET = process.env.CRON_SECRET; // opcional
 
