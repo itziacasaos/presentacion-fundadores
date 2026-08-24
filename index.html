@@ -689,51 +689,31 @@
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>Mejora tu Score: Fotografía de Alta Calidad</h2>
-            <p class="text-secundario" style="margin: 0 0 25px 0;">
-                Un buen score en el dashboard posiciona mejor tus anuncios.
-                El factor más determinante es la <strong>calidad visual</strong>:
-                cuida la iluminación, el orden y los ángulos amplios.
+            <p class="text-secundario" data-field="score-gallery-caption" style="margin: 0 0 18px 0; font-size: 15px;">
+                Un buen score posiciona mejor tus anuncios. Así luce hoy el inmueble con <strong>mayor score</strong>.
             </p>
-            <div style="display: flex; gap: 40px; align-items: center;">
-                <div style="
-                    flex: 0 0 260px; 
-                    width: 260px; 
-                    aspect-ratio: 1 / 1; 
-                    border-radius: 12px; 
-                    overflow: hidden; 
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.12); 
-                    background: var(--gris-claro); 
-                    position: relative;
-                ">
-                    <img id="slide6-client-logo" 
-                         src="logo-cliente.png" 
-                         alt="Logo del cliente" 
-                         style="width: 100%; height: 100%; object-fit: contain; display: block; padding: 20px;">
-                </div>
-                <ul class="text-secundario photo-tips" style="
-                    flex: 1;
-                    padding-left: 0; 
-                    color: var(--gris-oscuro); 
-                    display: flex; 
-                    flex-direction: column; 
-                    gap: 25px; 
-                    list-style-type: none; 
-                    margin: 0;
-                ">
-                    <li style="display: flex; gap: 12px; align-items: center;">
-                        <span style="font-size: 24px; line-height: 1;">✅</span> 
-                        <span><strong>Luz natural</strong> abundante</span>
-                    </li>
-                    <li style="display: flex; gap: 12px; align-items: center;">
-                        <span style="font-size: 24px; line-height: 1;">✅</span> 
-                        <span><strong>Espacios limpios</strong> y sin objetos personales</span>
-                    </li>
-                    <li style="display: flex; gap: 12px; align-items: center;">
-                        <span style="font-size: 24px; line-height: 1;">✅</span> 
-                        <span><strong>Toma horizontal</strong> o gran angular para capturar amplitud</span>
-                    </li>
-                </ul>
-            </div>
+            <!-- Este contenedor lo llena por completo el script al final del archivo,
+                 según el cliente seleccionado en la barra de control. -->
+            <div id="score-gallery"></div>
+            <ul class="text-secundario photo-tips" style="
+                display: flex;
+                gap: 24px;
+                list-style-type: none;
+                margin: 16px 0 0 0;
+                padding-left: 0;
+                justify-content: center;
+                flex-wrap: wrap;
+            ">
+                <li style="display: flex; gap: 6px; align-items: center; font-size: 12px;">
+                    <span>✅</span><span><strong>Luz natural</strong> abundante</span>
+                </li>
+                <li style="display: flex; gap: 6px; align-items: center; font-size: 12px;">
+                    <span>✅</span><span><strong>Espacios limpios</strong>, sin objetos personales</span>
+                </li>
+                <li style="display: flex; gap: 6px; align-items: center; font-size: 12px;">
+                    <span>✅</span><span><strong>Toma horizontal</strong> o gran angular</span>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="slide slide-7">
@@ -943,6 +923,96 @@ var PROMOS = {"promo_12_4": {"nombre": "Promo 12 + 4", "avisos": "Hasta 15 aviso
 // ya no depende del cruce manual con el Excel.
 var RANKING = {"catano": [{"codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 31, "impresiones": 3989, "vistas": 507, "score": 73.0}, {"codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0}, {"codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0}, {"codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0}, {"codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0}, {"codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0}, {"codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 14, "impresiones": 25310, "vistas": 818, "score": 36.0}, {"codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 13, "impresiones": 3027, "vistas": 456, "score": 66.0}], "cattori": [{"codigo": "EB-WK8125r", "property_id": 31555943, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 15, "impresiones": 13152, "vistas": 277, "score": 69.0}, {"codigo": "EB-WJ2325r", "property_id": 31524337, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 14, "impresiones": 14837, "vistas": 492, "score": 70.0}, {"codigo": "EB-UZ8649r", "property_id": 30688298, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 73.0}, {"codigo": "EB-TN1699s", "property_id": 31304118, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 7, "impresiones": 5210, "vistas": 278, "score": 74.0}, {"codigo": "EB-KK8771s", "property_id": 24891898, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 6, "impresiones": 27, "vistas": 10, "score": 65.0}, {"codigo": "EB-UG6140r", "property_id": 30365858, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 6, "impresiones": 0, "vistas": 0, "score": 67.0}, {"codigo": "EB-RA0749s", "property_id": 28495738, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 5, "impresiones": 18, "vistas": 19, "score": 68.0}, {"codigo": "EB-VT1368r", "property_id": 31304053, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 5, "impresiones": 4693, "vistas": 163, "score": 67.0}], "mint": [{"codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0}, {"codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0}, {"codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 5, "impresiones": 76932, "vistas": 910, "score": 57.0}, {"codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0}, {"codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 4, "impresiones": 518, "vistas": 40, "score": 54.0}, {"codigo": "EB-UO9148s", "property_id": 30504146, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 4, "impresiones": 0, "vistas": 2, "score": 65.0}, {"codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0}, {"codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0}]};
 
+// ================================================================
+// SCORE_PHOTOS — inmueble con mayor score por cliente (slide 6).
+// Esto se actualiza 100% a mano (no hay portal para jalarlo
+// automáticamente). Para actualizarlo, dile a Claude:
+//   "ACTUALIZAR FOTOS SCORE"
+// y dale, por cada cliente: property_id, score, colonia/ubicación,
+// y las 2 fotos. Claude reemplaza este bloque y las imágenes.
+// ================================================================
+var SCORE_PHOTOS = {
+    catano: {
+        nombre: 'Cataño México',
+        colonia: 'Pedregal de Santo Domingo',
+        property_id: '31673338',
+        score: 73,
+        photos: ['score-catano-1.png', 'score-catano-2.png'],
+    },
+    cattori: {
+        nombre: 'Cattori Inmobiliaria',
+        colonia: 'Marina Nacional, Anáhuac I Sección',
+        property_id: '31304118',
+        score: 74,
+        photos: ['score-cattori-1.png', 'score-cattori-2.png'],
+    },
+    mint: {
+        nombre: 'MINT Inmobiliaria',
+        colonia: 'Fuentes del Pedregal',
+        property_id: '30625364',
+        score: 68,
+        photos: ['score-mint-1.png', 'score-mint-2.png'],
+    },
+    pulppo: null, // aún sin inmueble destacado cargado
+};
+
+function scoreCardHTML(data, big) {
+    var photoSize = big ? '260px' : '';
+    var photosHTML = data.photos.map(function (src, i) {
+        return '<div style="' + (big ? 'width:' + photoSize + '; height:' + photoSize + ';' : 'width:50%; aspect-ratio:1/1;') +
+            ' border-radius:8px; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.10);">' +
+            '<img class="editable" src="' + src + '" alt="Inmueble ' + data.nombre + ' ' + (i + 1) + '" ' +
+            'style="width:100%; height:100%; object-fit:cover; display:block;"></div>';
+    }).join('');
+
+    return '' +
+        '<div style="display:flex; flex-direction:column; gap:8px; ' + (big ? 'max-width:560px; margin:0 auto;' : 'flex:1;') + '">' +
+        '  <div style="display:flex; gap:' + (big ? '10px' : '6px') + '; justify-content:center;">' + photosHTML + '</div>' +
+        '  <div style="background:var(--gris-claro); border-radius:8px; padding:' + (big ? '14px 18px' : '10px 12px') + ';">' +
+        '    <div style="font-family:\'Montserrat\'; font-weight:700; color:var(--verde-oscuro); font-size:' + (big ? '16px' : '13px') + ';">' + data.nombre + '</div>' +
+        '    <div class="editable" style="font-size:' + (big ? '14px' : '12px') + '; color:#555; margin-top:2px;">' + data.colonia + '</div>' +
+        '    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:6px;">' +
+        '      <span style="font-size:' + (big ? '13px' : '11px') + '; color:#777;">ID del inmueble: <strong class="editable" style="color:var(--gris-oscuro);">' + data.property_id + '</strong></span>' +
+        '      <span class="acento editable" style="font-family:\'Montserrat\'; font-weight:700; font-size:' + (big ? '16px' : '13px') + ';">Score ' + data.score + '</span>' +
+        '    </div>' +
+        '  </div>' +
+        '</div>';
+}
+
+function renderScoreGallery(clientId) {
+    var container = document.getElementById('score-gallery');
+    if (!container) return;
+    var caption = document.querySelector('[data-field="score-gallery-caption"]');
+
+    if (clientId === 'ALL') {
+        var cids = ['catano', 'cattori', 'mint', 'pulppo'];
+        var cards = cids.map(function (cid) {
+            var data = SCORE_PHOTOS[cid];
+            if (!data) {
+                var nombre = (META.clients[cid] && META.clients[cid].nombre) || cid;
+                return '<div style="flex:1; display:flex; align-items:center; justify-content:center; background:var(--gris-claro); border-radius:8px; padding:16px; text-align:center; font-size:12px; color:#999;">' +
+                    nombre + '<br>Aún sin inmueble destacado cargado</div>';
+            }
+            return scoreCardHTML(data, false);
+        }).join('');
+        container.innerHTML = '<div style="display:flex; gap:22px; justify-content:space-between;">' + cards + '</div>';
+        if (caption) caption.innerHTML = 'Un buen score posiciona mejor tus anuncios. Así lucen hoy los inmuebles con <strong>mayor score</strong> de cada cliente.';
+        return;
+    }
+
+    var data = SCORE_PHOTOS[clientId];
+    if (!data) {
+        var nombreC = (META.clients[clientId] && META.clients[clientId].nombre) || clientId;
+        container.innerHTML = '<div style="background:var(--gris-claro); border-radius:10px; padding:40px 20px; text-align:center; color:#999; font-size:14px;">' +
+            'Todavía no se ha cargado el inmueble destacado de <strong>' + nombreC + '</strong>.<br>' +
+            '(Se actualiza a mano — avísale a Claude con "ACTUALIZAR FOTOS SCORE")</div>';
+        if (caption) caption.innerHTML = 'Un buen score posiciona mejor tus anuncios.';
+        return;
+    }
+    container.innerHTML = scoreCardHTML(data, true);
+    if (caption) caption.innerHTML = 'Un buen score posiciona mejor tus anuncios. Así luce hoy el inmueble con <strong>mayor score</strong> de ' + data.nombre + '.';
+}
+
 function supabaseConfigured() {
     return SUPABASE_URL.indexOf('TU_SUPABASE_URL') === -1 &&
            SUPABASE_ANON_KEY.indexOf('TU_SUPABASE_ANON_KEY') === -1 &&
@@ -1056,6 +1126,9 @@ function renderClient() {
     var hasHist = !!histFull;
     var histSlice = hasHist ? histFull.slice(startIdx, endIdx + 1) : null;
 
+    // ---- Slide 6: galería de fotos del inmueble con mayor score ----
+    renderScoreGallery(clientId);
+
     // ---- Slide 1: portada / periodo ----
     var periodoLabel = (startIdx === endIdx)
         ? (MONTHS[startIdx] + ' 2026')
@@ -1082,33 +1155,6 @@ function renderClient() {
             };
             if (img.complete && img.naturalWidth === 0) img.onerror();
         }
-    }
-
-    // ---- Slide 6: logo del cliente (sin tocar la imagen/estructura, solo el src apuntado) ----
-    var slide6Img = document.getElementById('slide6-client-logo');
-    if (slide6Img) {
-        var clientName = clientId === 'ALL' ? 'Todos los clientes' : META.clients[clientId].nombre;
-        slide6Img.alt = 'Logo de ' + clientName;
-        var logoMap = {
-            'catano': 'logo-catano.png',
-            'cattori': 'logo-cattori.png',
-            'mint': 'logo-mint.png',
-            'pulppo': 'logo-pulppo.png'
-        };
-        if (clientId !== 'ALL' && logoMap[clientId]) {
-            slide6Img.src = logoMap[clientId];
-        } else {
-            slide6Img.src = 'logo-cliente.png';
-        }
-        slide6Img.onerror = function () {
-            this.style.display = 'none';
-            var parent = this.parentElement;
-            var fallback = document.createElement('div');
-            fallback.style.cssText = 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:700;font-size:20px;color:#999;text-align:center;padding:20px;';
-            fallback.textContent = clientName;
-            parent.appendChild(fallback);
-        };
-        if (slide6Img.complete && slide6Img.naturalWidth === 0) slide6Img.onerror();
     }
 
     // ---- Slide 3 KPIs ----
