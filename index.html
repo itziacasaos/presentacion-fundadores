@@ -482,7 +482,6 @@
             <option value="4">May 2026</option>
             <option value="5">Jun 2026</option>
             <option value="6">Jul 2026</option>
-            <option value="7">Ago 2026</option>
         </select>
         <span style="font-size: 12px; color: #888;">a</span>
         <select id="period-end" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
@@ -492,9 +491,9 @@
             <option value="3">Abr 2026</option>
             <option value="4">May 2026</option>
             <option value="5">Jun 2026</option>
-            <option value="6">Jul 2026</option>
-            <option value="7" selected>Ago 2026</option>
+            <option value="6" selected>Jul 2026</option>
         </select>
+        <span style="font-size: 11px; color: #999; font-style: italic;">(agosto se omite hasta que cierre el mes)</span>
 
         <div style="display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap;">
             <button id="btn-fetch-meta" style="padding: 8px 16px; border: none; border-radius: 6px; background: var(--verde-principal); color: white; font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif; font-size: 13px;">Actualizar datos de Meta</button>
@@ -539,7 +538,7 @@
         </h1>
         <div class="text-secundario" style="font-size: 24px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
             Resultados y evolución de
-            <span class="editable" data-field="client-name-badge" style="display: flex; align-items: center; padding: 4px 12px; background: rgba(255,255,255,0.1); border-radius: 6px;">
+            <span class="editable" data-field="client-name-badge" style="display: flex; align-items: center; padding: 6px 14px; background: rgba(255,255,255,0.94); border-radius: 6px;">
                 <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height: 35px; object-fit: contain;">
             </span>
             en Propiedades.com
@@ -616,18 +615,29 @@
                 <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
                     <table>
                         <tr>
-                            <th>Métrica</th>
-                            <th>Antes</th>
-                            <th>Ahora</th>
-                            <th>Cambio</th>
+                            <th>Trimestre</th>
+                            <th>Leads</th>
+                            <th>Var.</th>
                         </tr>
                         <tr>
-                            <td>Leads</td>
-                            <td class="editable" data-field="tabla-leads-antes">XX</td>
-                            <td class="editable" data-field="tabla-leads-ahora">XX</td>
-                            <td class="acento editable" data-field="tabla-leads-cambio">+X%</td>
+                            <td>T1 · Ene-Mar</td>
+                            <td class="editable" data-field="q1-leads">XX</td>
+                            <td class="editable" data-field="q1-var">—</td>
+                        </tr>
+                        <tr>
+                            <td>T2 · Abr-Jun</td>
+                            <td class="editable" data-field="q2-leads">XX</td>
+                            <td class="acento editable" data-field="q2-var">+X%</td>
+                        </tr>
+                        <tr>
+                            <td>Jul (parcial)</td>
+                            <td class="editable" data-field="q3-leads">XX</td>
+                            <td class="acento editable" data-field="q3-var">+X%</td>
                         </tr>
                     </table>
+                    <p class="editable" data-field="quarter-note" style="font-size: 11px; color: #888; margin-top: 8px; line-height: 1.4;">
+                        Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).
+                    </p>
                 </div>
             </div>
         </div>
@@ -688,32 +698,13 @@
     <div class="slide slide-6">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
-            <h2>Mejora tu Score: Fotografía de Alta Calidad</h2>
-            <p class="text-secundario" data-field="score-gallery-caption" style="margin: 0 0 18px 0; font-size: 15px;">
-                Un buen score posiciona mejor tus anuncios. Así luce hoy el inmueble con <strong>mayor score</strong>.
+            <h2>Mejora tu Score: Puntuación de tus Propiedades</h2>
+            <p class="text-secundario" data-field="score-gallery-caption" style="margin: 0 0 18px 0; font-size: 15px; text-align: left;">
+                Porcentaje promedio de score de las propiedades pautadas, y cómo mejorarlo.
             </p>
             <!-- Este contenedor lo llena por completo el script al final del archivo,
                  según el cliente seleccionado en la barra de control. -->
             <div id="score-gallery"></div>
-            <ul class="text-secundario photo-tips" style="
-                display: flex;
-                gap: 24px;
-                list-style-type: none;
-                margin: 16px 0 0 0;
-                padding-left: 0;
-                justify-content: center;
-                flex-wrap: wrap;
-            ">
-                <li style="display: flex; gap: 6px; align-items: center; font-size: 12px;">
-                    <span>✅</span><span><strong>Luz natural</strong> abundante</span>
-                </li>
-                <li style="display: flex; gap: 6px; align-items: center; font-size: 12px;">
-                    <span>✅</span><span><strong>Espacios limpios</strong>, sin objetos personales</span>
-                </li>
-                <li style="display: flex; gap: 6px; align-items: center; font-size: 12px;">
-                    <span>✅</span><span><strong>Toma horizontal</strong> o gran angular</span>
-                </li>
-            </ul>
         </div>
     </div>
     <div class="slide slide-7">
@@ -725,7 +716,7 @@
             <div class="posts-container" style="display: flex; gap: 30px; justify-content: center;">
                 <div class="mockup-post">
                     <div class="mockup-post-header">
-                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar">
+                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
                         <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
                     </div>
                     <img src="meta1.png" alt="Anuncio Meta 1" class="mockup-post-img">
@@ -736,7 +727,7 @@
                 </div>
                 <div class="mockup-post">
                     <div class="mockup-post-header">
-                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar">
+                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
                         <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
                     </div>
                     <img src="meta2.png" alt="Anuncio Meta 2" class="mockup-post-img">
@@ -747,7 +738,7 @@
                 </div>
                 <div class="mockup-post">
                     <div class="mockup-post-header">
-                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar">
+                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
                         <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
                     </div>
                     <img src="meta3.png" alt="Anuncio Meta 3" class="mockup-post-img">
@@ -769,7 +760,7 @@
                 <div class="mockup-story">
                     <img src="meta4.png" alt="Story Meta 1" class="mockup-story-img">
                     <div class="mockup-story-header">
-                        <img src="logoperfil.png" alt="Perfil" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
                         Propiedades.com
                     </div>
                     <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
@@ -777,7 +768,7 @@
                 <div class="mockup-story">
                     <img src="meta5.png" alt="Story Meta 2" class="mockup-story-img">
                     <div class="mockup-story-header">
-                        <img src="logoperfil.png" alt="Perfil" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
                         Propiedades.com
                     </div>
                     <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
@@ -785,7 +776,7 @@
                 <div class="mockup-story">
                     <img src="meta6.png" alt="Story Meta 3" class="mockup-story-img">
                     <div class="mockup-story-header">
-                        <img src="logoperfil.png" alt="Perfil" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
                         Propiedades.com
                     </div>
                     <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
@@ -915,7 +906,7 @@
 var SUPABASE_URL = 'TU_SUPABASE_URL';           // ej: https://xxxxxxxxxxxx.supabase.co
 var SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY'; // Project Settings → API → anon public
 
-var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cataño Bienes Raíces", "propiedades_activas": 506, "propiedades_total": 2656, "series": [{"mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005}, {"mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212}, {"mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753}, {"mes": "Ago", "leads": 168, "contactos": 0, "eventos": 0, "impresiones": 430292, "vistas": 12903}]}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria Inmobiliaria", "propiedades_activas": 1, "propiedades_total": 823, "series": [{"mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0}, {"mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444, "vistas": 1529}, {"mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441, "vistas": 1860}, {"mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336, "vistas": 2466}, {"mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706, "vistas": 695}]}, "mint": {"id": "mint", "nombre": "MINT inmobiliaria MINT INMOBILIARIA", "propiedades_activas": 101, "propiedades_total": 551, "series": [{"mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227}, {"mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454}, {"mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637}, {"mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553, "vistas": 3462}]}}};
+var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cataño Bienes Raíces", "propiedades_activas": 506, "propiedades_total": 2656, "series": [{"mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005}, {"mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212}, {"mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753}, {"mes": "Ago", "leads": 168, "contactos": 0, "eventos": 0, "impresiones": 430292, "vistas": 12903}], "avg_score": 63.8}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria Inmobiliaria", "propiedades_activas": 1, "propiedades_total": 823, "series": [{"mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0}, {"mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444, "vistas": 1529}, {"mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441, "vistas": 1860}, {"mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336, "vistas": 2466}, {"mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706, "vistas": 695}], "avg_score": 62.8}, "mint": {"id": "mint", "nombre": "MINT inmobiliaria MINT INMOBILIARIA", "propiedades_activas": 101, "propiedades_total": 551, "series": [{"mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227}, {"mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454}, {"mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637}, {"mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553, "vistas": 3462}], "avg_score": 61.5}}};
 var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 276.93, "eventos": 3162, "cpa": 0.09, "evpag": 4.06, "contactos": 1829, "cpl": 1.94, "anuncios": 5, "impresiones": 404598, "clics": 2543, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573, "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84, "cpc": 0.19}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525, "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9, "cpc": 0.27}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483, "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11, "cpc": 0.19}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534, "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85, "cpc": 0.09}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390, "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27, "cpc": 0.14}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 163, "gasto": 274.86, "eventos": 3036, "cpa": 0.09, "evpag": 4.33, "contactos": 1661, "cpl": 1.69, "anuncios": 5, "impresiones": 340501, "clics": 2381, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418, "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1, "cpc": 0.13}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346, "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34, "cpc": 0.11}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390, "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437, "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01, "cpc": 0.26}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386, "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95, "cpc": 0.16}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 122, "gasto": 236.89, "eventos": 2677, "cpa": 0.09, "evpag": 4.28, "contactos": 1667, "cpl": 1.94, "anuncios": 4, "impresiones": 354563, "clics": 1729, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461, "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86, "cpc": 0.2}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433, "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72, "cpc": 0.21}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504, "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465, "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09, "cpc": 0.11}]}, "pulppo": {"nombre": "Pulppo", "leads": 88, "gasto": 224.17, "eventos": 2144, "cpa": 0.1, "evpag": 5.24, "contactos": 1249, "cpl": 2.55, "anuncios": 4, "impresiones": 322236, "clics": 1358, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244, "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79, "cpc": 0.19}, {"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14, "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15, "cpm": 0.9, "cpc": 0.2}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508, "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73, "cpc": 0.23}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365, "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89, "cpc": 0.17}]}}};
 var PROMOS = {"promo_12_4": {"nombre": "Promo 12 + 4", "avisos": "Hasta 15 avisos activos", "vigencia": "16 meses (12 pagados + 4 de regalo)", "inversion": "$14,900 MXN/mes"}, "paga8_obten12": {"nombre": "Paga 8 y obtén 12", "avisos": "Hasta 15 avisos activos", "vigencia": "12 meses (pagas 8)", "inversion": "$14,900 MXN/mes"}, "anual_estandar": {"nombre": "Plan Anual Estándar", "avisos": "Hasta 10 avisos activos", "vigencia": "12 meses", "inversion": "$11,900 MXN/mes"}, "semestral": {"nombre": "Plan Semestral", "avisos": "Hasta 10 avisos activos", "vigencia": "6 meses", "inversion": "$13,400 MXN/mes"}};
 // RANKING: top de avisos por cliente. Se actualiza automáticamente todos los
@@ -923,60 +914,41 @@ var PROMOS = {"promo_12_4": {"nombre": "Promo 12 + 4", "avisos": "Hasta 15 aviso
 // ya no depende del cruce manual con el Excel.
 var RANKING = {"catano": [{"codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 31, "impresiones": 3989, "vistas": 507, "score": 73.0}, {"codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0}, {"codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0}, {"codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0}, {"codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0}, {"codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0}, {"codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 14, "impresiones": 25310, "vistas": 818, "score": 36.0}, {"codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 13, "impresiones": 3027, "vistas": 456, "score": 66.0}], "cattori": [{"codigo": "EB-WK8125r", "property_id": 31555943, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 15, "impresiones": 13152, "vistas": 277, "score": 69.0}, {"codigo": "EB-WJ2325r", "property_id": 31524337, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 14, "impresiones": 14837, "vistas": 492, "score": 70.0}, {"codigo": "EB-UZ8649r", "property_id": 30688298, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 73.0}, {"codigo": "EB-TN1699s", "property_id": 31304118, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 7, "impresiones": 5210, "vistas": 278, "score": 74.0}, {"codigo": "EB-KK8771s", "property_id": 24891898, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 6, "impresiones": 27, "vistas": 10, "score": 65.0}, {"codigo": "EB-UG6140r", "property_id": 30365858, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 6, "impresiones": 0, "vistas": 0, "score": 67.0}, {"codigo": "EB-RA0749s", "property_id": 28495738, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 5, "impresiones": 18, "vistas": 19, "score": 68.0}, {"codigo": "EB-VT1368r", "property_id": 31304053, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 5, "impresiones": 4693, "vistas": 163, "score": 67.0}], "mint": [{"codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0}, {"codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0}, {"codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 5, "impresiones": 76932, "vistas": 910, "score": 57.0}, {"codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0}, {"codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 4, "impresiones": 518, "vistas": 40, "score": 54.0}, {"codigo": "EB-UO9148s", "property_id": 30504146, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 4, "impresiones": 0, "vistas": 2, "score": 65.0}, {"codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0}, {"codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0}]};
 
-// ================================================================
-// SCORE_PHOTOS — inmueble con mayor score por cliente (slide 6).
-// Esto se actualiza 100% a mano (no hay portal para jalarlo
-// automáticamente). Para actualizarlo, dile a Claude:
-//   "ACTUALIZAR FOTOS SCORE"
-// y dale, por cada cliente: property_id, score, colonia/ubicación,
-// y las 2 fotos. Claude reemplaza este bloque y las imágenes.
-// ================================================================
-var SCORE_PHOTOS = {
-    catano: {
-        nombre: 'Cataño México',
-        colonia: 'Pedregal de Santo Domingo',
-        property_id: '31673338',
-        score: 73,
-        photos: ['score-catano-1.png', 'score-catano-2.png'],
-    },
-    cattori: {
-        nombre: 'Cattori Inmobiliaria',
-        colonia: 'Marina Nacional, Anáhuac I Sección',
-        property_id: '31304118',
-        score: 74,
-        photos: ['score-cattori-1.png', 'score-cattori-2.png'],
-    },
-    mint: {
-        nombre: 'MINT Inmobiliaria',
-        colonia: 'Fuentes del Pedregal',
-        property_id: '30625364',
-        score: 68,
-        photos: ['score-mint-1.png', 'score-mint-2.png'],
-    },
-    pulppo: null, // aún sin inmueble destacado cargado
+// Logos de marca por cliente (sin fondo), usados en la portada y en los
+// avatares de los mockups de post/story. Cataño todavía no tiene logo
+// cargado — cae automáticamente al ícono de Propiedades.com mientras tanto.
+var CLIENT_LOGOS = {
+    catano: null,
+    cattori: 'logo-cattori.png',
+    mint: 'logo-mint.png',
+    pulppo: 'logo-pulppo.png',
 };
 
-function scoreCardHTML(data, big) {
-    var photoSize = big ? '260px' : '';
-    var photosHTML = data.photos.map(function (src, i) {
-        return '<div style="' + (big ? 'width:' + photoSize + '; height:' + photoSize + ';' : 'width:50%; aspect-ratio:1/1;') +
-            ' border-radius:8px; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.10);">' +
-            '<img class="editable" src="' + src + '" alt="Inmueble ' + data.nombre + ' ' + (i + 1) + '" ' +
-            'style="width:100%; height:100%; object-fit:cover; display:block;"></div>';
-    }).join('');
+// ================================================================
+// Slide 6 — "Mejora tu Score": ahora muestra el PORCENTAJE PROMEDIO
+// de score de todas las propiedades pautadas de cada cliente (no una
+// propiedad puntual, que podría salir del mercado en cualquier
+// momento), más una serie de tips visuales para mejorarlo.
+// El promedio (avg_score) viene calculado en vivo desde Metabase
+// (ver /api/sync-metabase.js) dentro de HIST.clients[cid].avg_score.
+// ================================================================
+var SCORE_TIPS = [
+    { icon: '💡', text: 'Usa <strong>luz natural</strong> abundante, evita flash directo' },
+    { icon: '🧹', text: '<strong>Espacios limpios</strong>, sin objetos personales a la vista' },
+    { icon: '📐', text: '<strong>Toma horizontal</strong> o gran angular para mostrar amplitud' },
+    { icon: '🖼️', text: 'Mínimo <strong>8-10 fotos</strong> por aviso, en buena resolución' },
+    { icon: '📝', text: 'Descripción completa: <strong>m², recámaras, amenidades</strong>' },
+    { icon: '⏱️', text: 'Mantén el aviso <strong>actualizado</strong> (precio, disponibilidad)' },
+];
 
-    return '' +
-        '<div style="display:flex; flex-direction:column; gap:8px; ' + (big ? 'max-width:560px; margin:0 auto;' : 'flex:1;') + '">' +
-        '  <div style="display:flex; gap:' + (big ? '10px' : '6px') + '; justify-content:center;">' + photosHTML + '</div>' +
-        '  <div style="background:var(--gris-claro); border-radius:8px; padding:' + (big ? '14px 18px' : '10px 12px') + ';">' +
-        '    <div style="font-family:\'Montserrat\'; font-weight:700; color:var(--verde-oscuro); font-size:' + (big ? '16px' : '13px') + ';">' + data.nombre + '</div>' +
-        '    <div class="editable" style="font-size:' + (big ? '14px' : '12px') + '; color:#555; margin-top:2px;">' + data.colonia + '</div>' +
-        '    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:6px;">' +
-        '      <span style="font-size:' + (big ? '13px' : '11px') + '; color:#777;">ID del inmueble: <strong class="editable" style="color:var(--gris-oscuro);">' + data.property_id + '</strong></span>' +
-        '      <span class="acento editable" style="font-family:\'Montserrat\'; font-weight:700; font-size:' + (big ? '16px' : '13px') + ';">Score ' + data.score + '</span>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>';
+function getAvgScore(clientId) {
+    if (clientId === 'ALL') {
+        var vals = HIST_CLIENT_IDS.map(function (cid) { return HIST.clients[cid].avg_score; }).filter(function (v) { return typeof v === 'number'; });
+        if (!vals.length) return null;
+        return vals.reduce(function (s, v) { return s + v; }, 0) / vals.length;
+    }
+    var c = HIST.clients[clientId];
+    return (c && typeof c.avg_score === 'number') ? c.avg_score : null;
 }
 
 function renderScoreGallery(clientId) {
@@ -984,33 +956,29 @@ function renderScoreGallery(clientId) {
     if (!container) return;
     var caption = document.querySelector('[data-field="score-gallery-caption"]');
 
-    if (clientId === 'ALL') {
-        var cids = ['catano', 'cattori', 'mint', 'pulppo'];
-        var cards = cids.map(function (cid) {
-            var data = SCORE_PHOTOS[cid];
-            if (!data) {
-                var nombre = (META.clients[cid] && META.clients[cid].nombre) || cid;
-                return '<div style="flex:1; display:flex; align-items:center; justify-content:center; background:var(--gris-claro); border-radius:8px; padding:16px; text-align:center; font-size:12px; color:#999;">' +
-                    nombre + '<br>Aún sin inmueble destacado cargado</div>';
-            }
-            return scoreCardHTML(data, false);
-        }).join('');
-        container.innerHTML = '<div style="display:flex; gap:22px; justify-content:space-between;">' + cards + '</div>';
-        if (caption) caption.innerHTML = 'Un buen score posiciona mejor tus anuncios. Así lucen hoy los inmuebles con <strong>mayor score</strong> de cada cliente.';
-        return;
-    }
+    var avg = getAvgScore(clientId);
+    var nombreC = clientId === 'ALL' ? 'todos tus clientes' : ((META.clients[clientId] && META.clients[clientId].nombre) || clientId);
+    var pctText = (avg !== null) ? Math.round(avg) + '%' : '—';
 
-    var data = SCORE_PHOTOS[clientId];
-    if (!data) {
-        var nombreC = (META.clients[clientId] && META.clients[clientId].nombre) || clientId;
-        container.innerHTML = '<div style="background:var(--gris-claro); border-radius:10px; padding:40px 20px; text-align:center; color:#999; font-size:14px;">' +
-            'Todavía no se ha cargado el inmueble destacado de <strong>' + nombreC + '</strong>.<br>' +
-            '(Se actualiza a mano — avísale a Claude con "ACTUALIZAR FOTOS SCORE")</div>';
-        if (caption) caption.innerHTML = 'Un buen score posiciona mejor tus anuncios.';
-        return;
+    var tipsHTML = SCORE_TIPS.map(function (t) {
+        return '<div style="display:flex; gap:10px; align-items:flex-start; text-align:left;">' +
+            '<span style="font-size:20px; line-height:1.2;">' + t.icon + '</span>' +
+            '<span style="font-size:13px; color:var(--gris-oscuro); line-height:1.35;">' + t.text + '</span>' +
+            '</div>';
+    }).join('');
+
+    container.innerHTML =
+        '<div style="display:flex; gap:36px; align-items:flex-start; text-align:left;">' +
+        '  <div style="flex:0 0 200px; text-align:left;">' +
+        '    <div class="editable" style="font-family:\'Montserrat\'; font-weight:800; font-size:56px; color:var(--verde-oscuro); line-height:1;">' + pctText + '</div>' +
+        '    <div style="font-size:13px; color:#666; margin-top:6px;">Porcentaje promedio de score de las propiedades pautadas</div>' +
+        '  </div>' +
+        '  <div style="flex:1; display:grid; grid-template-columns: 1fr 1fr; gap:14px 22px; text-align:left;">' + tipsHTML + '</div>' +
+        '</div>';
+
+    if (caption) {
+        caption.innerHTML = 'Porcentaje promedio de score de las propiedades pautadas de <strong>' + nombreC + '</strong>, y cómo mejorarlo.';
     }
-    container.innerHTML = scoreCardHTML(data, true);
-    if (caption) caption.innerHTML = 'Un buen score posiciona mejor tus anuncios. Así luce hoy el inmueble con <strong>mayor score</strong> de ' + data.nombre + '.';
 }
 
 function supabaseConfigured() {
@@ -1050,7 +1018,7 @@ function loadFromSupabase() {
 }
 
 var MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago'];
-var META_START_IDX = 4; // Mayo 2026
+var META_START_IDX = 6; // Julio 2026 (corregido — la campaña de Meta inició en julio, no en mayo)
 var HIST_CLIENT_IDS = Object.keys(HIST.clients);
 var META_CLIENT_IDS = Object.keys(META.clients);
 
@@ -1089,13 +1057,16 @@ function getMetaAgg(clientId) {
 }
 
 function getPortalActivas(clientId) {
+    // Corregido: antes se tomaba el conteo general de propiedades activas de
+    // la cuenta completa (dato estático "Camilo"); ahora se toma el número
+    // de avisos específicamente pautados (estatus "Aprobada"), calculado en
+    // vivo desde Metabase dentro de HIST.clients[cid].propiedades_activas.
     if (clientId === 'ALL') {
-        return META_CLIENT_IDS.reduce(function (s, cid) {
-            var v = META.clients[cid].propiedades_activas_portal;
-            return s + (v || 0);
+        return HIST_CLIENT_IDS.reduce(function (s, cid) {
+            return s + (HIST.clients[cid].propiedades_activas || 0);
         }, 0);
     }
-    return META.clients[clientId].propiedades_activas_portal;
+    return HIST.clients[clientId] ? HIST.clients[clientId].propiedades_activas : null;
 }
 
 function getRanking(clientId) {
@@ -1114,7 +1085,9 @@ function getRanking(clientId) {
 }
 
 // ---------- Estado global de los controles ----------
-var state = { clientId: 'ALL', startIdx: 0, endIdx: MONTHS.length - 1 };
+// Rango limitado hasta julio (índice 6): agosto se omite de la UI hasta que
+// cierre el mes, para no mostrar una caída engañosa de un mes incompleto.
+var state = { clientId: 'ALL', startIdx: 0, endIdx: 6 };
 
 function renderClient() {
     var clientId = state.clientId;
@@ -1141,6 +1114,9 @@ function renderClient() {
         var name = clientId === 'ALL' ? 'Todos los clientes' : META.clients[clientId].nombre;
         if (img) {
             img.alt = name;
+            // Logo de marca específico del cliente (sin fondo). Si no hay logo
+            // para ese cliente (o es "Todos"), cae al ícono de Propiedades.com.
+            img.src = (clientId !== 'ALL' && CLIENT_LOGOS[clientId]) ? CLIENT_LOGOS[clientId] : 'p.png';
             img.onerror = function () {
                 img.style.display = 'none';
                 var existing = badge.querySelector('.fallback-name');
@@ -1149,13 +1125,21 @@ function renderClient() {
                     span.className = 'fallback-name';
                     span.style.fontFamily = "'Montserrat', sans-serif";
                     span.style.fontWeight = '700';
+                    span.style.color = 'var(--verde-oscuro)';
                     span.textContent = name;
                     badge.appendChild(span);
-                } else { existing.textContent = name; }
+                } else { existing.textContent = name; existing.style.display = ''; }
             };
+            var existingFallback = badge.querySelector('.fallback-name');
+            if (existingFallback) existingFallback.style.display = 'none';
+            img.style.display = '';
             if (img.complete && img.naturalWidth === 0) img.onerror();
         }
     }
+
+    // ---- Slides 7 y 8: avatar de marca en los mockups de post/story ----
+    var avatarSrc = (clientId !== 'ALL' && CLIENT_LOGOS[clientId]) ? CLIENT_LOGOS[clientId] : 'logoperfil.png';
+    document.querySelectorAll('.brand-avatar').forEach(function (im) { im.src = avatarSrc; });
 
     // ---- Slide 3 KPIs ----
     setField('kpi-leads', fmtNum(metaAgg.leads));
@@ -1164,7 +1148,7 @@ function renderClient() {
     var activas = getPortalActivas(clientId);
     setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' anuncios Meta'));
 
-    // ---- Growth / tabla antes-ahora ----
+    // ---- Growth / análisis trimestral ----
     var chartCaption = document.querySelector('[data-field="chart-caption"]');
     var polyHist = document.getElementById('poly-historico');
     var polyMeta = document.getElementById('poly-meta');
@@ -1172,31 +1156,47 @@ function renderClient() {
     var refLine = document.querySelector('#evolution-svg line');
 
     if (hasHist && histSlice.length) {
+        // KPI de crecimiento general (todavía compara pre/post activación de pautas en julio)
         var pre = histSlice.filter(function (_, i) { return (startIdx + i) < META_START_IDX; });
         var post = histSlice.filter(function (_, i) { return (startIdx + i) >= META_START_IDX; });
         var preAvg = pre.length ? sumField(pre, 'leads') / pre.length : null;
         var postAvg = post.length ? sumField(post, 'leads') / post.length : null;
-
         if (preAvg !== null && postAvg !== null) {
             var growth = preAvg > 0 ? Math.round(((postAvg - preAvg) / preAvg) * 100) : (postAvg > 0 ? 100 : 0);
             setField('kpi-growth', Math.abs(growth) + '%');
-            setField('tabla-leads-antes', fmtNum(preAvg) + '/mes');
-            setField('tabla-leads-ahora', fmtNum(postAvg) + '/mes');
-            setField('tabla-leads-cambio', (growth >= 0 ? '+' : '') + growth + '%');
-        } else if (postAvg !== null) {
-            setField('kpi-growth', '—');
-            setField('tabla-leads-antes', 'N/D en el rango');
-            setField('tabla-leads-ahora', fmtNum(postAvg) + '/mes');
-            setField('tabla-leads-cambio', '—');
         } else {
             setField('kpi-growth', '—');
-            setField('tabla-leads-antes', fmtNum(preAvg) + '/mes');
-            setField('tabla-leads-ahora', 'N/D en el rango');
-            setField('tabla-leads-cambio', '—');
         }
 
+        // ---- Análisis trimestral: Q1 (Ene-Mar), Q2 (Abr-Jun), Jul (parcial de Q3) ----
+        var q1 = histFull.slice(0, 3);   // Ene, Feb, Mar
+        var q2 = histFull.slice(3, 6);   // Abr, May, Jun
+        var jul = histFull[6];           // Jul (parcial, T3)
+        var q1Leads = sumField(q1, 'leads');
+        var q2Leads = sumField(q2, 'leads');
+        var q2Avg = q2Leads / 3;
+        var julLeads = jul ? jul.leads : null;
+
+        var q2VarPct = q1Leads > 0 ? Math.round(((q2Leads - q1Leads) / q1Leads) * 100) : (q2Leads > 0 ? 100 : 0);
+        setField('q1-leads', fmtNum(q1Leads));
+        setField('q1-var', '—');
+        setField('q2-leads', fmtNum(q2Leads));
+        setField('q2-var', (q1Leads > 0 || q2Leads > 0) ? ((q2VarPct >= 0 ? '+' : '') + q2VarPct + '%') : '—');
+        if (julLeads !== null) {
+            setField('q3-leads', fmtNum(julLeads) + ' (parcial)');
+            var julVsQ2Avg = q2Avg > 0 ? Math.round(((julLeads - q2Avg) / q2Avg) * 100) : (julLeads > 0 ? 100 : 0);
+            setField('q3-var', (julVsQ2Avg >= 0 ? '+' : '') + julVsQ2Avg + '% vs. prom. mensual T2');
+        } else {
+            setField('q3-leads', '—');
+            setField('q3-var', '—');
+        }
+        var abrLeads = histFull[3] ? histFull[3].leads : 0;
+        setField('quarter-note', abrLeads === 0
+            ? 'Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).'
+            : 'Abril registró ' + fmtNum(abrLeads) + ' leads (periodo orgánico, previo a la activación de pautas en julio 2026).');
+
         if (chartCaption) {
-            chartCaption.innerHTML = 'Histórico → <span class="acento">Activación Meta (May 2026)</span> · rango: ' + periodoLabel;
+            chartCaption.innerHTML = 'Comportamiento de leads 2026 → <span class="acento">Activación de pautas (Jul 2026)</span> · rango: ' + periodoLabel;
         }
         var n = histSlice.length;
         var maxVal = Math.max(1, ...histSlice.map(function (s) { return s.leads; }));
@@ -1222,9 +1222,10 @@ function renderClient() {
         }
     } else {
         setField('kpi-growth', '—');
-        setField('tabla-leads-antes', 'N/D');
-        setField('tabla-leads-ahora', fmtNum(metaAgg.leads) + ' (14 días)');
-        setField('tabla-leads-cambio', '—');
+        setField('q1-leads', '—'); setField('q1-var', '—');
+        setField('q2-leads', '—'); setField('q2-var', '—');
+        setField('q3-leads', '—'); setField('q3-var', '—');
+        setField('quarter-note', 'Aún no hay histórico mensual disponible para este cliente.');
         if (chartCaption) chartCaption.innerHTML = '<span class="acento">Pulppo</span> se incorporó recientemente a la pauta Meta — aún sin histórico en Propiedades.com';
         if (polyHist) polyHist.style.display = 'none';
         if (polyMeta) polyMeta.style.display = 'none';
