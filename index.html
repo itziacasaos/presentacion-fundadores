@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Ejecutiva - Propiedades.com</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap');
+        :root {
+            --verde-principal: #00B36B;
+            --verde-oscuro: #003323;
+            --blanco: #FFFFFF;
+            --gris-claro: #F4F6F8;
+            --gris-oscuro: #333333;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 40px;
+            background-color: #E5E9EC;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        .slide {
+            width: 960px;
+            height: 540px;
+            background-color: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            padding: 45px 60px;
+            display: flex;
+            flex-direction: column;
+            color: var(--gris-oscuro);
+        }
+        .slide.dark {
+            background-color: var(--verde-oscuro);
+            color: var(--blanco);
+        }
+        h1,
+        h2,
+        h3,
+        .kpi-num,
+        .highlight {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 32px;
+            line-height: 1.2;
+            color: var(--verde-oscuro);
+            margin-bottom: 22px;
+        }
+        .slide.dark h1,
+        .slide.dark h2 {
+            color: var(--blanco);
+        }
+        .acento {
+            color: var(--verde-principal);
+        }
+        .text-secundario {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .logo-main {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            height: 45px;
+        }
+        .slide.dark .logo-main {
+            filter: brightness(0) invert(1);
+        }
+        .brand-mark {
+            position: absolute;
+            right: 38px;
+            bottom: 27px;
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            z-index: 10;
+            opacity: 0.95;
+        }
+        .slide-content {
+            width: 100%;
+            margin-top: 0;
+        }
+        .grid-kpi {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .card-kpi {
+            background: var(--gris-claro);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-bottom: 4px solid var(--verde-principal);
+        }
+        .kpi-num {
+            font-size: 36px;
+            color: var(--verde-oscuro);
+        }
+        .flujo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 38px;
+            background: var(--gris-claro);
+            padding: 24px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        .flujo span {
+            color: var(--verde-principal);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th,
+        td {
+            padding: 10px 15px;
+            text-align: left;
+            border-bottom: 1px solid #E5E9EC;
+        }
+        th {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--verde-oscuro);
+        }
+        .mockup-dashboard {
+            background: var(--gris-claro);
+            border: 1px solid #E5E9EC;
+            border-radius: 8px;
+            height: 235px;
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            color: #999;
+        }
+        .editable {
+            background-color: rgba(0, 179, 107, 0.1);
+            border: 1px dashed var(--verde-principal);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .mockup-post {
+            width: 225px;
+            background: white;
+            border: 1px solid #E5E9EC;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .mockup-post-header {
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mockup-post-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ddd;
+            object-fit: cover;
+        }
+        .mockup-post-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        .mockup-story {
+            width: 150px;
+            height: 267px;
+            background: #222;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .mockup-story-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+        .mockup-story-header {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 10px;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .renewal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        .renewal-card-dark {
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 120px;
+        }
+        .renewal-card-light {
+            background: var(--gris-claro);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--verde-principal);
+        }
+        .renewal-label {
+            color: var(--verde-principal);
+            font-family: 'Montserrat';
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .renewal-proposal {
+            margin-top: 22px;
+            border: 1px solid rgba(0,179,107,0.45);
+            border-radius: 8px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .benefit-number {
+            font-family: 'Montserrat';
+            color: var(--verde-oscuro);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+        .slide-2 .slide-content,
+        .slide-3 .slide-content,
+        .slide-4 .slide-content {
+            margin-top: 38px; 
+        }
+        .slide-2 .flujo {
+            margin-top: 38px;
+        }
+        .slide-3 h2 {
+            margin-bottom: 18px;
+        }
+        .slide-3 .grid-kpi {
+            margin-top: 22px;
+        }
+        .slide-3 .historic-note {
+            margin-top: 22px !important;
+        }
+        .slide-4 .evolution-grid {
+            margin-top: 12px !important;
+        }
+        .slide-4 .chart-box {
+            padding-top: 20px !important;
+            padding-bottom: 45px !important; 
+        }
+        .slide-5 table {
+            margin-top: 5px;
+        }
+        .slide-5 th,
+        .slide-5 td {
+            padding-top: 9px;
+            padding-bottom: 9px;
+        }
+        .slide-5 .ranking-summary {
+            margin-top: 16px !important;
+        }
+        .slide-6 h2 {
+            margin-bottom: 12px;
+        }
+        .slide-6 .photo-tips {
+            margin-top: 12px !important;
+        }
+        .slide-7 h2 {
+            margin-bottom: 8px;
+        }
+        .slide-7 .posts-container {
+            margin-top: 12px !important;
+        }
+        .slide-8 h2 {
+            margin-bottom: 8px;
+        }
+        .slide-8 .stories-container {
+            margin-top: 12px !important;
+        }
+        .slide-9 h2 {
+            margin-bottom: 14px;
+        }
+        .slide-9 .dashboard-list {
+            margin-top: 0;
+        }
+        .slide-9 .dashboard-note {
+            margin-top: 15px !important;
+        }
+        .slide-10 h2 {
+            margin-top: 12px !important;
+            margin-bottom: 8px !important;
+        }
+        .slide-10 .renewal-intro {
+            margin-bottom: 24px !important;
+        }
+        .slide-10 .renewal-grid {
+            margin-top: 0;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-box textarea {
+            width: 100%;
+            height: 300px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+        }
+        .modal-box .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            justify-content: flex-end;
+        }
+        .modal-box .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+        }
+        .modal-box .btn-primary {
+            background: var(--verde-principal);
+            color: white;
+        }
+        .modal-box .btn-secondary {
+            background: #ccc;
+            color: #333;
+        }
+        .modal-box .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        .modal-box .status-msg {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .modal-box .status-msg.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .modal-box .status-msg.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                gap: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .slide {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+                box-shadow: none;
+                page-break-after: always;
+                padding: 45px 60px;
+            }
+            .slide.dark {
+                background-color: var(--verde-oscuro);
+                color: var(--blanco);
+            }
+            .brand-mark {
+                opacity: 0.5;
+            }
+        }
+
+        #pdf-progress-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,51,35,0.85);
+            z-index: 10000;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            flex-direction: column;
+            gap: 14px;
+        }
+        #pdf-progress-overlay.active { display: flex; }
+        .pdf-spinner {
+            width: 42px; height: 42px;
+            border: 4px solid rgba(255,255,255,0.25);
+            border-top-color: var(--verde-principal);
+            border-radius: 50%;
+            animation: pdf-spin 0.9s linear infinite;
+        }
+        @keyframes pdf-spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="width: 960px; background: #fff; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); padding: 14px 24px; display: flex; align-items: center; gap: 16px; font-family: 'Roboto', sans-serif; flex-wrap: wrap;">
+        <strong style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); font-size: 14px;">Cliente:</strong>
+        <select id="client-selector" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+            <option value="ALL">Todos los clientes</option>
+            <option value="catano">Cataño México</option>
+            <option value="cattori">Cattori Inmobiliaria</option>
+            <option value="mint">MINT Inmobiliaria</option>
+            <option value="pulppo">Pulppo</option>
+        </select>
+
+        <strong style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); font-size: 14px;">Periodo:</strong>
+        <select id="period-start" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+            <option value="0">Ene 2026</option>
+            <option value="1">Feb 2026</option>
+            <option value="2">Mar 2026</option>
+            <option value="3">Abr 2026</option>
+            <option value="4">May 2026</option>
+            <option value="5">Jun 2026</option>
+            <option value="6">Jul 2026</option>
+            <option value="7">Ago 2026</option>
+        </select>
+        <span style="font-size: 12px; color: #888;">a</span>
+        <select id="period-end" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+            <option value="0">Ene 2026</option>
+            <option value="1">Feb 2026</option>
+            <option value="2">Mar 2026</option>
+            <option value="3">Abr 2026</option>
+            <option value="4">May 2026</option>
+            <option value="5">Jun 2026</option>
+            <option value="6">Jul 2026</option>
+            <option value="7" selected>Ago 2026</option>
+        </select>
+
+        <div style="display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap;">
+            <button id="btn-fetch-meta" style="padding: 8px 16px; border: none; border-radius: 6px; background: var(--verde-principal); color: white; font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif; font-size: 13px;">Actualizar datos de Meta</button>
+            <button id="btn-pdf" style="padding: 8px 16px; border: none; border-radius: 6px; background: #003323; color: white; font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif; font-size: 13px;">Descargar PDF</button>
+        </div>
+
+        <div style="width: 100%; display: flex; align-items: center; gap: 12px; border-top: 1px dashed #E5E9EC; padding-top: 12px; margin-top: 4px;">
+            <strong style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); font-size: 14px;">Propuesta de renovación (slide 10):</strong>
+            <select id="promo-selector" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+                <option value="promo_12_4">Promo 12 + 4</option>
+                <option value="paga8_obten12">Paga 8 y obtén 12</option>
+                <option value="anual_estandar">Plan Anual Estándar</option>
+                <option value="semestral">Plan Semestral</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="modal-overlay no-print" id="meta-modal">
+        <div class="modal-box">
+            <h3 style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); margin-top: 0;">Actualizar datos de Meta</h3>
+            <p style="font-size: 14px; color: #555;">Pega aquí el JSON con los datos de Meta (debe tener la misma estructura que <code>META</code> en el script).</p>
+            <textarea id="meta-json-input" placeholder='{ "clients": { ... } }'></textarea>
+            <div id="meta-status" class="status-msg" style="display:none;"></div>
+            <div class="btn-group">
+                <button id="btn-meta-cancel" class="btn btn-secondary">Cancelar</button>
+                <button id="btn-meta-apply" class="btn btn-primary">Aplicar datos</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pdf-progress-overlay" class="no-print">
+        <div class="pdf-spinner"></div>
+        <div id="pdf-progress-text">Preparando PDF…</div>
+    </div>
+
+    <div class="slide dark slide-1" style="justify-content: center;">
+        <img src="logo2.png" alt="Propiedades.com" class="logo-main" style="top: 60px;">
+        <h1 style="margin-top: 80px;">
+            El portal donde
+            <br>
+            <span class="acento">te encuentran.</span>
+        </h1>
+        <div class="text-secundario" style="font-size: 24px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            Resultados y evolución de
+            <span class="editable" data-field="client-name-badge" style="display: flex; align-items: center; padding: 4px 12px; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height: 35px; object-fit: contain;">
+            </span>
+            en Propiedades.com
+        </div>
+        <p class="text-secundario" style="font-size: 20px; opacity: 0.8; margin-top: 0;">
+            Periodo: <span class="editable" data-field="periodo">[PERIODO]</span>
+        </p>
+    </div>
+    <div class="slide slide-2">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>El Reto</h2>
+            <p class="text-secundario" style="max-width: 820px; margin: 0;">
+                Publicar una propiedad es solo el primer paso.
+                El verdadero reto es lograr que las personas correctas
+                la encuentren y se conviertan en oportunidades.
+            </p>
+            <div class="flujo">
+                Propiedad <span>➔</span> Exposición <span>➔</span> Visitas <span>➔</span> Interés <span>➔</span> Leads <span>➔</span> Oportunidad
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-3">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>¿Qué está pasando con tus propiedades?</h2>
+            <div class="grid-kpi">
+                <div class="card-kpi">
+                    <div class="kpi-num editable" data-field="kpi-leads">X</div>
+                    <div class="text-secundario" style="font-size: 14px;">Leads</div>
+                </div>
+                <div class="card-kpi">
+                    <div class="kpi-num editable" data-field="kpi-vistas">X</div>
+                    <div class="text-secundario" style="font-size: 14px;">Vistas</div>
+                </div>
+                <div class="card-kpi">
+                    <div class="kpi-num editable" data-field="kpi-impresiones">X</div>
+                    <div class="text-secundario" style="font-size: 14px;">Impresiones</div>
+                </div>
+                <div class="card-kpi">
+                    <div class="kpi-num editable" data-field="kpi-activas">X</div>
+                    <div class="text-secundario" style="font-size: 14px;">Propiedades activas</div>
+                </div>
+            </div>
+            <p class="text-secundario historic-note" style="text-align: center; font-weight: bold;">
+                <span class="acento">▲ +<span class="editable" data-field="kpi-growth">XX%</span></span> leads vs. periodo histórico
+            </p>
+        </div>
+    </div>
+    <div class="slide slide-4">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>Evolución de Resultados</h2>
+            <div class="evolution-grid" style="display: flex; gap: 35px; align-items: center;">
+                <div class="chart-box" style="flex: 2.2; background: var(--gris-claro); border-radius: 8px; padding: 20px 20px 45px 45px; position: relative;">
+                    <p data-field="chart-caption" style="text-align: center; font-family: 'Montserrat'; color: var(--verde-oscuro); margin-bottom: 20px; font-size: 14px;">
+                        Histórico de 6 meses → <span class="acento">Activación Meta</span> → Actualidad
+                    </p>
+                    <div style="height: 240px; border-bottom: 2px solid #999; border-left: 2px solid #999; position: relative;">
+                        <div style="position: absolute; left: -70px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 11px; font-weight: bold; color: var(--gris-oscuro); letter-spacing: 0.5px; white-space: nowrap;">
+                            Número de Leads
+                        </div>
+                        <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: bold; color: var(--gris-oscuro); letter-spacing: 0.5px;">
+                            Tiempo
+                        </div>
+                        <svg id="evolution-svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style="overflow: visible;">
+                            <polyline id="poly-historico" fill="none" stroke="#ccc" stroke-width="2" points="0,80 30,75 50,70"></polyline>
+                            <polyline id="poly-meta" fill="none" stroke="#00B36B" stroke-width="3" points="50,70 70,30 100,20"></polyline>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="#003323" stroke-width="1" stroke-dasharray="4" />
+                        </svg>
+                        <div id="chart-month-labels" style="position:absolute; bottom:-18px; left:0; right:0; display:flex; justify-content:space-between; font-size:9px; color:#999; padding: 0 2px;"></div>
+                    </div>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <table>
+                        <tr>
+                            <th>Métrica</th>
+                            <th>Antes</th>
+                            <th>Ahora</th>
+                            <th>Cambio</th>
+                        </tr>
+                        <tr>
+                            <td>Leads</td>
+                            <td class="editable" data-field="tabla-leads-antes">XX</td>
+                            <td class="editable" data-field="tabla-leads-ahora">XX</td>
+                            <td class="acento editable" data-field="tabla-leads-cambio">+X%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-5">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>¿Qué propiedades están generando oportunidades?</h2>
+            <table id="ranking-table">
+                <tr>
+                    <th>🏆 Propiedad</th>
+                    <th>📌 Tipo de aviso</th>
+                    <th>👀 Vistas</th>
+                    <th>🎯 Leads</th>
+                    <th>⭐ Score</th>
+                </tr>
+                <tr data-row="0">
+                    <td class="editable" data-field="rank-0-nombre">[Nombre Propiedad 1]</td>
+                    <td class="editable" data-field="rank-0-tipo">[Tipo de aviso]</td>
+                    <td class="editable" data-field="rank-0-vistas">X</td>
+                    <td class="editable" data-field="rank-0-leads">X</td>
+                    <td class="editable" data-field="rank-0-score">X.X</td>
+                </tr>
+                <tr data-row="1">
+                    <td class="editable" data-field="rank-1-nombre">[Nombre Propiedad 2]</td>
+                    <td class="editable" data-field="rank-1-tipo">[Tipo de aviso]</td>
+                    <td class="editable" data-field="rank-1-vistas">X</td>
+                    <td class="editable" data-field="rank-1-leads">X</td>
+                    <td class="editable" data-field="rank-1-score">X.X</td>
+                </tr>
+                <tr data-row="2">
+                    <td class="editable" data-field="rank-2-nombre">[Nombre Propiedad 3]</td>
+                    <td class="editable" data-field="rank-2-tipo">[Tipo de aviso]</td>
+                    <td class="editable" data-field="rank-2-vistas">X</td>
+                    <td class="editable" data-field="rank-2-leads">X</td>
+                    <td class="editable" data-field="rank-2-score">X.X</td>
+                </tr>
+                <tr data-row="3">
+                    <td class="editable" data-field="rank-3-nombre">[Nombre Propiedad 4]</td>
+                    <td class="editable" data-field="rank-3-tipo">[Tipo de aviso]</td>
+                    <td class="editable" data-field="rank-3-vistas">X</td>
+                    <td class="editable" data-field="rank-3-leads">X</td>
+                    <td class="editable" data-field="rank-3-score">X.X</td>
+                </tr>
+                <tr data-row="4">
+                    <td class="editable" data-field="rank-4-nombre">[Nombre Propiedad 5]</td>
+                    <td class="editable" data-field="rank-4-tipo">[Tipo de aviso]</td>
+                    <td class="editable" data-field="rank-4-vistas">X</td>
+                    <td class="editable" data-field="rank-4-leads">X</td>
+                    <td class="editable" data-field="rank-4-score">X.X</td>
+                </tr>
+            </table>
+            <div class="ranking-summary" style="background: var(--verde-oscuro); color: white; padding: 13px 15px; border-radius: 8px; text-align: center;">
+                Estas 5 propiedades representan el <span class="acento editable" data-field="rank-summary-pct">[X%]</span> de la generación total de leads.
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-6">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>Mejora tu Score: Fotografía de Alta Calidad</h2>
+            <p class="text-secundario" style="margin: 0 0 25px 0;">
+                Un buen score en el dashboard posiciona mejor tus anuncios.
+                El factor más determinante es la <strong>calidad visual</strong>:
+                cuida la iluminación, el orden y los ángulos amplios.
+            </p>
+            <div style="display: flex; gap: 40px; align-items: center;">
+                <div style="
+                    flex: 0 0 260px; 
+                    width: 260px; 
+                    aspect-ratio: 1 / 1; 
+                    border-radius: 12px; 
+                    overflow: hidden; 
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.12); 
+                    background: var(--gris-claro); 
+                    position: relative;
+                ">
+                    <img id="slide6-client-logo" 
+                         src="logo-cliente.png" 
+                         alt="Logo del cliente" 
+                         style="width: 100%; height: 100%; object-fit: contain; display: block; padding: 20px;">
+                </div>
+                <ul class="text-secundario photo-tips" style="
+                    flex: 1;
+                    padding-left: 0; 
+                    color: var(--gris-oscuro); 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: 25px; 
+                    list-style-type: none; 
+                    margin: 0;
+                ">
+                    <li style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-size: 24px; line-height: 1;">✅</span> 
+                        <span><strong>Luz natural</strong> abundante</span>
+                    </li>
+                    <li style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-size: 24px; line-height: 1;">✅</span> 
+                        <span><strong>Espacios limpios</strong> y sin objetos personales</span>
+                    </li>
+                    <li style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-size: 24px; line-height: 1;">✅</span> 
+                        <span><strong>Toma horizontal</strong> o gran angular para capturar amplitud</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-7">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>Campaña en Meta: Formato Post (Feed)</h2>
+            <p class="text-secundario" style="text-align: center; margin: 0;">Así se ven tus propiedades en los perfiles de Facebook e Instagram.</p>
+            
+            <div class="posts-container" style="display: flex; gap: 30px; justify-content: center;">
+                <div class="mockup-post">
+                    <div class="mockup-post-header">
+                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar">
+                        <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
+                    </div>
+                    <img src="meta1.png" alt="Anuncio Meta 1" class="mockup-post-img">
+                    <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
+                        <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
+                        Encuentra la propiedad ideal. Agenda una visita hoy mismo...
+                    </div>
+                </div>
+                <div class="mockup-post">
+                    <div class="mockup-post-header">
+                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar">
+                        <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
+                    </div>
+                    <img src="meta2.png" alt="Anuncio Meta 2" class="mockup-post-img">
+                    <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
+                        <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
+                        Espacios diseñados para tu estilo de vida. Conoce más detalles...
+                    </div>
+                </div>
+                <div class="mockup-post">
+                    <div class="mockup-post-header">
+                        <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar">
+                        <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
+                    </div>
+                    <img src="meta3.png" alt="Anuncio Meta 3" class="mockup-post-img">
+                    <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
+                        <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
+                        La mejor inversión en bienes raíces comienza aquí...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-8">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>Campaña en Meta: Formato Story</h2>
+            <p class="text-secundario" style="text-align: center; margin: 0;">Formatos verticales optimizados para generar alta interacción.</p>
+            
+            <div class="stories-container" style="display: flex; gap: 40px; justify-content: center;">
+                <div class="mockup-story">
+                    <img src="meta4.png" alt="Story Meta 1" class="mockup-story-img">
+                    <div class="mockup-story-header">
+                        <img src="logoperfil.png" alt="Perfil" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        Propiedades.com
+                    </div>
+                    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
+                </div>
+                <div class="mockup-story">
+                    <img src="meta5.png" alt="Story Meta 2" class="mockup-story-img">
+                    <div class="mockup-story-header">
+                        <img src="logoperfil.png" alt="Perfil" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        Propiedades.com
+                    </div>
+                    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
+                </div>
+                <div class="mockup-story">
+                    <img src="meta6.png" alt="Story Meta 3" class="mockup-story-img">
+                    <div class="mockup-story-header">
+                        <img src="logoperfil.png" alt="Perfil" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        Propiedades.com
+                    </div>
+                    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-9">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <h2>Tu Dashboard</h2>
+            <ul class="text-secundario dashboard-list" style="margin: 0; padding-left: 20px;">
+                <li>Consulta en tiempo real</li>
+                <li>Evolución de resultados</li>
+                <li>Filtros por fecha y propiedad</li>
+                <li>Desempeño e insights</li>
+            </ul>
+            <div class="mockup-dashboard">
+                [ Representación visual de Dashboard Interactivo ]
+            </div>
+            <p class="text-secundario dashboard-note" style="text-align: center; font-weight: 500;">
+                Toda la información de tus propiedades, disponible en un solo lugar y actualizada continuamente.
+            </p>
+        </div>
+    </div>
+    <div class="slide dark slide-10">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <div style="display: inline-block; background: rgba(0,179,107,0.12); color: var(--verde-principal); padding: 6px 12px; border-radius: 4px; font-family: 'Montserrat'; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">
+                LA PROPUESTA
+            </div>
+            <h2>Continuar construyendo sobre lo que ya funciona.</h2>
+            <p class="text-secundario renewal-intro" style="color: rgba(255,255,255,0.72); margin-top: 0;">
+                Una renovación pensada para dar continuidad a la presencia, performance y evolución de tu inventario.
+            </p>
+            
+            <div class="renewal-grid">
+                <div class="renewal-card-dark">
+                    <div class="renewal-label">PRESENCIA</div>
+                    <p style="font-family: 'Roboto'; color: rgba(255,255,255,0.78); font-size: 14px; line-height: 1.45; margin: 0;">
+                        Mantener la visibilidad de tu inventario en Propiedades.com.
+                    </p>
+                </div>
+                <div class="renewal-card-dark">
+                    <div class="renewal-label">PERFORMANCE</div>
+                    <p style="font-family: 'Roboto'; color: rgba(255,255,255,0.78); font-size: 14px; line-height: 1.45; margin: 0;">
+                        Continuar impulsando tus propiedades para generar nuevas oportunidades de contacto.
+                    </p>
+                </div>
+                <div class="renewal-card-dark">
+                    <div class="renewal-label">EVOLUCIÓN</div>
+                    <p style="font-family: 'Roboto'; color: rgba(255,255,255,0.78); font-size: 14px; line-height: 1.45; margin: 0;">
+                        Seguir utilizando datos e insights para identificar oportunidades de optimización.
+                    </p>
+                </div>
+            </div>
+            <div class="renewal-proposal">
+                <div>
+                    <div style="font-family: 'Montserrat'; color: var(--blanco); font-size: 15px; font-weight: 700;">Propuesta de renovación</div>
+                    <div style="font-family: 'Roboto'; color: rgba(255,255,255,0.65); font-size: 12px; margin-top: 5px;">
+                        <span class="editable" data-field="promo-nombre">[NOMBRE DEL PLAN / PAQUETE]</span> &nbsp; · &nbsp; <span class="editable" data-field="promo-avisos">[NÚMERO DE AVISOS]</span> &nbsp; · &nbsp; <span class="editable" data-field="promo-vigencia">[VIGENCIA]</span>
+                    </div>
+                </div>
+                <div style="font-family: 'Montserrat'; font-size: 23px; color: var(--verde-principal); font-weight: 700;">
+                    <span class="editable" data-field="promo-inversion">[INVERSIÓN]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide slide-11">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <div class="slide-content">
+            <div style="display: inline-block; background: rgba(0,179,107,0.08); color: var(--verde-principal); padding: 6px 12px; border-radius: 4px; font-family: 'Montserrat'; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">
+                BENEFICIOS
+            </div>
+            <h2 style="margin-top: 12px; margin-bottom: 8px;">Más que renovar, es dar continuidad a tu estrategia.</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 22px;">
+                <div class="renewal-card-light">
+                    <div class="benefit-number">01 — Mayor visibilidad</div>
+                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Mantén tus propiedades presentes frente a compradores que ya están buscando.</p>
+                </div>
+                <div class="renewal-card-light">
+                    <div class="benefit-number">02 — Generación de oportunidades</div>
+                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Continúa aprovechando la promoción y distribución de tus propiedades para generar leads.</p>
+                </div>
+                <div class="renewal-card-light">
+                    <div class="benefit-number">03 — Optimización continua</div>
+                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Utiliza el comportamiento de tus publicaciones para identificar qué funciona y dónde mejorar.</p>
+                </div>
+                <div class="renewal-card-light">
+                    <div class="benefit-number">04 — Medición transparente</div>
+                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Consulta la evolución de tus resultados mediante tu dashboard.</p>
+                </div>
+            </div>
+            <div style="margin-top: 22px; text-align: center; padding: 15px; border-top: 1px solid #E5E9EC;">
+                <p style="font-family: 'Montserrat'; color: var(--verde-oscuro); font-size: 16px; margin: 0;">
+                    Una estrategia que se mide puede optimizarse. <span class="acento">Una estrategia que se mantiene, puede crecer.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="slide dark slide-12" style="justify-content: center; align-items: center; text-align: center;">
+        <img src="p.png" alt="Propiedades.com" class="brand-mark">
+        <h1 style="font-size: 36px; max-width: 800px;">Seguimos convirtiendo exposición en oportunidades.</h1>
+        <div class="flujo" style="background: transparent; color: var(--blanco); border: 1px solid rgba(255,255,255,0.2); width: 80%; margin: 35px auto;">
+            Medir <span class="acento">➔</span> Analizar <span class="acento">➔</span> Optimizar <span class="acento">➔</span> Crecer
+        </div>
+        <p class="text-secundario" style="max-width: 700px; margin: 0 auto 20px;">
+            Continuaremos monitoreando el desempeño de tus propiedades para identificar dónde podemos generar nuevas oportunidades.
+        </p>
+    </div>
+
+
+    <script>
+// ================================================================
+// DATOS INCORPORADOS (Histórico + Meta + Ranking + Promos + Excel map)
+// ================================================================
+// ================================================================
+// DATOS: Supabase (fuente en vivo) con respaldo local (fallback)
+// ================================================================
+// Si configuras SUPABASE_URL y SUPABASE_ANON_KEY, la presentación
+// consulta la tabla "dashboard_data" al cargar y usa esos datos.
+// Si no los configuras, o si la consulta falla (sin internet, tabla
+// vacía, credenciales de ejemplo, etc.), se usan los datos de
+// respaldo incrustados abajo — la página SIEMPRE funciona.
+var SUPABASE_URL = 'TU_SUPABASE_URL';           // ej: https://xxxxxxxxxxxx.supabase.co
+var SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY'; // Project Settings → API → anon public
+
+var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cata\u00f1o Bienes Ra\u00edces", "color": "#00B36B", "propiedades_activas": 510, "propiedades_total": 510, "series": [{"mes": "Ene", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 369, "clics": 6, "vistas": 3, "inversion": 0, "ctr": 1.63, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Feb", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 362, "clics": 7, "vistas": 4, "inversion": 0, "ctr": 1.93, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Mar", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 361, "clics": 7, "vistas": 3, "inversion": 0, "ctr": 1.94, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 373, "clics": 5, "vistas": 2, "inversion": 0, "ctr": 1.34, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "May", "leads": 10, "contactos": 12, "eventos": 27, "impresiones": 8061, "clics": 242, "vistas": 181, "inversion": 390.77, "ctr": 3.0, "cpl": 39.08, "cpc": 1.61, "cpm": 48.48, "etapa": "meta"}, {"mes": "Jun", "leads": 130, "contactos": 171, "eventos": 308, "impresiones": 52325, "clics": 2333, "vistas": 1693, "inversion": 701.98, "ctr": 4.46, "cpl": 5.4, "cpc": 0.3, "cpm": 13.42, "etapa": "meta"}, {"mes": "Jul", "leads": 149, "contactos": 176, "eventos": 379, "impresiones": 56064, "clics": 1863, "vistas": 1539, "inversion": 700.45, "ctr": 3.32, "cpl": 4.7, "cpc": 0.38, "cpm": 12.49, "etapa": "meta"}, {"mes": "Ago", "leads": 94, "contactos": 109, "eventos": 218, "impresiones": 38760, "clics": 1446, "vistas": 1052, "inversion": 617.15, "ctr": 3.73, "cpl": 6.57, "cpc": 0.43, "cpm": 15.92, "etapa": "meta"}]}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria", "color": "#0A8F5B", "propiedades_activas": 231, "propiedades_total": 231, "series": [{"mes": "Ene", "leads": 1, "contactos": 1, "eventos": 1, "impresiones": 380, "clics": 7, "vistas": 4, "inversion": 0, "ctr": 1.84, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Feb", "leads": 1, "contactos": 1, "eventos": 1, "impresiones": 368, "clics": 8, "vistas": 5, "inversion": 0, "ctr": 2.17, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Mar", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 375, "clics": 8, "vistas": 5, "inversion": 0, "ctr": 2.13, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 368, "clics": 9, "vistas": 5, "inversion": 0, "ctr": 2.45, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "May", "leads": 23, "contactos": 26, "eventos": 59, "impresiones": 13213, "clics": 404, "vistas": 316, "inversion": 337.53, "ctr": 3.06, "cpl": 14.68, "cpc": 0.84, "cpm": 25.55, "etapa": "meta"}, {"mes": "Jun", "leads": 47, "contactos": 60, "eventos": 120, "impresiones": 22134, "clics": 949, "vistas": 721, "inversion": 451.69, "ctr": 4.29, "cpl": 9.61, "cpc": 0.48, "cpm": 20.41, "etapa": "meta"}, {"mes": "Jul", "leads": 66, "contactos": 82, "eventos": 171, "impresiones": 28848, "clics": 1219, "vistas": 1027, "inversion": 513.23, "ctr": 4.23, "cpl": 7.78, "cpc": 0.42, "cpm": 17.79, "etapa": "meta"}, {"mes": "Ago", "leads": 41, "contactos": 53, "eventos": 97, "impresiones": 20240, "clics": 789, "vistas": 669, "inversion": 383.2, "ctr": 3.9, "cpl": 9.35, "cpc": 0.49, "cpm": 18.93, "etapa": "meta"}]}, "mint": {"id": "mint", "nombre": "MINT Inmobiliaria", "color": "#003323", "propiedades_activas": 112, "propiedades_total": 112, "series": [{"mes": "Ene", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 371, "clics": 8, "vistas": 4, "inversion": 0, "ctr": 2.16, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Feb", "leads": 2, "contactos": 2, "eventos": 3, "impresiones": 447, "clics": 7, "vistas": 3, "inversion": 0, "ctr": 1.57, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Mar", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 363, "clics": 6, "vistas": 3, "inversion": 0, "ctr": 1.65, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 386, "clics": 6, "vistas": 3, "inversion": 0, "ctr": 1.55, "cpl": 0, "cpc": 0, "cpm": 0, "etapa": "historico"}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 4000, "clics": 167, "vistas": 138, "inversion": 147.36, "ctr": 4.17, "cpl": 0, "cpc": 0.88, "cpm": 36.84, "etapa": "meta"}, {"mes": "Jun", "leads": 29, "contactos": 34, "eventos": 67, "impresiones": 15911, "clics": 704, "vistas": 520, "inversion": 249.46, "ctr": 4.42, "cpl": 8.6, "cpc": 0.35, "cpm": 15.68, "etapa": "meta"}, {"mes": "Jul", "leads": 39, "contactos": 44, "eventos": 95, "impresiones": 18773, "clics": 713, "vistas": 537, "inversion": 280.5, "ctr": 3.8, "cpl": 7.19, "cpc": 0.39, "cpm": 14.94, "etapa": "meta"}, {"mes": "Ago", "leads": 29, "contactos": 36, "eventos": 74, "impresiones": 15173, "clics": 670, "vistas": 542, "inversion": 249.87, "ctr": 4.42, "cpl": 8.62, "cpc": 0.37, "cpm": 16.47, "etapa": "meta"}]}}, "ranking": {"catano": [{"codigo": "EB-WD9932r", "property_id": 31413499.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 15, "impresiones": 6411, "clics": 197, "ctr": 3.07, "score": 36.0}, {"codigo": "EB-VY4444s", "property_id": 31393744.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 12, "impresiones": 5443, "clics": 226, "ctr": 4.15, "score": 70.0}, {"codigo": "EB-WR6211r", "property_id": 31673338.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 12, "impresiones": 5419, "clics": 227, "ctr": 4.19, "score": 73.0}, {"codigo": "EB-VX6505r", "property_id": 31393746.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 11, "impresiones": 4585, "clics": 164, "ctr": 3.58, "score": 65.0}, {"codigo": "EB-VQ9817r", "property_id": 31393958.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 11, "impresiones": 4331, "clics": 171, "ctr": 3.95, "score": 64.0}, {"codigo": "EB-QT6798s", "property_id": 31351580.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 10, "impresiones": 3949, "clics": 122, "ctr": 3.09, "score": 43.0}, {"codigo": "EB-VG9716r", "property_id": 31394018.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 9, "impresiones": 3710, "clics": 120, "ctr": 3.23, "score": 63.0}, {"codigo": "EB-RK0037s", "property_id": 31351558.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 8, "impresiones": 3437, "clics": 105, "ctr": 3.05, "score": 43.0}], "cattori": [{"codigo": "EB-RA0749s", "property_id": 31304176.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 8, "impresiones": 3220, "clics": 103, "ctr": 3.2, "score": 69.0}, {"codigo": "EB-VL6843r", "property_id": 31304070.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 7, "impresiones": 2936, "clics": 104, "ctr": 3.54, "score": 65.0}, {"codigo": "EB-UC4766s", "property_id": 31304110.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 7, "impresiones": 2894, "clics": 124, "ctr": 4.28, "score": 69.0}, {"codigo": "EB-RJ7155s", "property_id": 28713145.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 6, "impresiones": 2834, "clics": 91, "ctr": 3.21, "score": 74.0}, {"codigo": "EB-VX2979s", "property_id": 31304045.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 6, "impresiones": 2661, "clics": 93, "ctr": 3.49, "score": 68.0}, {"codigo": "EB-RV7088s", "property_id": 31304157.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 6, "impresiones": 2714, "clics": 86, "ctr": 3.17, "score": 68.0}, {"codigo": "EB-WH3813r", "property_id": 31488025.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 6, "impresiones": 2947, "clics": 132, "ctr": 4.48, "score": 67.0}, {"codigo": "EB-VO9291s", "property_id": 31304061.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 5, "impresiones": 2386, "clics": 88, "ctr": 3.69, "score": 66.0}], "mint": [{"codigo": "EB-UO9159s", "property_id": 31311813.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 7, "impresiones": 2928, "clics": 92, "ctr": 3.14, "score": 62.0}, {"codigo": "EB-UU5409s", "property_id": 30603908.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 5, "impresiones": 2337, "clics": 79, "ctr": 3.38, "score": 66.0}, {"codigo": "EB-VY6468s", "property_id": 31124404.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 4, "impresiones": 2125, "clics": 68, "ctr": 3.2, "score": 64.0}, {"codigo": "EB-UO9191s", "property_id": 31311223.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 4, "impresiones": 1867, "clics": 82, "ctr": 4.39, "score": 62.0}, {"codigo": "EB-UO9166s", "property_id": 31311810.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 4, "impresiones": 2029, "clics": 65, "ctr": 3.2, "score": 62.0}, {"codigo": "EB-OH9513r", "property_id": 31434440.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 4, "impresiones": 2033, "clics": 61, "ctr": 3.0, "score": 57.0}, {"codigo": "EB-VE4966s", "property_id": 31495214.0, "tipo_operacion": "Venta", "estatus": "Activo", "leads": 4, "impresiones": 2028, "clics": 90, "ctr": 4.44, "score": 74.0}, {"codigo": "EB-WN3164r", "property_id": 31593964.0, "tipo_operacion": "Renta", "estatus": "Activo", "leads": 4, "impresiones": 2136, "clics": 86, "ctr": 4.03, "score": 57.0}]}}
+;
+var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 302.95, "eventos": 3108, "cpa": 0.1, "evpag": 3.13, "contactos": 1783, "cpl": 2.12, "anuncios": 5, "impresiones": 287475, "clics": 1806, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 28, "contactos": 406, "impresiones": 66393, "clics": 301, "ctr": 0.54, "gasto": 55.11, "cpm": 0.83, "cpc": 0.18}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 16, "contactos": 374, "impresiones": 61659, "clics": 194, "ctr": 0.41, "gasto": 55.07, "cpm": 0.89, "cpc": 0.28}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 33, "contactos": 283, "impresiones": 44866, "clics": 375, "ctr": 1.04, "gasto": 55.06, "cpm": 1.23, "cpc": 0.15}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 33, "contactos": 390, "impresiones": 66309, "clics": 648, "ctr": 1.02, "gasto": 54.97, "cpm": 0.83, "cpc": 0.08}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 33, "contactos": 330, "impresiones": 48248, "clics": 288, "ctr": 0.72, "gasto": 54.9, "cpm": 1.14, "cpc": 0.19}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 108, "gasto": 279.3, "eventos": 2373, "cpa": 0.12, "evpag": 3.42, "contactos": 1292, "cpl": 2.59, "anuncios": 5, "impresiones": 229820, "clics": 1534, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 19, "contactos": 267, "impresiones": 44127, "clics": 289, "ctr": 0.86, "gasto": 50.2, "cpm": 1.14, "cpc": 0.17}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 19, "contactos": 263, "impresiones": 50876, "clics": 264, "ctr": 0.62, "gasto": 50.12, "cpm": 0.99, "cpc": 0.19}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 24, "contactos": 267, "impresiones": 47300, "clics": 278, "ctr": 0.71, "gasto": 50.05, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 25, "contactos": 286, "impresiones": 49776, "clics": 207, "ctr": 0.49, "gasto": 49.98, "cpm": 1.0, "cpc": 0.24}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 21, "contactos": 209, "impresiones": 37741, "clics": 496, "ctr": 1.41, "gasto": 49.92, "cpm": 1.32, "cpc": 0.1}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 100, "gasto": 262.24, "eventos": 2315, "cpa": 0.11, "evpag": 2.7, "contactos": 1456, "cpl": 2.62, "anuncios": 4, "impresiones": 237434, "clics": 1111, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 22, "contactos": 313, "impresiones": 58004, "clics": 230, "ctr": 0.53, "gasto": 50.16, "cpm": 0.86, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 25, "contactos": 288, "impresiones": 46063, "clics": 431, "ctr": 1.06, "gasto": 50.11, "cpm": 1.09, "cpc": 0.12}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 14, "contactos": 295, "impresiones": 67426, "clics": 215, "ctr": 0.37, "gasto": 50.05, "cpm": 0.74, "cpc": 0.23}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 25, "contactos": 323, "impresiones": 65941, "clics": 235, "ctr": 0.42, "gasto": 49.97, "cpm": 0.76, "cpc": 0.21}]}, "pulppo": {"nombre": "Pulppo", "leads": 54, "gasto": 177.39, "eventos": 1545, "cpa": 0.11, "evpag": 5.12, "contactos": 963, "cpl": 3.28, "anuncios": 4, "impresiones": 211077, "clics": 856, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 11, "contactos": 183, "impresiones": 48238, "clics": 187, "ctr": 0.51, "gasto": 43.25, "cpm": 0.9, "cpc": 0.23}, {"publicacion": "31307357", "colonia": "Tamanché", "leads": 9, "contactos": 150, "impresiones": 55237, "clics": 220, "ctr": 0.45, "gasto": 42.73, "cpm": 0.77, "cpc": 0.19}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 15, "contactos": 233, "impresiones": 48485, "clics": 248, "ctr": 0.64, "gasto": 42.67, "cpm": 0.88, "cpc": 0.17}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 13, "contactos": 348, "impresiones": 59117, "clics": 201, "ctr": 0.39, "gasto": 42.52, "cpm": 0.72, "cpc": 0.21}]}}};
+var PROMOS = {"promo_12_4": {"nombre": "Promo 12 + 4", "avisos": "Hasta 15 avisos activos", "vigencia": "16 meses (12 pagados + 4 de regalo)", "inversion": "$14,900 MXN/mes"}, "paga8_obten12": {"nombre": "Paga 8 y obtén 12", "avisos": "Hasta 15 avisos activos", "vigencia": "12 meses (pagas 8)", "inversion": "$14,900 MXN/mes"}, "anual_estandar": {"nombre": "Plan Anual Estándar", "avisos": "Hasta 10 avisos activos", "vigencia": "12 meses", "inversion": "$11,900 MXN/mes"}, "semestral": {"nombre": "Plan Semestral", "avisos": "Hasta 10 avisos activos", "vigencia": "6 meses", "inversion": "$13,400 MXN/mes"}};
+// Mapa Excel: property_id (como string) -> { codigo_aviso, score }.
+// Se usa para cruzar cada "publicacion" del JSON de Meta contra el Excel.
+var EXCEL_MAP = {"31625311": {"codigo_aviso": "EB-WP1052s", "score": 72.0}, "31598577": {"codigo_aviso": "EB-WN5100s", "score": 72.0}, "31638830": {"codigo_aviso": "EB-WP6782s", "score": 76.0}, "31548377": {"codigo_aviso": "EB-WK3796s", "score": 74.0}, "31518535": {"codigo_aviso": "EB-WI8551s", "score": 74.0}, "31611444": {"codigo_aviso": "EB-WO2617s", "score": 74.0}, "31581816": {"codigo_aviso": "EB-WL9197s", "score": 72.0}, "31434431": {"codigo_aviso": "EB-TE2794s", "score": 68.0}, "31434430": {"codigo_aviso": "EB-TR8032s", "score": 68.0}, "30842301": {"codigo_aviso": "EB-VG8464s", "score": 68.0}, "28713145": {"codigo_aviso": "EB-RJ7155s", "score": 74.0}, "31640054": {"codigo_aviso": "EB-WP7261s", "score": 74.0}, "31631604": {"codigo_aviso": "EB-WP2086s", "score": 74.0}, "31616995": {"codigo_aviso": "EB-WO5193s", "score": 74.0}};
+
+function supabaseConfigured() {
+    return SUPABASE_URL.indexOf('TU_SUPABASE_URL') === -1 &&
+           SUPABASE_ANON_KEY.indexOf('TU_SUPABASE_ANON_KEY') === -1 &&
+           SUPABASE_URL.indexOf('supabase.co') !== -1;
+}
+
+function loadFromSupabase() {
+    if (!supabaseConfigured() || typeof window.supabase === 'undefined') {
+        return Promise.resolve(false);
+    }
+    try {
+        var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        return client.from('dashboard_data').select('id,payload').then(function (res) {
+            if (res.error || !res.data || !res.data.length) {
+                console.warn('Supabase: usando datos de respaldo —', res.error && res.error.message);
+                return false;
+            }
+            var byId = {};
+            res.data.forEach(function (row) { byId[row.id] = row.payload; });
+            if (byId.hist) HIST = byId.hist;
+            if (byId.meta) META = byId.meta;
+            if (byId.promos) PROMOS = byId.promos;
+            if (byId.excel_map) EXCEL_MAP = byId.excel_map;
+            HIST_CLIENT_IDS = Object.keys(HIST.clients);
+            META_CLIENT_IDS = Object.keys(META.clients);
+            return true;
+        }).catch(function (err) {
+            console.warn('Supabase: usando datos de respaldo —', err.message);
+            return false;
+        });
+    } catch (err) {
+        console.warn('Supabase: usando datos de respaldo —', err.message);
+        return Promise.resolve(false);
+    }
+}
+
+var MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago'];
+var META_START_IDX = 4; // Mayo 2026
+var HIST_CLIENT_IDS = Object.keys(HIST.clients);
+var META_CLIENT_IDS = Object.keys(META.clients);
+
+function fmtNum(n) { return new Intl.NumberFormat('es-MX').format(Math.round(n || 0)); }
+function sumField(arr, field) { return arr.reduce(function (s, r) { return s + (r[field] || 0); }, 0); }
+function setField(name, value) {
+    document.querySelectorAll('[data-field="' + name + '"]').forEach(function (el) { el.textContent = value; });
+}
+
+// ---------- Histórico (Excel) ----------
+function getHistFull(clientId) {
+    if (clientId === 'ALL') {
+        return MONTHS.map(function (mes, i) {
+            var agg = { mes: mes, leads: 0 };
+            HIST_CLIENT_IDS.forEach(function (cid) { agg.leads += HIST.clients[cid].series[i].leads; });
+            return agg;
+        });
+    }
+    if (!HIST.clients[clientId]) return null;
+    return HIST.clients[clientId].series;
+}
+
+// ---------- Meta de hoy (real) ----------
+function getMetaAgg(clientId) {
+    if (clientId === 'ALL') {
+        var agg = { leads: 0, gasto: 0, eventos: 0, contactos: 0, impresiones: 0, clics: 0, anuncios: 0 };
+        META_CLIENT_IDS.forEach(function (cid) {
+            var c = META.clients[cid];
+            agg.leads += c.leads; agg.gasto += c.gasto; agg.eventos += c.eventos;
+            agg.contactos += c.contactos; agg.impresiones += c.impresiones; agg.clics += c.clics; agg.anuncios += c.anuncios;
+        });
+        agg.cpl = agg.leads ? agg.gasto / agg.leads : 0;
+        return agg;
+    }
+    return META.clients[clientId];
+}
+
+function getPortalActivas(clientId) {
+    if (clientId === 'ALL') {
+        return META_CLIENT_IDS.reduce(function (s, cid) {
+            var v = META.clients[cid].propiedades_activas_portal;
+            return s + (v || 0);
+        }, 0);
+    }
+    return META.clients[clientId].propiedades_activas_portal;
+}
+
+function getRanking(clientId) {
+    var rows = [];
+    if (clientId === 'ALL') {
+        META_CLIENT_IDS.forEach(function (cid) {
+            META.clients[cid].detalle.forEach(function (p) { rows.push(Object.assign({}, p, { cliente: META.clients[cid].nombre })); });
+        });
+    } else {
+        rows = META.clients[clientId].detalle.map(function (p) { return Object.assign({}, p, { cliente: META.clients[clientId].nombre }); });
+    }
+    rows.sort(function (a, b) { return b.leads - a.leads; });
+    return rows.slice(0, 5);
+}
+
+// ---------- Cruce Meta (PUBLICACIÓN) ↔ Excel (property_id) ----------
+// Regla:
+//  - Si existe match en EXCEL_MAP -> PROPIEDAD = colonia (Meta), TIPO DE AVISO = codigo_aviso (Excel), SCORE = score (Excel)
+//  - Si NO existe match -> PROPIEDAD = publicacion (el identificador de Meta), TIPO DE AVISO = "—", SCORE = "—"
+//    (nunca se inventa codigo_aviso ni score)
+function crossReference(p) {
+    var match = EXCEL_MAP[String(p.publicacion)];
+    if (match) {
+        return {
+            propiedad: p.colonia,
+            tipoAviso: match.codigo_aviso,
+            score: (typeof match.score === 'number') ? match.score.toFixed(1) : String(match.score)
+        };
+    }
+    return {
+        propiedad: String(p.publicacion),
+        tipoAviso: '—',
+        score: '—'
+    };
+}
+
+// ---------- Estado global de los controles ----------
+var state = { clientId: 'ALL', startIdx: 0, endIdx: MONTHS.length - 1 };
+
+function renderClient() {
+    var clientId = state.clientId;
+    var startIdx = Math.min(state.startIdx, state.endIdx);
+    var endIdx = Math.max(state.startIdx, state.endIdx);
+
+    var metaAgg = getMetaAgg(clientId);
+    var histFull = getHistFull(clientId);
+    var hasHist = !!histFull;
+    var histSlice = hasHist ? histFull.slice(startIdx, endIdx + 1) : null;
+
+    // ---- Slide 1: portada / periodo ----
+    var periodoLabel = (startIdx === endIdx)
+        ? (MONTHS[startIdx] + ' 2026')
+        : (MONTHS[startIdx] + ' – ' + MONTHS[endIdx] + ' 2026');
+    setField('periodo', periodoLabel);
+
+    var badge = document.querySelector('[data-field="client-name-badge"]');
+    if (badge) {
+        var img = badge.querySelector('img');
+        var name = clientId === 'ALL' ? 'Todos los clientes' : META.clients[clientId].nombre;
+        if (img) {
+            img.alt = name;
+            img.onerror = function () {
+                img.style.display = 'none';
+                var existing = badge.querySelector('.fallback-name');
+                if (!existing) {
+                    var span = document.createElement('span');
+                    span.className = 'fallback-name';
+                    span.style.fontFamily = "'Montserrat', sans-serif";
+                    span.style.fontWeight = '700';
+                    span.textContent = name;
+                    badge.appendChild(span);
+                } else { existing.textContent = name; }
+            };
+            if (img.complete && img.naturalWidth === 0) img.onerror();
+        }
+    }
+
+    // ---- Slide 6: logo del cliente (sin tocar la imagen/estructura, solo el src apuntado) ----
+    var slide6Img = document.getElementById('slide6-client-logo');
+    if (slide6Img) {
+        var clientName = clientId === 'ALL' ? 'Todos los clientes' : META.clients[clientId].nombre;
+        slide6Img.alt = 'Logo de ' + clientName;
+        var logoMap = {
+            'catano': 'logo-catano.png',
+            'cattori': 'logo-cattori.png',
+            'mint': 'logo-mint.png',
+            'pulppo': 'logo-pulppo.png'
+        };
+        if (clientId !== 'ALL' && logoMap[clientId]) {
+            slide6Img.src = logoMap[clientId];
+        } else {
+            slide6Img.src = 'logo-cliente.png';
+        }
+        slide6Img.onerror = function () {
+            this.style.display = 'none';
+            var parent = this.parentElement;
+            var fallback = document.createElement('div');
+            fallback.style.cssText = 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:700;font-size:20px;color:#999;text-align:center;padding:20px;';
+            fallback.textContent = clientName;
+            parent.appendChild(fallback);
+        };
+        if (slide6Img.complete && slide6Img.naturalWidth === 0) slide6Img.onerror();
+    }
+
+    // ---- Slide 3 KPIs ----
+    setField('kpi-leads', fmtNum(metaAgg.leads));
+    setField('kpi-vistas', fmtNum(metaAgg.clics));
+    setField('kpi-impresiones', fmtNum(metaAgg.impresiones));
+    var activas = getPortalActivas(clientId);
+    setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' anuncios Meta'));
+
+    // ---- Growth / tabla antes-ahora ----
+    var chartCaption = document.querySelector('[data-field="chart-caption"]');
+    var polyHist = document.getElementById('poly-historico');
+    var polyMeta = document.getElementById('poly-meta');
+    var labelsBox = document.getElementById('chart-month-labels');
+    var refLine = document.querySelector('#evolution-svg line');
+
+    if (hasHist && histSlice.length) {
+        var pre = histSlice.filter(function (_, i) { return (startIdx + i) < META_START_IDX; });
+        var post = histSlice.filter(function (_, i) { return (startIdx + i) >= META_START_IDX; });
+        var preAvg = pre.length ? sumField(pre, 'leads') / pre.length : null;
+        var postAvg = post.length ? sumField(post, 'leads') / post.length : null;
+
+        if (preAvg !== null && postAvg !== null) {
+            var growth = preAvg > 0 ? Math.round(((postAvg - preAvg) / preAvg) * 100) : (postAvg > 0 ? 100 : 0);
+            setField('kpi-growth', Math.abs(growth) + '%');
+            setField('tabla-leads-antes', fmtNum(preAvg) + '/mes');
+            setField('tabla-leads-ahora', fmtNum(postAvg) + '/mes');
+            setField('tabla-leads-cambio', (growth >= 0 ? '+' : '') + growth + '%');
+        } else if (postAvg !== null) {
+            setField('kpi-growth', '—');
+            setField('tabla-leads-antes', 'N/D en el rango');
+            setField('tabla-leads-ahora', fmtNum(postAvg) + '/mes');
+            setField('tabla-leads-cambio', '—');
+        } else {
+            setField('kpi-growth', '—');
+            setField('tabla-leads-antes', fmtNum(preAvg) + '/mes');
+            setField('tabla-leads-ahora', 'N/D en el rango');
+            setField('tabla-leads-cambio', '—');
+        }
+
+        if (chartCaption) {
+            chartCaption.innerHTML = 'Histórico → <span class="acento">Activación Meta (May 2026)</span> · rango: ' + periodoLabel;
+        }
+        var n = histSlice.length;
+        var maxVal = Math.max(1, ...histSlice.map(function (s) { return s.leads; }));
+        var step = n > 1 ? 100 / (n - 1) : 0;
+        function pt(i) { return (i * step) + ',' + (100 - (histSlice[i].leads / maxVal) * 100); }
+        var metaLocalIdx = META_START_IDX - startIdx;
+        var histPts = [], metaPts = [];
+        for (var i = 0; i < n; i++) {
+            if (i <= metaLocalIdx) histPts.push(pt(i));
+            if (i >= metaLocalIdx) metaPts.push(pt(i));
+        }
+        if (polyHist) { polyHist.setAttribute('points', histPts.join(' ')); polyHist.style.display = histPts.length > 1 ? '' : 'none'; }
+        if (polyMeta) { polyMeta.setAttribute('points', metaPts.join(' ')); polyMeta.style.display = metaPts.length > 1 ? '' : 'none'; }
+        if (refLine) {
+            if (metaLocalIdx >= 0 && metaLocalIdx <= n - 1) {
+                var x = metaLocalIdx * step;
+                refLine.setAttribute('x1', x); refLine.setAttribute('x2', x); refLine.style.display = '';
+            } else { refLine.style.display = 'none'; }
+        }
+        if (labelsBox) {
+            labelsBox.innerHTML = '';
+            histSlice.forEach(function (s) { var sp = document.createElement('span'); sp.textContent = s.mes; labelsBox.appendChild(sp); });
+        }
+    } else {
+        setField('kpi-growth', '—');
+        setField('tabla-leads-antes', 'N/D');
+        setField('tabla-leads-ahora', fmtNum(metaAgg.leads) + ' (14 días)');
+        setField('tabla-leads-cambio', '—');
+        if (chartCaption) chartCaption.innerHTML = '<span class="acento">Pulppo</span> se incorporó recientemente a la pauta Meta — aún sin histórico en Propiedades.com';
+        if (polyHist) polyHist.style.display = 'none';
+        if (polyMeta) polyMeta.style.display = 'none';
+        if (refLine) refLine.style.display = 'none';
+        if (labelsBox) labelsBox.innerHTML = '';
+    }
+
+    // ---- Slide 5: ranking (cruce Meta ↔ Excel) ----
+    var ranking = getRanking(clientId);
+    for (var r = 0; r < 5; r++) {
+        var p = ranking[r];
+        if (p) {
+            var cross = crossReference(p);
+            setField('rank-' + r + '-nombre', cross.propiedad + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
+            setField('rank-' + r + '-tipo', cross.tipoAviso);
+            setField('rank-' + r + '-vistas', fmtNum(p.clics));
+            setField('rank-' + r + '-leads', fmtNum(p.leads));
+            setField('rank-' + r + '-score', cross.score);
+        } else {
+            setField('rank-' + r + '-nombre', '—'); setField('rank-' + r + '-tipo', '—');
+            setField('rank-' + r + '-vistas', '—'); setField('rank-' + r + '-leads', '—'); setField('rank-' + r + '-score', '—');
+        }
+    }
+    var top5Leads = ranking.reduce(function (s, p) { return s + p.leads; }, 0);
+    var pct = metaAgg.leads ? Math.round((top5Leads / metaAgg.leads) * 100) : 0;
+    setField('rank-summary-pct', pct + '%');
+}
+
+// ---- Slide 10: propuesta de renovación ----
+function renderPromo(promoKey) {
+    var promo = PROMOS[promoKey];
+    if (!promo) return;
+    setField('promo-nombre', promo.nombre);
+    setField('promo-avisos', promo.avisos);
+    setField('promo-vigencia', promo.vigencia);
+    setField('promo-inversion', promo.inversion);
+}
+
+// ---- Actualizar META desde un objeto/JSON pegado o desde una URL ----
+function updateMetaData(newMeta) {
+    try {
+        if (typeof newMeta === 'string') newMeta = JSON.parse(newMeta);
+        if (!newMeta.clients || typeof newMeta.clients !== 'object') {
+            throw new Error('El JSON debe tener la propiedad "clients"');
+        }
+        META = newMeta;
+        META_CLIENT_IDS = Object.keys(META.clients);
+        renderClient();
+        return { success: true, message: 'Datos de Meta actualizados correctamente.' };
+    } catch (e) {
+        return { success: false, message: 'Error al actualizar datos: ' + e.message };
+    }
+}
+
+function fetchMetaFromUrl(url) {
+    return fetch(url)
+        .then(function (response) {
+            if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+            return response.json();
+        })
+        .then(function (data) { return updateMetaData(data); })
+        .catch(function (error) {
+            return { success: false, message: 'No se pudo obtener datos desde la URL: ' + error.message };
+        });
+}
+
+// ================================================================
+// EXPORTACIÓN A PDF (html2canvas + jsPDF)
+// Reemplaza window.print() por una captura real de cada slide,
+// evitando páginas en blanco y esperando a que fuentes e imágenes
+// terminen de cargar antes de generar el documento.
+// No se toca ninguna imagen/mockup: solo se capturan tal cual están.
+// ================================================================
+function waitForImages(root) {
+    var imgs = Array.prototype.slice.call(root.querySelectorAll('img'));
+    return Promise.all(imgs.map(function (img) {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        if (img.complete && img.naturalWidth === 0) return Promise.resolve(); // imagen rota: no bloquear el PDF
+        return new Promise(function (resolve) {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+        });
+    }));
+}
+
+function waitForFonts() {
+    if (document.fonts && document.fonts.ready) return document.fonts.ready;
+    return Promise.resolve();
+}
+
+function setPdfProgress(text) {
+    var overlay = document.getElementById('pdf-progress-overlay');
+    var txt = document.getElementById('pdf-progress-text');
+    if (txt) txt.textContent = text;
+    if (overlay) overlay.classList.add('active');
+}
+
+function hidePdfProgress() {
+    var overlay = document.getElementById('pdf-progress-overlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
+function generatePdf() {
+    var noPrintEls = Array.prototype.slice.call(document.querySelectorAll('.no-print'));
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var btn = document.getElementById('btn-pdf');
+
+    if (btn) btn.disabled = true;
+    setPdfProgress('Esperando fuentes e imágenes…');
+
+    // Ocultar barra de control / modal / overlay mientras se captura (no altera los slides)
+    var previousDisplay = noPrintEls.map(function (el) { return el.style.display; });
+    noPrintEls.forEach(function (el) { if (el.id !== 'pdf-progress-overlay') el.style.display = 'none'; });
+
+    Promise.all([waitForFonts(), waitForImages(document.body)])
+        .then(function () {
+            // Pequeño margen extra por si algún navegador reporta "loaded" antes de pintar
+            return new Promise(function (resolve) { setTimeout(resolve, 150); });
+        })
+        .then(function () {
+            var jsPDFCtor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
+            var pdf = new jsPDFCtor({ orientation: 'landscape', unit: 'px', format: [960, 540] });
+            var chain = Promise.resolve();
+            slides.forEach(function (slideEl, idx) {
+                chain = chain.then(function () {
+                    setPdfProgress('Generando slide ' + (idx + 1) + ' de ' + slides.length + '…');
+                    return html2canvas(slideEl, {
+                        scale: 2,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        logging: false
+                    }).then(function (canvas) {
+                        var imgData = canvas.toDataURL('image/jpeg', 0.95);
+                        if (idx > 0) pdf.addPage([960, 540], 'landscape');
+                        pdf.addImage(imgData, 'JPEG', 0, 0, 960, 540, undefined, 'FAST');
+                    });
+                });
+            });
+            return chain.then(function () {
+                setPdfProgress('Guardando PDF…');
+                pdf.save('Presentacion-Ejecutiva-Propiedades.pdf');
+            });
+        })
+        .catch(function (err) {
+            console.error('Error generando el PDF:', err);
+            alert('Ocurrió un error generando el PDF. Revisa la consola para más detalles.');
+        })
+        .finally(function () {
+            noPrintEls.forEach(function (el, i) { el.style.display = previousDisplay[i]; });
+            hidePdfProgress();
+            if (btn) btn.disabled = false;
+        });
+}
+
+// ---- Inicialización ----
+document.addEventListener('DOMContentLoaded', function () {
+    var clientSel = document.getElementById('client-selector');
+    var startSel = document.getElementById('period-start');
+    var endSel = document.getElementById('period-end');
+    var promoSel = document.getElementById('promo-selector');
+
+    if (clientSel) state.clientId = clientSel.value;
+    if (startSel) state.startIdx = parseInt(startSel.value, 10);
+    if (endSel) state.endIdx = parseInt(endSel.value, 10);
+
+    // Render inmediato con los datos de respaldo para que la página nunca
+    // se vea en blanco, y si Supabase responde a tiempo, se vuelve a
+    // renderizar con los datos en vivo (esto no toca diseño ni imágenes).
+    renderClient();
+    renderPromo(promoSel ? promoSel.value : 'promo_12_4');
+
+    var supabaseTimeout = new Promise(function (resolve) { setTimeout(function () { resolve(false); }, 4000); });
+    Promise.race([loadFromSupabase(), supabaseTimeout]).then(function (loaded) {
+        if (loaded) {
+            renderClient();
+            renderPromo(promoSel ? promoSel.value : 'promo_12_4');
+        }
+    });
+
+    if (clientSel) clientSel.addEventListener('change', function () { state.clientId = this.value; renderClient(); });
+    if (startSel) startSel.addEventListener('change', function () {
+        state.startIdx = parseInt(this.value, 10);
+        if (state.startIdx > state.endIdx) { state.endIdx = state.startIdx; if (endSel) endSel.value = String(state.endIdx); }
+        renderClient();
+    });
+    if (endSel) endSel.addEventListener('change', function () {
+        state.endIdx = parseInt(this.value, 10);
+        if (state.endIdx < state.startIdx) { state.startIdx = state.endIdx; if (startSel) startSel.value = String(state.startIdx); }
+        renderClient();
+    });
+    if (promoSel) promoSel.addEventListener('change', function () { renderPromo(this.value); });
+
+    document.getElementById('btn-fetch-meta').addEventListener('click', function () {
+        var url = 'https://camilootoya-habi.github.io/tableros-marketing-habi/pauta-propiedades/';
+        var modal = document.getElementById('meta-modal');
+        var statusDiv = document.getElementById('meta-status');
+        var textarea = document.getElementById('meta-json-input');
+
+        modal.classList.add('active');
+        statusDiv.style.display = 'none';
+        textarea.value = '';
+
+        fetchMetaFromUrl(url).then(function (result) {
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status-msg ' + (result.success ? 'success' : 'error');
+            statusDiv.textContent = result.message;
+            if (result.success) {
+                setTimeout(function () { modal.classList.remove('active'); }, 1500);
+            } else {
+                textarea.placeholder = 'No se pudo obtener datos automáticamente. Pega aquí el JSON manualmente.';
+            }
+        });
+    });
+
+    document.getElementById('btn-meta-apply').addEventListener('click', function () {
+        var textarea = document.getElementById('meta-json-input');
+        var statusDiv = document.getElementById('meta-status');
+        var raw = textarea.value.trim();
+        if (!raw) {
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status-msg error';
+            statusDiv.textContent = 'Por favor, ingresa los datos en formato JSON.';
+            return;
+        }
+        var result = updateMetaData(raw);
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status-msg ' + (result.success ? 'success' : 'error');
+        statusDiv.textContent = result.message;
+        if (result.success) {
+            setTimeout(function () { document.getElementById('meta-modal').classList.remove('active'); }, 1500);
+        }
+    });
+
+    document.getElementById('btn-meta-cancel').addEventListener('click', function () {
+        document.getElementById('meta-modal').classList.remove('active');
+    });
+
+    document.getElementById('btn-pdf').addEventListener('click', generatePdf);
+});
+
+    </script>
+</body>
+</html>
