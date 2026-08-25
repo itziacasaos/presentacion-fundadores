@@ -192,6 +192,27 @@ module.exports = async (req, res) => {
       }
     });
 
+    // ---- Candado de seguridad ----
+    // El reporte de Metabase ha demostrado ser inestable: la misma consulta
+    // a veces devuelve ~500,000 filas y a veces ~10,000, y a veces le faltan
+    // clientes completos (parece una consulta pesada que no siempre termina
+    // de calcularse). Para no pisar datos buenos de Supabase con un
+    // resultado incompleto, exigimos un mínimo de clientes reconocidos
+    // antes de subir nada. Ajusta MIN_CLIENTES_ESPERADOS si agregas o quitas
+    // clientes de verdad.
+    const MIN_CLIENTES_ESPERADOS = 3;
+    const clientesEncontrados = Object.keys(seriesByClient);
+    if (clientesEncontrados.length < MIN_CLIENTES_ESPERADOS) {
+      res.status(200).json({
+        ok: false,
+        error: 'Resultado incompleto de Metabase — no se actualizó Supabase para proteger los datos existentes.',
+        clientes_encontrados: clientesEncontrados,
+        filas_leidas_csv: rawRows.length,
+        filas_unicas_usadas: rows.length,
+      });
+      return;
+    }
+
     // ---- HIST: histórico mensual por cliente ----
     const hist = { clients: {} };
     Object.keys(seriesByClient).forEach((cid) => {
