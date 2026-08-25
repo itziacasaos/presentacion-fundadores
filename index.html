@@ -543,7 +543,7 @@
         </h1>
         <div class="text-secundario" style="font-size: 24px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
             Resultados y evolución de
-            <span class="editable" data-field="client-name-badge" style="display: flex; align-items: center; padding: 6px 14px; background: rgba(255,255,255,0.94); border-radius: 6px;">
+            <span class="editable" data-field="client-name-badge" style="display: flex; align-items: center; padding: 0; background: transparent; border-radius: 0;">
                 <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height: 35px; object-fit: contain;">
             </span>
             en Propiedades.com
@@ -735,10 +735,10 @@
                         <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
                         <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
                     </div>
-                    <img src="meta2.png" alt="Anuncio Meta 2" class="mockup-post-img">
+                    <img id="mockup-center-img" src="meta2.png" alt="Anuncio Meta 2" class="mockup-post-img">
                     <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
                         <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
-                        Espacios diseñados para tu estilo de vida. Conoce más detalles...
+                        <span id="mockup-center-caption">Espacios diseñados para tu estilo de vida. Conoce más detalles...</span>
                     </div>
                 </div>
                 <div class="mockup-post">
@@ -906,8 +906,8 @@
 // Si no los configuras, o si la consulta falla (sin internet, tabla
 // vacía, credenciales de ejemplo, etc.), se usan los datos de
 // respaldo incrustados abajo — la página SIEMPRE funciona.
-var SUPABASE_URL = 'TU_SUPABASE_URL';           // ej: https://xxxxxxxxxxxx.supabase.co
-var SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY'; // Project Settings → API → anon public
+var SUPABASE_URL = 'https://zxufghecsdmicndhynrq.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dWZnaGVjc2RtaWNuZGh5bnJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODAwNTgsImV4cCI6MjEwMzE1NjA1OH0.zx5XiO4DvamQvOrEt2YnEZQJP9WCofm5Np4l3EIMWGA';
 
 var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cataño Bienes Raíces", "propiedades_activas": 506, "propiedades_total": 2656, "series": [{"mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005}, {"mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212}, {"mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753}, {"mes": "Ago", "leads": 168, "contactos": 0, "eventos": 0, "impresiones": 430292, "vistas": 12903}], "avg_score": 63.8}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria Inmobiliaria", "propiedades_activas": 1, "propiedades_total": 823, "series": [{"mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0}, {"mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444, "vistas": 1529}, {"mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441, "vistas": 1860}, {"mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336, "vistas": 2466}, {"mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706, "vistas": 695}], "avg_score": 62.8}, "mint": {"id": "mint", "nombre": "MINT inmobiliaria MINT INMOBILIARIA", "propiedades_activas": 101, "propiedades_total": 551, "series": [{"mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227}, {"mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454}, {"mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637}, {"mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553, "vistas": 3462}], "avg_score": 61.5}}};
 var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 276.93, "eventos": 3162, "cpa": 0.09, "evpag": 4.06, "contactos": 1829, "cpl": 1.94, "anuncios": 5, "impresiones": 404598, "clics": 2543, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573, "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84, "cpc": 0.19}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525, "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9, "cpc": 0.27}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483, "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11, "cpc": 0.19}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534, "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85, "cpc": 0.09}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390, "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27, "cpc": 0.14}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 163, "gasto": 274.86, "eventos": 3036, "cpa": 0.09, "evpag": 4.33, "contactos": 1661, "cpl": 1.69, "anuncios": 5, "impresiones": 340501, "clics": 2381, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418, "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1, "cpc": 0.13}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346, "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34, "cpc": 0.11}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390, "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437, "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01, "cpc": 0.26}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386, "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95, "cpc": 0.16}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 122, "gasto": 236.89, "eventos": 2677, "cpa": 0.09, "evpag": 4.28, "contactos": 1667, "cpl": 1.94, "anuncios": 4, "impresiones": 354563, "clics": 1729, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461, "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86, "cpc": 0.2}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433, "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72, "cpc": 0.21}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504, "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465, "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09, "cpc": 0.11}]}, "pulppo": {"nombre": "Pulppo", "leads": 88, "gasto": 224.17, "eventos": 2144, "cpa": 0.1, "evpag": 5.24, "contactos": 1249, "cpl": 2.55, "anuncios": 4, "impresiones": 322236, "clics": 1358, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244, "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79, "cpc": 0.19}, {"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14, "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15, "cpm": 0.9, "cpc": 0.2}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508, "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73, "cpc": 0.23}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365, "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89, "cpc": 0.17}]}}};
@@ -926,6 +926,33 @@ var CLIENT_LOGOS = {
     mint: 'logo-mint.png',
     pulppo: 'logo-pulppo.png',
 };
+// Versión específica para la portada (fondo verde oscuro, sin pastilla de
+// fondo): Pulppo es negro sólido y necesita su variante blanca para verse.
+var CLIENT_LOGOS_DARK_BG = Object.assign({}, CLIENT_LOGOS, {
+    pulppo: 'logo-pulppo-white.png',
+});
+
+// ================================================================
+// Mockup central del post (slide 7, el de en medio — NO se tocan el
+// primero ni el último). Foto real + texto según Venta/Renta y
+// colonia de cada cliente. Se actualiza a mano: dale a Claude el
+// property_id, si es Venta/Renta, la colonia y la foto.
+// ================================================================
+var CENTER_MOCKUP_DEFAULT = { img: 'meta2.png', text: 'Espacios diseñados para tu estilo de vida. Conoce más detalles...' };
+var CENTER_MOCKUP = {
+    catano: { img: 'mockup-center-catano.png', text: 'Venta de casa en Olivar de los Padres. Agenda una visita hoy mismo...' },
+    cattori: { img: 'mockup-center-cattori.png', text: 'Venta de propiedad en Legaria. Agenda una visita hoy mismo...' },
+    pulppo: { img: 'meta2.png', text: 'Casa en venta en tu zona ideal. Agenda una visita hoy mismo...' },
+    mint: { img: 'mockup-center-mint.png', text: 'Se vende casa en Ampliación Napoles. Agenda una visita hoy mismo...' },
+};
+
+function renderCenterMockup(clientId) {
+    var img = document.getElementById('mockup-center-img');
+    var caption = document.getElementById('mockup-center-caption');
+    var data = (clientId !== 'ALL' && CENTER_MOCKUP[clientId]) ? CENTER_MOCKUP[clientId] : CENTER_MOCKUP_DEFAULT;
+    if (img) img.src = data.img;
+    if (caption) caption.textContent = data.text;
+}
 
 // ================================================================
 // Slide 6 — "Mejora tu Score": ahora muestra el PORCENTAJE PROMEDIO
@@ -936,12 +963,18 @@ var CLIENT_LOGOS = {
 // (ver /api/sync-metabase.js) dentro de HIST.clients[cid].avg_score.
 // ================================================================
 var SCORE_TIPS = [
-    { icon: '🌅', text: 'Fotografía de día con cortinas abiertas; evita el mediodía (sombras duras) — mejor mañana o atardecer' },
-    { icon: '📐', text: 'Usa lente <strong>gran angular</strong> para transmitir amplitud, sin exagerar (evita el efecto ojo de pez)' },
-    { icon: '👁️', text: 'Toma cada espacio a la <strong>altura de los ojos</strong> y desde varios ángulos' },
-    { icon: '🏢', text: 'Incluye <strong>fachada, acceso y áreas comunes</strong>, no solo el interior' },
-    { icon: '🧹', text: '<strong>Espacios limpios y despejados</strong>, sin objetos personales a la vista' },
-    { icon: '📝', text: 'Descripción completa y actualizada: <strong>m², recámaras, amenidades, precio</strong>' },
+    { text: 'Sigue todas las recomendaciones de cada sección del aviso' },
+    { text: 'Completa al 100% tu información (m², recámaras, amenidades, precio)' },
+    { text: 'Usa <strong>fotos reales, claras y atractivas</strong> del inmueble' },
+    { text: 'Fotografía de día, con luz natural — evita el mediodía (sombras duras)' },
+    { text: 'Mantén el aviso <strong>actualizado</strong> (disponibilidad y precio)' },
+    { text: 'Responde <strong>rápido</strong> a los contactos y leads' },
+];
+
+var SCORE_RANGES = [
+    { label: 'Excelente', range: '90 o más', color: '#00B36B', desc: 'Información completa y optimizada, fotos de calidad, máxima confianza y prioridad.' },
+    { label: 'Buena', range: '80 – 89', color: '#F2A93B', desc: 'Información correcta en la mayoría de campos; hay puntos de oportunidad.' },
+    { label: 'Baja', range: 'Menos de 80', color: '#E15B4E', desc: 'Información incompleta, pocas fotos, menor visibilidad y confianza.' },
 ];
 
 function getAvgScore(clientId) {
@@ -954,6 +987,51 @@ function getAvgScore(clientId) {
     return (c && typeof c.avg_score === 'number') ? c.avg_score : null;
 }
 
+// Medidor semicircular (0-100) con 3 bandas de color y una aguja apuntando
+// al score promedio actual. Construido en SVG puro, sin librerías.
+function buildScoreGauge(value) {
+    var cx = 100, cy = 92, r = 78, sw = 15;
+    function point(t) {
+        var theta = Math.PI * (1 - t);
+        return { x: cx + r * Math.cos(theta), y: cy - r * Math.sin(theta) };
+    }
+    function arcPath(t0, t1) {
+        var p0 = point(t0), p1 = point(t1);
+        return 'M ' + p0.x.toFixed(2) + ' ' + p0.y.toFixed(2) + ' A ' + r + ' ' + r + ' 0 0 1 ' + p1.x.toFixed(2) + ' ' + p1.y.toFixed(2);
+    }
+    var bands = [
+        { t0: 0, t1: 0.80, color: '#E15B4E' },
+        { t0: 0.80, t1: 0.90, color: '#F2A93B' },
+        { t0: 0.90, t1: 1.00, color: '#00B36B' },
+    ];
+    var bandsHTML = bands.map(function (b) {
+        return '<path d="' + arcPath(b.t0, b.t1) + '" fill="none" stroke="' + b.color + '" stroke-width="' + sw + '" stroke-linecap="round"></path>';
+    }).join('');
+
+    var hasVal = typeof value === 'number';
+    var v = hasVal ? Math.max(0, Math.min(100, value)) : 0;
+    var needleP = point(v / 100);
+    var needleLen = r - 22;
+    var ang = Math.PI * (1 - v / 100);
+    var nx = cx + needleLen * Math.cos(ang);
+    var ny = cy - needleLen * Math.sin(ang);
+
+    var needleHTML = hasVal
+        ? '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(2) + '" y2="' + ny.toFixed(2) + '" stroke="var(--verde-oscuro)" stroke-width="3" stroke-linecap="round"></line>' +
+          '<circle cx="' + cx + '" cy="' + cy + '" r="6" fill="var(--verde-oscuro)"></circle>'
+        : '';
+
+    var valueText = hasVal ? Math.round(v) + '%' : '—';
+
+    return '' +
+        '<svg viewBox="0 0 200 118" style="width:100%; max-width:230px; display:block; margin:0 auto;">' +
+        bandsHTML +
+        needleHTML +
+        '<text x="100" y="100" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="26" fill="var(--verde-oscuro)">' + valueText + '</text>' +
+        '<text x="100" y="114" text-anchor="middle" font-family="Roboto, sans-serif" font-size="8" fill="#999">Promedio de tus propiedades</text>' +
+        '</svg>';
+}
+
 function renderScoreGallery(clientId) {
     var container = document.getElementById('score-gallery');
     if (!container) return;
@@ -961,22 +1039,34 @@ function renderScoreGallery(clientId) {
 
     var avg = getAvgScore(clientId);
     var nombreC = clientId === 'ALL' ? 'todos tus clientes' : ((META.clients[clientId] && META.clients[clientId].nombre) || clientId);
-    var pctText = (avg !== null) ? Math.round(avg) + '%' : '—';
+
+    var legendHTML = SCORE_RANGES.map(function (r) {
+        return '<div style="display:flex; gap:8px; align-items:flex-start; margin-top:8px;">' +
+            '<span style="width:10px; height:10px; border-radius:50%; background:' + r.color + '; margin-top:4px; flex-shrink:0;"></span>' +
+            '<div>' +
+            '<div style="font-size:12px; font-weight:700; color:var(--gris-oscuro);">' + r.label + ' <span style="font-weight:400; color:#888;">(' + r.range + ')</span></div>' +
+            '<div style="font-size:11px; color:#777; line-height:1.3;">' + r.desc + '</div>' +
+            '</div></div>';
+    }).join('');
 
     var tipsHTML = SCORE_TIPS.map(function (t) {
-        return '<div style="display:flex; gap:10px; align-items:flex-start; text-align:left;">' +
-            '<span style="font-size:20px; line-height:1.2;">' + t.icon + '</span>' +
-            '<span style="font-size:13px; color:var(--gris-oscuro); line-height:1.35;">' + t.text + '</span>' +
+        return '<div style="display:flex; gap:8px; align-items:flex-start; margin-top:9px;">' +
+            '<span style="flex-shrink:0; width:16px; height:16px; border-radius:50%; background:var(--verde-principal); color:#fff; font-size:10px; line-height:16px; text-align:center; margin-top:1px;">✓</span>' +
+            '<span style="font-size:12px; color:var(--gris-oscuro); line-height:1.35;">' + t.text + '</span>' +
             '</div>';
     }).join('');
 
     container.innerHTML =
-        '<div style="display:flex; gap:36px; align-items:flex-start; text-align:left;">' +
-        '  <div style="flex:0 0 200px; text-align:left;">' +
-        '    <div class="editable" style="font-family:\'Montserrat\'; font-weight:800; font-size:56px; color:var(--verde-oscuro); line-height:1;">' + pctText + '</div>' +
-        '    <div style="font-size:13px; color:#666; margin-top:6px;">Porcentaje promedio de score de las propiedades pautadas</div>' +
+        '<div style="display:flex; gap:34px; align-items:flex-start; text-align:left;">' +
+        '  <div style="flex:1;">' +
+        '    <div style="font-family:\'Montserrat\'; font-weight:700; color:var(--verde-oscuro); font-size:13px; margin-bottom:2px;">Qué significa tu score</div>' +
+        buildScoreGauge(avg) +
+        legendHTML +
         '  </div>' +
-        '  <div style="flex:1; display:grid; grid-template-columns: 1fr 1fr; gap:14px 22px; text-align:left;">' + tipsHTML + '</div>' +
+        '  <div style="flex:1;">' +
+        '    <div style="font-family:\'Montserrat\'; font-weight:700; color:var(--verde-oscuro); font-size:13px; margin-bottom:2px;">Cómo mejorar tu score</div>' +
+        tipsHTML +
+        '  </div>' +
         '</div>';
 
     if (caption) {
@@ -1105,6 +1195,9 @@ function renderClient() {
     // ---- Slide 6: galería de fotos del inmueble con mayor score ----
     renderScoreGallery(clientId);
 
+    // ---- Slide 7: mockup central (foto real por cliente) ----
+    renderCenterMockup(clientId);
+
     // ---- Slide 1: portada / periodo ----
     var periodoLabel = (startIdx === endIdx)
         ? (MONTHS[startIdx] + ' 2026')
@@ -1119,7 +1212,7 @@ function renderClient() {
             img.alt = name;
             // Logo de marca específico del cliente (sin fondo). Si no hay logo
             // para ese cliente (o es "Todos"), cae al ícono de Propiedades.com.
-            img.src = (clientId !== 'ALL' && CLIENT_LOGOS[clientId]) ? CLIENT_LOGOS[clientId] : 'p.png';
+            img.src = (clientId !== 'ALL' && CLIENT_LOGOS_DARK_BG[clientId]) ? CLIENT_LOGOS_DARK_BG[clientId] : 'p.png';
             img.onerror = function () {
                 img.style.display = 'none';
                 var existing = badge.querySelector('.fallback-name');
