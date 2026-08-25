@@ -543,13 +543,13 @@
         </h1>
         <div class="text-secundario" style="font-size: 24px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
             Resultados y evolución de
-            <span class="editable" data-field="client-name-badge" style="display: flex; align-items: center; padding: 0; background: transparent; border-radius: 0;">
-                <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height: 35px; object-fit: contain;">
+            <span data-field="client-name-badge" style="display: flex; align-items: center; padding: 0; background: transparent; border-radius: 0;">
+                <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height: 58px; object-fit: contain;">
             </span>
             en Propiedades.com
         </div>
         <p class="text-secundario" style="font-size: 20px; opacity: 0.8; margin-top: 0;">
-            Periodo: <span class="editable" data-field="periodo">[PERIODO]</span>
+            Periodo: <span data-field="periodo" style="font-weight: 700;">[PERIODO]</span>
         </p>
     </div>
     <div class="slide slide-2">
@@ -610,7 +610,7 @@
                             <polyline id="poly-meta" fill="none" stroke="#00B36B" stroke-width="3"></polyline>
                             <g id="meta-marker" style="display:none;">
                                 <rect id="meta-marker-bg" rx="6" ry="6" fill="var(--verde-oscuro)"></rect>
-                                <text id="meta-marker-text" fill="#fff" font-family="Montserrat, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle"> Aquí comenzó la publicidad de Meta</text>
+                                <text id="meta-marker-text" fill="#fff" font-family="Montserrat, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">Comienzo publicidad Meta</text>
                                 <line id="meta-marker-line" stroke="var(--verde-oscuro)" stroke-width="1.4"></line>
                                 <circle id="meta-marker-dot" r="4.5" fill="var(--verde-principal)" stroke="#fff" stroke-width="1.6"></circle>
                             </g>
@@ -1352,7 +1352,7 @@ function renderClient() {
             if (metaLocalIdx >= 0 && metaLocalIdx <= n - 1) {
                 var mx = xAt(metaLocalIdx);
                 var my = yAt(histSlice[metaLocalIdx].leads);
-                var labelW = 132, labelH = 15;
+                var labelW = 112, labelH = 15;
                 var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L), CHART_W - PAD_R - labelW);
                 var labelY = my > 30 ? my - 26 : my + 14; // evita que se salga por arriba
                 if (markerDot) { markerDot.setAttribute('cx', mx); markerDot.setAttribute('cy', my); }
