@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Presentación Ejecutiva - Propiedades.com</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap');
         :root {
@@ -33,7 +35,7 @@
             height: 540px;
             background-color: var(--blanco);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
             padding: 45px 60px;
@@ -128,6 +130,16 @@
         .flujo span {
             color: var(--verde-principal);
         }
+        /* Slide "El Reto": centrar el flujo verticalmente */
+        .slide-2 .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .slide-2 .flujo {
+            margin-top: 0; /* removemos el margin-top fijo, el flex lo centra */
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -142,6 +154,12 @@
         th {
             font-family: 'Montserrat', sans-serif;
             color: var(--verde-oscuro);
+        }
+        .ranking-table td {
+            text-align: center;
+        }
+        .ranking-table th {
+            text-align: left;
         }
         .mockup-dashboard {
             background: var(--gris-claro);
@@ -166,7 +184,7 @@
             background: white;
             border: 1px solid #E5E9EC;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -195,7 +213,7 @@
             height: 267px;
             background: #222;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -215,7 +233,7 @@
             color: white;
             font-size: 10px;
             font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
         .renewal-grid {
             display: grid;
@@ -223,7 +241,7 @@
             gap: 18px;
         }
         .renewal-card-dark {
-            border: 1px solid rgba(255,255,255,0.16);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 8px;
             padding: 20px;
             min-height: 120px;
@@ -243,7 +261,7 @@
         }
         .renewal-proposal {
             margin-top: 22px;
-            border: 1px solid rgba(0,179,107,0.45);
+            border: 1px solid rgba(0, 179, 107, 0.45);
             border-radius: 8px;
             padding: 16px 20px;
             display: flex;
@@ -257,85 +275,91 @@
             font-weight: 700;
             margin-bottom: 7px;
         }
-        .slide-2 .slide-content,
+
+        /* Slide 3-4 */
         .slide-3 .slide-content,
         .slide-4 .slide-content {
-            margin-top: 38px; 
+            margin-top: 10px;
         }
-        .slide-2 .flujo {
-            margin-top: 38px;
-        }
-        .slide-3 h2 {
-            margin-bottom: 18px;
+        .slide-3 h2,
+        .slide-4 h2 {
+            margin-bottom: 8px;
         }
         .slide-3 .grid-kpi {
-            margin-top: 22px;
+            margin-top: 12px;
         }
         .slide-3 .historic-note {
-            margin-top: 22px !important;
+            display: none !important;
         }
         .slide-4 .evolution-grid {
-            margin-top: 12px !important;
+            margin-top: 6px !important;
         }
         .slide-4 .chart-box {
-            padding-top: 20px !important;
-            padding-bottom: 45px !important; 
+            padding-top: 12px !important;
+            padding-bottom: 35px !important;
         }
-        .slide-5 table {
-            margin-top: 5px;
+        .slide-4 .chart-title,
+        .slide-4 .trimestral-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--verde-oscuro);
+            margin: 0 0 4px 0;
+            letter-spacing: 0.3px;
         }
-        .slide-5 th,
-        .slide-5 td {
-            padding-top: 9px;
-            padding-bottom: 9px;
+        .slide-4 .trimestral-title {
+            text-align: left;
         }
-        .slide-5 .ranking-summary {
-            margin-top: 16px !important;
+        .slide-4 .footer-note {
+            font-size: 9px;
+            color: #999;
+            margin-top: 12px;
+            text-align: right;
+            border-top: 1px solid #E5E9EC;
+            padding-top: 8px;
+        }
+        .trimestral-block {
+            background: #F7F9F8;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-top: 2px;
+        }
+        .trimestral-block .trimestral-title {
+            margin-bottom: 2px;
+        }
+        .trimestral-block table {
+            margin-top: 2px;
+        }
+
+        .slide-6 .slide-content {
+            margin-top: 4px !important;
         }
         .slide-6 h2 {
-            margin-bottom: 12px;
+            margin-bottom: 6px !important;
         }
-        .slide-6 .photo-tips {
-            margin-top: 12px !important;
+        .slide-6 #score-gallery {
+            margin-top: 2px;
         }
-        .slide-7 h2 {
-            margin-bottom: 8px;
+        .slide-6 #score-gallery>div {
+            gap: 12px;
         }
-        .slide-7 .posts-container {
-            margin-top: 12px !important;
+        .slide-6 #score-gallery .gauge-card,
+        .slide-6 #score-gallery .tips-card {
+            padding: 12px 14px !important;
         }
-        .slide-8 h2 {
-            margin-bottom: 8px;
-        }
-        .slide-8 .stories-container {
-            margin-top: 12px !important;
-        }
-        .slide-9 h2 {
-            margin-bottom: 14px;
-        }
-        .slide-9 .dashboard-list {
-            margin-top: 0;
-        }
-        .slide-9 .dashboard-note {
-            margin-top: 15px !important;
-        }
-        .slide-10 h2 {
-            margin-top: 12px !important;
-            margin-bottom: 8px !important;
-        }
-        .slide-10 .renewal-intro {
-            margin-bottom: 24px !important;
-        }
-        .slide-10 .renewal-grid {
-            margin-top: 0;
-        }
-        .compact-table th,
-        .compact-table td {
-            padding: 5px 8px !important;
+        .slide-6 #score-gallery .legend-item,
+        .slide-6 #score-gallery .tip-item {
+            padding: 6px 10px !important;
+            margin-top: 6px !important;
             font-size: 11px !important;
         }
-        /* Utilidad para ocultar una slide sin borrarla del código.
-           Actualmente aplicada a la slide 9 (Dashboard). */
+        .slide-6 #score-gallery .section-header {
+            margin-bottom: 8px !important;
+        }
+        .slide-6 .gauge-wrapper svg {
+            max-width: 180px !important;
+        }
+
         .slide-hidden {
             display: none !important;
         }
@@ -347,7 +371,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -363,7 +387,7 @@
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         .modal-box textarea {
             width: 100%;
@@ -445,8 +469,11 @@
         #pdf-progress-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,51,35,0.85);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 51, 35, 0.85);
             z-index: 10000;
             color: white;
             align-items: center;
@@ -456,21 +483,36 @@
             flex-direction: column;
             gap: 14px;
         }
-        #pdf-progress-overlay.active { display: flex; }
+        #pdf-progress-overlay.active {
+            display: flex;
+        }
         .pdf-spinner {
-            width: 42px; height: 42px;
-            border: 4px solid rgba(255,255,255,0.25);
+            width: 42px;
+            height: 42px;
+            border: 4px solid rgba(255, 255, 255, 0.25);
             border-top-color: var(--verde-principal);
             border-radius: 50%;
             animation: pdf-spin 0.9s linear infinite;
         }
-        @keyframes pdf-spin { to { transform: rotate(360deg); } }
+        @keyframes pdf-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .slide-12 .brand-mark {
+            display: none !important;
+        }
+        .slide-12 h1 {
+            font-size: 52px;
+        }
     </style>
 </head>
 <body>
-    <div class="no-print" style="width: 960px; background: #fff; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); padding: 14px 24px; display: flex; align-items: center; gap: 16px; font-family: 'Roboto', sans-serif; flex-wrap: wrap;">
-        <strong style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); font-size: 14px;">Cliente:</strong>
-        <select id="client-selector" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+
+    <!-- Barra de control -->
+    <div class="no-print" style="width:960px; background:#fff; border-radius:12px; box-shadow:0 4px 14px rgba(0,0,0,0.08); padding:14px 24px; display:flex; align-items:center; gap:16px; font-family:'Roboto',sans-serif; flex-wrap:wrap;">
+        <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Cliente:</strong>
+        <select id="client-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
             <option value="ALL">Todos los clientes</option>
             <option value="catano">Cataño México</option>
             <option value="cattori">Cattori Inmobiliaria</option>
@@ -478,8 +520,8 @@
             <option value="pulppo">Pulppo</option>
         </select>
 
-        <strong style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); font-size: 14px;">Periodo:</strong>
-        <select id="period-start" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+        <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Periodo:</strong>
+        <select id="period-start" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
             <option value="0">Ene 2026</option>
             <option value="1">Feb 2026</option>
             <option value="2">Mar 2026</option>
@@ -488,8 +530,8 @@
             <option value="5">Jun 2026</option>
             <option value="6">Jul 2026</option>
         </select>
-        <span style="font-size: 12px; color: #888;">a</span>
-        <select id="period-end" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+        <span style="font-size:12px; color:#888;">a</span>
+        <select id="period-end" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
             <option value="0">Ene 2026</option>
             <option value="1">Feb 2026</option>
             <option value="2">Mar 2026</option>
@@ -498,16 +540,16 @@
             <option value="5">Jun 2026</option>
             <option value="6" selected>Jul 2026</option>
         </select>
-        <span style="font-size: 11px; color: #999; font-style: italic;">(agosto se omite hasta que cierre el mes)</span>
+        <span style="font-size:11px; color:#999; font-style:italic;">(agosto se omite hasta que cierre el mes)</span>
 
-        <div style="display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap;">
-            <button id="btn-fetch-meta" style="padding: 8px 16px; border: none; border-radius: 6px; background: var(--verde-principal); color: white; font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif; font-size: 13px;">Actualizar datos de Meta</button>
-            <button id="btn-pdf" style="padding: 8px 16px; border: none; border-radius: 6px; background: #003323; color: white; font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif; font-size: 13px;">Descargar PDF</button>
+        <div style="display:flex; gap:8px; margin-left:auto; flex-wrap:wrap;">
+            <button id="btn-fetch-meta" style="padding:8px 16px; border:none; border-radius:6px; background:var(--verde-principal); color:white; font-weight:700; cursor:pointer; font-family:'Roboto',sans-serif; font-size:13px;">Actualizar datos de Meta</button>
+            <button id="btn-pdf" style="padding:8px 16px; border:none; border-radius:6px; background:#003323; color:white; font-weight:700; cursor:pointer; font-family:'Roboto',sans-serif; font-size:13px;">Descargar PDF</button>
         </div>
 
-        <div style="width: 100%; display: flex; align-items: center; gap: 12px; border-top: 1px dashed #E5E9EC; padding-top: 12px; margin-top: 4px;">
-            <strong style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); font-size: 14px;">Propuesta de renovación (slide 10):</strong>
-            <select id="promo-selector" style="padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; font-family: 'Roboto', sans-serif;">
+        <div style="width:100%; display:flex; align-items:center; gap:12px; border-top:1px dashed #E5E9EC; padding-top:12px; margin-top:4px;">
+            <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Propuesta de renovación (slide 10):</strong>
+            <select id="promo-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
                 <option value="promo_12_4">Promo 12 + 4</option>
                 <option value="paga8_obten12">Paga 8 y obtén 12</option>
                 <option value="anual_estandar">Plan Anual Estándar</option>
@@ -516,10 +558,11 @@
         </div>
     </div>
 
+    <!-- Modal -->
     <div class="modal-overlay no-print" id="meta-modal">
         <div class="modal-box">
-            <h3 style="font-family: 'Montserrat', sans-serif; color: var(--verde-oscuro); margin-top: 0;">Actualizar datos de Meta</h3>
-            <p style="font-size: 14px; color: #555;">Pega aquí <strong>tal cual lo copiaste</strong> de la página de "Pauta Propiedades.com" (las tablas de "Comparativa por cliente" y/o "Detalle por publicación"). También acepta JSON si lo prefieres.</p>
+            <h3 style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); margin-top:0;">Actualizar datos de Meta</h3>
+            <p style="font-size:14px; color:#555;">Pega aquí <strong>tal cual lo copiaste</strong> de la página de "Pauta Propiedades.com" (las tablas de "Comparativa por cliente" y/o "Detalle por publicación"). También acepta JSON si lo prefieres.</p>
             <textarea id="meta-json-input" placeholder="Pega aquí el texto copiado de la página, o un JSON con la propiedad clients"></textarea>
             <div id="meta-status" class="status-msg" style="display:none;"></div>
             <div class="btn-group">
@@ -529,34 +572,42 @@
         </div>
     </div>
 
+    <!-- Overlay de progreso PDF -->
     <div id="pdf-progress-overlay" class="no-print">
         <div class="pdf-spinner"></div>
         <div id="pdf-progress-text">Preparando PDF…</div>
     </div>
 
-    <div class="slide dark slide-1" style="justify-content: center;">
-        <img src="logo_2_.png" alt="Propiedades.com" class="logo-main" style="top: 60px; filter: none;">
-        <h1 style="margin-top: 80px;">
+    <!-- ======================================== -->
+    <!-- SLIDES -->
+    <!-- ======================================== -->
+
+    <!-- Slide 1: Portada -->
+    <div class="slide dark slide-1" style="justify-content:center;">
+        <img src="logo_2_.png" alt="Propiedades.com" class="logo-main" style="top:60px; filter:none;">
+        <h1 style="margin-top:80px;">
             El portal donde
             <br>
             <span class="acento">te encuentran.</span>
         </h1>
-        <div class="text-secundario" style="font-size: 24px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div class="text-secundario" style="font-size:24px; display:flex; align-items:center; gap:10px; margin-bottom:10px;">
             Resultados y evolución de
-            <span data-field="client-name-badge" style="display: flex; align-items: center; padding: 0; background: transparent; border-radius: 0;">
-                <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height: 58px; object-fit: contain;">
+            <span data-field="client-name-badge" style="display:flex; align-items:center; padding:0; background:transparent; border-radius:0;">
+                <img src="logo-cliente.png" alt="[LOGO DEL CLIENTE]" style="height:58px; object-fit:contain;">
             </span>
             en Propiedades.com
         </div>
-        <p class="text-secundario" style="font-size: 20px; opacity: 0.8; margin-top: 0;">
-            Periodo: <span data-field="periodo" style="font-weight: 700;">[PERIODO]</span>
+        <p class="text-secundario" style="font-size:20px; opacity:0.8; margin-top:0;">
+            Periodo: <span data-field="periodo" style="font-weight:700;">[PERIODO]</span>
         </p>
     </div>
+
+    <!-- Slide 2: El Reto (centrado verticalmente) -->
     <div class="slide slide-2">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>El Reto</h2>
-            <p class="text-secundario" style="max-width: 820px; margin: 0;">
+            <p class="text-secundario" style="max-width:820px; margin:0;">
                 Publicar una propiedad es solo el primer paso.
                 El verdadero reto es lograr que las personas correctas
                 la encuentren y se conviertan en oportunidades.
@@ -566,45 +617,41 @@
             </div>
         </div>
     </div>
+
+    <!-- Slide 3 y 4: KPIs + histórico -->
     <div class="slide slide-3 slide-4">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
-            <h2 style="margin-bottom: 2px;">¿Qué está pasando con tus propiedades?</h2>
-            <p style="font-size: 10px; color: #999; margin: 0 0 6px 0;">Leads / Vistas / Impresiones: pauta de <strong>Meta Ads, últimos 14 días</strong> · Propiedades activas: portal Propiedades.com</p>
-            <div class="grid-kpi" style="margin-top: 0;">
-                <div class="card-kpi" style="padding: 9px;">
-                    <div class="kpi-num editable" data-field="kpi-leads" style="font-size: 22px;">X</div>
-                    <div class="text-secundario" style="font-size: 12px;">Leads</div>
+            <h2 style="margin-bottom:4px;">¿Qué está pasando con tus propiedades?</h2>
+            <div class="grid-kpi" style="margin-top:6px;">
+                <div class="card-kpi" style="padding:9px;">
+                    <div class="kpi-num editable" data-field="kpi-leads" style="font-size:22px;">X</div>
+                    <div class="text-secundario" style="font-size:12px;">Leads</div>
                 </div>
-                <div class="card-kpi" style="padding: 9px;">
-                    <div class="kpi-num editable" data-field="kpi-vistas" style="font-size: 22px;">X</div>
-                    <div class="text-secundario" style="font-size: 12px;">Vistas</div>
+                <div class="card-kpi" style="padding:9px;">
+                    <div class="kpi-num editable" data-field="kpi-vistas" style="font-size:22px;">X</div>
+                    <div class="text-secundario" style="font-size:12px;">Vistas</div>
                 </div>
-                <div class="card-kpi" style="padding: 9px;">
-                    <div class="kpi-num editable" data-field="kpi-impresiones" style="font-size: 22px;">X</div>
-                    <div class="text-secundario" style="font-size: 12px;">Impresiones</div>
+                <div class="card-kpi" style="padding:9px;">
+                    <div class="kpi-num editable" data-field="kpi-impresiones" style="font-size:22px;">X</div>
+                    <div class="text-secundario" style="font-size:12px;">Impresiones</div>
                 </div>
-                <div class="card-kpi" style="padding: 9px;">
-                    <div class="kpi-num editable" data-field="kpi-activas" style="font-size: 22px;">X</div>
-                    <div class="text-secundario" style="font-size: 12px;">Propiedades activas</div>
+                <div class="card-kpi" style="padding:9px;">
+                    <div class="kpi-num editable" data-field="kpi-activas" style="font-size:22px;">X</div>
+                    <div class="text-secundario" style="font-size:12px;">Propiedades activas</div>
                 </div>
             </div>
-            <p class="text-secundario historic-note" style="text-align: center; font-weight: bold; margin-top: 6px !important; margin-bottom: 0; font-size: 12px;">
-                <span class="acento">▲ +<span class="editable" data-field="kpi-growth">XX%</span></span> leads del <strong>portal</strong> vs. histórico (detalle por trimestre abajo ↓)
-            </p>
-            <div class="evolution-grid" style="display: flex; gap: 28px; align-items: center; margin-top: 6px !important;">
-                <div class="chart-box" style="flex: 2.2; background: var(--gris-claro); border-radius: 8px; padding: 8px 16px 32px 44px !important; position: relative;">
-                    <p data-field="chart-caption" style="text-align: center; font-family: 'Montserrat'; color: var(--verde-oscuro); margin: 0 0 8px 0; font-size: 12px;">
-                        Histórico de 6 meses → <span class="acento">Activación Meta</span> → Actualidad
-                    </p>
-                    <div style="height: 165px; position: relative;">
-                        <div style="position: absolute; left: -62px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 10px; font-weight: bold; color: var(--gris-oscuro); letter-spacing: 0.5px; white-space: nowrap;">
+            <div class="evolution-grid" style="display:flex; gap:28px; align-items:center; margin-top:4px !important;">
+                <div class="chart-box" style="flex:2.2; background:var(--gris-claro); border-radius:8px; padding:6px 16px 28px 44px !important; position:relative;">
+                    <p class="chart-title" style="text-align:center; margin:0 0 4px 0;">Comportamiento de leads</p>
+                    <div style="height:165px; position:relative;">
+                        <div style="position:absolute; left:-62px; top:50%; transform:translateY(-50%) rotate(-90deg); font-size:10px; font-weight:bold; color:var(--gris-oscuro); letter-spacing:0.5px; white-space:nowrap;">
                             Número de Leads
                         </div>
-                        <div style="position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: bold; color: var(--gris-oscuro); letter-spacing: 0.5px; text-align: center; white-space: nowrap;">
-                            Tiempo <span style="font-weight: 400; color: #999;">(meses · 2026)</span>
+                        <div style="position:absolute; bottom:-32px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:bold; color:var(--gris-oscuro); letter-spacing:0.5px; text-align:center; white-space:nowrap;">
+                            Tiempo <span style="font-weight:400; color:#999;">(meses · 2026)</span>
                         </div>
-                        <svg id="evolution-svg" width="100%" height="100%" viewBox="0 0 400 165" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
+                        <svg id="evolution-svg" width="100%" height="100%" viewBox="0 0 400 165" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
                             <g id="y-grid"></g>
                             <polyline id="poly-historico" fill="none" stroke="#ccc" stroke-width="2"></polyline>
                             <polyline id="poly-meta" fill="none" stroke="#00B36B" stroke-width="3"></polyline>
@@ -615,44 +662,50 @@
                                 <circle id="meta-marker-dot" r="4.5" fill="var(--verde-principal)" stroke="#fff" stroke-width="1.6"></circle>
                             </g>
                         </svg>
-                        <div id="chart-month-labels" style="position:absolute; bottom:-16px; left:44px; right:16px; display:flex; justify-content:space-between; font-size:9px; color:#999;"></div>
+                        <div id="chart-month-labels" style="position:absolute; bottom:-16px; display:flex; justify-content:space-between; font-size:9px; color:#999;"></div>
                     </div>
                 </div>
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <table class="compact-table" style="margin-top: 0;">
-                        <tr>
-                            <th>Periodo</th>
-                            <th>Leads</th>
-                            <th>Var.</th>
-                        </tr>
-                        <tr>
-                            <td>Ene-Mar</td>
-                            <td class="editable" data-field="q1-leads">XX</td>
-                            <td class="editable" data-field="q1-var">—</td>
-                        </tr>
-                        <tr>
-                            <td>Abr-Jun</td>
-                            <td class="editable" data-field="q2-leads">XX</td>
-                            <td class="acento editable" data-field="q2-var">+X%</td>
-                        </tr>
-                        <tr>
-                            <td>Jul (parcial)</td>
-                            <td class="editable" data-field="q3-leads">XX</td>
-                            <td class="acento editable" data-field="q3-var">+X%</td>
-                        </tr>
-                    </table>
-                    <p class="editable" data-field="quarter-note" style="font-size: 9px; color: #888; margin-top: 5px; line-height: 1.3;">
+                <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                    <div class="trimestral-block">
+                        <p class="trimestral-title" style="margin:0 0 2px 0;">Comportamiento trimestral - leads</p>
+                        <table class="compact-table" style="margin-top:2px;">
+                            <tr>
+                                <th>Periodo</th>
+                                <th>Leads</th>
+                                <th>Var.</th>
+                            </tr>
+                            <tr>
+                                <td>Ene-Mar</td>
+                                <td class="editable" data-field="q1-leads">XX</td>
+                                <td class="editable" data-field="q1-var">—</td>
+                            </tr>
+                            <tr>
+                                <td>Abr-Jun</td>
+                                <td class="editable" data-field="q2-leads">XX</td>
+                                <td class="acento editable" data-field="q2-var">+X%</td>
+                            </tr>
+                            <tr>
+                                <td>Jul (parcial)</td>
+                                <td class="editable" data-field="q3-leads">XX</td>
+                                <td class="acento editable" data-field="q3-var">+X%</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p class="editable" data-field="quarter-note" style="font-size:9px; color:#888; margin-top:5px; line-height:1.3;">
                         Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).
                     </p>
                 </div>
             </div>
+            <div class="footer-note">Fuente: panel de Propiedades.com</div>
         </div>
     </div>
+
+    <!-- Slide 5: Ranking -->
     <div class="slide slide-5">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>¿Qué propiedades están generando oportunidades?</h2>
-            <table id="ranking-table">
+            <table id="ranking-table" class="ranking-table">
                 <tr>
                     <th>🏆 Propiedad</th>
                     <th>📌 Tipo de aviso</th>
@@ -696,104 +749,108 @@
                     <td class="editable" data-field="rank-4-score">X.X</td>
                 </tr>
             </table>
-            <div class="ranking-summary" style="background: var(--verde-oscuro); color: white; padding: 13px 15px; border-radius: 8px; text-align: center;">
-                Estas 5 propiedades representan el <span class="acento editable" data-field="rank-summary-pct">[X%]</span> de la generación total de leads.
+            <div class="ranking-summary" style="background:var(--verde-oscuro); color:white; padding:13px 15px; border-radius:8px; text-align:center;">
+                Estas 5 propiedades representan el <span class="acento editable" data-field="rank-summary-pct">[X%]</span> del total de leads del periodo.
             </div>
         </div>
     </div>
+
+    <!-- Slide 6: Mejora tu Score -->
     <div class="slide slide-6">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
-            <h2 style="margin-bottom: 6px;">Mejora tu Score</h2>
-            <div style="width: 46px; height: 4px; background: var(--verde-principal); border-radius: 2px; margin-bottom: 14px;"></div>
-            <p class="text-secundario" data-field="score-gallery-caption" style="display: none;"></p>
-            <!-- Este contenedor lo llena por completo el script al final del archivo,
-                 según el cliente seleccionado en la barra de control. -->
+            <h2 style="margin-bottom:6px;">Mejora tu Score</h2>
+            <div style="width:46px; height:4px; background:var(--verde-principal); border-radius:2px; margin-bottom:10px;"></div>
+            <p class="text-secundario" data-field="score-gallery-caption" style="display:none;"></p>
             <div id="score-gallery"></div>
         </div>
     </div>
+
+    <!-- Slide 7: Posts -->
     <div class="slide slide-7">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>Campaña en Meta: Formato Post (Feed)</h2>
-            <p class="text-secundario" style="text-align: center; margin: 0;">Así se ven tus propiedades en los perfiles de Facebook e Instagram.</p>
-            
-            <div class="posts-container" style="display: flex; gap: 30px; justify-content: center;">
+            <p class="text-secundario" style="text-align:center; margin:0;">Así se ven tus propiedades en los perfiles de Facebook e Instagram.</p>
+            <div class="posts-container" style="display:flex; gap:30px; justify-content:center;">
                 <div class="mockup-post">
                     <div class="mockup-post-header">
                         <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
-                        <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
+                        <div style="font-family:'Roboto'; font-size:13px; font-weight:700;">Propiedades.com</div>
                     </div>
                     <img src="meta1.png" alt="Anuncio Meta 1" class="mockup-post-img">
-                    <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
-                        <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
+                    <div style="padding:10px 12px; font-size:12px; font-family:'Roboto'; line-height:1.4;">
+                        <span style="font-weight:700; color:#385898;">Publicidad</span><br>
                         Encuentra la propiedad ideal. Agenda una visita hoy mismo...
                     </div>
                 </div>
                 <div class="mockup-post">
                     <div class="mockup-post-header">
                         <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
-                        <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
+                        <div style="font-family:'Roboto'; font-size:13px; font-weight:700;">Propiedades.com</div>
                     </div>
                     <img id="mockup-center-img" src="meta2.png" alt="Anuncio Meta 2" class="mockup-post-img">
-                    <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
-                        <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
+                    <div style="padding:10px 12px; font-size:12px; font-family:'Roboto'; line-height:1.4;">
+                        <span style="font-weight:700; color:#385898;">Publicidad</span><br>
                         <span id="mockup-center-caption">Espacios diseñados para tu estilo de vida. Conoce más detalles...</span>
                     </div>
                 </div>
                 <div class="mockup-post">
                     <div class="mockup-post-header">
                         <img src="logoperfil.png" alt="Perfil" class="mockup-post-avatar brand-avatar">
-                        <div style="font-family: 'Roboto'; font-size: 13px; font-weight: 700;">Propiedades.com</div>
+                        <div style="font-family:'Roboto'; font-size:13px; font-weight:700;">Propiedades.com</div>
                     </div>
                     <img src="meta3.png" alt="Anuncio Meta 3" class="mockup-post-img">
-                    <div style="padding: 10px 12px; font-size: 12px; font-family: 'Roboto'; line-height: 1.4;">
-                        <span style="font-weight: 700; color: #385898;">Publicidad</span><br>
+                    <div style="padding:10px 12px; font-size:12px; font-family:'Roboto'; line-height:1.4;">
+                        <span style="font-weight:700; color:#385898;">Publicidad</span><br>
                         La mejor inversión en bienes raíces comienza aquí...
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Slide 8: Stories -->
     <div class="slide slide-8">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>Campaña en Meta: Formato Story</h2>
-            <p class="text-secundario" style="text-align: center; margin: 0;">Formatos verticales optimizados para generar alta interacción.</p>
-            
-            <div class="stories-container" style="display: flex; gap: 40px; justify-content: center;">
+            <p class="text-secundario" style="text-align:center; margin:0;">Formatos verticales optimizados para generar alta interacción.</p>
+            <div class="stories-container" style="display:flex; gap:40px; justify-content:center;">
                 <div class="mockup-story">
                     <img src="meta4.png" alt="Story Meta 1" class="mockup-story-img">
                     <div class="mockup-story-header">
-                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width:24px; height:24px; border-radius:50%; object-fit:cover; border:1px solid #fff;">
                         Propiedades.com
                     </div>
-                    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
+                    <div style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); background:var(--verde-principal); color:white; padding:6px 15px; border-radius:20px; font-size:11px; font-weight:bold;">Más información</div>
                 </div>
-                <div class="mockup-story" style="background: #000;">
-                    <img id="mockup-center-story-img" src="meta2.png" alt="Story Meta 2" class="mockup-story-img" style="object-fit: contain; background: #000;">
+                <div class="mockup-story" style="background:#000;">
+                    <img id="mockup-center-story-img" src="meta2.png" alt="Story Meta 2" class="mockup-story-img" style="object-fit:contain; background:#000;">
                     <div class="mockup-story-header">
-                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width:24px; height:24px; border-radius:50%; object-fit:cover; border:1px solid #fff;">
                         Propiedades.com
                     </div>
-                    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
+                    <div style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); background:var(--verde-principal); color:white; padding:6px 15px; border-radius:20px; font-size:11px; font-weight:bold;">Más información</div>
                 </div>
                 <div class="mockup-story">
                     <img src="meta6.png" alt="Story Meta 3" class="mockup-story-img">
                     <div class="mockup-story-header">
-                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
+                        <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width:24px; height:24px; border-radius:50%; object-fit:cover; border:1px solid #fff;">
                         Propiedades.com
                     </div>
-                    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
+                    <div style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); background:var(--verde-principal); color:white; padding:6px 15px; border-radius:20px; font-size:11px; font-weight:bold;">Más información</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Slide 9: Dashboard (oculta) -->
     <div class="slide slide-9 slide-hidden">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
             <h2>Tu Dashboard</h2>
-            <ul class="text-secundario dashboard-list" style="margin: 0; padding-left: 20px;">
+            <ul class="text-secundario dashboard-list" style="margin:0; padding-left:20px;">
                 <li>Consulta en tiempo real</li>
                 <li>Evolución de resultados</li>
                 <li>Filtros por fecha y propiedad</li>
@@ -802,972 +859,1210 @@
             <div class="mockup-dashboard">
                 [ Representación visual de Dashboard Interactivo ]
             </div>
-            <p class="text-secundario dashboard-note" style="text-align: center; font-weight: 500;">
+            <p class="text-secundario dashboard-note" style="text-align:center; font-weight:500;">
                 Toda la información de tus propiedades, disponible en un solo lugar y actualizada continuamente.
             </p>
         </div>
     </div>
+
+    <!-- Slide 10: Propuesta de renovación -->
     <div class="slide dark slide-10">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
-            <div style="display: inline-block; background: rgba(0,179,107,0.12); color: var(--verde-principal); padding: 6px 12px; border-radius: 4px; font-family: 'Montserrat'; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">
+            <div style="display:inline-block; background:rgba(0,179,107,0.12); color:var(--verde-principal); padding:6px 12px; border-radius:4px; font-family:'Montserrat'; font-size:12px; font-weight:700; letter-spacing:0.5px;">
                 LA PROPUESTA
             </div>
             <h2>Continuar construyendo sobre lo que ya funciona.</h2>
-            <p class="text-secundario renewal-intro" style="color: rgba(255,255,255,0.72); margin-top: 0;">
+            <p class="text-secundario renewal-intro" style="color:rgba(255,255,255,0.72); margin-top:0;">
                 Una renovación pensada para dar continuidad a la presencia, performance y evolución de tu inventario.
             </p>
-            
             <div class="renewal-grid">
                 <div class="renewal-card-dark">
                     <div class="renewal-label">PRESENCIA</div>
-                    <p style="font-family: 'Roboto'; color: rgba(255,255,255,0.78); font-size: 14px; line-height: 1.45; margin: 0;">
+                    <p style="font-family:'Roboto'; color:rgba(255,255,255,0.78); font-size:14px; line-height:1.45; margin:0;">
                         Mantener la visibilidad de tu inventario en Propiedades.com.
                     </p>
                 </div>
                 <div class="renewal-card-dark">
                     <div class="renewal-label">PERFORMANCE</div>
-                    <p style="font-family: 'Roboto'; color: rgba(255,255,255,0.78); font-size: 14px; line-height: 1.45; margin: 0;">
+                    <p style="font-family:'Roboto'; color:rgba(255,255,255,0.78); font-size:14px; line-height:1.45; margin:0;">
                         Continuar impulsando tus propiedades para generar nuevas oportunidades de contacto.
                     </p>
                 </div>
                 <div class="renewal-card-dark">
                     <div class="renewal-label">EVOLUCIÓN</div>
-                    <p style="font-family: 'Roboto'; color: rgba(255,255,255,0.78); font-size: 14px; line-height: 1.45; margin: 0;">
+                    <p style="font-family:'Roboto'; color:rgba(255,255,255,0.78); font-size:14px; line-height:1.45; margin:0;">
                         Seguir utilizando datos e insights para identificar oportunidades de optimización.
                     </p>
                 </div>
             </div>
             <div class="renewal-proposal">
                 <div>
-                    <div style="font-family: 'Montserrat'; color: var(--blanco); font-size: 15px; font-weight: 700;">Propuesta de renovación</div>
-                    <div style="font-family: 'Roboto'; color: rgba(255,255,255,0.65); font-size: 12px; margin-top: 5px;">
+                    <div style="font-family:'Montserrat'; color:var(--blanco); font-size:15px; font-weight:700;">Propuesta de renovación</div>
+                    <div style="font-family:'Roboto'; color:rgba(255,255,255,0.65); font-size:12px; margin-top:5px;">
                         <span class="editable" data-field="promo-nombre">[NOMBRE DEL PLAN / PAQUETE]</span> &nbsp; · &nbsp; <span class="editable" data-field="promo-avisos">[NÚMERO DE AVISOS]</span> &nbsp; · &nbsp; <span class="editable" data-field="promo-vigencia">[VIGENCIA]</span>
                     </div>
                 </div>
-                <div style="font-family: 'Montserrat'; font-size: 23px; color: var(--verde-principal); font-weight: 700;">
+                <div style="font-family:'Montserrat'; font-size:23px; color:var(--verde-principal); font-weight:700;">
                     <span class="editable" data-field="promo-inversion">[INVERSIÓN]</span>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Slide 11: Beneficios -->
     <div class="slide slide-11">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
-            <div style="display: inline-block; background: rgba(0,179,107,0.08); color: var(--verde-principal); padding: 6px 12px; border-radius: 4px; font-family: 'Montserrat'; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;">
-                BENEFICIOS
-            </div>
-            <h2 style="margin-top: 12px; margin-bottom: 8px;">Más que renovar, es dar continuidad a tu estrategia.</h2>
-            
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 22px;">
+            <h2 style="margin-top:0; margin-bottom:8px;">Beneficios de continuar con tu estrategia</h2>
+            <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:22px;">
                 <div class="renewal-card-light">
                     <div class="benefit-number">01 — Mayor visibilidad</div>
-                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Mantén tus propiedades presentes frente a compradores que ya están buscando.</p>
+                    <p class="text-secundario" style="font-size:14px; margin:0; line-height:1.4;">Mantén tus propiedades presentes frente a compradores que ya están buscando.</p>
                 </div>
                 <div class="renewal-card-light">
                     <div class="benefit-number">02 — Generación de oportunidades</div>
-                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Continúa aprovechando la promoción y distribución de tus propiedades para generar leads.</p>
+                    <p class="text-secundario" style="font-size:14px; margin:0; line-height:1.4;">Continúa aprovechando la promoción y distribución de tus propiedades para generar leads.</p>
                 </div>
                 <div class="renewal-card-light">
                     <div class="benefit-number">03 — Optimización continua</div>
-                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Utiliza el comportamiento de tus publicaciones para identificar qué funciona y dónde mejorar.</p>
+                    <p class="text-secundario" style="font-size:14px; margin:0; line-height:1.4;">Utiliza el comportamiento de tus publicaciones para identificar qué funciona y dónde mejorar.</p>
                 </div>
                 <div class="renewal-card-light">
                     <div class="benefit-number">04 — Medición transparente</div>
-                    <p class="text-secundario" style="font-size: 14px; margin: 0; line-height: 1.4;">Consulta la evolución de tus resultados mediante tu dashboard.</p>
+                    <p class="text-secundario" style="font-size:14px; margin:0; line-height:1.4;">Consulta la evolución de tus resultados mediante tu dashboard.</p>
                 </div>
             </div>
-            <div style="margin-top: 22px; text-align: center; padding: 15px; border-top: 1px solid #E5E9EC;">
-                <p style="font-family: 'Montserrat'; color: var(--verde-oscuro); font-size: 16px; margin: 0;">
+            <div style="margin-top:22px; text-align:center; padding:15px; border-top:1px solid #E5E9EC;">
+                <p style="font-family:'Montserrat'; color:var(--verde-oscuro); font-size:16px; margin:0;">
                     Una estrategia que se mide puede optimizarse. <span class="acento">Una estrategia que se mantiene, puede crecer.</span>
                 </p>
             </div>
         </div>
     </div>
-    <div class="slide dark slide-12" style="justify-content: center; align-items: center; text-align: center;">
-        <img src="p.png" alt="Propiedades.com" class="brand-mark">
-        <h1 style="font-size: 36px; max-width: 800px;">Seguimos convirtiendo exposición en oportunidades.</h1>
-        <img src="logo_2_.png" alt="Propiedades.com" style="height: 46px; margin: 32px auto;">
-        <p class="text-secundario" style="max-width: 700px; margin: 0 auto 20px;">
-            Continuaremos monitoreando el desempeño de tus propiedades para identificar dónde podemos generar nuevas oportunidades.
-        </p>
+
+    <!-- Slide 12: Cierre -->
+    <div class="slide dark slide-12" style="justify-content:center; align-items:center; text-align:center;">
+        <h1 style="font-size:52px; margin-bottom:20px;">Gracias por confiar en</h1>
+        <img src="logo_2_.png" alt="Propiedades.com" style="height:60px; object-fit:contain;">
     </div>
 
-
+    <!-- ======================================== -->
+    <!-- SCRIPT -->
+    <!-- ======================================== -->
     <script>
-// ================================================================
-// DATOS INCORPORADOS (Histórico + Meta + Ranking + Promos + Excel map)
-// ================================================================
-// ================================================================
-// DATOS: Supabase (fuente en vivo) con respaldo local (fallback)
-// ================================================================
-// Si configuras SUPABASE_URL y SUPABASE_ANON_KEY, la presentación
-// consulta la tabla "dashboard_data" al cargar y usa esos datos.
-// Si no los configuras, o si la consulta falla (sin internet, tabla
-// vacía, credenciales de ejemplo, etc.), se usan los datos de
-// respaldo incrustados abajo — la página SIEMPRE funciona.
-var SUPABASE_URL = 'https://zxufghecsdmicndhynrq.supabase.co';
-var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dWZnaGVjc2RtaWNuZGh5bnJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODAwNTgsImV4cCI6MjEwMzE1NjA1OH0.zx5XiO4DvamQvOrEt2YnEZQJP9WCofm5Np4l3EIMWGA';
+        // ================================================================
+        // DATOS (respaldo local)
+        // ================================================================
+        var SUPABASE_URL = 'https://zxufghecsdmicndhynrq.supabase.co';
+        var SUPABASE_ANON_KEY =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dWZnaGVjc2RtaWNuZGh5bnJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODAwNTgsImV4cCI6MjEwMzE1NjA1OH0.zx5XiO4DvamQvOrEt2YnEZQJP9WCofm5Np4l3EIMWGA';
 
-var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cataño Bienes Raíces", "propiedades_activas": 510, "propiedades_total": 2661, "avg_score": 63.8, "series": [{"mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005}, {"mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212}, {"mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753}, {"mes": "Ago", "leads": 178, "contactos": 0, "eventos": 0, "impresiones": 430292, "vistas": 12903}]}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria Inmobiliaria", "propiedades_activas": 1, "propiedades_total": 823, "avg_score": 62.8, "series": [{"mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0}, {"mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444, "vistas": 1529}, {"mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441, "vistas": 1860}, {"mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336, "vistas": 2466}, {"mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706, "vistas": 695}]}, "mint": {"id": "mint", "nombre": "MINT inmobiliaria MINT INMOBILIARIA", "propiedades_activas": 101, "propiedades_total": 551, "avg_score": 61.5, "series": [{"mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227}, {"mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454}, {"mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637}, {"mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553, "vistas": 3462}]}, "pulppo": {"id": "pulppo", "nombre": "Pulppo", "propiedades_activas": 7594, "propiedades_total": 76437, "avg_score": 29.4, "series": [{"mes": "Ene", "leads": 922, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 518, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 496, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 21, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 203, "contactos": 0, "eventos": 0, "impresiones": 158895, "vistas": 7178}, {"mes": "Jun", "leads": 523, "contactos": 0, "eventos": 0, "impresiones": 357928, "vistas": 25132}, {"mes": "Jul", "leads": 823, "contactos": 0, "eventos": 0, "impresiones": 745429, "vistas": 47979}, {"mes": "Ago", "leads": 1156, "contactos": 0, "eventos": 0, "impresiones": 1238538, "vistas": 64970}]}}};
-var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 276.93, "eventos": 3162, "cpa": 0.09, "evpag": 4.06, "contactos": 1829, "cpl": 1.94, "anuncios": 5, "impresiones": 404598, "clics": 2543, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573, "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84, "cpc": 0.19}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525, "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9, "cpc": 0.27}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483, "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11, "cpc": 0.19}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534, "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85, "cpc": 0.09}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390, "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27, "cpc": 0.14}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 163, "gasto": 274.86, "eventos": 3036, "cpa": 0.09, "evpag": 4.33, "contactos": 1661, "cpl": 1.69, "anuncios": 5, "impresiones": 340501, "clics": 2381, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418, "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1, "cpc": 0.13}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346, "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34, "cpc": 0.11}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390, "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437, "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01, "cpc": 0.26}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386, "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95, "cpc": 0.16}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 122, "gasto": 236.89, "eventos": 2677, "cpa": 0.09, "evpag": 4.28, "contactos": 1667, "cpl": 1.94, "anuncios": 4, "impresiones": 354563, "clics": 1729, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461, "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86, "cpc": 0.2}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433, "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72, "cpc": 0.21}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504, "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465, "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09, "cpc": 0.11}]}, "pulppo": {"nombre": "Pulppo", "leads": 88, "gasto": 224.17, "eventos": 2144, "cpa": 0.1, "evpag": 5.24, "contactos": 1249, "cpl": 2.55, "anuncios": 4, "impresiones": 322236, "clics": 1358, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244, "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79, "cpc": 0.19}, {"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14, "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15, "cpm": 0.9, "cpc": 0.2}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508, "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73, "cpc": 0.23}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365, "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89, "cpc": 0.17}]}}};
-var PROMOS = {"promo_12_4": {"nombre": "Promo 12 + 4", "avisos": "Hasta 15 avisos activos", "vigencia": "16 meses (12 pagados + 4 de regalo)", "inversion": "$14,900 MXN/mes"}, "paga8_obten12": {"nombre": "Paga 8 y obtén 12", "avisos": "Hasta 15 avisos activos", "vigencia": "12 meses (pagas 8)", "inversion": "$14,900 MXN/mes"}, "anual_estandar": {"nombre": "Plan Anual Estándar", "avisos": "Hasta 10 avisos activos", "vigencia": "12 meses", "inversion": "$11,900 MXN/mes"}, "semestral": {"nombre": "Plan Semestral", "avisos": "Hasta 10 avisos activos", "vigencia": "6 meses", "inversion": "$13,400 MXN/mes"}};
-// RANKING: top de avisos por cliente. Se actualiza automáticamente todos los
-// días desde la tabla en vivo de Metabase (ver /api/sync-metabase.js) —
-// ya no depende del cruce manual con el Excel.
-var RANKING = {"catano": [{"codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 31, "impresiones": 3989, "vistas": 507, "score": 73.0}, {"codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0}, {"codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0}, {"codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0}, {"codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0}, {"codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0}, {"codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 14, "impresiones": 25310, "vistas": 818, "score": 36.0}, {"codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 13, "impresiones": 3027, "vistas": 456, "score": 66.0}], "cattori": [{"codigo": "EB-WK8125r", "property_id": 31555943, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 15, "impresiones": 13152, "vistas": 277, "score": 69.0}, {"codigo": "EB-WJ2325r", "property_id": 31524337, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 14, "impresiones": 14837, "vistas": 492, "score": 70.0}, {"codigo": "EB-UZ8649r", "property_id": 30688298, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 73.0}, {"codigo": "EB-TN1699s", "property_id": 31304118, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 7, "impresiones": 5210, "vistas": 278, "score": 74.0}, {"codigo": "EB-KK8771s", "property_id": 24891898, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 6, "impresiones": 27, "vistas": 10, "score": 65.0}, {"codigo": "EB-UG6140r", "property_id": 30365858, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 6, "impresiones": 0, "vistas": 0, "score": 67.0}, {"codigo": "EB-RA0749s", "property_id": 28495738, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 5, "impresiones": 18, "vistas": 19, "score": 68.0}, {"codigo": "EB-VT1368r", "property_id": 31304053, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 5, "impresiones": 4693, "vistas": 163, "score": 67.0}], "mint": [{"codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0}, {"codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0}, {"codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 5, "impresiones": 76932, "vistas": 910, "score": 57.0}, {"codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0}, {"codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 4, "impresiones": 518, "vistas": 40, "score": 54.0}, {"codigo": "EB-UO9148s", "property_id": 30504146, "tipo_operacion": "Venta", "estatus": "Eliminada", "leads": 4, "impresiones": 0, "vistas": 2, "score": 65.0}, {"codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0}, {"codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0}], "pulppo": [{"codigo": "", "property_id": 28697360, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 26, "impresiones": 0, "vistas": 0, "score": 61.0}, {"codigo": "", "property_id": 28757872, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 24, "impresiones": 0, "vistas": 1, "score": 62.0}, {"codigo": "DGD-062", "property_id": 31092169, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 3757, "vistas": 399, "score": 62.0}, {"codigo": "CMS-104", "property_id": 30943671, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 20, "impresiones": 2402, "vistas": 275, "score": 62.0}, {"codigo": "TJB-383", "property_id": 31424969, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 18, "impresiones": 1771, "vistas": 221, "score": 78.0}, {"codigo": "", "property_id": 28662935, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 17, "impresiones": 0, "vistas": 0, "score": 61.0}, {"codigo": "", "property_id": 28659142, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 0, "vistas": 0, "score": 62.0}, {"codigo": "CPU-248", "property_id": 31578913, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 15, "impresiones": 344, "vistas": 176, "score": 72.0}]};
-
-// Logos de marca por cliente (sin fondo), usados en la portada y en los
-// avatares de los mockups de post/story. Cataño todavía no tiene logo
-// cargado — cae automáticamente al ícono de Propiedades.com mientras tanto.
-var CLIENT_LOGOS = {
-    catano: 'logo-catano.png',
-    cattori: 'logo-cattori.png',
-    mint: 'logo-mint.png',
-    pulppo: 'logo-pulppo.png',
-};
-// Versión específica para la portada (fondo verde oscuro, sin pastilla de
-// fondo): Pulppo es negro sólido y necesita su variante blanca para verse.
-var CLIENT_LOGOS_DARK_BG = Object.assign({}, CLIENT_LOGOS, {
-    pulppo: 'logo-pulppo-white.png',
-});
-
-// ================================================================
-// Mockup central del post (slide 7, el de en medio — NO se tocan el
-// primero ni el último). Foto real + texto según Venta/Renta y
-// colonia de cada cliente. Se actualiza a mano: dale a Claude el
-// property_id, si es Venta/Renta, la colonia y la foto.
-// ================================================================
-var CENTER_MOCKUP_DEFAULT = { img: 'meta2.png', text: 'Espacios diseñados para tu estilo de vida. Conoce más detalles...' };
-var CENTER_MOCKUP = {
-    catano: { img: 'mockup-center-catano.png', text: 'Venta de casa en Olivar de los Padres. Agenda una visita hoy mismo...' },
-    cattori: { img: 'mockup-center-cattori.png', text: 'Venta de propiedad en Legaria. Agenda una visita hoy mismo...' },
-    pulppo: { img: 'meta2.png', text: 'Casa en venta en tu zona ideal. Agenda una visita hoy mismo...' },
-    mint: { img: 'mockup-center-mint.png', text: 'Se vende casa en Ampliación Napoles. Agenda una visita hoy mismo...' },
-};
-
-function renderCenterMockup(clientId) {
-    var img = document.getElementById('mockup-center-img');
-    var storyImg = document.getElementById('mockup-center-story-img');
-    var caption = document.getElementById('mockup-center-caption');
-    var data = (clientId !== 'ALL' && CENTER_MOCKUP[clientId]) ? CENTER_MOCKUP[clientId] : CENTER_MOCKUP_DEFAULT;
-    if (img) img.src = data.img;
-    if (storyImg) storyImg.src = data.img;
-    if (caption) caption.textContent = data.text;
-}
-
-// ================================================================
-// Slide 6 — "Mejora tu Score": ahora muestra el PORCENTAJE PROMEDIO
-// de score de todas las propiedades pautadas de cada cliente (no una
-// propiedad puntual, que podría salir del mercado en cualquier
-// momento), más una serie de tips visuales para mejorarlo.
-// El promedio (avg_score) viene calculado en vivo desde Metabase
-// (ver /api/sync-metabase.js) dentro de HIST.clients[cid].avg_score.
-// ================================================================
-var SCORE_TIPS = [
-    { text: 'Sigue todas las recomendaciones de cada sección del aviso' },
-    { text: 'Completa al 100% tu información (m², recámaras, amenidades, precio)' },
-    { text: 'Usa <strong>fotos reales, claras y atractivas</strong> del inmueble' },
-    { text: 'Fotografía de día, con luz natural — evita el mediodía (sombras duras)' },
-    { text: 'Mantén el aviso <strong>actualizado</strong> (disponibilidad y precio)' },
-    { text: 'Responde <strong>rápido</strong> a los contactos y leads' },
-];
-
-var SCORE_RANGES = [
-    { label: 'Excelente', range: '90 o más', color: '#00B36B', desc: 'Información completa y optimizada, fotos de calidad, máxima confianza y prioridad.' },
-    { label: 'Buena', range: '80 – 89', color: '#F2A93B', desc: 'Información correcta en la mayoría de campos; hay puntos de oportunidad.' },
-    { label: 'Baja', range: 'Menos de 80', color: '#E15B4E', desc: 'Información incompleta, pocas fotos, menor visibilidad y confianza.' },
-];
-
-function getAvgScore(clientId) {
-    if (clientId === 'ALL') {
-        var vals = HIST_CLIENT_IDS.map(function (cid) { return HIST.clients[cid].avg_score; }).filter(function (v) { return typeof v === 'number'; });
-        if (!vals.length) return null;
-        return vals.reduce(function (s, v) { return s + v; }, 0) / vals.length;
-    }
-    var c = HIST.clients[clientId];
-    return (c && typeof c.avg_score === 'number') ? c.avg_score : null;
-}
-
-// ================================================================
-// CAPA VISUAL (slide "Mejora tu Score") — inspirada en la referencia
-// del 25-ago-2026. Solo cambia la representación gráfica; usa
-// exactamente el mismo valor que devuelve getAvgScore() y el mismo
-// contenido de SCORE_RANGES / SCORE_TIPS de arriba (no se tocan).
-// ================================================================
-function scoreIcon(name) {
-    var stroke = '#00553A';
-    var icons = {
-        gauge: '<path d="M4 18a8 8 0 1 1 16 0" stroke="' + stroke + '" stroke-width="2" fill="none"/><path d="M12 18l4-6" stroke="' + stroke + '" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="' + stroke + '"/>',
-        question: '<text x="12" y="17" text-anchor="middle" font-size="15" font-weight="800" fill="' + stroke + '" font-family="Montserrat, sans-serif">?</text>',
-        bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11.2V17h6v-2.8A6 6 0 0 0 12 3Z" stroke="' + stroke + '" stroke-width="2" fill="none" stroke-linejoin="round"/>',
-        clipboard: '<rect x="5" y="4" width="14" height="17" rx="2" stroke="' + stroke + '" stroke-width="2" fill="none"/><path d="M9 3h6v3H9z" stroke="' + stroke + '" stroke-width="2" fill="none"/><path d="M9 13l2 2 4-4" stroke="' + stroke + '" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-        camera: '<rect x="3" y="7" width="18" height="13" rx="2" stroke="' + stroke + '" stroke-width="2" fill="none"/><path d="M8 7l1.5-2h5L16 7" stroke="' + stroke + '" stroke-width="2" fill="none"/><circle cx="12" cy="13.5" r="3.2" stroke="' + stroke + '" stroke-width="2" fill="none"/>',
-        sun: '<circle cx="12" cy="12" r="4" stroke="#F2A93B" stroke-width="2" fill="none"/><path d="M12 2v3M12 19v3M4 12H1M23 12h-3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="#F2A93B" stroke-width="2" stroke-linecap="round"/>',
-        megaphone: '<path d="M3 11v2a2 2 0 0 0 2 2h1l4 3v-9l-4 2H5a2 2 0 0 0-2 2Z" stroke="' + stroke + '" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M14 8a4 4 0 0 1 0 8" stroke="' + stroke + '" stroke-width="2" fill="none"/>',
-        bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#00B36B"/>',
-    };
-    return '<svg width="17" height="17" viewBox="0 0 24 24">' + (icons[name] || '') + '</svg>';
-}
-function scoreIconBadge(name, bg) {
-    return '<div style="width:30px; height:30px; border-radius:50%; background:' + (bg || '#EAF7EF') + '; display:flex; align-items:center; justify-content:center; flex-shrink:0;">' + scoreIcon(name) + '</div>';
-}
-function scoreSectionHeader(iconName, text) {
-    return '<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">' +
-        scoreIconBadge(iconName) +
-        '<span style="font-family:\'Montserrat\'; font-weight:800; color:var(--verde-oscuro); font-size:13px; letter-spacing:0.3px;">' + text + '</span>' +
-        '</div>';
-}
-
-// Medidor semicircular (0-100) con 3 bandas de color y una aguja apuntando
-// al score promedio actual. Construido en SVG puro, sin librerías.
-function buildScoreGauge(value) {
-    var cx = 100, cy = 82, r = 72, sw = 17;
-    function point(t) {
-        var theta = Math.PI * (1 - t);
-        return { x: cx + r * Math.cos(theta), y: cy - r * Math.sin(theta) };
-    }
-    function arcPath(t0, t1) {
-        var p0 = point(t0), p1 = point(t1);
-        return 'M ' + p0.x.toFixed(2) + ' ' + p0.y.toFixed(2) + ' A ' + r + ' ' + r + ' 0 0 1 ' + p1.x.toFixed(2) + ' ' + p1.y.toFixed(2);
-    }
-    var bands = [
-        { t0: 0, t1: 0.80, color: '#E15B4E' },
-        { t0: 0.80, t1: 0.90, color: '#F2A93B' },
-        { t0: 0.90, t1: 1.00, color: '#00B36B' },
-    ];
-    var bandsHTML = '<g style="filter:drop-shadow(0 3px 3px rgba(0,0,0,0.18));">' + bands.map(function (b) {
-        return '<path d="' + arcPath(b.t0, b.t1) + '" fill="none" stroke="' + b.color + '" stroke-width="' + sw + '" stroke-linecap="round"></path>';
-    }).join('') + '</g>';
-
-    var hasVal = typeof value === 'number';
-    var v = hasVal ? Math.max(0, Math.min(100, value)) : 0;
-    var needleLen = r - 26;
-    var ang = Math.PI * (1 - v / 100);
-    var nx = cx + needleLen * Math.cos(ang);
-    var ny = cy - needleLen * Math.sin(ang);
-
-    var needleHTML = hasVal
-        ? '<g style="filter:drop-shadow(0 2px 2px rgba(0,0,0,0.25));">' +
-          '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(2) + '" y2="' + ny.toFixed(2) + '" stroke="#3A3A3A" stroke-width="4" stroke-linecap="round"></line>' +
-          '</g>' +
-          '<circle cx="' + cx + '" cy="' + cy + '" r="15" fill="#fff" stroke="#e2e2e2" stroke-width="1"></circle>' +
-          '<text x="' + cx + '" y="' + (cy + 5) + '" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="15" fill="var(--verde-principal)">P</text>'
-        : '';
-
-    var valueText = hasVal ? Math.round(v) + '%' : '—';
-    var valueY = cy + 46;
-
-    return '' +
-        '<svg viewBox="0 0 200 ' + (valueY + 14) + '" style="width:100%; max-width:220px; display:block; margin:0 auto;">' +
-        bandsHTML +
-        needleHTML +
-        '<text x="100" y="' + valueY + '" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="30" fill="var(--verde-principal)">' + valueText + '</text>' +
-        '</svg>';
-}
-
-function renderScoreGallery(clientId) {
-    var container = document.getElementById('score-gallery');
-    if (!container) return;
-    var caption = document.querySelector('[data-field="score-gallery-caption"]');
-
-    var avg = getAvgScore(clientId);
-    var nombreC = clientId === 'ALL' ? 'todos tus clientes' : ((META.clients[clientId] && META.clients[clientId].nombre) || clientId);
-
-    var legendHTML = SCORE_RANGES.map(function (r) {
-        return '<div style="background:#F7F9F8; border-radius:10px; padding:8px 12px; margin-top:8px; display:flex; gap:9px; align-items:flex-start;">' +
-            '<span style="width:11px; height:11px; border-radius:50%; background:' + r.color + '; margin-top:4px; flex-shrink:0;"></span>' +
-            '<div>' +
-            '<div style="font-size:12px; font-weight:800; color:var(--gris-oscuro);">' + r.label + ' <span style="font-weight:400; color:#888;">(' + r.range + ')</span></div>' +
-            '<div style="font-size:10.5px; color:#888; line-height:1.3; margin-top:1px;">' + r.desc + '</div>' +
-            '</div></div>';
-    }).join('');
-
-    var tipIcons = ['clipboard', 'bulb', 'camera', 'sun', 'megaphone', 'bolt'];
-    var tipsHTML = SCORE_TIPS.map(function (t, i) {
-        return '<div style="background:#F7F9F8; border-radius:10px; padding:8px 12px; margin-top:8px; display:flex; gap:10px; align-items:center;">' +
-            scoreIconBadge(tipIcons[i] || 'bolt') +
-            '<span style="font-size:12px; color:var(--gris-oscuro); line-height:1.3;">' + t.text + '</span>' +
-            '</div>';
-    }).join('');
-
-    container.innerHTML =
-        '<div style="display:flex; gap:16px; align-items:stretch; text-align:left;">' +
-        '  <div style="flex:1; background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:14px 16px;">' +
-        scoreSectionHeader('gauge', 'SCORE PROMEDIO') +
-        buildScoreGauge(avg) +
-        '    <div style="margin-top:10px;">' + scoreSectionHeader('question', 'QUÉ SIGNIFICA TU SCORE') + '</div>' +
-        legendHTML +
-        '  </div>' +
-        '  <div style="flex:1; background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:14px 16px;">' +
-        scoreSectionHeader('bulb', 'CÓMO MEJORAR TU SCORE') +
-        tipsHTML +
-        '  </div>' +
-        '</div>';
-
-    if (caption) {
-        caption.innerHTML = 'Porcentaje promedio de score de las propiedades pautadas de <strong>' + nombreC + '</strong>, y cómo mejorarlo.';
-    }
-}
-
-function supabaseConfigured() {
-    return SUPABASE_URL.indexOf('TU_SUPABASE_URL') === -1 &&
-           SUPABASE_ANON_KEY.indexOf('TU_SUPABASE_ANON_KEY') === -1 &&
-           SUPABASE_URL.indexOf('supabase.co') !== -1;
-}
-
-function loadFromSupabase() {
-    if (!supabaseConfigured() || typeof window.supabase === 'undefined') {
-        return Promise.resolve(false);
-    }
-    try {
-        var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        return client.from('dashboard_data').select('id,payload').then(function (res) {
-            if (res.error || !res.data || !res.data.length) {
-                console.warn('Supabase: usando datos de respaldo —', res.error && res.error.message);
-                return false;
+        var HIST = {
+            "clients": {
+                "catano": {
+                    "id": "catano",
+                    "nombre": "Cataño Bienes Raíces",
+                    "propiedades_activas": 510,
+                    "propiedades_total": 2661,
+                    "avg_score": 63.8,
+                    "series": [
+                        { "mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143,
+                        "vistas": 2005 },
+                        { "mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480,
+                            "vistas": 17212 },
+                        { "mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496,
+                            "vistas": 20753 },
+                        { "mes": "Ago", "leads": 178, "contactos": 0, "eventos": 0, "impresiones": 430292,
+                            "vistas": 12903 }
+                    ]
+                },
+                "cattori": {
+                    "id": "cattori",
+                    "nombre": "Cattori Inmobiliaria Inmobiliaria",
+                    "propiedades_activas": 1,
+                    "propiedades_total": 823,
+                    "avg_score": 62.8,
+                    "series": [
+                        { "mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0 },
+                        { "mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444,
+                        "vistas": 1529 },
+                        { "mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441,
+                        "vistas": 1860 },
+                        { "mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336,
+                        "vistas": 2466 },
+                        { "mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706,
+                        "vistas": 695 }
+                    ]
+                },
+                "mint": {
+                    "id": "mint",
+                    "nombre": "MINT inmobiliaria MINT INMOBILIARIA",
+                    "propiedades_activas": 101,
+                    "propiedades_total": 551,
+                    "avg_score": 61.5,
+                    "series": [
+                        { "mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227 },
+                        { "mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988,
+                        "vistas": 2454 },
+                        { "mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709,
+                            "vistas": 5637 },
+                        { "mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553,
+                            "vistas": 3462 }
+                    ]
+                },
+                "pulppo": {
+                    "id": "pulppo",
+                    "nombre": "Pulppo",
+                    "propiedades_activas": 7594,
+                    "propiedades_total": 76437,
+                    "avg_score": 29.4,
+                    "series": [
+                        { "mes": "Ene", "leads": 922, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Feb", "leads": 518, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Mar", "leads": 496, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "Abr", "leads": 21, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                        { "mes": "May", "leads": 203, "contactos": 0, "eventos": 0, "impresiones": 158895,
+                            "vistas": 7178 },
+                        { "mes": "Jun", "leads": 523, "contactos": 0, "eventos": 0, "impresiones": 357928,
+                            "vistas": 25132 },
+                        { "mes": "Jul", "leads": 823, "contactos": 0, "eventos": 0, "impresiones": 745429,
+                            "vistas": 47979 },
+                        { "mes": "Ago", "leads": 1156, "contactos": 0, "eventos": 0, "impresiones": 1238538,
+                            "vistas": 64970 }
+                    ]
+                }
             }
-            var byId = {};
-            res.data.forEach(function (row) { byId[row.id] = row.payload; });
-            if (byId.hist) HIST = byId.hist;
-            if (byId.meta) META = byId.meta;
-            if (byId.promos) PROMOS = byId.promos;
-            if (byId.ranking) RANKING = byId.ranking;
-            HIST_CLIENT_IDS = Object.keys(HIST.clients);
-            META_CLIENT_IDS = Object.keys(META.clients);
-            return true;
-        }).catch(function (err) {
-            console.warn('Supabase: usando datos de respaldo —', err.message);
-            return false;
-        });
-    } catch (err) {
-        console.warn('Supabase: usando datos de respaldo —', err.message);
-        return Promise.resolve(false);
-    }
-}
-
-var MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago'];
-var META_START_IDX = 6; // Julio 2026 (corregido — la campaña de Meta inició en julio, no en mayo)
-var HIST_CLIENT_IDS = Object.keys(HIST.clients);
-var META_CLIENT_IDS = Object.keys(META.clients);
-
-function fmtNum(n) { return new Intl.NumberFormat('es-MX').format(Math.round(n || 0)); }
-function sumField(arr, field) { return arr.reduce(function (s, r) { return s + (r[field] || 0); }, 0); }
-function setField(name, value) {
-    document.querySelectorAll('[data-field="' + name + '"]').forEach(function (el) { el.textContent = value; });
-}
-
-// ---------- Histórico (Excel) ----------
-function getHistFull(clientId) {
-    if (clientId === 'ALL') {
-        return MONTHS.map(function (mes, i) {
-            var agg = { mes: mes, leads: 0 };
-            HIST_CLIENT_IDS.forEach(function (cid) { agg.leads += HIST.clients[cid].series[i].leads; });
-            return agg;
-        });
-    }
-    if (!HIST.clients[clientId]) return null;
-    return HIST.clients[clientId].series;
-}
-
-// ---------- Meta de hoy (real) ----------
-function getMetaAgg(clientId) {
-    if (clientId === 'ALL') {
-        var agg = { leads: 0, gasto: 0, eventos: 0, contactos: 0, impresiones: 0, clics: 0, anuncios: 0 };
-        META_CLIENT_IDS.forEach(function (cid) {
-            var c = META.clients[cid];
-            agg.leads += c.leads; agg.gasto += c.gasto; agg.eventos += c.eventos;
-            agg.contactos += c.contactos; agg.impresiones += c.impresiones; agg.clics += c.clics; agg.anuncios += c.anuncios;
-        });
-        agg.cpl = agg.leads ? agg.gasto / agg.leads : 0;
-        return agg;
-    }
-    return META.clients[clientId];
-}
-
-function getPortalActivas(clientId) {
-    // Corregido: antes se tomaba el conteo general de propiedades activas de
-    // la cuenta completa (dato estático "Camilo"); ahora se toma el número
-    // de avisos específicamente pautados (estatus "Aprobada"), calculado en
-    // vivo desde Metabase dentro de HIST.clients[cid].propiedades_activas.
-    if (clientId === 'ALL') {
-        return HIST_CLIENT_IDS.reduce(function (s, cid) {
-            return s + (HIST.clients[cid].propiedades_activas || 0);
-        }, 0);
-    }
-    return HIST.clients[clientId] ? HIST.clients[clientId].propiedades_activas : null;
-}
-
-function getRanking(clientId) {
-    var rows = [];
-    if (clientId === 'ALL') {
-        Object.keys(RANKING).forEach(function (cid) {
-            var nombre = (META.clients[cid] && META.clients[cid].nombre) || (HIST.clients[cid] && HIST.clients[cid].nombre) || cid;
-            RANKING[cid].forEach(function (p) { rows.push(Object.assign({}, p, { cliente: nombre })); });
-        });
-    } else {
-        var nombreC = (META.clients[clientId] && META.clients[clientId].nombre) || (HIST.clients[clientId] && HIST.clients[clientId].nombre) || clientId;
-        rows = (RANKING[clientId] || []).map(function (p) { return Object.assign({}, p, { cliente: nombreC }); });
-    }
-    rows.sort(function (a, b) { return b.leads - a.leads; });
-    return rows.slice(0, 5);
-}
-
-// ---------- Estado global de los controles ----------
-// Rango limitado hasta julio (índice 6): agosto se omite de la UI hasta que
-// cierre el mes, para no mostrar una caída engañosa de un mes incompleto.
-var state = { clientId: 'ALL', startIdx: 0, endIdx: 6 };
-
-function renderClient() {
-    var clientId = state.clientId;
-    var startIdx = Math.min(state.startIdx, state.endIdx);
-    var endIdx = Math.max(state.startIdx, state.endIdx);
-
-    var metaAgg = getMetaAgg(clientId);
-    var histFull = getHistFull(clientId);
-    var hasHist = !!histFull;
-    var histSlice = hasHist ? histFull.slice(startIdx, endIdx + 1) : null;
-
-    // ---- Slide 6: galería de fotos del inmueble con mayor score ----
-    renderScoreGallery(clientId);
-
-    // ---- Slide 7: mockup central (foto real por cliente) ----
-    renderCenterMockup(clientId);
-
-    // ---- Slide 1: portada / periodo ----
-    var periodoLabel = (startIdx === endIdx)
-        ? (MONTHS[startIdx] + ' 2026')
-        : (MONTHS[startIdx] + ' – ' + MONTHS[endIdx] + ' 2026');
-    setField('periodo', periodoLabel);
-
-    var badge = document.querySelector('[data-field="client-name-badge"]');
-    if (badge) {
-        var img = badge.querySelector('img');
-        var name = clientId === 'ALL' ? 'Todos los clientes' : META.clients[clientId].nombre;
-        if (img) {
-            img.alt = name;
-            // Logo de marca específico del cliente (sin fondo). Si no hay logo
-            // para ese cliente (o es "Todos"), cae al ícono de Propiedades.com.
-            img.src = (clientId !== 'ALL' && CLIENT_LOGOS_DARK_BG[clientId]) ? CLIENT_LOGOS_DARK_BG[clientId] : 'p.png';
-            img.onerror = function () {
-                img.style.display = 'none';
-                var existing = badge.querySelector('.fallback-name');
-                if (!existing) {
-                    var span = document.createElement('span');
-                    span.className = 'fallback-name';
-                    span.style.fontFamily = "'Montserrat', sans-serif";
-                    span.style.fontWeight = '700';
-                    span.style.color = 'var(--verde-oscuro)';
-                    span.textContent = name;
-                    badge.appendChild(span);
-                } else { existing.textContent = name; existing.style.display = ''; }
-            };
-            var existingFallback = badge.querySelector('.fallback-name');
-            if (existingFallback) existingFallback.style.display = 'none';
-            img.style.display = '';
-            if (img.complete && img.naturalWidth === 0) img.onerror();
-        }
-    }
-
-    // ---- Slide 3 KPIs ----
-    setField('kpi-leads', fmtNum(metaAgg.leads));
-    setField('kpi-vistas', fmtNum(metaAgg.clics));
-    setField('kpi-impresiones', fmtNum(metaAgg.impresiones));
-    var activas = getPortalActivas(clientId);
-    setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' (Meta)'));
-
-    // ---- Growth / análisis trimestral ----
-    var chartCaption = document.querySelector('[data-field="chart-caption"]');
-    var polyHist = document.getElementById('poly-historico');
-    var polyMeta = document.getElementById('poly-meta');
-    var labelsBox = document.getElementById('chart-month-labels');
-    var yGrid = document.getElementById('y-grid');
-    var markerGroup = document.getElementById('meta-marker');
-    var markerDot = document.getElementById('meta-marker-dot');
-    var markerBg = document.getElementById('meta-marker-bg');
-    var markerText = document.getElementById('meta-marker-text');
-    var markerLine = document.getElementById('meta-marker-line');
-
-    // Área de dibujo del SVG (viewBox="0 0 400 165")
-    var CHART_W = 400, CHART_H = 165;
-    var PAD_L = 6, PAD_R = 10, PAD_T = 10, PAD_B = 8;
-    var plotW = CHART_W - PAD_L - PAD_R;
-    var plotH = CHART_H - PAD_T - PAD_B;
-
-    if (hasHist && histSlice.length) {
-        // KPI de crecimiento general (todavía compara pre/post activación de pautas en julio)
-        var pre = histSlice.filter(function (_, i) { return (startIdx + i) < META_START_IDX; });
-        var post = histSlice.filter(function (_, i) { return (startIdx + i) >= META_START_IDX; });
-        var preAvg = pre.length ? sumField(pre, 'leads') / pre.length : null;
-        var postAvg = post.length ? sumField(post, 'leads') / post.length : null;
-        if (preAvg !== null && postAvg !== null) {
-            var growth = preAvg > 0 ? Math.round(((postAvg - preAvg) / preAvg) * 100) : (postAvg > 0 ? 100 : 0);
-            setField('kpi-growth', Math.abs(growth) + '%');
-        } else {
-            setField('kpi-growth', '—');
-        }
-
-        // ---- Análisis trimestral: Q1 (Ene-Mar), Q2 (Abr-Jun), Jul (parcial de Q3) ----
-        var q1 = histFull.slice(0, 3);
-        var q2 = histFull.slice(3, 6);
-        var jul = histFull[6];
-        var q1Leads = sumField(q1, 'leads');
-        var q2Leads = sumField(q2, 'leads');
-        var q2Avg = q2Leads / 3;
-        var julLeads = jul ? jul.leads : null;
-
-        var q2VarPct = q1Leads > 0 ? Math.round(((q2Leads - q1Leads) / q1Leads) * 100) : (q2Leads > 0 ? 100 : 0);
-        setField('q1-leads', fmtNum(q1Leads));
-        setField('q1-var', '—');
-        setField('q2-leads', fmtNum(q2Leads));
-        setField('q2-var', (q1Leads > 0 || q2Leads > 0) ? ((q2VarPct >= 0 ? '+' : '') + q2VarPct + '%') : '—');
-        if (julLeads !== null) {
-            setField('q3-leads', fmtNum(julLeads) + ' (parcial)');
-            var julVsQ2Avg = q2Avg > 0 ? Math.round(((julLeads - q2Avg) / q2Avg) * 100) : (julLeads > 0 ? 100 : 0);
-            setField('q3-var', (julVsQ2Avg >= 0 ? '+' : '') + julVsQ2Avg + '% vs. prom. mensual T2');
-        } else {
-            setField('q3-leads', '—');
-            setField('q3-var', '—');
-        }
-        var abrLeads = histFull[3] ? histFull[3].leads : 0;
-        setField('quarter-note', abrLeads === 0
-            ? 'Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).'
-            : 'Abril registró ' + fmtNum(abrLeads) + ' leads (periodo orgánico, previo a la activación de pautas en julio 2026).');
-
-        if (chartCaption) {
-            chartCaption.innerHTML = 'Comportamiento de leads 2026 → <span class="acento">Activación de pautas (Jul 2026)</span> · rango: ' + periodoLabel;
-        }
-
-        var n = histSlice.length;
-        var maxVal = Math.max(1, ...histSlice.map(function (s) { return s.leads; }));
-        // Redondear el techo del eje a un número "bonito"
-        var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
-        var stepX = n > 1 ? plotW / (n - 1) : 0;
-        function xAt(i) { return PAD_L + i * stepX; }
-        function yAt(v) { return PAD_T + plotH - (v / niceMax) * plotH; }
-        function pt(i) { return xAt(i) + ',' + yAt(histSlice[i].leads); }
-
-        var metaLocalIdx = META_START_IDX - startIdx;
-        var histPts = [], metaPts = [];
-        for (var i = 0; i < n; i++) {
-            if (i <= metaLocalIdx) histPts.push(pt(i));
-            if (i >= metaLocalIdx) metaPts.push(pt(i));
-        }
-        if (polyHist) { polyHist.setAttribute('points', histPts.join(' ')); polyHist.style.display = histPts.length > 1 ? '' : 'none'; }
-        if (polyMeta) { polyMeta.setAttribute('points', metaPts.join(' ')); polyMeta.style.display = metaPts.length > 1 ? '' : 'none'; }
-
-        // ---- Eje Y: líneas guía + valores ----
-        if (yGrid) {
-            yGrid.innerHTML = '';
-            [0, 0.25, 0.5, 0.75, 1].forEach(function (frac) {
-                var y = PAD_T + plotH * (1 - frac);
-                var val = Math.round(niceMax * frac);
-                var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', PAD_L); line.setAttribute('x2', CHART_W - PAD_R);
-                line.setAttribute('y1', y); line.setAttribute('y2', y);
-                line.setAttribute('stroke', frac === 0 ? '#999' : '#E2E6E4');
-                line.setAttribute('stroke-width', frac === 0 ? '1.2' : '1');
-                yGrid.appendChild(line);
-                var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', PAD_L - 4);
-                text.setAttribute('y', y + 3);
-                text.setAttribute('text-anchor', 'end');
-                text.setAttribute('font-size', '8');
-                text.setAttribute('fill', '#8a958f');
-                text.textContent = fmtNum(val);
-                yGrid.appendChild(text);
-            });
-        }
-
-        // ---- Marcador "Aquí comenzó la publicidad de Meta" (en vez de línea punteada) ----
-        if (markerGroup) {
-            if (metaLocalIdx >= 0 && metaLocalIdx <= n - 1) {
-                var mx = xAt(metaLocalIdx);
-                var my = yAt(histSlice[metaLocalIdx].leads);
-                var labelW = 112, labelH = 15;
-                var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L), CHART_W - PAD_R - labelW);
-                var labelY = my > 30 ? my - 26 : my + 14; // evita que se salga por arriba
-                if (markerDot) { markerDot.setAttribute('cx', mx); markerDot.setAttribute('cy', my); }
-                if (markerBg) {
-                    markerBg.setAttribute('x', labelX); markerBg.setAttribute('y', labelY);
-                    markerBg.setAttribute('width', labelW); markerBg.setAttribute('height', labelH);
-                }
-                if (markerText) {
-                    markerText.setAttribute('x', labelX + labelW / 2);
-                    markerText.setAttribute('y', labelY + labelH / 2 + 3);
-                }
-                if (markerLine) {
-                    markerLine.setAttribute('x1', mx); markerLine.setAttribute('y1', my);
-                    markerLine.setAttribute('x2', mx); markerLine.setAttribute('y2', labelY > my ? labelY : labelY + labelH);
-                }
-                markerGroup.style.display = '';
-            } else {
-                markerGroup.style.display = 'none';
-            }
-        }
-
-        if (labelsBox) {
-            labelsBox.innerHTML = '';
-            histSlice.forEach(function (s) { var sp = document.createElement('span'); sp.textContent = s.mes; labelsBox.appendChild(sp); });
-        }
-    } else {
-        setField('kpi-growth', '—');
-        setField('q1-leads', '—'); setField('q1-var', '—');
-        setField('q2-leads', '—'); setField('q2-var', '—');
-        setField('q3-leads', '—'); setField('q3-var', '—');
-        setField('quarter-note', 'Sin histórico mensual para este cliente todavía.');
-        if (chartCaption) chartCaption.innerHTML = '<span class="acento">Pulppo</span> se incorporó recientemente a la pauta Meta — aún sin histórico en Propiedades.com';
-        if (polyHist) polyHist.style.display = 'none';
-        if (polyMeta) polyMeta.style.display = 'none';
-        if (markerGroup) markerGroup.style.display = 'none';
-        if (yGrid) yGrid.innerHTML = '';
-        if (labelsBox) labelsBox.innerHTML = '';
-    }
-
-    // ---- Slide 5: ranking (en vivo desde Metabase — se actualiza solo cada día) ----
-    var ranking = getRanking(clientId);
-    for (var r = 0; r < 5; r++) {
-        var p = ranking[r];
-        if (p) {
-            setField('rank-' + r + '-nombre', p.property_id + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
-            setField('rank-' + r + '-tipo', p.tipo_operacion || '—');
-            setField('rank-' + r + '-vistas', fmtNum(p.vistas));
-            setField('rank-' + r + '-leads', fmtNum(p.leads));
-            setField('rank-' + r + '-score', (typeof p.score === 'number') ? Math.round(p.score) + '%' : (p.score || '—'));
-        } else {
-            setField('rank-' + r + '-nombre', '—'); setField('rank-' + r + '-tipo', '—');
-            setField('rank-' + r + '-vistas', '—'); setField('rank-' + r + '-leads', '—'); setField('rank-' + r + '-score', '—');
-        }
-    }
-    var top5Leads = ranking.reduce(function (s, p) { return s + p.leads; }, 0);
-    var pct = metaAgg.leads ? Math.round((top5Leads / metaAgg.leads) * 100) : 0;
-    setField('rank-summary-pct', pct + '%');
-}
-
-// ---- Slide 10: propuesta de renovación ----
-function renderPromo(promoKey) {
-    var promo = PROMOS[promoKey];
-    if (!promo) return;
-    setField('promo-nombre', promo.nombre);
-    setField('promo-avisos', promo.avisos);
-    setField('promo-vigencia', promo.vigencia);
-    setField('promo-inversion', promo.inversion);
-}
-
-// ---- Actualizar META desde un objeto/JSON pegado o desde una URL ----
-// ================================================================
-// Parser del texto que se copia y pega directamente de la página
-// de "Pauta Propiedades.com" (Metabase/Habi) — NO requiere convertir
-// nada a JSON. Reconoce dos bloques por su forma, sin importar el
-// orden en que aparezcan en el texto pegado:
-//
-//  1) "Comparativa por cliente" (una línea por cliente, 10 columnas)
-//  2) "Detalle por publicación" (una línea por aviso, 19-20 columnas)
-//
-// Las columnas vienen separadas por TAB al copiar la tabla del
-// navegador; como respaldo, si no hay tabs también acepta 2+ espacios.
-// ================================================================
-var KNOWN_CLIENT_NAMES = ['Cataño México', 'MINT Inmobiliaria', 'Cattori Inmobiliaria', 'Pulppo'];
-
-function splitCols(line) {
-    if (line.indexOf('\t') !== -1) return line.split('\t').map(function (s) { return s.trim(); });
-    return line.trim().split(/ {2,}/).map(function (s) { return s.trim(); });
-}
-function numMoney(s) { return s ? Number(String(s).replace(/[$,]/g, '')) : 0; }
-function numPlain(s) { return s ? Number(String(s).replace(/,/g, '')) : 0; }
-function numPct(s) { return s ? Number(String(s).replace('%', '')) : 0; }
-
-function parseMetaPastedText(text) {
-    var lines = text.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
-    var clientsOut = {};
-    var detalleByClientName = {};
-
-    lines.forEach(function (line) {
-        var cols = splitCols(line);
-
-        // ---- Línea de "Comparativa por cliente" ----
-        // <Cliente> <anuncios> <$gasto> <eventos> <$cpa> <ev/pag> <pct%> <contactos> <leads> <$costo_lead>
-        if (KNOWN_CLIENT_NAMES.indexOf(cols[0]) !== -1 && cols.length === 10) {
-            var nombre = cols[0];
-            clientsOut[nombre] = {
-                nombre: nombre,
-                anuncios: numPlain(cols[1]),
-                gasto: numMoney(cols[2]),
-                eventos: numPlain(cols[3]),
-                cpa: numMoney(cols[4]),
-                evpag: Number(cols[5]) || 0,
-                contactos: numPlain(cols[7]),
-                leads: numPlain(cols[8]),
-                cpl: numMoney(cols[9]),
-                impresiones: 0,
-                clics: 0,
-                detalle: [],
-            };
-            return;
-        }
-
-        // ---- Línea de "Detalle por publicación" ----
-        // <id 8 dígitos> <Cliente> <estado_ad> <estado_pub> <etapa> <eventos> <$cpa> <ev/pag>
-        // <contactos> <leads> <colonia> <$gasto> <impr> <clics> <ctr> <$cpm> <$cpc> <x> <y> [Ver ↗]
-        if (/^\d{6,9}$/.test(cols[0]) && KNOWN_CLIENT_NAMES.indexOf(cols[1]) !== -1 && cols.length >= 19) {
-            var cliente = cols[1];
-            detalleByClientName[cliente] = detalleByClientName[cliente] || [];
-            detalleByClientName[cliente].push({
-                publicacion: cols[0],
-                colonia: cols[10],
-                leads: numPlain(cols[9]),
-                contactos: numPlain(cols[8]),
-                impresiones: numPlain(cols[12]),
-                clics: numPlain(cols[13]),
-                ctr: Number(cols[14]) || 0,
-                gasto: numMoney(cols[11]),
-                cpm: numMoney(cols[15]),
-                cpc: numMoney(cols[16]),
-            });
-        }
-    });
-
-    if (Object.keys(clientsOut).length === 0) return null; // no se reconoció nada
-
-    Object.keys(detalleByClientName).forEach(function (nombre) {
-        if (clientsOut[nombre]) {
-            clientsOut[nombre].detalle = detalleByClientName[nombre];
-            clientsOut[nombre].impresiones = sumField(detalleByClientName[nombre], 'impresiones');
-            clientsOut[nombre].clics = sumField(detalleByClientName[nombre], 'clics');
-        }
-    });
-
-    // Traducir "nombre visible" -> id interno (catano/cattori/mint/pulppo),
-    // conservando propiedades_activas_portal si ya existía.
-    var NAME_TO_ID = { 'Cataño México': 'catano', 'MINT Inmobiliaria': 'mint', 'Cattori Inmobiliaria': 'cattori', 'Pulppo': 'pulppo' };
-    var result = { clients: {} };
-    Object.keys(clientsOut).forEach(function (nombre) {
-        var cid = NAME_TO_ID[nombre] || nombre.toLowerCase().replace(/[^a-z0-9]/g, '');
-        var prevPortalActivas = (META.clients[cid] && META.clients[cid].propiedades_activas_portal) || null;
-        var c = clientsOut[nombre];
-        result.clients[cid] = {
-            nombre: nombre,
-            leads: c.leads, gasto: c.gasto, eventos: c.eventos, cpa: c.cpa, evpag: c.evpag,
-            contactos: c.contactos, cpl: c.cpl, anuncios: c.anuncios,
-            impresiones: c.impresiones, clics: c.clics,
-            propiedades_activas_portal: prevPortalActivas,
-            detalle: c.detalle,
         };
-    });
-    return result;
-}
-
-function updateMetaData(newMetaOrText) {
-    try {
-        var parsed;
-        if (typeof newMetaOrText === 'object') {
-            parsed = newMetaOrText; // ya viene como objeto (ej. cargado por fetch)
-        } else {
-            var raw = String(newMetaOrText).trim();
-            try {
-                parsed = JSON.parse(raw); // ¿es JSON válido?
-            } catch (jsonErr) {
-                parsed = parseMetaPastedText(raw); // si no, intenta como texto pegado del tablero
+        var META = {
+            "clients": {
+                "catano": {
+                    "nombre": "Cataño México",
+                    "leads": 143,
+                    "gasto": 276.93,
+                    "eventos": 3162,
+                    "cpa": 0.09,
+                    "evpag": 4.06,
+                    "contactos": 1829,
+                    "cpl": 1.94,
+                    "anuncios": 5,
+                    "impresiones": 404598,
+                    "clics": 2543,
+                    "propiedades_activas_portal": 510,
+                    "detalle": [
+                        { "publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573,
+                            "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84,
+                            "cpc": 0.19 },
+                        { "publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525,
+                            "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9,
+                            "cpc": 0.27 },
+                        { "publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483,
+                            "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11,
+                            "cpc": 0.19 },
+                        { "publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534,
+                            "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85,
+                            "cpc": 0.09 },
+                        { "publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390,
+                            "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27,
+                            "cpc": 0.14 }
+                    ]
+                },
+                "mint": {
+                    "nombre": "MINT Inmobiliaria",
+                    "leads": 163,
+                    "gasto": 274.86,
+                    "eventos": 3036,
+                    "cpa": 0.09,
+                    "evpag": 4.33,
+                    "contactos": 1661,
+                    "cpl": 1.69,
+                    "anuncios": 5,
+                    "impresiones": 340501,
+                    "clics": 2381,
+                    "propiedades_activas_portal": 112,
+                    "detalle": [
+                        { "publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418,
+                            "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1,
+                            "cpc": 0.13 },
+                        { "publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346,
+                            "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34,
+                            "cpc": 0.11 },
+                        { "publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390,
+                            "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06,
+                            "cpc": 0.18 },
+                        { "publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437,
+                            "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01,
+                            "cpc": 0.26 },
+                        { "publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386,
+                            "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95,
+                            "cpc": 0.16 }
+                    ]
+                },
+                "cattori": {
+                    "nombre": "Cattori Inmobiliaria",
+                    "leads": 122,
+                    "gasto": 236.89,
+                    "eventos": 2677,
+                    "cpa": 0.09,
+                    "evpag": 4.28,
+                    "contactos": 1667,
+                    "cpl": 1.94,
+                    "anuncios": 4,
+                    "impresiones": 354563,
+                    "clics": 1729,
+                    "propiedades_activas_portal": 231,
+                    "detalle": [
+                        { "publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461,
+                            "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86,
+                            "cpc": 0.2 },
+                        { "publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433,
+                            "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72,
+                            "cpc": 0.21 },
+                        { "publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504,
+                            "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75,
+                            "cpc": 0.22 },
+                        { "publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465,
+                            "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09,
+                            "cpc": 0.11 }
+                    ]
+                },
+                "pulppo": {
+                    "nombre": "Pulppo",
+                    "leads": 88,
+                    "gasto": 224.17,
+                    "eventos": 2144,
+                    "cpa": 0.1,
+                    "evpag": 5.24,
+                    "contactos": 1249,
+                    "cpl": 2.55,
+                    "anuncios": 4,
+                    "impresiones": 322236,
+                    "clics": 1358,
+                    "propiedades_activas_portal": null,
+                    "detalle": [
+                        { "publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244,
+                            "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79,
+                            "cpc": 0.19 },
+                        { "publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14,
+                            "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15,
+                            "cpm": 0.9, "cpc": 0.2 },
+                        { "publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508,
+                            "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73,
+                            "cpc": 0.23 },
+                        { "publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365,
+                            "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89,
+                            "cpc": 0.17 }
+                    ]
+                }
             }
-        }
-        if (!parsed || !parsed.clients || typeof parsed.clients !== 'object' || !Object.keys(parsed.clients).length) {
-            throw new Error('No reconocí ningún dato de cliente en lo que pegaste. Copia desde "Comparativa por cliente" y/o "Detalle por publicación" (incluye esos encabezados o sus filas).');
-        }
-        META = parsed;
-        META_CLIENT_IDS = Object.keys(META.clients);
-        renderClient();
-        return { success: true, message: 'Datos de Meta actualizados correctamente (' + META_CLIENT_IDS.length + ' clientes).' };
-    } catch (e) {
-        return { success: false, message: 'Error al actualizar datos: ' + e.message };
-    }
-}
+        };
+        var PROMOS = {
+            "promo_12_4": { "nombre": "Promo 12 + 4", "avisos": "Hasta 15 avisos activos",
+                "vigencia": "16 meses (12 pagados + 4 de regalo)", "inversion": "$14,900 MXN/mes" },
+            "paga8_obten12": { "nombre": "Paga 8 y obtén 12", "avisos": "Hasta 15 avisos activos",
+                "vigencia": "12 meses (pagas 8)", "inversion": "$14,900 MXN/mes" },
+            "anual_estandar": { "nombre": "Plan Anual Estándar", "avisos": "Hasta 10 avisos activos",
+                "vigencia": "12 meses", "inversion": "$11,900 MXN/mes" },
+            "semestral": { "nombre": "Plan Semestral", "avisos": "Hasta 10 avisos activos", "vigencia": "6 meses",
+                "inversion": "$13,400 MXN/mes" }
+        };
+        var RANKING = {
+            "catano": [
+                { "codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 31, "impresiones": 3989, "vistas": 507, "score": 73.0 },
+                { "codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0 },
+                { "codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0 },
+                { "codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0 },
+                { "codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0 },
+                { "codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada",
+                    "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0 },
+                { "codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada",
+                    "leads": 14, "impresiones": 25310, "vistas": 818, "score": 36.0 },
+                { "codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada",
+                    "leads": 13, "impresiones": 3027, "vistas": 456, "score": 66.0 }
+            ],
+            "cattori": [
+                { "codigo": "EB-WK8125r", "property_id": 31555943, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 15, "impresiones": 13152, "vistas": 277, "score": 69.0 },
+                { "codigo": "EB-WJ2325r", "property_id": 31524337, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 14, "impresiones": 14837, "vistas": 492, "score": 70.0 },
+                { "codigo": "EB-UZ8649r", "property_id": 30688298, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 9, "impresiones": 0, "vistas": 0, "score": 73.0 },
+                { "codigo": "EB-TN1699s", "property_id": 31304118, "tipo_operacion": "Venta", "estatus": "Vencida",
+                    "leads": 7, "impresiones": 5210, "vistas": 278, "score": 74.0 },
+                { "codigo": "EB-KK8771s", "property_id": 24891898, "tipo_operacion": "Venta", "estatus": "Eliminada",
+                    "leads": 6, "impresiones": 27, "vistas": 10, "score": 65.0 },
+                { "codigo": "EB-UG6140r", "property_id": 30365858, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 6, "impresiones": 0, "vistas": 0, "score": 67.0 },
+                { "codigo": "EB-RA0749s", "property_id": 28495738, "tipo_operacion": "Venta", "estatus": "Eliminada",
+                    "leads": 5, "impresiones": 18, "vistas": 19, "score": 68.0 },
+                { "codigo": "EB-VT1368r", "property_id": 31304053, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 5, "impresiones": 4693, "vistas": 163, "score": 67.0 }
+            ],
+            "mint": [
+                { "codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0 },
+                { "codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida",
+                    "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0 },
+                { "codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada",
+                    "leads": 5, "impresiones": 76932, "vistas": 910, "score": 57.0 },
+                { "codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida",
+                    "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0 },
+                { "codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada",
+                    "leads": 4, "impresiones": 518, "vistas": 40, "score": 54.0 },
+                { "codigo": "EB-UO9148s", "property_id": 30504146, "tipo_operacion": "Venta", "estatus": "Eliminada",
+                    "leads": 4, "impresiones": 0, "vistas": 2, "score": 65.0 },
+                { "codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida",
+                    "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0 },
+                { "codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida",
+                    "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0 }
+            ],
+            "pulppo": [
+                { "codigo": "", "property_id": 28697360, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 26,
+                    "impresiones": 0, "vistas": 0, "score": 61.0 },
+                { "codigo": "", "property_id": 28757872, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 24,
+                    "impresiones": 0, "vistas": 1, "score": 62.0 },
+                { "codigo": "DGD-062", "property_id": 31092169, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 22, "impresiones": 3757, "vistas": 399, "score": 62.0 },
+                { "codigo": "CMS-104", "property_id": 30943671, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 20, "impresiones": 2402, "vistas": 275, "score": 62.0 },
+                { "codigo": "TJB-383", "property_id": 31424969, "tipo_operacion": "Venta", "estatus": "Aprobada",
+                    "leads": 18, "impresiones": 1771, "vistas": 221, "score": 78.0 },
+                { "codigo": "", "property_id": 28662935, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 17,
+                    "impresiones": 0, "vistas": 0, "score": 61.0 },
+                { "codigo": "", "property_id": 28659142, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16,
+                    "impresiones": 0, "vistas": 0, "score": 62.0 },
+                { "codigo": "CPU-248", "property_id": 31578913, "tipo_operacion": "Renta", "estatus": "Vencida",
+                    "leads": 15, "impresiones": 344, "vistas": 176, "score": 72.0 }
+            ]
+        };
 
-function fetchMetaFromUrl(url) {
-    return fetch(url)
-        .then(function (response) {
-            if (!response.ok) throw new Error('Error HTTP: ' + response.status);
-            return response.json();
-        })
-        .then(function (data) { return updateMetaData(data); })
-        .catch(function (error) {
-            return { success: false, message: 'No se pudo obtener datos desde la URL: ' + error.message };
+        var CLIENT_LOGOS = {
+            catano: 'logo-catano.png',
+            cattori: 'logo-cattori.png',
+            mint: 'logo-mint.png',
+            pulppo: 'logo-pulppo.png',
+        };
+        var CLIENT_LOGOS_DARK_BG = Object.assign({}, CLIENT_LOGOS, {
+            pulppo: 'logo-pulppo-white.png',
         });
-}
 
-// ================================================================
-// EXPORTACIÓN A PDF (html2canvas + jsPDF)
-// Reemplaza window.print() por una captura real de cada slide,
-// evitando páginas en blanco y esperando a que fuentes e imágenes
-// terminen de cargar antes de generar el documento.
-// No se toca ninguna imagen/mockup: solo se capturan tal cual están.
-// ================================================================
-function waitForImages(root) {
-    var imgs = Array.prototype.slice.call(root.querySelectorAll('img'));
-    return Promise.all(imgs.map(function (img) {
-        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-        if (img.complete && img.naturalWidth === 0) return Promise.resolve(); // imagen rota: no bloquear el PDF
-        return new Promise(function (resolve) {
-            img.addEventListener('load', resolve, { once: true });
-            img.addEventListener('error', resolve, { once: true });
-        });
-    }));
-}
+        var CENTER_MOCKUP_DEFAULT = { img: 'meta2.png',
+            text: 'Espacios diseñados para tu estilo de vida. Conoce más detalles...' };
+        var CENTER_MOCKUP = {
+            catano: { img: 'mockup-center-catano.png',
+                text: 'Venta de casa en Olivar de los Padres. Agenda una visita hoy mismo...' },
+            cattori: { img: 'mockup-center-cattori.png',
+                text: 'Venta de propiedad en Legaria. Agenda una visita hoy mismo...' },
+            pulppo: { img: 'meta2.png', text: 'Casa en venta en tu zona ideal. Agenda una visita hoy mismo...' },
+            mint: { img: 'mockup-center-mint.png',
+                text: 'Se vende casa en Ampliación Napoles. Agenda una visita hoy mismo...' },
+        };
 
-function waitForFonts() {
-    if (document.fonts && document.fonts.ready) return document.fonts.ready;
-    return Promise.resolve();
-}
+        function renderCenterMockup(clientId) {
+            var img = document.getElementById('mockup-center-img');
+            var storyImg = document.getElementById('mockup-center-story-img');
+            var caption = document.getElementById('mockup-center-caption');
+            var data = (clientId !== 'ALL' && CENTER_MOCKUP[clientId]) ? CENTER_MOCKUP[clientId] :
+            CENTER_MOCKUP_DEFAULT;
+            if (img) img.src = data.img;
+            if (storyImg) storyImg.src = data.img;
+            if (caption) caption.textContent = data.text;
+        }
 
-function setPdfProgress(text) {
-    var overlay = document.getElementById('pdf-progress-overlay');
-    var txt = document.getElementById('pdf-progress-text');
-    if (txt) txt.textContent = text;
-    if (overlay) overlay.classList.add('active');
-}
+        var SCORE_TIPS = [
+            { text: 'Sigue todas las recomendaciones de cada sección del aviso' },
+            { text: 'Completa al 100% tu información (m², recámaras, amenidades, precio)' },
+            { text: 'Usa <strong>fotos reales, claras y atractivas</strong> del inmueble' },
+            { text: 'Fotografía de día, con luz natural — evita el mediodía (sombras duras)' },
+            { text: 'Mantén el aviso <strong>actualizado</strong> (disponibilidad y precio)' },
+            { text: 'Responde <strong>rápido</strong> a los contactos y leads' },
+        ];
 
-function hidePdfProgress() {
-    var overlay = document.getElementById('pdf-progress-overlay');
-    if (overlay) overlay.classList.remove('active');
-}
+        var SCORE_RANGES = [
+            { label: 'Excelente', range: '90 o más', color: '#00B36B',
+                desc: 'Información completa y optimizada, fotos de calidad, máxima confianza y prioridad.' },
+            { label: 'Buena', range: '80 – 89', color: '#F2A93B',
+                desc: 'Información correcta en la mayoría de campos; hay puntos de oportunidad.' },
+            { label: 'Baja', range: 'Menos de 80', color: '#E15B4E',
+                desc: 'Información incompleta, pocas fotos, menor visibilidad y confianza.' },
+        ];
 
-function generatePdf() {
-    var noPrintEls = Array.prototype.slice.call(document.querySelectorAll('.no-print'));
-    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide:not(.slide-hidden)'));
-    var btn = document.getElementById('btn-pdf');
-
-    if (btn) btn.disabled = true;
-    setPdfProgress('Esperando fuentes e imágenes…');
-
-    // Ocultar barra de control / modal / overlay mientras se captura (no altera los slides)
-    var previousDisplay = noPrintEls.map(function (el) { return el.style.display; });
-    noPrintEls.forEach(function (el) { if (el.id !== 'pdf-progress-overlay') el.style.display = 'none'; });
-
-    Promise.all([waitForFonts(), waitForImages(document.body)])
-        .then(function () {
-            // Pequeño margen extra por si algún navegador reporta "loaded" antes de pintar
-            return new Promise(function (resolve) { setTimeout(resolve, 150); });
-        })
-        .then(function () {
-            var jsPDFCtor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
-            var pdf = new jsPDFCtor({ orientation: 'landscape', unit: 'px', format: [960, 540] });
-            var chain = Promise.resolve();
-            slides.forEach(function (slideEl, idx) {
-                chain = chain.then(function () {
-                    setPdfProgress('Generando slide ' + (idx + 1) + ' de ' + slides.length + '…');
-                    return html2canvas(slideEl, {
-                        scale: 2,
-                        useCORS: true,
-                        backgroundColor: '#ffffff',
-                        logging: false
-                    }).then(function (canvas) {
-                        var imgData = canvas.toDataURL('image/jpeg', 0.95);
-                        if (idx > 0) pdf.addPage([960, 540], 'landscape');
-                        pdf.addImage(imgData, 'JPEG', 0, 0, 960, 540, undefined, 'FAST');
-                    });
+        function getAvgScore(clientId) {
+            if (clientId === 'ALL') {
+                var vals = HIST_CLIENT_IDS.map(function(cid) { return HIST.clients[cid].avg_score; }).filter(function(v) {
+                    return typeof v === 'number';
                 });
-            });
-            return chain.then(function () {
-                setPdfProgress('Guardando PDF…');
-                pdf.save('Presentacion-Ejecutiva-Propiedades.pdf');
-            });
-        })
-        .catch(function (err) {
-            console.error('Error generando el PDF:', err);
-            alert('Ocurrió un error generando el PDF. Revisa la consola para más detalles.');
-        })
-        .finally(function () {
-            noPrintEls.forEach(function (el, i) { el.style.display = previousDisplay[i]; });
-            hidePdfProgress();
-            if (btn) btn.disabled = false;
-        });
-}
-
-// ---- Inicialización ----
-document.addEventListener('DOMContentLoaded', function () {
-    var clientSel = document.getElementById('client-selector');
-    var startSel = document.getElementById('period-start');
-    var endSel = document.getElementById('period-end');
-    var promoSel = document.getElementById('promo-selector');
-
-    if (clientSel) state.clientId = clientSel.value;
-    if (startSel) state.startIdx = parseInt(startSel.value, 10);
-    if (endSel) state.endIdx = parseInt(endSel.value, 10);
-
-    // Render inmediato con los datos de respaldo para que la página nunca
-    // se vea en blanco, y si Supabase responde a tiempo, se vuelve a
-    // renderizar con los datos en vivo (esto no toca diseño ni imágenes).
-    renderClient();
-    renderPromo(promoSel ? promoSel.value : 'promo_12_4');
-
-    var supabaseTimeout = new Promise(function (resolve) { setTimeout(function () { resolve(false); }, 4000); });
-    Promise.race([loadFromSupabase(), supabaseTimeout]).then(function (loaded) {
-        if (loaded) {
-            renderClient();
-            renderPromo(promoSel ? promoSel.value : 'promo_12_4');
-        }
-    });
-
-    if (clientSel) clientSel.addEventListener('change', function () { state.clientId = this.value; renderClient(); });
-    if (startSel) startSel.addEventListener('change', function () {
-        state.startIdx = parseInt(this.value, 10);
-        if (state.startIdx > state.endIdx) { state.endIdx = state.startIdx; if (endSel) endSel.value = String(state.endIdx); }
-        renderClient();
-    });
-    if (endSel) endSel.addEventListener('change', function () {
-        state.endIdx = parseInt(this.value, 10);
-        if (state.endIdx < state.startIdx) { state.startIdx = state.endIdx; if (startSel) startSel.value = String(state.startIdx); }
-        renderClient();
-    });
-    if (promoSel) promoSel.addEventListener('change', function () { renderPromo(this.value); });
-
-    document.getElementById('btn-fetch-meta').addEventListener('click', function () {
-        var url = 'https://camilootoya-habi.github.io/tableros-marketing-habi/pauta-propiedades/';
-        var modal = document.getElementById('meta-modal');
-        var statusDiv = document.getElementById('meta-status');
-        var textarea = document.getElementById('meta-json-input');
-
-        modal.classList.add('active');
-        statusDiv.style.display = 'none';
-        textarea.value = '';
-
-        fetchMetaFromUrl(url).then(function (result) {
-            statusDiv.style.display = 'block';
-            statusDiv.className = 'status-msg ' + (result.success ? 'success' : 'error');
-            statusDiv.textContent = result.message;
-            if (result.success) {
-                setTimeout(function () { modal.classList.remove('active'); }, 1500);
-            } else {
-                textarea.placeholder = 'No se pudo obtener datos automáticamente. Pega aquí el JSON manualmente.';
+                if (!vals.length) return null;
+                return vals.reduce(function(s, v) { return s + v; }, 0) / vals.length;
             }
-        });
-    });
-
-    document.getElementById('btn-meta-apply').addEventListener('click', function () {
-        var textarea = document.getElementById('meta-json-input');
-        var statusDiv = document.getElementById('meta-status');
-        var raw = textarea.value.trim();
-        if (!raw) {
-            statusDiv.style.display = 'block';
-            statusDiv.className = 'status-msg error';
-            statusDiv.textContent = 'Por favor, ingresa los datos en formato JSON.';
-            return;
+            var c = HIST.clients[clientId];
+            return (c && typeof c.avg_score === 'number') ? c.avg_score : null;
         }
-        var result = updateMetaData(raw);
-        statusDiv.style.display = 'block';
-        statusDiv.className = 'status-msg ' + (result.success ? 'success' : 'error');
-        statusDiv.textContent = result.message;
-        if (result.success) {
-            setTimeout(function () { document.getElementById('meta-modal').classList.remove('active'); }, 1500);
+
+        function scoreIcon(name) {
+            var stroke = '#00553A';
+            var icons = {
+                gauge: '<path d="M4 18a8 8 0 1 1 16 0" stroke="' + stroke +
+                    '" stroke-width="2" fill="none"/><path d="M12 18l4-6" stroke="' + stroke +
+                    '" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="' + stroke + '"/>',
+                question: '<text x="12" y="17" text-anchor="middle" font-size="15" font-weight="800" fill="' + stroke +
+                    '" font-family="Montserrat, sans-serif">?</text>',
+                bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11.2V17h6v-2.8A6 6 0 0 0 12 3Z" stroke="' + stroke +
+                    '" stroke-width="2" fill="none" stroke-linejoin="round"/>',
+                clipboard: '<rect x="5" y="4" width="14" height="17" rx="2" stroke="' + stroke +
+                    '" stroke-width="2" fill="none"/><path d="M9 3h6v3H9z" stroke="' + stroke +
+                    '" stroke-width="2" fill="none"/><path d="M9 13l2 2 4-4" stroke="' + stroke +
+                    '" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+                camera: '<rect x="3" y="7" width="18" height="13" rx="2" stroke="' + stroke +
+                    '" stroke-width="2" fill="none"/><path d="M8 7l1.5-2h5L16 7" stroke="' + stroke +
+                    '" stroke-width="2" fill="none"/><circle cx="12" cy="13.5" r="3.2" stroke="' + stroke +
+                    '" stroke-width="2" fill="none"/>',
+                sun: '<circle cx="12" cy="12" r="4" stroke="#F2A93B" stroke-width="2" fill="none"/><path d="M12 2v3M12 19v3M4 12H1M23 12h-3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="#F2A93B" stroke-width="2" stroke-linecap="round"/>',
+                megaphone: '<path d="M3 11v2a2 2 0 0 0 2 2h1l4 3v-9l-4 2H5a2 2 0 0 0-2 2Z" stroke="' + stroke +
+                    '" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M14 8a4 4 0 0 1 0 8" stroke="' +
+                    stroke + '" stroke-width="2" fill="none"/>',
+                bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#00B36B"/>',
+            };
+            return '<svg width="17" height="17" viewBox="0 0 24 24">' + (icons[name] || '') + '</svg>';
         }
-    });
 
-    document.getElementById('btn-meta-cancel').addEventListener('click', function () {
-        document.getElementById('meta-modal').classList.remove('active');
-    });
+        function scoreIconBadge(name, bg) {
+            return '<div style="width:30px; height:30px; border-radius:50%; background:' + (bg || '#EAF7EF') +
+                '; display:flex; align-items:center; justify-content:center; flex-shrink:0;">' + scoreIcon(name) +
+                '</div>';
+        }
 
-    document.getElementById('btn-pdf').addEventListener('click', generatePdf);
-});
+        function scoreSectionHeader(iconName, text) {
+            return '<div class="section-header" style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">' +
+                scoreIconBadge(iconName) +
+                '<span style="font-family:\'Montserrat\'; font-weight:800; color:var(--verde-oscuro); font-size:13px; letter-spacing:0.3px;">' +
+                text + '</span>' +
+                '</div>';
+        }
 
-    </script>
-</body>
-</html>
+        function buildScoreGauge(value) {
+            var cx = 100,
+                cy = 82,
+                r = 72,
+                sw = 17;
+
+            function point(t) {
+                var theta = Math.PI * (1 - t);
+                return { x: cx + r * Math.cos(theta), y: cy - r * Math.sin(theta) };
+            }
+
+            function arcPath(t0, t1) {
+                var p0 = point(t0),
+                    p1 = point(t1);
+                return 'M ' + p0.x.toFixed(2) + ' ' + p0.y.toFixed(2) + ' A ' + r + ' ' + r + ' 0 0 1 ' + p1.x.toFixed(
+                    2) +
+                    ' ' + p1.y.toFixed(2);
+            }
+            var bands = [
+                { t0: 0, t1: 0.80, color: '#E15B4E' },
+                { t0: 0.80, t1: 0.90, color: '#F2A93B' },
+                { t0: 0.90, t1: 1.00, color: '#00B36B' },
+            ];
+            var bandsHTML = '<g style="filter:drop-shadow(0 3px 3px rgba(0,0,0,0.18));">' + bands.map(function(b) {
+                return '<path d="' + arcPath(b.t0, b.t1) + '" fill="none" stroke="' + b.color +
+                    '" stroke-width="' + sw + '" stroke-linecap="round"></path>';
+            }).join('') + '</g>';
+
+            var hasVal = typeof value === 'number';
+            var v = hasVal ? Math.max(0, Math.min(100, value)) : 0;
+            var needleLen = r - 26;
+            var ang = Math.PI * (1 - v / 100);
+            var nx = cx + needleLen * Math.cos(ang);
+            var ny = cy - needleLen * Math.sin(ang);
+
+            var needleHTML = hasVal ?
+                '<g style="filter:drop-shadow(0 2px 2px rgba(0,0,0,0.25));">' +
+                '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(2) + '" y2="' + ny.toFixed(2) +
+                '" stroke="#3A3A3A" stroke-width="4" stroke-linecap="round"></line>' +
+                '</g>' +
+                '<circle cx="' + cx + '" cy="' + cy + '" r="15" fill="#fff" stroke="#e2e2e2" stroke-width="1"></circle>' +
+                '<image x="' + (cx - 11) + '" y="' + (cy - 11) + '" width="22" height="22" href="p.png" />' :
+                '';
+
+            var valueText = hasVal ? Math.round(v) + '%' : '—';
+            var valueY = cy + 46;
+
+            return '' +
+                '<div class="gauge-wrapper">' +
+                '<svg viewBox="0 0 200 ' + (valueY + 14) + '" style="width:100%; max-width:200px; display:block; margin:0 auto;">' +
+                bandsHTML +
+                needleHTML +
+                '<text x="100" y="' + valueY +
+                '" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="30" fill="var(--verde-principal)">' +
+                valueText + '</text>' +
+                '</svg>' +
+                '</div>';
+        }
+
+        function renderScoreGallery(clientId) {
+            var container = document.getElementById('score-gallery');
+            if (!container) return;
+            var caption = document.querySelector('[data-field="score-gallery-caption"]');
+
+            var avg = getAvgScore(clientId);
+            var nombreC = clientId === 'ALL' ? 'todos tus clientes' : ((META.clients[clientId] && META.clients[clientId]
+                .nombre) || clientId);
+
+            var legendHTML = SCORE_RANGES.map(function(r) {
+                return '<div class="legend-item" style="background:#F7F9F8; border-radius:10px; padding:8px 12px; margin-top:6px; display:flex; gap:9px; align-items:flex-start;">' +
+                    '<span style="width:11px; height:11px; border-radius:50%; background:' + r.color +
+                    '; margin-top:4px; flex-shrink:0;"></span>' +
+                    '<div>' +
+                    '<div style="font-size:12px; font-weight:800; color:var(--gris-oscuro);">' + r.label +
+                    ' <span style="font-weight:400; color:#888;">(' + r.range + ')</span></div>' +
+                    '<div style="font-size:10.5px; color:#888; line-height:1.3; margin-top:1px;">' + r.desc +
+                    '</div>' +
+                    '</div></div>';
+            }).join('');
+
+            var tipIcons = ['clipboard', 'bulb', 'camera', 'sun', 'megaphone', 'bolt'];
+            var tipsHTML = SCORE_TIPS.map(function(t, i) {
+                return '<div class="tip-item" style="background:#F7F9F8; border-radius:10px; padding:6px 10px; margin-top:6px; display:flex; gap:10px; align-items:center;">' +
+                    scoreIconBadge(tipIcons[i] || 'bolt') +
+                    '<span style="font-size:11px; color:var(--gris-oscuro); line-height:1.3;">' + t.text +
+                    '</span>' +
+                    '</div>';
+            }).join('');
+
+            container.innerHTML =
+                '<div style="display:flex; gap:16px; align-items:stretch; text-align:left;">' +
+                '  <div class="gauge-card" style="flex:1; background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:12px 14px;">' +
+                scoreSectionHeader('gauge', 'SCORE PROMEDIO') +
+                buildScoreGauge(avg) +
+                '    <div style="margin-top:8px;">' + scoreSectionHeader('question', 'QUÉ SIGNIFICA TU SCORE') +
+                '</div>' +
+                legendHTML +
+                '  </div>' +
+                '  <div class="tips-card" style="flex:1; background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:12px 14px;">' +
+                scoreSectionHeader('bulb', 'CÓMO MEJORAR TU SCORE') +
+                tipsHTML +
+                '  </div>' +
+                '</div>';
+
+            if (caption) {
+                caption.innerHTML = 'Porcentaje promedio de score de las propiedades pautadas de <strong>' +
+                    nombreC + '</strong>, y cómo mejorarlo.';
+            }
+        }
+
+        function supabaseConfigured() {
+            return SUPABASE_URL.indexOf('TU_SUPABASE_URL') === -1 &&
+                SUPABASE_ANON_KEY.indexOf('TU_SUPABASE_ANON_KEY') === -1 &&
+                SUPABASE_URL.indexOf('supabase.co') !== -1;
+        }
+
+        function loadFromSupabase() {
+            if (!supabaseConfigured() || typeof window.supabase === 'undefined') {
+                return Promise.resolve(false);
+            }
+            try {
+                var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                return client.from('dashboard_data').select('id,payload').then(function(res) {
+                    if (res.error || !res.data || !res.data.length) {
+                        console.warn('Supabase: usando datos de respaldo —', res.error && res.error.message);
+                        return false;
+                    }
+                    var byId = {};
+                    res.data.forEach(function(row) { byId[row.id] = row.payload; });
+                    if (byId.hist) HIST = byId.hist;
+                    if (byId.meta) META = byId.meta;
+                    if (byId.promos) PROMOS = byId.promos;
+                    if (byId.ranking) RANKING = byId.ranking;
+                    HIST_CLIENT_IDS = Object.keys(HIST.clients);
+                    META_CLIENT_IDS = Object.keys(META.clients);
+                    return true;
+                }).catch(function(err) {
+                    console.warn('Supabase: usando datos de respaldo —', err.message);
+                    return false;
+                });
+            } catch (err) {
+                console.warn('Supabase: usando datos de respaldo —', err.message);
+                return Promise.resolve(false);
+            }
+        }
+
+        var MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'];
+        var META_START_IDX = 6;
+        var HIST_CLIENT_IDS = Object.keys(HIST.clients);
+        var META_CLIENT_IDS = Object.keys(META.clients);
+
+        function fmtNum(n) { return new Intl.NumberFormat('es-MX').format(Math.round(n || 0)); }
+
+        function sumField(arr, field) { return arr.reduce(function(s, r) { return s + (r[field] || 0); }, 0); }
+
+        function setField(name, value) {
+            document.querySelectorAll('[data-field="' + name + '"]').forEach(function(el) { el.textContent = value; });
+        }
+
+        function getHistFull(clientId) {
+            if (clientId === 'ALL') {
+                return MONTHS.map(function(mes, i) {
+                    var agg = { mes: mes, leads: 0, vistas: 0, impresiones: 0 };
+                    HIST_CLIENT_IDS.forEach(function(cid) {
+                        var s = HIST.clients[cid].series[i];
+                        agg.leads += s.leads || 0;
+                        agg.vistas += s.vistas || 0;
+                        agg.impresiones += s.impresiones || 0;
+                    });
+                    return agg;
+                });
+            }
+            if (!HIST.clients[clientId]) return null;
+            return HIST.clients[clientId].series;
+        }
+
+        function getMetaAgg(clientId) {
+            if (clientId === 'ALL') {
+                var agg = { leads: 0, gasto: 0, eventos: 0, contactos: 0, impresiones: 0, clics: 0, anuncios: 0 };
+                META_CLIENT_IDS.forEach(function(cid) {
+                    var c = META.clients[cid];
+                    agg.leads += c.leads;
+                    agg.gasto += c.gasto;
+                    agg.eventos += c.eventos;
+                    agg.contactos += c.contactos;
+                    agg.impresiones += c.impresiones;
+                    agg.clics += c.clics;
+                    agg.anuncios += c.anuncios;
+                });
+                agg.cpl = agg.leads ? agg.gasto / agg.leads : 0;
+                return agg;
+            }
+            return META.clients[clientId];
+        }
+
+        function getPortalActivas(clientId) {
+            if (clientId === 'ALL') {
+                return HIST_CLIENT_IDS.reduce(function(s, cid) {
+                    return s + (HIST.clients[cid].propiedades_activas || 0);
+                }, 0);
+            }
+            return HIST.clients[clientId] ? HIST.clients[clientId].propiedades_activas : null;
+        }
+
+        function getRanking(clientId) {
+            var rows = [];
+            if (clientId === 'ALL') {
+                Object.keys(RANKING).forEach(function(cid) {
+                    var nombre = (META.clients[cid] && META.clients[cid].nombre) || (HIST.clients[cid] && HIST
+                        .clients[cid].nombre) || cid;
+                    RANKING[cid].forEach(function(p) { rows.push(Object.assign({}, p, { cliente: nombre })); });
+                });
+            } else {
+                var nombreC = (META.clients[clientId] && META.clients[clientId].nombre) || (HIST.clients[clientId] &&
+                    HIST.clients[clientId].nombre) || clientId;
+                rows = (RANKING[clientId] || []).map(function(p) { return Object.assign({}, p, { cliente: nombreC }); });
+            }
+            rows.sort(function(a, b) { return b.leads - a.leads; });
+            return rows.slice(0, 5);
+        }
+
+        var state = { clientId: 'ALL', startIdx: 0, endIdx: 6 };
+
+        function renderClient() {
+            var clientId = state.clientId;
+            var startIdx = Math.min(state.startIdx, state.endIdx);
+            var endIdx = Math.max(state.startIdx, state.endIdx);
+
+            var metaAgg = getMetaAgg(clientId);
+            var histFull = getHistFull(clientId);
+            var hasHist = !!histFull;
+            var histSlice = hasHist ? histFull.slice(startIdx, endIdx + 1) : null;
+
+            renderScoreGallery(clientId);
+            renderCenterMockup(clientId);
+
+            var periodoLabel = (startIdx === endIdx) ?
+                (MONTHS[startIdx] + ' 2026') :
+                (MONTHS[startIdx] + ' – ' + MONTHS[endIdx] + ' 2026');
+            setField('periodo', periodoLabel);
+
+            var badge = document.querySelector('[data-field="client-name-badge"]');
+            if (badge) {
+                var img = badge.querySelector('img');
+                var name = clientId === 'ALL' ? 'Todos los clientes' : META.clients[clientId].nombre;
+                if (img) {
+                    img.alt = name;
+                    img.src = (clientId !== 'ALL' && CLIENT_LOGOS_DARK_BG[clientId]) ? CLIENT_LOGOS_DARK_BG[clientId] :
+                        'p.png';
+                    img.onerror = function() {
+                        img.style.display = 'none';
+                        var existing = badge.querySelector('.fallback-name');
+                        if (!existing) {
+                            var span = document.createElement('span');
+                            span.className = 'fallback-name';
+                            span.style.fontFamily = "'Montserrat', sans-serif";
+                            span.style.fontWeight = '700';
+                            span.style.color = 'var(--verde-oscuro)';
+                            span.textContent = name;
+                            badge.appendChild(span);
+                        } else { existing.textContent = name;
+                            existing.style.display = ''; }
+                    };
+                    var existingFallback = badge.querySelector('.fallback-name');
+                    if (existingFallback) existingFallback.style.display = 'none';
+                    img.style.display = '';
+                    if (img.complete && img.naturalWidth === 0) img.onerror();
+                }
+            }
+
+            // KPIs
+            if (histSlice && histSlice.length) {
+                var totalLeads = sumField(histSlice, 'leads');
+                var totalVistas = sumField(histSlice, 'vistas');
+                var totalImpresiones = sumField(histSlice, 'impresiones');
+                setField('kpi-leads', fmtNum(totalLeads));
+                setField('kpi-vistas', fmtNum(totalVistas));
+                setField('kpi-impresiones', fmtNum(totalImpresiones));
+            } else {
+                setField('kpi-leads', '—');
+                setField('kpi-vistas', '—');
+                setField('kpi-impresiones', '—');
+            }
+            var activas = getPortalActivas(clientId);
+            setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' (Meta)'));
+
+            // Gráfico
+            var polyHist = document.getElementById('poly-historico');
+            var polyMeta = document.getElementById('poly-meta');
+            var labelsBox = document.getElementById('chart-month-labels');
+            var yGrid = document.getElementById('y-grid');
+            var markerGroup = document.getElementById('meta-marker');
+            var markerDot = document.getElementById('meta-marker-dot');
+            var markerBg = document.getElementById('meta-marker-bg');
+            var markerText = document.getElementById('meta-marker-text');
+            var markerLine = document.getElementById('meta-marker-line');
+
+            var CHART_W = 400,
+                CHART_H = 165;
+            var PAD_L = 6,
+                PAD_R = 4;
+            var PAD_T = 10,
+                PAD_B = 8;
+            var plotW = CHART_W - PAD_L - PAD_R;
+            var plotH = CHART_H - PAD_T - PAD_B;
+
+            if (hasHist && histSlice.length) {
+                var pre = histSlice.filter(function(_, i) { return (startIdx + i) < META_START_IDX; });
+                var post = histSlice.filter(function(_, i) { return (startIdx + i) >= META_START_IDX; });
+                var preAvg = pre.length ? sumField(pre, 'leads') / pre.length : null;
+                var postAvg = post.length ? sumField(post, 'leads') / post.length : null;
+                if (preAvg !== null && postAvg !== null) {
+                    var growth = preAvg > 0 ? Math.round(((postAvg - preAvg) / preAvg) * 100) : (postAvg > 0 ? 100 : 0);
+                    setField('kpi-growth', Math.abs(growth) + '%');
+                } else {
+                    setField('kpi-growth', '—');
+                }
+
+                var q1 = histFull.slice(0, 3);
+                var q2 = histFull.slice(3, 6);
+                var jul = histFull[6];
+                var q1Leads = sumField(q1, 'leads');
+                var q2Leads = sumField(q2, 'leads');
+                var q2Avg = q2Leads / 3;
+                var julLeads = jul ? jul.leads : null;
+
+                var q2VarPct = q1Leads > 0 ? Math.round(((q2Leads - q1Leads) / q1Leads) * 100) : (q2Leads > 0 ? 100 : 0);
+                setField('q1-leads', fmtNum(q1Leads));
+                setField('q1-var', '—');
+                setField('q2-leads', fmtNum(q2Leads));
+                setField('q2-var', (q1Leads > 0 || q2Leads > 0) ? ((q2VarPct >= 0 ? '+' : '') + q2VarPct + '%') : '—');
+                if (julLeads !== null) {
+                    setField('q3-leads', fmtNum(julLeads) + ' (parcial)');
+                    var julVsQ2Avg = q2Avg > 0 ? Math.round(((julLeads - q2Avg) / q2Avg) * 100) : (julLeads > 0 ? 100 :
+                        0);
+                    setField('q3-var', (julVsQ2Avg >= 0 ? '+' : '') + julVsQ2Avg + '% vs. prom. mensual T2');
+                } else {
+                    setField('q3-leads', '—');
+                    setField('q3-var', '—');
+                }
+                var abrLeads = histFull[3] ? histFull[3].leads : 0;
+                setField('quarter-note', abrLeads === 0 ?
+                    'Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).' :
+                    'Abril registró ' + fmtNum(abrLeads) +
+                    ' leads (periodo orgánico, previo a la activación de pautas en julio 2026).'
+                );
+
+                // Dibujar gráfico
+                var n = histSlice.length;
+                var maxVal = Math.max(1, ...histSlice.map(function(s) { return s.leads; }));
+                var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
+                var stepX = n > 1 ? plotW / (n - 1) : 0;
+
+                function xAt(i) { return PAD_L + i * stepX; }
+
+                function yAt(v) { return PAD_T + plotH - (v / niceMax) * plotH; }
+
+                function pt(i) { return xAt(i) + ',' + yAt(histSlice[i].leads); }
+
+                var metaLocalIdx = META_START_IDX - startIdx;
+                var histPts = [],
+                    metaPts = [];
+                for (var i = 0; i < n; i++) {
+                    if (i <= metaLocalIdx) histPts.push(pt(i));
+                    if (i >= metaLocalIdx) metaPts.push(pt(i));
+                }
+                if (polyHist) { polyHist.setAttribute('points', histPts.join(' '));
+                    polyHist.style.display = histPts.length > 1 ? '' : 'none'; }
+                if (polyMeta) { polyMeta.setAttribute('points', metaPts.join(' '));
+                    polyMeta.style.display = metaPts.length > 1 ? '' : 'none'; }
+
+                // Eje Y
+                if (yGrid) {
+                    yGrid.innerHTML = '';
+                    var axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    axisLine.setAttribute('x1', PAD_L);
+                    axisLine.setAttribute('y1', PAD_T);
+                    axisLine.setAttribute('x2', PAD_L);
+                    axisLine.setAttribute('y2', PAD_T + plotH);
+                    axisLine.setAttribute('stroke', '#333');
+                    axisLine.setAttribute('stroke-width', '1.2');
+                    yGrid.appendChild(axisLine);
+
+                    [0, 0.25, 0.5, 0.75, 1].forEach(function(frac) {
+                        var y = PAD_T + plotH * (1 - frac);
+                        var val = Math.round(niceMax * frac);
+                        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', PAD_L);
+                        line.setAttribute('x2', CHART_W - PAD_R);
+                        line.setAttribute('y1', y);
+                        line.setAttribute('y2', y);
+                        line.setAttribute('stroke', frac === 0 ? '#999' : '#E2E6E4');
+                        line.setAttribute('stroke-width', frac === 0 ? '1.2' : '1');
+                        yGrid.appendChild(line);
+                        var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        text.setAttribute('x', PAD_L - 4);
+                        text.setAttribute('y', y + 3);
+                        text.setAttribute('text-anchor', 'end');
+                        text.setAttribute('font-size', '8');
+                        text.setAttribute('fill', '#8a958f');
+                        text.textContent = fmtNum(val);
+                        yGrid.appendChild(text);
+                    });
+                }
+
+                // Marcador
+                if (markerGroup) {
+                    if (metaLocalIdx >= 0 && metaLocalIdx <= n - 1) {
+                        var mx = xAt(metaLocalIdx);
+                        var my = yAt(histSlice[metaLocalIdx].leads);
+                        var labelW = 130;
+                        var labelH = 15;
+                        var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L), CHART_W - PAD_R - labelW);
+                        var labelY = my > 30 ? my - 26 : my + 14;
+                        if (markerDot) { markerDot.setAttribute('cx', mx);
+                            markerDot.setAttribute('cy', my); }
+                        if (markerBg) {
+                            markerBg.setAttribute('x', labelX);
+                            markerBg.setAttribute('y', labelY);
+                            markerBg.setAttribute('width', labelW);
+                            markerBg.setAttribute('height', labelH);
+                        }
+                        if (markerText) {
+                            markerText.setAttribute('x', labelX + labelW / 2);
+                            markerText.setAttribute('y', labelY + labelH / 2 + 3);
+                        }
+                        if (markerLine) {
+                            markerLine.setAttribute('x1', mx);
+                            markerLine.setAttribute('y1', my);
+                            markerLine.setAttribute('x2', mx);
+                            markerLine.setAttribute('y2', labelY > my ? labelY : labelY + labelH);
+                        }
+                        markerGroup.style.display = '';
+                    } else {
+                        markerGroup.style.display = 'none';
+                    }
+                }
+
+                // Etiquetas del eje X (redistribuidas)
+                if (labelsBox) {
+                    labelsBox.style.position = 'absolute';
+                    labelsBox.style.bottom = '-16px';
+                    labelsBox.style.left = '52px';  // alineado con el área de dibujo
+                    labelsBox.style.right = '21px'; // alineado con el área de dibujo
+                    labelsBox.style.display = 'flex';
+                    labelsBox.style.justifyContent = 'space-between';
+                    labelsBox.style.fontSize = '9px';
+                    labelsBox.style.color = '#999';
+                    labelsBox.innerHTML = '';
+                    histSlice.forEach(function(s) {
+                        var sp = document.createElement('span');
+                        sp.textContent = s.mes;
+                        labelsBox.appendChild(sp);
+                    });
+                }
+            } else {
+                setField('kpi-growth', '—');
+                setField('q1-leads', '—');
+                setField('q1-var', '—');
+                setField('q2-leads', '—');
+                setField('q2-var', '—');
+                setField('q3-leads', '—');
+                setField('q3-var', '—');
+                setField('quarter-note', 'Sin histórico mensual para este cliente todavía.');
+                if (polyHist) polyHist.style.display = 'none';
+                if (polyMeta) polyMeta.style.display = 'none';
+                if (markerGroup) markerGroup.style.display = 'none';
+                if (yGrid) yGrid.innerHTML = '';
+                if (labelsBox) labelsBox.innerHTML = '';
+            }
+
+            // Ranking
+            var ranking = getRanking(clientId);
+            for (var r = 0; r < 5; r++) {
+                var p = ranking[r];
+                if (p) {
+                    setField('rank-' + r + '-nombre', p.property_id + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
+                    setField('rank-' + r + '-tipo', p.tipo_operacion || '—');
+                    setField('rank-' + r + '-vistas', fmtNum(p.vistas));
+                    setField('rank-' + r + '-leads', fmtNum(p.leads));
+                    setField('rank-' + r + '-score', (typeof p.score === 'number') ? Math.round(p.score) + '%' : (p
+                        .score || '—'));
+                } else {
+                    setField('rank-' + r + '-nombre', '—');
+                    setField('rank-' + r + '-tipo', '—');
+                    setField('rank-' + r + '-vistas', '—');
+                    setField('rank-' + r + '-leads', '—');
+                    setField('rank-' + r + '-score', '—');
+                }
+            }
+            var top5Leads = ranking.reduce(function(s, p) { return s + p.leads; }, 0);
+            var totalLeadsPortal = histSlice ? sumField(histSlice, 'leads') : 0;
+            var pct = totalLeadsPortal ? Math.round((top5Leads / totalLeadsPortal) * 100) : 0;
+            setField('rank-summary-pct', pct + '%');
+        }
+
+        function renderPromo(promoKey) {
+            var promo = PROMOS[promoKey];
+            if (!promo) return;
+            setField('promo-nombre', promo.nombre);
+            setField('promo-avisos', promo.avisos);
+            setField('promo-vigencia', promo.vigencia);
+            setField('promo-inversion', promo.inversion);
+        }
+
+        var KNOWN_CLIENT_NAMES = ['Cataño México', 'MINT Inmobiliaria', 'Cattori Inmobiliaria', 'Pulppo'];
+
+        function splitCols(line) {
+            if (line.indexOf('\t') !== -1) return line.split('\t').map(function(s) { return s.trim(); });
+            return line.trim().split(/ {2,}/).map(function(s) { return s.trim(); });
+        }
+
+        function numMoney(s) { return s ? Number(String(s).replace(/[$,]/g, '')) : 0; }
+
+        function numPlain(s) { return s ? Number(String(s).replace(/,/g, '')) : 0; }
+
+        function numPct(s) { return s ? Number(String(s).replace('%', '')) : 0; }
+
+        function parseMetaPastedText(text) {
+            var lines = text.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(Boolean);
+            var clientsOut = {};
+            var detalleByClientName = {};
+
+            lines.forEach(function(line) {
+                var cols = splitCols(line);
+
+                if (KNOWN_CLIENT_NAMES.indexOf(cols[0]) !== -1 && cols.length === 10) {
+                    var nombre = cols[0];
+                    clientsOut[nombre] = {
+                        nombre: nombre,
+                        anuncios: numPlain(cols[1]),
+                        gasto: numMoney(cols[2]),
+                        eventos: numPlain(cols[3]),
+                        cpa: numMoney(cols[4]),
+                        evpag: Number(cols[5]) || 0,
+                        contactos: numPlain(cols[7]),
+                        leads: numPlain(cols[8]),
+                        cpl: numMoney(cols[9]),
+                        impresiones: 0,
+                        clics: 0,
+                        detalle: [],
+                    };
+                    return;
+                }
+
+                if (/^\d{6,9}$/.test(cols[0]) && KNOWN_CLIENT_NAMES.indexOf(cols[1]) !== -1 && cols.length >= 19) {
+                    var cliente = cols[1];
+                    detalleByClientName[cliente] = detalleByClientName[cliente] || [];
+                    detalleByClientName[cliente].push({
+                        publicacion: cols[0],
+                        colonia: cols[10],
+                        leads: numPlain(cols[9]),
+                        contactos: numPlain(cols[8]),
+                        impresiones: numPlain(cols[12]),
+                        clics: numPlain(cols[13]),
+                        ctr: Number(cols[14]) || 0,
+                        gasto: numMoney(cols[11]),
+                        cpm: numMoney(cols[15]),
+                        cpc: numMoney(cols[16]),
+                    });
+                }
+            });
+
+            if (Object.keys(clientsOut).length === 0) return null;
+
+            Object.keys(detalleByClientName).forEach(function(nombre) {
+                if (clientsOut[nombre]) {
+                    clientsOut[nombre].detalle = detalleByClientName[nombre];
+                    clientsOut[nombre].impresiones = sumField(detalleByClientName[nombre], 'impresiones');
+                    clientsOut[nombre].clics = sumField(detalleByClientName[nombre], 'clics');
+                }
+            });
+
+            var NAME_TO_ID = { 'Cataño México': 'catano', 'MINT Inmobiliaria': 'mint', 'Cattori Inmobiliaria': 'cattori',
+                'Pulppo': 'pulppo' };
+            var result = { clients: {} };
+            Object.keys(clientsOut).forEach(function(nombre) {
+                var cid = NAME_TO_ID[nombre] || nombre.toLowerCase().replace(/[^a-z0-9]/g, '');
+                var prevPortalActivas = (META.clients[cid] && META.clients[cid].propiedades_activas_portal) || null;
+                var c = clientsOut[nombre];
+                result.clients[cid] = {
+                    nombre: nombre,
+                    leads: c.leads,
+                    gasto: c.gasto,
+                    eventos: c.eventos,
+                    cpa: c.cpa,
+                    evpag: c.evpag,
+                    contactos: c.contactos,
+                    cpl: c.cpl,
+                    anuncios: c.anuncios,
+                    impresiones: c.impresiones,
+                    clics: c.clics,
+                    propiedades_activas_portal: prevPortalActivas,
+                    detalle: c.detalle,
+                };
+            });
+            return result;
+        }
+
+        function updateMetaData(newMetaOrText) {
+            try {
+                var parsed;
+                if (typeof newMetaOrText === 'object') {
+                    parsed = newMetaOrText;
+                } else {
+                    var raw = String(newMetaOrText).trim();
+                    try {
+                        parsed = JSON.parse(raw);
+                    } catch (jsonErr) {
+                        parsed = parseMetaPastedText(raw);
+                    }
+                }
+                if (!parsed || !parsed.clients || typeof parsed.clients !== 'object' || !Object.keys(parsed.clients)
+                    .length) {
+                    throw new Error(
+                        'No reconocí ningún dato de cliente en lo que pegaste. Copia desde "Comparativa por cliente" y/o "Detalle por publicación" (incluye esos encabezados o sus filas).'
+                        );
+                }
+                META = parsed;
+                META_CLIENT_IDS = Object.keys(META.clients);
+                renderClient();
+                return { success: true, message: 'Datos de Meta actualizados correctamente (' + META_CLIENT_IDS.length +
+                        ' clientes).' };
+            } catch (e) {
+                return { success: false, message: 'Error al actualizar datos: ' + e.message };
+            }
+        }
+
+        function fetchMetaFromUrl(url) {
+            return fetch(url)
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Error HTTP: ' + response.status);
+                    return response.json();
+                })
+                .then(function(data) { return updateMetaData(data); })
+                .catch(function(error) {
+                    return { success: false, message: 'No se pudo obtener datos desde la URL: ' + error.message };
+                });
+        }
+
+        function waitForImages(root) {
+            var imgs = Array.prototype.slice.call(root.querySelectorAll('img'));
+            return Promise.all(imgs.map(function(img) {
+                if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+                if (img.complete && img.naturalWidth === 0) return Promise.resolve();
+                return new Promise(function(resolve) {
+                    img.addEventListener('load', resolve, { once: true });
+                    img.addEventListener('error', resolve, { once: true });
+                });
+            }));
+        }
+
+        function waitForFonts() {
+            if (document.fonts && document.fonts.ready) return document.fonts.ready;
+            return Promise.resolve();
+        }
+
+        function setPdfProgress(text) {
+            var overlay = document.getElementById('pdf-progress-overlay');
+            var txt = document.getElementById('pdf-progress-text');
+            if (txt) txt.textContent = text;
+            if (overlay) overlay.classList.add('active');
+        }
+
+        function hidePdfProgress() {
+            var overlay = document.getElementById('pdf-progress-overlay');
+            if (overlay) overlay.classList.remove('active');
+        }
+
+        function generatePdf() {
+            var noPrintEls = Array.prototype.slice.call(document.querySelectorAll('.no-print'));
+            var slides = Array.prototype.slice.call(document.querySelectorAll('.slide:not(.slide-hidden)'));
+            var btn = document.getElementById('btn-pdf');
+
+            if (btn) btn.disabled = true;
+            setPdfProgress('Esperando fuentes e imágenes…');
+
+            var previousDisplay = noPrintEls.map(function(el) { return el.style.display; });
+            noPrintEls.forEach(function(el) { if (el.id !== 'pdf-progress-overlay') el.style.display = 'none'; });
+
+            Promise.all([waitForFonts(), waitForImages(document.body)])
+                .then(function() {
+                    return new Promise(function(resolve) { setTimeout(resolve, 150); });
+                })
+                .then(function() {
+                    var jsPDFCtor = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
+                    var pdf = new jsPDFCtor({ orientation: 'landscape', unit: 'px', format: [960, 540] });
+                    var chain = Promise.resolve();
+                    slides.forEach(function(slideEl, idx) {
+                        chain = chain.then(function() {
+                            setPdfProgress('Generando slide ' + (idx + 1) + ' de ' + slides.length +
+                                '…');
+                            return html2canvas(slideEl, {
+                                scale: 2,
+                                useCORS: true,
+                                backgroundColor: '#ffffff',
+                                logging: false
+                            }).then(function(canvas) {
+                                var imgData = canvas.toDataURL('image/jpeg', 0.95);
+                                if (idx > 0) pdf.addPage([960, 540], 'landscape');
+                                pdf.addImage(imgData, 'JPEG', 0, 0, 960, 540, undefined,
+                                'FAST');
+                            });
+                        });
+                    });
+                    return chain.then(function() {
+                        setPdfProgress('Guardando PDF…');
+                        pdf.save('Presentacion-Ejecutiva-Propiedades.pdf');
+                    });
+                })
