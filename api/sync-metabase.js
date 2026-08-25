@@ -132,16 +132,33 @@ module.exports = async (req, res) => {
     const csvResp = await fetch(METABASE_CSV_URL);
     if (!csvResp.ok) throw new Error('No se pudo descargar el CSV de Metabase: ' + csvResp.status);
     const csvText = await csvResp.text();
-    const rows = parseCSV(csvText);
+    const rawRows = parseCSV(csvText);
 
-    const clientNames = {};
+    // ---- Deduplicar por (cliente + property_id + mes) ----
+    // El CSV en vivo puede traer la misma combinación propiedad+mes repetida
+    // varias veces (por ejemplo, si el proceso que la genera vuelve a
+    // registrar meses ya cerrados en cada corrida). Si sumáramos cada fila
+    // tal cual, un mismo mes se contaría varias veces y todo se infla. Aquí
+    // nos quedamos con un solo registro por combinación (el último que
+    // aparece en el archivo, asumido como el más reciente).
+    const dedupMap = new Map();
+    let clientNamesRaw = {};
+    rawRows.forEach((r) => {
+      if (!r.nombre_cuenta || !r.property_id || !r.mes) return;
+      const cid = normalizeClientId(r.nombre_cuenta);
+      clientNamesRaw[cid] = r.nombre_cuenta.trim();
+      const key = cid + '|' + r.property_id + '|' + r.mes;
+      dedupMap.set(key, r); // el último que aparece para esa combinación gana
+    });
+    const rows = Array.from(dedupMap.values());
+
+    const clientNames = clientNamesRaw;
     const seriesByClient = {};
     const propsByClient = {};
 
     rows.forEach((r) => {
       if (!r.nombre_cuenta) return;
       const cid = normalizeClientId(r.nombre_cuenta);
-      clientNames[cid] = r.nombre_cuenta.trim();
 
       seriesByClient[cid] = seriesByClient[cid] || {};
       const mes = r.mes; // 'YYYY-MM'
@@ -229,7 +246,8 @@ module.exports = async (req, res) => {
     res.status(200).json({
       ok: true,
       clientes: Object.keys(hist.clients),
-      filas_leidas: rows.length,
+      filas_leidas_csv: rawRows.length,
+      filas_unicas_usadas: rows.length,
       actualizado: new Date().toISOString(),
     });
   } catch (err) {
