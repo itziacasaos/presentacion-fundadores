@@ -20,8 +20,8 @@
 const METABASE_CSV_URL =
   process.env.METABASE_CSV_URL ||
   'https://metabase.propiedades.com/public/question/de7b8657-4116-4bf1-8cd7-ff0a34e04a77.csv';
-const SUPABASE_URL = (process.env.SUPABASE_URL || '').trim().replace(/\/+$/, '');
 
+const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const CRON_SECRET = process.env.CRON_SECRET; // opcional
 
@@ -31,15 +31,51 @@ const MONTH_LABELS = {
   '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dic',
 };
 
+// Parser de CSV compatible con RFC 4180: respeta campos entre comillas que
+// pueden contener comas, comillas escapadas ("") y saltos de línea. El
+// parser anterior simplemente cortaba por comas, y con cualquier campo que
+// trajera una coma dentro de comillas (una colonia, un nombre, etc.) se
+// desalineaban todas las columnas — eso fue lo que infló "filas_leidas" a
+// más de medio millón y corrompió los cálculos.
 function parseCSV(text) {
-  const lines = text.split(/\r?\n/).filter((l) => l.length > 0);
-  const headers = lines[0].split(',').map((h) => h.trim());
-  return lines.slice(1).map((line) => {
-    const cols = line.split(',');
-    const row = {};
-    headers.forEach((h, i) => { row[h] = cols[i] !== undefined ? cols[i].trim() : ''; });
-    return row;
-  });
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else { inQuotes = false; }
+      } else {
+        field += c;
+      }
+    } else if (c === '"') {
+      inQuotes = true;
+    } else if (c === ',') {
+      row.push(field); field = '';
+    } else if (c === '\r') {
+      // ignorar, \n cierra la fila
+    } else if (c === '\n') {
+      row.push(field); field = '';
+      rows.push(row); row = [];
+    } else {
+      field += c;
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+
+  const rawHeader = rows.shift() || [];
+  const header = rawHeader.map((h) => h.trim());
+  return rows
+    .filter((r) => r.length > 1 || (r.length === 1 && r[0] !== ''))
+    .map((r) => {
+      const obj = {};
+      header.forEach((h, i) => { obj[h] = r[i] !== undefined ? r[i].trim() : ''; });
+      return obj;
+    });
 }
 
 // Los nombres de cuenta vienen "sucios" (espacios extra, palabras repetidas).
@@ -154,12 +190,18 @@ module.exports = async (req, res) => {
           vistas: seriesByClient[cid][m].visitas,
         };
       });
-      const activos = Object.values(propsByClient[cid] || {}).filter((p) => p.estatus_aviso === 'Aprobada').length;
+      const isAprobada = (s) => (s || '').trim().toLowerCase() === 'aprobada';
+      const activos = Object.values(propsByClient[cid] || {}).filter((p) => isAprobada(p.estatus_aviso)).length;
+      const allProps = Object.values(propsByClient[cid] || {});
+      const avgScore = allProps.length
+        ? Math.round((allProps.reduce((s, p) => s + (p.score || 0), 0) / allProps.length) * 10) / 10
+        : null;
       hist.clients[cid] = {
         id: cid,
         nombre: clientNames[cid],
         propiedades_activas: activos,
         propiedades_total: Object.keys(propsByClient[cid] || {}).length,
+        avg_score: avgScore,
         series,
       };
     });
