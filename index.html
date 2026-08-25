@@ -770,8 +770,8 @@
                     </div>
                     <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: var(--verde-principal); color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: bold;">Más información</div>
                 </div>
-                <div class="mockup-story">
-                    <img src="meta5.png" alt="Story Meta 2" class="mockup-story-img">
+                <div class="mockup-story" style="background: #000;">
+                    <img id="mockup-center-story-img" src="meta2.png" alt="Story Meta 2" class="mockup-story-img" style="object-fit: contain; background: #000;">
                     <div class="mockup-story-header">
                         <img src="logoperfil.png" alt="Perfil" class="brand-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid #fff;">
                         Propiedades.com
@@ -948,9 +948,11 @@ var CENTER_MOCKUP = {
 
 function renderCenterMockup(clientId) {
     var img = document.getElementById('mockup-center-img');
+    var storyImg = document.getElementById('mockup-center-story-img');
     var caption = document.getElementById('mockup-center-caption');
     var data = (clientId !== 'ALL' && CENTER_MOCKUP[clientId]) ? CENTER_MOCKUP[clientId] : CENTER_MOCKUP_DEFAULT;
     if (img) img.src = data.img;
+    if (storyImg) storyImg.src = data.img;
     if (caption) caption.textContent = data.text;
 }
 
@@ -990,7 +992,7 @@ function getAvgScore(clientId) {
 // Medidor semicircular (0-100) con 3 bandas de color y una aguja apuntando
 // al score promedio actual. Construido en SVG puro, sin librerías.
 function buildScoreGauge(value) {
-    var cx = 100, cy = 92, r = 78, sw = 15;
+    var cx = 100, cy = 78, r = 68, sw = 13;
     function point(t) {
         var theta = Math.PI * (1 - t);
         return { x: cx + r * Math.cos(theta), y: cy - r * Math.sin(theta) };
@@ -1010,25 +1012,26 @@ function buildScoreGauge(value) {
 
     var hasVal = typeof value === 'number';
     var v = hasVal ? Math.max(0, Math.min(100, value)) : 0;
-    var needleP = point(v / 100);
-    var needleLen = r - 22;
+    var needleLen = r - 24;
     var ang = Math.PI * (1 - v / 100);
     var nx = cx + needleLen * Math.cos(ang);
     var ny = cy - needleLen * Math.sin(ang);
 
     var needleHTML = hasVal
         ? '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(2) + '" y2="' + ny.toFixed(2) + '" stroke="var(--verde-oscuro)" stroke-width="3" stroke-linecap="round"></line>' +
-          '<circle cx="' + cx + '" cy="' + cy + '" r="6" fill="var(--verde-oscuro)"></circle>'
+          '<circle cx="' + cx + '" cy="' + cy + '" r="5" fill="var(--verde-oscuro)"></circle>'
         : '';
 
     var valueText = hasVal ? Math.round(v) + '%' : '—';
+    var valueY = cy + 44;
+    var labelY = cy + 58;
 
     return '' +
-        '<svg viewBox="0 0 200 118" style="width:100%; max-width:230px; display:block; margin:0 auto;">' +
+        '<svg viewBox="0 0 200 ' + (labelY + 8) + '" style="width:100%; max-width:220px; display:block; margin:0 auto;">' +
         bandsHTML +
         needleHTML +
-        '<text x="100" y="100" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="26" fill="var(--verde-oscuro)">' + valueText + '</text>' +
-        '<text x="100" y="114" text-anchor="middle" font-family="Roboto, sans-serif" font-size="8" fill="#999">Promedio de tus propiedades</text>' +
+        '<text x="100" y="' + valueY + '" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="24" fill="var(--verde-oscuro)">' + valueText + '</text>' +
+        '<text x="100" y="' + labelY + '" text-anchor="middle" font-family="Roboto, sans-serif" font-size="8" fill="#999">Promedio de tus propiedades</text>' +
         '</svg>';
 }
 
