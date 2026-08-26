@@ -405,6 +405,13 @@
         }
         .slide-6 .gauge-wrapper svg {
             max-width: 180px !important;
+            overflow: visible !important;
+        }
+
+        /* Solo para exportación PDF: evita que el gauge/indicador se recorte. */
+        .pdf-exporting .slide-6 .gauge-wrapper,
+        .pdf-exporting .slide-6 .gauge-wrapper svg {
+            overflow: visible !important;
         }
 
         .slide-hidden {
@@ -1450,7 +1457,7 @@
 
             return '' +
                 '<div class="gauge-wrapper">' +
-                '<svg viewBox="0 0 200 ' + (valueY + 14) + '" style="width:100%; max-width:200px; display:block; margin:0 auto;">' +
+                '<svg viewBox="0 0 200 ' + (valueY + 14) + '" style="width:100%; max-width:200px; display:block; margin:0 auto; overflow:visible;">' +
                 bandsHTML +
                 needleHTML +
                 '<text x="100" y="' + valueY +
@@ -2527,6 +2534,7 @@
 
             var previousDisplay = noPrintEls.map(function(el) { return el.style.display; });
             noPrintEls.forEach(function(el) { if (el.id !== 'pdf-progress-overlay') el.style.display = 'none'; });
+            document.body.classList.add('pdf-exporting');
 
             Promise.all([waitForFonts(), waitForImages(document.body)])
                 .then(function() {
@@ -2564,6 +2572,7 @@
                 })
                 .finally(function() {
                     noPrintEls.forEach(function(el, i) { el.style.display = previousDisplay[i]; });
+                    document.body.classList.remove('pdf-exporting');
                     hidePdfProgress();
                     if (btn) btn.disabled = false;
                 });
