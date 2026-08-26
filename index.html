@@ -102,7 +102,7 @@
         }
         .grid-kpi {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin-top: 25px;
         }
@@ -283,7 +283,7 @@
             display: none !important;
         }
         .slide-4 .evolution-grid {
-            margin-top: 6px !important;
+            margin-top: 10px;
         }
         .slide-4 .chart-box {
             padding-top: 12px !important;
@@ -321,6 +321,41 @@
         }
         .trimestral-block table {
             margin-top: 2px;
+        }
+
+
+        /* Ajuste de contención para slide 3: toda la información permanece dentro de márgenes */
+        .slide-3 .evolution-grid, .slide-4 .evolution-grid {
+            gap: 16px !important;
+            align-items: flex-start !important;
+        }
+        .slide-3 .chart-box, .slide-4 .chart-box {
+            padding: 8px 12px 28px 36px !important;
+        }
+        .slide-3 .chart-box > div, .slide-4 .chart-box > div {
+            height: 178px !important;
+        }
+        .slide-3 .trimestral-block, .slide-4 .trimestral-block {
+            padding: 7px 8px !important;
+            margin-top: 0 !important;
+        }
+        .slide-3 .monthly-cpl-table th, .slide-3 .monthly-cpl-table td,
+        .slide-4 .monthly-cpl-table th, .slide-4 .monthly-cpl-table td {
+            padding: 4px 4px !important;
+            font-size: 7.5px !important;
+            white-space: nowrap;
+        }
+        .slide-3 [data-field="quarter-note"], .slide-4 [data-field="quarter-note"] {
+            font-size: 7.5px !important;
+            margin-top: 3px !important;
+        }
+        .slide-3 [data-field="founder-contract-note"], .slide-4 [data-field="founder-contract-note"] {
+            font-size: 7px !important;
+            margin-top: 3px !important;
+        }
+        .slide-3 .footer-note, .slide-4 .footer-note {
+            margin-top: 7px !important;
+            padding-top: 5px !important;
         }
 
         .slide-6 .slide-content {
@@ -522,6 +557,7 @@
             <option value="4">May 2026</option>
             <option value="5">Jun 2026</option>
             <option value="6">Jul 2026</option>
+            <option value="7">Ago 2026</option>
         </select>
         <span style="font-size:12px; color:#888;">a</span>
         <select id="period-end" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
@@ -531,9 +567,10 @@
             <option value="3">Abr 2026</option>
             <option value="4">May 2026</option>
             <option value="5">Jun 2026</option>
-            <option value="6" selected>Jul 2026</option>
+            <option value="6">Jul 2026</option>
+            <option value="7" selected>Ago 2026</option>
         </select>
-        <span style="font-size:11px; color:#999; font-style:italic;">(agosto se omite hasta que cierre el mes)</span>
+        <span style="font-size:11px; color:#999; font-style:italic;">(agosto: periodo parcial)</span>
 
         <div style="display:flex; gap:8px; margin-left:auto; flex-wrap:wrap;">
             <button id="btn-fetch-meta" style="padding:8px 16px; border:none; border-radius:6px; background:var(--verde-principal); color:white; font-weight:700; cursor:pointer; font-family:'Roboto',sans-serif; font-size:13px;">Actualizar datos de Meta</button>
@@ -541,12 +578,17 @@
         </div>
 
         <div style="width:100%; display:flex; align-items:center; gap:12px; border-top:1px dashed #E5E9EC; padding-top:12px; margin-top:4px;">
-            <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Propuesta de renovación (slide 10):</strong>
+            <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Lectura de resultados:</strong>
+            <select id="analysis-view-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
+                <option value="monthly">Mensual</option>
+                <option value="quarterly">Trimestral</option>
+                <option value="before_after" selected>Antes vs. Después</option>
+            </select>
+            <span style="font-size:11px; color:#999; font-style:italic;">Leads · CPL · crecimiento</span>
+
+            <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px; margin-left:18px;">Propuesta de renovación (slide 10):</strong>
             <select id="promo-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
-                <option value="promo_12_4">Promo 12 + 4</option>
-                <option value="paga8_obten12">Paga 8 y obtén 12</option>
-                <option value="anual_estandar">Plan Anual Estándar</option>
-                <option value="semestral">Plan Semestral</option>
+                <option value="socio_fundador">RENOVACIÓN SOCIO FUNDADOR</option>
             </select>
         </div>
     </div>
@@ -622,14 +664,6 @@
                     <div class="text-secundario" style="font-size:12px;">Leads</div>
                 </div>
                 <div class="card-kpi" style="padding:9px;">
-                    <div class="kpi-num editable" data-field="kpi-vistas" style="font-size:22px;">X</div>
-                    <div class="text-secundario" style="font-size:12px;">Vistas</div>
-                </div>
-                <div class="card-kpi" style="padding:9px;">
-                    <div class="kpi-num editable" data-field="kpi-impresiones" style="font-size:22px;">X</div>
-                    <div class="text-secundario" style="font-size:12px;">Impresiones</div>
-                </div>
-                <div class="card-kpi" style="padding:9px;">
                     <div class="kpi-num editable" data-field="kpi-activas" style="font-size:22px;">X</div>
                     <div class="text-secundario" style="font-size:12px;">Propiedades activas</div>
                 </div>
@@ -637,57 +671,48 @@
             <div class="evolution-grid" style="display:flex; gap:28px; align-items:center; margin-top:4px !important;">
                 <div class="chart-box" style="flex:2.2; background:var(--gris-claro); border-radius:8px; padding:6px 16px 28px 44px !important; position:relative;">
                     <p class="chart-title" style="text-align:center; margin:0 0 4px 0;">Comportamiento de leads</p>
-                    <div style="height:165px; position:relative;">
+                    <div style="height:205px; position:relative;">
                         <div style="position:absolute; left:-62px; top:50%; transform:translateY(-50%) rotate(-90deg); font-size:10px; font-weight:bold; color:var(--gris-oscuro); letter-spacing:0.5px; white-space:nowrap;">
                             Número de Leads
                         </div>
-                        <div style="position:absolute; bottom:-32px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:bold; color:var(--gris-oscuro); letter-spacing:0.5px; text-align:center; white-space:nowrap;">
+                        <div style="position:absolute; bottom:-30px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:bold; color:var(--gris-oscuro); letter-spacing:0.5px; text-align:center; white-space:nowrap;">
                             Tiempo <span style="font-weight:400; color:#999;">(meses · 2026)</span>
                         </div>
-                        <svg id="evolution-svg" width="100%" height="100%" viewBox="0 0 400 165" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
+                        <svg id="evolution-svg" width="100%" height="100%" viewBox="0 0 400 178" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
                             <g id="y-grid"></g>
-                            <polyline id="poly-historico" fill="none" stroke="#ccc" stroke-width="2"></polyline>
-                            <polyline id="poly-meta" fill="none" stroke="#00B36B" stroke-width="3"></polyline>
+                            <polyline id="poly-historico" fill="none" stroke="#00B36B" stroke-width="3"></polyline>
+                            <polyline id="poly-meta" fill="none" stroke="none" stroke-width="0"></polyline>
                             <g id="meta-marker" style="display:none;">
                                 <rect id="meta-marker-bg" rx="6" ry="6" fill="var(--verde-oscuro)"></rect>
-                                <text id="meta-marker-text" fill="#fff" font-family="Montserrat, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">Comienzo publicidad Meta</text>
+                                <text id="meta-marker-text" fill="#fff" font-family="Montserrat, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">Socio Fundador</text>
                                 <line id="meta-marker-line" stroke="var(--verde-oscuro)" stroke-width="1.4"></line>
-                                <circle id="meta-marker-dot" r="4.5" fill="var(--verde-principal)" stroke="#fff" stroke-width="1.6"></circle>
+                                <circle id="meta-marker-dot" r="4.8" fill="var(--verde-principal)" stroke="#fff" stroke-width="1.6"></circle>
                             </g>
                         </svg>
                         <div id="chart-month-labels" style="position:absolute; bottom:-16px; display:flex; justify-content:space-between; font-size:9px; color:#999;"></div>
                     </div>
                 </div>
                 <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                    <!-- Bloque con fondo para título + tabla -->
+                    <!-- Bloque de tabla mensual integrado -->
                     <div class="trimestral-block">
-                        <p class="trimestral-title" style="margin:0 0 2px 0;">Comportamiento trimestral - leads</p>
-                        <table class="compact-table" style="margin-top:2px;">
-                            <tr>
-                                <th>Periodo</th>
-                                <th>Leads</th>
-                                <th>Var.</th>
-                            </tr>
-                            <tr>
-                                <td>Ene-Mar</td>
-                                <td class="editable" data-field="q1-leads">XX</td>
-                                <td class="editable" data-field="q1-var">—</td>
-                            </tr>
-                            <tr>
-                                <td>Abr-Jun</td>
-                                <td class="editable" data-field="q2-leads">XX</td>
-                                <td class="acento editable" data-field="q2-var">+X%</td>
-                            </tr>
-                            <tr>
-                                <td>Jul (parcial)</td>
-                                <td class="editable" data-field="q3-leads">XX</td>
-                                <td class="acento editable" data-field="q3-var">+X%</td>
-                            </tr>
+                        <p id="analysis-table-title" class="trimestral-title" style="margin:0 0 2px 0;">Evolución mensual · leads, CPL y crecimiento</p>
+                        <table class="compact-table monthly-cpl-table" style="margin-top:2px;">
+                            <thead>
+                                <tr>
+                                    <th>Mes</th>
+                                    <th>Leads</th>
+                                    
+                                    <th>CPL</th>
+                                    <th>Crecimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthly-cpl-body"></tbody>
                         </table>
                     </div>
-                    <p class="editable" data-field="quarter-note" style="font-size:9px; color:#888; margin-top:5px; line-height:1.3;">
-                        Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).
+                    <p data-field="quarter-note" style="font-size:9px; color:#888; margin-top:5px; line-height:1.3;">
+                        —
                     </p>
+                    <p data-field="founder-contract-note" style="font-size:8.5px; color:#999; margin:4px 0 0; line-height:1.25;"></p>
                 </div>
             </div>
             <div class="footer-note">Fuente: panel de Propiedades.com</div>
@@ -866,7 +891,7 @@
             <div style="display:inline-block; background:rgba(0,179,107,0.12); color:var(--verde-principal); padding:6px 12px; border-radius:4px; font-family:'Montserrat'; font-size:12px; font-weight:700; letter-spacing:0.5px;">
                 LA PROPUESTA
             </div>
-            <h2>Continuar construyendo sobre lo que ya funciona.</h2>
+            <h2>RENOVACIÓN SOCIO FUNDADOR</h2>
             <p class="text-secundario renewal-intro" style="color:rgba(255,255,255,0.72); margin-top:0;">
                 Una renovación pensada para dar continuidad a la presencia, performance y evolución de tu inventario.
             </p>
@@ -892,13 +917,13 @@
             </div>
             <div class="renewal-proposal">
                 <div>
-                    <div style="font-family:'Montserrat'; color:var(--blanco); font-size:15px; font-weight:700;">Propuesta de renovación</div>
+                    <div style="font-family:'Montserrat'; color:var(--blanco); font-size:15px; font-weight:700;">RENOVACIÓN SOCIO FUNDADOR</div>
                     <div style="font-family:'Roboto'; color:rgba(255,255,255,0.65); font-size:12px; margin-top:5px;">
-                        <span class="editable" data-field="promo-nombre">[NOMBRE DEL PLAN / PAQUETE]</span> &nbsp; · &nbsp; <span class="editable" data-field="promo-avisos">[NÚMERO DE AVISOS]</span> &nbsp; · &nbsp; <span class="editable" data-field="promo-vigencia">[VIGENCIA]</span>
+                        Trimestral &nbsp; · &nbsp; Compromiso 5 años
                     </div>
                 </div>
                 <div style="font-family:'Montserrat'; font-size:23px; color:var(--verde-principal); font-weight:700;">
-                    <span class="editable" data-field="promo-inversion">[INVERSIÓN]</span>
+                    $90,000 + IVA / trimestre
                 </div>
             </div>
         </div>
@@ -929,7 +954,7 @@
             </div>
             <div style="margin-top:22px; text-align:center; padding:15px; border-top:1px solid #E5E9EC;">
                 <p style="font-family:'Montserrat'; color:var(--verde-oscuro); font-size:16px; margin:0;">
-                    Una estrategia que se mide puede optimizarse. <span class="acento">Una estrategia que se mantiene, puede crecer.</span>
+                    Recuerda que siempre cuentas con el acompañamiento de tu asesor comercial para apoyarte en todo momento.
                 </p>
             </div>
         </div>
@@ -951,6 +976,15 @@
         var SUPABASE_URL = 'https://zxufghecsdmicndhynrq.supabase.co';
         var SUPABASE_ANON_KEY =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dWZnaGVjc2RtaWNuZGh5bnJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODAwNTgsImV4cCI6MjEwMzE1NjA1OH0.zx5XiO4DvamQvOrEt2YnEZQJP9WCofm5Np4l3EIMWGA';
+
+        // Activaciones reales de Socio Fundador (mayo 2026).
+        // Mayo se trata como transición porque el histórico disponible es mensual
+        // y no permite repartir leads por día sin inventar una distribución.
+        var SOCIO_FUNDADOR = {
+            cattori: { fecha: '2026-05-15', monto: 60000, periodicidad: 'trimestral', costoMensual: 20000 },
+            mint:    { fecha: '2026-05-29', monto: 60000, periodicidad: 'trimestral', costoMensual: 20000 },
+            catano:  { fecha: '2026-05-11', monto: 60000, periodicidad: 'trimestral', costoMensual: 20000 }
+        };
 
         var HIST = {
             "clients": {
@@ -1162,14 +1196,11 @@
             }
         };
         var PROMOS = {
-            "promo_12_4": { "nombre": "Promo 12 + 4", "avisos": "Hasta 15 avisos activos",
-                "vigencia": "16 meses (12 pagados + 4 de regalo)", "inversion": "$14,900 MXN/mes" },
-            "paga8_obten12": { "nombre": "Paga 8 y obtén 12", "avisos": "Hasta 15 avisos activos",
-                "vigencia": "12 meses (pagas 8)", "inversion": "$14,900 MXN/mes" },
-            "anual_estandar": { "nombre": "Plan Anual Estándar", "avisos": "Hasta 10 avisos activos",
-                "vigencia": "12 meses", "inversion": "$11,900 MXN/mes" },
-            "semestral": { "nombre": "Plan Semestral", "avisos": "Hasta 10 avisos activos", "vigencia": "6 meses",
-                "inversion": "$13,400 MXN/mes" }
+            "socio_fundador": { "nombre": "RENOVACIÓN SOCIO FUNDADOR", "avisos": "—", "vigencia": "Trimestral", "inversion": "$90,000 + IVA" },
+            "plan_impulso": { "nombre": "PLAN IMPULSO", "avisos": "—",
+                "vigencia": "Paga 8 meses → recibe 12 meses · 10% de bonificación en Destacados durante 1 mes", "inversion": "—" },
+            "plan_crecimiento": { "nombre": "PLAN CRECIMIENTO", "avisos": "—",
+                "vigencia": "Paga 12 meses → recibe 16 meses · 10% de bonificación en Destacados durante 3 meses", "inversion": "—" }
         };
         var RANKING = {
             "catano": [
@@ -1497,7 +1528,7 @@
         }
 
         var MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'];
-        var META_START_IDX = 6;
+        var META_START_IDX = 6; // respaldo para clientes sin activación Socio Fundador
         var HIST_CLIENT_IDS = Object.keys(HIST.clients);
         var META_CLIENT_IDS = Object.keys(META.clients);
 
@@ -1567,11 +1598,522 @@
                     HIST.clients[clientId].nombre) || clientId;
                 rows = (RANKING[clientId] || []).map(function(p) { return Object.assign({}, p, { cliente: nombreC }); });
             }
+            rows = rows;
             rows.sort(function(a, b) { return b.leads - a.leads; });
             return rows.slice(0, 5);
         }
 
         var state = { clientId: 'ALL', startIdx: 0, endIdx: 6 };
+
+        function founderConfig(clientId) { return SOCIO_FUNDADOR[clientId] || null; }
+
+        function monthIndexFromDate(isoDate) {
+            var d = new Date(isoDate + 'T12:00:00');
+            return d.getMonth();
+        }
+
+        function dayFractionIntoMonth(isoDate) {
+            var d = new Date(isoDate + 'T12:00:00');
+            var day = d.getDate();
+            var last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+            return (day - 1) / last;
+        }
+
+        function fmtMoney(n) {
+            if (typeof n !== 'number' || !isFinite(n)) return '—';
+            return '$' + new Intl.NumberFormat('es-MX', { maximumFractionDigits: 0 }).format(n);
+        }
+
+        function getMonthlyInvestment(clientId, absoluteMonthIndex) {
+            var cfg = founderConfig(clientId);
+            if (!cfg) return null;
+            var activationMonth = monthIndexFromDate(cfg.fecha);
+            if (absoluteMonthIndex < activationMonth) return null;
+            // Mayo es transición: no se prorratea el monto ni los leads sin granularidad diaria.
+            if (absoluteMonthIndex === activationMonth) return null;
+            return cfg.costoMensual || null;
+        }
+
+        var ANALYSIS_VIEW = 'before_after';
+
+        function getAnalysisConfig(clientId) {
+            var cfg = founderConfig(clientId);
+            return cfg || null;
+        }
+
+        function aggregateRange(series, fromIdx, toIdx) {
+            if (!series || fromIdx > toIdx) return { leads: 0 };
+            var leads = 0;
+            for (var i = fromIdx; i <= toIdx; i++) {
+                if (series[i]) leads += Number(series[i].leads || 0);
+            }
+            return { leads: leads };
+        }
+
+        function analysisMonthlyCost(clientId) {
+            var cfg = getAnalysisConfig(clientId);
+            return cfg && cfg.costoMensual ? cfg.costoMensual : null;
+        }
+
+        function fmtCplValue(cost, leads) {
+            return (cost != null && leads > 0) ? fmtMoney(cost / leads) : '—';
+        }
+
+        function fmtGrowth(current, previous) {
+            if (previous == null || previous <= 0) return '—';
+            var g = Math.round(((current - previous) / previous) * 100);
+            return (g >= 0 ? '+' : '') + g + '%';
+        }
+
+        function renderMonthlyCplTable(clientId, histFull, startIdx, endIdx) {
+            var body = document.getElementById('monthly-cpl-body');
+            var title = document.getElementById('analysis-table-title');
+            if (!body) return;
+
+            body.innerHTML = '';
+            if (!histFull || !histFull.length) return;
+
+            var cfg = getAnalysisConfig(clientId);
+            var monthlyCost = analysisMonthlyCost(clientId);
+
+            function addRow(label, leads, cpl, growth, transition) {
+                var tr = document.createElement('tr');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+                var td3 = document.createElement('td');
+                var td4 = document.createElement('td');
+
+                td1.textContent = label;
+                td2.textContent = fmtNum(leads);
+                td3.textContent = cpl;
+                td4.textContent = growth;
+
+                if (transition) {
+                    td1.style.fontWeight = '700';
+                    td1.style.color = 'var(--verde-principal)';
+                }
+                if (growth !== '—' && String(growth).charAt(0) === '+') td4.className = 'acento';
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+                body.appendChild(tr);
+            }
+
+            if (ANALYSIS_VIEW === 'monthly') {
+                if (title) title.textContent = 'Evolución mensual · leads, CPL y crecimiento';
+
+                for (var i = startIdx; i <= endIdx; i++) {
+                    var row = histFull[i];
+                    if (!row) continue;
+
+                    var isActivationMonth = !!cfg && i === monthIndexFromDate(cfg.fecha);
+                    var isPost = !!cfg && i > monthIndexFromDate(cfg.fecha);
+
+                    var cpl = (isPost && monthlyCost != null)
+                        ? fmtCplValue(monthlyCost, row.leads)
+                        : '—';
+
+                    var growth = (i > 0)
+                        ? fmtGrowth(row.leads, histFull[i - 1] ? histFull[i - 1].leads : null)
+                        : '—';
+
+                    addRow(row.mes + ' 2026' + (isActivationMonth ? ' · transición' : ''),
+                        row.leads, cpl, growth, isActivationMonth);
+                }
+
+            } else if (ANALYSIS_VIEW === 'quarterly') {
+                if (title) title.textContent = 'Evolución trimestral · leads, CPL y crecimiento';
+
+                var quarters = [
+                    { label: 'Ene–Mar', from: 0, to: 2 },
+                    { label: 'Abr–Jun', from: 3, to: 5 },
+                    { label: 'Jul–Sep', from: 6, to: 8 }
+                ];
+
+                var previousLeads = null;
+
+                quarters.forEach(function(q) {
+                    var from = Math.max(startIdx, q.from);
+                    var to = Math.min(endIdx, q.to);
+                    if (from > to || !histFull[from]) return;
+
+                    var agg = aggregateRange(histFull, from, to);
+
+                    // CPL del periodo: costo mensual * número de meses representados / leads.
+                    // Para un trimestre completo equivale a $60,000 / leads del trimestre.
+                    var monthsRepresented = to - from + 1;
+                    var periodCost = monthlyCost != null ? monthlyCost * monthsRepresented : null;
+
+                    // El trimestre Abr-Jun contiene mayo como transición, por lo que
+                    // se conserva como bloque de datos mensual disponible sin inventar
+                    // un prorrateo diario.
+                    var cpl = fmtCplValue(periodCost, agg.leads);
+                    var growth = fmtGrowth(agg.leads, previousLeads);
+
+                    addRow(q.label, agg.leads, cpl, growth, false);
+                    previousLeads = agg.leads;
+                });
+
+            } else {
+                if (title) title.textContent = 'Antes vs. Después · leads, CPL y crecimiento';
+
+                if (!cfg) {
+                    addRow('Histórico', aggregateRange(histFull, startIdx, endIdx).leads, '—', '—', false);
+                    return;
+                }
+
+                var activationIdx = monthIndexFromDate(cfg.fecha);
+                var beforeFrom = startIdx;
+                var beforeTo = Math.min(activationIdx, endIdx);
+                var afterFrom = Math.max(activationIdx + 1, startIdx);
+                var afterTo = endIdx;
+
+                var before = beforeFrom <= beforeTo
+                    ? aggregateRange(histFull, beforeFrom, beforeTo).leads
+                    : 0;
+                var after = afterFrom <= afterTo
+                    ? aggregateRange(histFull, afterFrom, afterTo).leads
+                    : 0;
+
+                // Para "Antes vs. Después" se muestra el periodo previo completo
+                // y el periodo limpio posterior (jun-ago), evitando repartir mayo.
+                var beforeMonths = Math.max(0, beforeTo - beforeFrom + 1);
+                var afterMonths = Math.max(0, afterTo - afterFrom + 1);
+                var beforeCost = null;
+                var afterCost = monthlyCost != null ? monthlyCost * afterMonths : null;
+
+                addRow('Antes · Ene–May', before, '—',
+                    '—', false);
+
+                addRow('Después · Jun–Ago', after,
+                    fmtCplValue(afterCost, after),
+                    fmtGrowth(after, before), false);
+            }
+        }
+
+        function renderAnalysisChart(clientId, histFull, startIdx, endIdx) {
+            var polyHist = document.getElementById('poly-historico');
+            var polyMeta = document.getElementById('poly-meta');
+            var labelsBox = document.getElementById('chart-month-labels');
+            var yGrid = document.getElementById('y-grid');
+            var markerGroup = document.getElementById('meta-marker');
+
+            if (!polyHist || !histFull || !histFull.length) return;
+
+            // Para la vista mensual, usar exactamente la lógica mensual ya existente.
+            if (ANALYSIS_VIEW === 'monthly') {
+                renderLeadsChartBySeries(clientId, histFull, startIdx, endIdx);
+                return;
+            }
+
+            // Para las vistas trimestral y antes/después, dibujar una serie agregada
+            // y mantener el mismo componente SVG.
+            var pointsData = [];
+            var labels = [];
+
+            if (ANALYSIS_VIEW === 'quarterly') {
+                [
+                    { label: 'Ene–Mar', from: 0, to: 2 },
+                    { label: 'Abr–Jun', from: 3, to: 5 },
+                    { label: 'Jul–Sep', from: 6, to: 8 }
+                ].forEach(function(q) {
+                    var from = Math.max(startIdx, q.from);
+                    var to = Math.min(endIdx, q.to);
+                    if (from <= to && histFull[from]) {
+                        pointsData.push(aggregateRange(histFull, from, to).leads);
+                        labels.push(q.label);
+                    }
+                });
+            } else {
+                var cfg = getAnalysisConfig(clientId);
+                if (cfg) {
+                    var activationIdx = monthIndexFromDate(cfg.fecha);
+                    var beforeFrom = startIdx;
+                    var beforeTo = Math.min(activationIdx, endIdx);
+                    var afterFrom = Math.max(activationIdx + 1, startIdx);
+                    var afterTo = endIdx;
+
+                    if (beforeFrom <= beforeTo) {
+                        pointsData.push(aggregateRange(histFull, beforeFrom, beforeTo).leads);
+                        labels.push('Antes');
+                    }
+                    if (afterFrom <= afterTo) {
+                        pointsData.push(aggregateRange(histFull, afterFrom, afterTo).leads);
+                        labels.push('Después');
+                    }
+                }
+            }
+
+            var n = pointsData.length;
+            if (n < 2) return;
+
+            var CHART_W = 400, CHART_H = 178;
+            var PAD_L = 36, PAD_R = 10, PAD_T = 12, PAD_B = 16;
+            var plotW = CHART_W - PAD_L - PAD_R;
+            var plotH = CHART_H - PAD_T - PAD_B;
+            var maxVal = Math.max(1, ...pointsData);
+            var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
+            var stepX = n > 1 ? plotW / (n - 1) : 0;
+
+            function xAt(i) { return PAD_L + i * stepX; }
+            function yAt(v) { return PAD_T + plotH - (v / niceMax) * plotH; }
+
+            var pts = pointsData.map(function(v, i) {
+                return xAt(i) + ',' + yAt(v);
+            });
+
+            polyHist.setAttribute('points', pts.join(' '));
+            polyHist.style.display = '';
+            polyHist.setAttribute('stroke', '#00B36B');
+            polyHist.setAttribute('stroke-width', '3');
+            if (polyMeta) polyMeta.style.display = 'none';
+
+            if (yGrid) {
+                yGrid.innerHTML = '';
+
+                var yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                yAxis.setAttribute('x1', PAD_L);
+                yAxis.setAttribute('y1', PAD_T);
+                yAxis.setAttribute('x2', PAD_L);
+                yAxis.setAttribute('y2', PAD_T + plotH);
+                yAxis.setAttribute('stroke', '#333');
+                yAxis.setAttribute('stroke-width', '1.2');
+                yGrid.appendChild(yAxis);
+
+                [0, 0.25, 0.5, 0.75, 1].forEach(function(frac) {
+                    var y = PAD_T + plotH * (1 - frac);
+                    var val = Math.round(niceMax * frac);
+
+                    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', PAD_L);
+                    line.setAttribute('x2', CHART_W - PAD_R);
+                    line.setAttribute('y1', y);
+                    line.setAttribute('y2', y);
+                    line.setAttribute('stroke', frac === 0 ? '#999' : '#E2E6E4');
+                    line.setAttribute('stroke-width', frac === 0 ? '1.2' : '1');
+                    yGrid.appendChild(line);
+
+                    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    t.setAttribute('x', PAD_L - 4);
+                    t.setAttribute('y', y + 3);
+                    t.setAttribute('text-anchor', 'end');
+                    t.setAttribute('font-size', '8');
+                    t.setAttribute('fill', '#8a958f');
+                    t.textContent = fmtNum(val);
+                    yGrid.appendChild(t);
+                });
+            }
+
+            if (markerGroup) {
+                markerGroup.style.display = 'none';
+
+                // Mantener el mismo estándar visual del gráfico mensual:
+                // marcador exacto de Socio Fundador sobre la línea, cuando aplica.
+                var founderCfg = getAnalysisConfig(clientId);
+                if (founderCfg && ANALYSIS_VIEW === 'quarterly') {
+                    var founderMonth = monthIndexFromDate(founderCfg.fecha);
+                    var founderQuarterIdx = founderMonth <= 2 ? 0 : (founderMonth <= 5 ? 1 : 2);
+                    if (founderQuarterIdx < n) {
+                        var fx = xAt(founderQuarterIdx);
+                        var fy = yAt(pointsData[founderQuarterIdx]);
+
+                        markerDot.setAttribute('cx', fx);
+                        markerDot.setAttribute('cy', fy);
+
+                        var fw = 112, fh = 16;
+                        var fX = Math.min(Math.max(fx - fw / 2, PAD_L), CHART_W - PAD_R - fw);
+                        var fAbove = fy > 36;
+                        var fY = fAbove ? fy - 27 : fy + 12;
+
+                        markerBg.setAttribute('x', fX);
+                        markerBg.setAttribute('y', fY);
+                        markerBg.setAttribute('width', fw);
+                        markerBg.setAttribute('height', fh);
+                        markerText.setAttribute('x', fX + fw / 2);
+                        markerText.setAttribute('y', fY + fh / 2 + 3);
+                        markerText.textContent = 'Socio Fundador';
+                        markerLine.setAttribute('x1', fx);
+                        markerLine.setAttribute('y1', fy);
+                        markerLine.setAttribute('x2', fx);
+                        markerLine.setAttribute('y2', fAbove ? fY + fh : fY);
+                        markerGroup.style.display = '';
+                    }
+                } else if (founderCfg && ANALYSIS_VIEW === 'before_after') {
+                    // En Antes vs Después, el marcador cae en el límite entre ambos periodos.
+                    // Se coloca sobre el primer punto del bloque "Después".
+                    var bx = xAt(n - 1);
+                    var by = yAt(pointsData[n - 1]);
+
+                    markerDot.setAttribute('cx', bx);
+                    markerDot.setAttribute('cy', by);
+
+                    var bw = 112, bh = 16;
+                    var bX = Math.min(Math.max(bx - bw / 2, PAD_L), CHART_W - PAD_R - bw);
+                    var bAbove = by > 36;
+                    var bY = bAbove ? by - 27 : by + 12;
+
+                    markerBg.setAttribute('x', bX);
+                    markerBg.setAttribute('y', bY);
+                    markerBg.setAttribute('width', bw);
+                    markerBg.setAttribute('height', bh);
+                    markerText.setAttribute('x', bX + bw / 2);
+                    markerText.setAttribute('y', bY + bh / 2 + 3);
+                    markerText.textContent = 'Socio Fundador';
+                    markerLine.setAttribute('x1', bx);
+                    markerLine.setAttribute('y1', by);
+                    markerLine.setAttribute('x2', bx);
+                    markerLine.setAttribute('y2', bAbove ? bY + bh : bY);
+                    markerGroup.style.display = '';
+                }
+            }
+
+            if (labelsBox) {
+                labelsBox.style.left = 'calc(50% - ' + (CHART_W / 2 - PAD_L) + 'px)';
+                labelsBox.style.right = 'auto';
+                labelsBox.style.width = plotW + 'px';
+                labelsBox.style.transform = 'none';
+                labelsBox.innerHTML = '';
+                labels.forEach(function(label) {
+                    var sp = document.createElement('span');
+                    sp.textContent = label;
+                    labelsBox.appendChild(sp);
+                });
+            }
+        }
+
+        function renderLeadsChartBySeries(clientId, histFull, startIdx, endIdx) {
+            var polyHist = document.getElementById('poly-historico');
+            var polyMeta = document.getElementById('poly-meta');
+            var labelsBox = document.getElementById('chart-month-labels');
+            var yGrid = document.getElementById('y-grid');
+            var markerGroup = document.getElementById('meta-marker');
+            var markerDot = document.getElementById('meta-marker-dot');
+            var markerBg = document.getElementById('meta-marker-bg');
+            var markerText = document.getElementById('meta-marker-text');
+            var markerLine = document.getElementById('meta-marker-line');
+
+            var histSlice = histFull.slice(startIdx, endIdx + 1);
+            var n = histSlice.length;
+            if (!n) return;
+
+            var CHART_W = 400, CHART_H = 178;
+            var PAD_L = 36, PAD_R = 10, PAD_T = 12;
+            var plotW = CHART_W - PAD_L - PAD_R;
+            var plotH = CHART_H - PAD_T - 20;
+            var maxVal = Math.max(1, ...histSlice.map(function(s) { return s.leads; }));
+            var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
+            var stepX = n > 1 ? plotW / (n - 1) : 0;
+
+            function xAt(i) { return PAD_L + i * stepX; }
+            function yAt(v) { return PAD_T + plotH - (v / niceMax) * plotH; }
+            function pt(i) { return xAt(i) + ',' + yAt(histSlice[i].leads); }
+
+            var allPts = histSlice.map(function(_, i) { return pt(i); });
+            polyHist.setAttribute('points', allPts.join(' '));
+            polyHist.style.display = '';
+            polyHist.setAttribute('stroke', '#00B36B');
+            polyHist.setAttribute('stroke-width', '3');
+            if (polyMeta) polyMeta.style.display = 'none';
+
+            if (yGrid) {
+                yGrid.innerHTML = '';
+
+                var yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                yAxis.setAttribute('x1', PAD_L);
+                yAxis.setAttribute('y1', PAD_T);
+                yAxis.setAttribute('x2', PAD_L);
+                yAxis.setAttribute('y2', PAD_T + plotH);
+                yAxis.setAttribute('stroke', '#333');
+                yAxis.setAttribute('stroke-width', '1.2');
+                yGrid.appendChild(yAxis);
+
+                [0, 0.25, 0.5, 0.75, 1].forEach(function(frac) {
+                    var y = PAD_T + plotH * (1 - frac);
+                    var val = Math.round(niceMax * frac);
+                    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', PAD_L);
+                    line.setAttribute('x2', CHART_W - PAD_R);
+                    line.setAttribute('y1', y);
+                    line.setAttribute('y2', y);
+                    line.setAttribute('stroke', frac === 0 ? '#999' : '#E2E6E4');
+                    line.setAttribute('stroke-width', frac === 0 ? '1.2' : '1');
+                    yGrid.appendChild(line);
+
+                    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    t.setAttribute('x', PAD_L - 4);
+                    t.setAttribute('y', y + 3);
+                    t.setAttribute('text-anchor', 'end');
+                    t.setAttribute('font-size', '8');
+                    t.setAttribute('fill', '#8a958f');
+                    t.textContent = fmtNum(val);
+                    yGrid.appendChild(t);
+                });
+            }
+
+            var cfg = getAnalysisConfig(clientId);
+            var activationMonthIdx = cfg ? monthIndexFromDate(cfg.fecha) : -1;
+            var activationLocalIdx = activationMonthIdx - startIdx;
+
+            if (markerGroup) {
+                if (cfg && activationLocalIdx >= 0 && activationLocalIdx <= n - 1) {
+                    var mx;
+                    var my;
+
+                    // Coincidir EXACTAMENTE con la línea continua; cuando la fecha
+                    // cae dentro de mayo, interpolar sobre el segmento May-Jun.
+                    if (activationLocalIdx < n - 1 && activationMonthIdx === 4) {
+                        var activationFraction = (new Date(cfg.fecha + 'T12:00:00').getDate() - 1) / 30;
+                        var x0 = xAt(activationLocalIdx);
+                        var x1 = xAt(activationLocalIdx + 1);
+                        var y0 = yAt(histSlice[activationLocalIdx].leads);
+                        var y1 = yAt(histSlice[activationLocalIdx + 1].leads);
+                        mx = x0 + (x1 - x0) * activationFraction;
+                        my = y0 + (y1 - y0) * activationFraction;
+                    } else {
+                        mx = xAt(activationLocalIdx);
+                        my = yAt(histSlice[activationLocalIdx].leads);
+                    }
+
+                    var labelW = 112, labelH = 16;
+                    var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L),
+                        CHART_W - PAD_R - labelW);
+                    var placeAbove = my > 36;
+                    var labelY = placeAbove ? my - 27 : my + 12;
+
+                    markerDot.setAttribute('cx', mx);
+                    markerDot.setAttribute('cy', my);
+                    markerBg.setAttribute('x', labelX);
+                    markerBg.setAttribute('y', labelY);
+                    markerBg.setAttribute('width', labelW);
+                    markerBg.setAttribute('height', labelH);
+                    markerText.setAttribute('x', labelX + labelW / 2);
+                    markerText.setAttribute('y', labelY + labelH / 2 + 3);
+                    markerText.textContent = 'Socio Fundador';
+                    markerLine.setAttribute('x1', mx);
+                    markerLine.setAttribute('y1', my);
+                    markerLine.setAttribute('x2', mx);
+                    markerLine.setAttribute('y2', placeAbove ? labelY + labelH : labelY);
+                    markerGroup.style.display = '';
+                } else {
+                    markerGroup.style.display = 'none';
+                }
+            }
+
+            if (labelsBox) {
+                labelsBox.style.left = 'calc(50% - ' + (CHART_W / 2 - PAD_L) + 'px)';
+                labelsBox.style.right = 'auto';
+                labelsBox.style.width = plotW + 'px';
+                labelsBox.style.transform = 'none';
+                labelsBox.innerHTML = '';
+                histSlice.forEach(function(s) {
+                    var sp = document.createElement('span');
+                    sp.textContent = s.mes;
+                    labelsBox.appendChild(sp);
+                });
+            }
+        }
 
         function renderClient() {
             var clientId = state.clientId;
@@ -1620,18 +2162,12 @@
                 }
             }
 
-            // KPIs basados en histórico
+            // KPI: conservar únicamente Leads; vistas e impresiones acumuladas se eliminan.
             if (histSlice && histSlice.length) {
                 var totalLeads = sumField(histSlice, 'leads');
-                var totalVistas = sumField(histSlice, 'vistas');
-                var totalImpresiones = sumField(histSlice, 'impresiones');
                 setField('kpi-leads', fmtNum(totalLeads));
-                setField('kpi-vistas', fmtNum(totalVistas));
-                setField('kpi-impresiones', fmtNum(totalImpresiones));
             } else {
                 setField('kpi-leads', '—');
-                setField('kpi-vistas', '—');
-                setField('kpi-impresiones', '—');
             }
             var activas = getPortalActivas(clientId);
             setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' (Meta)'));
@@ -1648,7 +2184,7 @@
             var markerLine = document.getElementById('meta-marker-line');
 
             var CHART_W = 400,
-                CHART_H = 165;
+                CHART_H = 178;
             var PAD_L = 6,
                 PAD_R = 4; // Reducido para que el último punto llegue al borde
             var PAD_T = 10,
@@ -1661,163 +2197,92 @@
             // Lo haremos dentro del bloque where we draw the grid.
 
             if (hasHist && histSlice.length) {
-                var pre = histSlice.filter(function(_, i) { return (startIdx + i) < META_START_IDX; });
-                var post = histSlice.filter(function(_, i) { return (startIdx + i) >= META_START_IDX; });
-                var preAvg = pre.length ? sumField(pre, 'leads') / pre.length : null;
-                var postAvg = post.length ? sumField(post, 'leads') / post.length : null;
-                if (preAvg !== null && postAvg !== null) {
-                    var growth = preAvg > 0 ? Math.round(((postAvg - preAvg) / preAvg) * 100) : (postAvg > 0 ? 100 : 0);
-                    setField('kpi-growth', Math.abs(growth) + '%');
-                } else {
-                    setField('kpi-growth', '—');
-                }
+                renderMonthlyCplTable(clientId, histFull, startIdx, endIdx);
 
-                var q1 = histFull.slice(0, 3);
-                var q2 = histFull.slice(3, 6);
-                var jul = histFull[6];
-                var q1Leads = sumField(q1, 'leads');
-                var q2Leads = sumField(q2, 'leads');
-                var q2Avg = q2Leads / 3;
-                var julLeads = jul ? jul.leads : null;
+                var founder = founderConfig(clientId);
+                var activationMonthIdx = founder ? monthIndexFromDate(founder.fecha) : META_START_IDX;
+                var activationFraction = founder ? dayFractionIntoMonth(founder.fecha) : 0;
 
-                var q2VarPct = q1Leads > 0 ? Math.round(((q2Leads - q1Leads) / q1Leads) * 100) : (q2Leads > 0 ? 100 : 0);
-                setField('q1-leads', fmtNum(q1Leads));
-                setField('q1-var', '—');
-                setField('q2-leads', fmtNum(q2Leads));
-                setField('q2-var', (q1Leads > 0 || q2Leads > 0) ? ((q2VarPct >= 0 ? '+' : '') + q2VarPct + '%') : '—');
-                if (julLeads !== null) {
-                    setField('q3-leads', fmtNum(julLeads) + ' (parcial)');
-                    var julVsQ2Avg = q2Avg > 0 ? Math.round(((julLeads - q2Avg) / q2Avg) * 100) : (julLeads > 0 ? 100 :
-                        0);
-                    setField('q3-var', (julVsQ2Avg >= 0 ? '+' : '') + julVsQ2Avg + '% vs. prom. mensual T2');
-                } else {
-                    setField('q3-leads', '—');
-                    setField('q3-var', '—');
-                }
-                var abrLeads = histFull[3] ? histFull[3].leads : 0;
-                setField('quarter-note', abrLeads === 0 ?
-                    'Abril registró 0 leads (periodo orgánico, previo a la activación de pautas en julio 2026).' :
-                    'Abril registró ' + fmtNum(abrLeads) +
-                    ' leads (periodo orgánico, previo a la activación de pautas en julio 2026).'
-                );
-
-                // --- Dibujar gráfico ---
+                // --- Dibujar gráfico mensual: histórico vs. desempeño posterior ---
                 var n = histSlice.length;
                 var maxVal = Math.max(1, ...histSlice.map(function(s) { return s.leads; }));
                 var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
                 var stepX = n > 1 ? plotW / (n - 1) : 0;
 
                 function xAt(i) { return PAD_L + i * stepX; }
-
                 function yAt(v) { return PAD_T + plotH - (v / niceMax) * plotH; }
-
                 function pt(i) { return xAt(i) + ',' + yAt(histSlice[i].leads); }
 
-                var metaLocalIdx = META_START_IDX - startIdx;
-                var histPts = [],
-                    metaPts = [];
+                var activationLocalIdx = activationMonthIdx - startIdx;
+                var allPts = [];
                 for (var i = 0; i < n; i++) {
-                    if (i <= metaLocalIdx) histPts.push(pt(i));
-                    if (i >= metaLocalIdx) metaPts.push(pt(i));
+                    allPts.push(pt(i));
                 }
-                if (polyHist) { polyHist.setAttribute('points', histPts.join(' '));
-                    polyHist.style.display = histPts.length > 1 ? '' : 'none'; }
-                if (polyMeta) { polyMeta.setAttribute('points', metaPts.join(' '));
-                    polyMeta.style.display = metaPts.length > 1 ? '' : 'none'; }
+                if (polyHist) {
+                    polyHist.setAttribute('points', allPts.join(' '));
+                    polyHist.style.display = allPts.length > 1 ? '' : 'none';
+                }
+                if (polyMeta) {
+                    polyMeta.style.display = 'none';
+                }
 
-                // --- Eje Y: líneas guía + valores, y ahora también la línea vertical del eje ---
                 if (yGrid) {
                     yGrid.innerHTML = '';
-                    // Línea vertical del eje Y
                     var axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    axisLine.setAttribute('x1', PAD_L);
-                    axisLine.setAttribute('y1', PAD_T);
-                    axisLine.setAttribute('x2', PAD_L);
-                    axisLine.setAttribute('y2', PAD_T + plotH);
-                    axisLine.setAttribute('stroke', '#333');
-                    axisLine.setAttribute('stroke-width', '1.2');
+                    axisLine.setAttribute('x1', PAD_L); axisLine.setAttribute('y1', PAD_T);
+                    axisLine.setAttribute('x2', PAD_L); axisLine.setAttribute('y2', PAD_T + plotH);
+                    axisLine.setAttribute('stroke', '#333'); axisLine.setAttribute('stroke-width', '1.2');
                     yGrid.appendChild(axisLine);
-
-                    // Líneas horizontales y etiquetas
                     [0, 0.25, 0.5, 0.75, 1].forEach(function(frac) {
                         var y = PAD_T + plotH * (1 - frac);
                         var val = Math.round(niceMax * frac);
                         var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                        line.setAttribute('x1', PAD_L);
-                        line.setAttribute('x2', CHART_W - PAD_R);
-                        line.setAttribute('y1', y);
-                        line.setAttribute('y2', y);
+                        line.setAttribute('x1', PAD_L); line.setAttribute('x2', CHART_W - PAD_R);
+                        line.setAttribute('y1', y); line.setAttribute('y2', y);
                         line.setAttribute('stroke', frac === 0 ? '#999' : '#E2E6E4');
-                        line.setAttribute('stroke-width', frac === 0 ? '1.2' : '1');
-                        yGrid.appendChild(line);
+                        line.setAttribute('stroke-width', frac === 0 ? '1.2' : '1'); yGrid.appendChild(line);
                         var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                        text.setAttribute('x', PAD_L - 4);
-                        text.setAttribute('y', y + 3);
-                        text.setAttribute('text-anchor', 'end');
-                        text.setAttribute('font-size', '8');
-                        text.setAttribute('fill', '#8a958f');
-                        text.textContent = fmtNum(val);
+                        text.setAttribute('x', PAD_L - 4); text.setAttribute('y', y + 3); text.setAttribute('text-anchor', 'end');
+                        text.setAttribute('font-size', '8'); text.setAttribute('fill', '#8a958f'); text.textContent = fmtNum(val);
                         yGrid.appendChild(text);
                     });
                 }
 
-                // --- Marcador "Comienzo publicidad Meta" ---
                 if (markerGroup) {
-                    if (metaLocalIdx >= 0 && metaLocalIdx <= n - 1) {
-                        var mx = xAt(metaLocalIdx);
-                        var my = yAt(histSlice[metaLocalIdx].leads);
-                        var labelW = 130;
-                        var labelH = 15;
+                    var showFounderMarker = !!founder && activationLocalIdx >= 0 && activationLocalIdx < n;
+                    if (showFounderMarker) {
+                        // Ubicar el marcador en la fecha exacta dentro de mayo, sin inventar leads diarios.
+                        var baseX = xAt(activationLocalIdx);
+                        var nextX = activationLocalIdx < n - 1 ? xAt(activationLocalIdx + 1) : baseX;
+
+                        // El punto debe quedar exactamente sobre la polilínea:
+                        // interpolamos también Y, no sólo X.
+                        var baseY = yAt(histSlice[activationLocalIdx].leads);
+                        var nextY = activationLocalIdx < n - 1
+                            ? yAt(histSlice[activationLocalIdx + 1].leads)
+                            : baseY;
+
+                        var mx = baseX + (nextX - baseX) * activationFraction;
+                        var my = baseY + (nextY - baseY) * activationFraction;
+                        var labelW = 110, labelH = 15;
                         var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L), CHART_W - PAD_R - labelW);
                         var labelY = my > 30 ? my - 26 : my + 14;
-                        if (markerDot) { markerDot.setAttribute('cx', mx);
-                            markerDot.setAttribute('cy', my); }
-                        if (markerBg) {
-                            markerBg.setAttribute('x', labelX);
-                            markerBg.setAttribute('y', labelY);
-                            markerBg.setAttribute('width', labelW);
-                            markerBg.setAttribute('height', labelH);
-                        }
-                        if (markerText) {
-                            markerText.setAttribute('x', labelX + labelW / 2);
-                            markerText.setAttribute('y', labelY + labelH / 2 + 3);
-                        }
-                        if (markerLine) {
-                            markerLine.setAttribute('x1', mx);
-                            markerLine.setAttribute('y1', my);
-                            markerLine.setAttribute('x2', mx);
-                            markerLine.setAttribute('y2', labelY > my ? labelY : labelY + labelH);
-                        }
+                        markerDot.setAttribute('cx', mx); markerDot.setAttribute('cy', my);
+                        markerBg.setAttribute('x', labelX); markerBg.setAttribute('y', labelY); markerBg.setAttribute('width', labelW); markerBg.setAttribute('height', labelH);
+                        markerText.setAttribute('x', labelX + labelW / 2); markerText.setAttribute('y', labelY + labelH / 2 + 3);
+                        markerText.textContent = 'Socio Fundador · ' + new Date(founder.fecha + 'T12:00:00').toLocaleDateString('es-MX', {day:'numeric', month:'short'});
+                        markerLine.setAttribute('x1', mx); markerLine.setAttribute('y1', my); markerLine.setAttribute('x2', mx); markerLine.setAttribute('y2', labelY > my ? labelY : labelY + labelH);
                         markerGroup.style.display = '';
-                    } else {
-                        markerGroup.style.display = 'none';
-                    }
+                    } else { markerGroup.style.display = 'none'; }
                 }
 
-                // --- Etiquetas de meses (eje X) ---
-                // Las etiquetas se distribuyen únicamente sobre el ancho real
-                // de la línea del eje X, sin modificar puntos, escala ni eje.
                 if (labelsBox) {
                     labelsBox.style.left = 'calc(50% - ' + (CHART_W / 2 - PAD_L) + 'px)';
-                    labelsBox.style.right = 'auto';
-                    labelsBox.style.width = plotW + 'px';
-                    labelsBox.style.transform = 'none';
-                    labelsBox.innerHTML = '';
-                    histSlice.forEach(function(s) {
-                        var sp = document.createElement('span');
-                        sp.textContent = s.mes;
-                        labelsBox.appendChild(sp);
-                    });
+                    labelsBox.style.right = 'auto'; labelsBox.style.width = plotW + 'px'; labelsBox.style.transform = 'none'; labelsBox.innerHTML = '';
+                    histSlice.forEach(function(s) { var sp = document.createElement('span'); sp.textContent = s.mes; labelsBox.appendChild(sp); });
                 }
             } else {
-                setField('kpi-growth', '—');
-                setField('q1-leads', '—');
-                setField('q1-var', '—');
-                setField('q2-leads', '—');
-                setField('q2-var', '—');
-                setField('q3-leads', '—');
-                setField('q3-var', '—');
-                setField('quarter-note', 'Sin histórico mensual para este cliente todavía.');
+                renderMonthlyCplTable(clientId, histFull, startIdx, endIdx);
                 if (polyHist) polyHist.style.display = 'none';
                 if (polyMeta) polyMeta.style.display = 'none';
                 if (markerGroup) markerGroup.style.display = 'none';
@@ -1825,8 +2290,11 @@
                 if (labelsBox) labelsBox.innerHTML = '';
             }
 
+            renderAnalysisChart(clientId, histFull, startIdx, endIdx);
+
             // --- Ranking ---
             var ranking = getRanking(clientId);
+            if (!Array.isArray(ranking)) ranking = [];
             for (var r = 0; r < 5; r++) {
                 var p = ranking[r];
                 if (p) {
@@ -2075,6 +2543,14 @@
                 });
         }
 
+        var analysisViewSelector = document.getElementById('analysis-view-selector');
+        if (analysisViewSelector) {
+            analysisViewSelector.addEventListener('change', function() {
+                ANALYSIS_VIEW = this.value;
+                renderClient();
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             var clientSel = document.getElementById('client-selector');
             var startSel = document.getElementById('period-start');
@@ -2086,13 +2562,13 @@
             if (endSel) state.endIdx = parseInt(endSel.value, 10);
 
             renderClient();
-            renderPromo(promoSel ? promoSel.value : 'promo_12_4');
+            renderPromo(promoSel ? promoSel.value : 'plan_impulso');
 
             var supabaseTimeout = new Promise(function(resolve) { setTimeout(function() { resolve(false); }, 4000); });
             Promise.race([loadFromSupabase(), supabaseTimeout]).then(function(loaded) {
                 if (loaded) {
                     renderClient();
-                    renderPromo(promoSel ? promoSel.value : 'promo_12_4');
+                    renderPromo(promoSel ? promoSel.value : 'plan_impulso');
                 }
             });
 
