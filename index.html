@@ -427,7 +427,7 @@
             max-width: 180px !important;
             height: auto !important;
             margin: 0 auto !important;
-            transform: translateX(-60px) !important;
+           transform: none !important;
             overflow: visible !important;
         }
 
@@ -1473,8 +1473,8 @@
             var valueY = cy + 46;
 
             return '' +
-                '<div class="gauge-wrapper">' +
-                '<svg viewBox="0 0 200 ' + (valueY + 14) + '" style="width:100%; max-width:200px; display:block; margin:0 auto; overflow:visible;">' +
+            '<div class="gauge-wrapper">' +
+            '<svg viewBox="-25 -25 250 ' + (valueY + 40) + '" style="width:100%; max-width:230px; display:block; margin:0 auto; overflow:visible;">' +
                 bandsHTML +
                 needleHTML +
                 '<text x="100" y="' + valueY +
