@@ -259,6 +259,26 @@
             align-items: center;
             justify-content: space-between;
         }
+
+        .slide-10 .slide-content {
+            width: 100%;
+        }
+        .slide-10 .renewal-intro {
+            margin-top: 2px !important;
+            margin-bottom: 20px !important;
+        }
+        .slide-10 .renewal-card-dark {
+            min-height: 126px;
+            padding: 20px;
+        }
+        .slide-10 .renewal-proposal {
+            margin-top: 22px;
+            padding: 16px 20px;
+        }
+        .slide-10 .renewal-proposal > div:last-child {
+            white-space: nowrap;
+        }
+
         .benefit-number {
             font-family: 'Montserrat';
             color: var(--verde-oscuro);
@@ -919,7 +939,7 @@
                 <div>
                     <div style="font-family:'Montserrat'; color:var(--blanco); font-size:15px; font-weight:700;">RENOVACIÓN SOCIO FUNDADOR</div>
                     <div style="font-family:'Roboto'; color:rgba(255,255,255,0.65); font-size:12px; margin-top:5px;">
-                        Trimestral &nbsp; · &nbsp; Compromiso 5 años
+                        Trimestral
                     </div>
                 </div>
                 <div style="font-family:'Montserrat'; font-size:23px; color:var(--verde-principal); font-weight:700;">
@@ -1196,7 +1216,7 @@
             }
         };
         var PROMOS = {
-            "socio_fundador": { "nombre": "RENOVACIÓN SOCIO FUNDADOR", "avisos": "—", "vigencia": "Trimestral", "inversion": "$90,000 + IVA" },
+            "socio_fundador": { "nombre": "RENOVACIÓN SOCIO FUNDADOR", "avisos": "—", "vigencia": "$90,000 + IVA · Trimestral · Compromiso 5 años", "inversion": "$90,000 + IVA" },
             "plan_impulso": { "nombre": "PLAN IMPULSO", "avisos": "—",
                 "vigencia": "Paga 8 meses → recibe 12 meses · 10% de bonificación en Destacados durante 1 mes", "inversion": "—" },
             "plan_crecimiento": { "nombre": "PLAN CRECIMIENTO", "avisos": "—",
@@ -2291,19 +2311,24 @@
             }
 
             renderAnalysisChart(clientId, histFull, startIdx, endIdx);
-
             // --- Ranking ---
+            renderRankingTable(clientId, histSlice);
+}
+
+        function renderRankingTable(clientId, histSlice) {
             var ranking = getRanking(clientId);
             if (!Array.isArray(ranking)) ranking = [];
+
             for (var r = 0; r < 5; r++) {
                 var p = ranking[r];
                 if (p) {
-                    setField('rank-' + r + '-nombre', p.property_id + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
+                    setField('rank-' + r + '-nombre',
+                        p.property_id + (clientId === 'ALL' ? ' · ' + p.cliente : ''));
                     setField('rank-' + r + '-tipo', p.tipo_operacion || '—');
                     setField('rank-' + r + '-vistas', fmtNum(p.vistas));
                     setField('rank-' + r + '-leads', fmtNum(p.leads));
-                    setField('rank-' + r + '-score', (typeof p.score === 'number') ? Math.round(p.score) + '%' : (p
-                        .score || '—'));
+                    setField('rank-' + r + '-score',
+                        (typeof p.score === 'number') ? Math.round(p.score) + '%' : (p.score || '—'));
                 } else {
                     setField('rank-' + r + '-nombre', '—');
                     setField('rank-' + r + '-tipo', '—');
@@ -2312,7 +2337,8 @@
                     setField('rank-' + r + '-score', '—');
                 }
             }
-            var top5Leads = ranking.reduce(function(s, p) { return s + p.leads; }, 0);
+
+            var top5Leads = ranking.reduce(function(s, p) { return s + (Number(p.leads) || 0); }, 0);
             var totalLeadsPortal = histSlice ? sumField(histSlice, 'leads') : 0;
             var pct = totalLeadsPortal ? Math.round((top5Leads / totalLeadsPortal) * 100) : 0;
             setField('rank-summary-pct', pct + '%');
@@ -2567,13 +2593,20 @@
             var supabaseTimeout = new Promise(function(resolve) { setTimeout(function() { resolve(false); }, 4000); });
             Promise.race([loadFromSupabase(), supabaseTimeout]).then(function(loaded) {
                 if (loaded) {
+                    renderRankingTable(state.clientId, getHistFull(state.clientId));
                     renderClient();
                     renderPromo(promoSel ? promoSel.value : 'plan_impulso');
                 }
             });
 
-            if (clientSel) clientSel.addEventListener('change', function() { state.clientId = this.value;
-                renderClient(); });
+            if (clientSel) clientSel.addEventListener('change', function() {
+                state.clientId = this.value;
+                var currentHist = getHistFull(state.clientId);
+                var s = Math.min(state.startIdx, state.endIdx);
+                var e = Math.max(state.startIdx, state.endIdx);
+                renderRankingTable(state.clientId, currentHist ? currentHist.slice(s, e + 1) : null);
+                renderClient();
+            });
             if (startSel) startSel.addEventListener('change', function() {
                 state.startIdx = parseInt(this.value, 10);
                 if (state.startIdx > state.endIdx) { state.endIdx = state.startIdx; if (endSel) endSel.value =
