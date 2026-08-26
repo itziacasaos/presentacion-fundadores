@@ -121,7 +121,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 38px;
+            margin-top: 82px;
             background: var(--gris-claro);
             padding: 24px 30px;
             border-radius: 10px;
@@ -129,16 +129,6 @@
         }
         .flujo span {
             color: var(--verde-principal);
-        }
-        /* Slide "El Reto": centrar el flujo verticalmente */
-        .slide-2 .slide-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-        }
-        .slide-2 .flujo {
-            margin-top: 0; /* removemos el margin-top fijo, el flex lo centra */
         }
         table {
             width: 100%;
@@ -155,6 +145,7 @@
             font-family: 'Montserrat', sans-serif;
             color: var(--verde-oscuro);
         }
+        /* Centrar datos en la tabla de ranking */
         .ranking-table td {
             text-align: center;
         }
@@ -276,7 +267,7 @@
             margin-bottom: 7px;
         }
 
-        /* Slide 3-4 */
+        /* Ajustes slide 3-4 */
         .slide-3 .slide-content,
         .slide-4 .slide-content {
             margin-top: 10px;
@@ -318,6 +309,7 @@
             border-top: 1px solid #E5E9EC;
             padding-top: 8px;
         }
+        /* Bloque de tabla trimestral integrado */
         .trimestral-block {
             background: #F7F9F8;
             border-radius: 8px;
@@ -499,6 +491,7 @@
                 transform: rotate(360deg);
             }
         }
+        /* Última slide: sin marca de agua */
         .slide-12 .brand-mark {
             display: none !important;
         }
@@ -509,7 +502,7 @@
 </head>
 <body>
 
-    <!-- Barra de control -->
+    <!-- Barra de control (no se imprime) -->
     <div class="no-print" style="width:960px; background:#fff; border-radius:12px; box-shadow:0 4px 14px rgba(0,0,0,0.08); padding:14px 24px; display:flex; align-items:center; gap:16px; font-family:'Roboto',sans-serif; flex-wrap:wrap;">
         <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Cliente:</strong>
         <select id="client-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
@@ -558,7 +551,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal para pegar datos de Meta -->
     <div class="modal-overlay no-print" id="meta-modal">
         <div class="modal-box">
             <h3 style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); margin-top:0;">Actualizar datos de Meta</h3>
@@ -602,7 +595,7 @@
         </p>
     </div>
 
-    <!-- Slide 2: El Reto (centrado verticalmente) -->
+    <!-- Slide 2: El Reto -->
     <div class="slide slide-2">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
@@ -618,7 +611,7 @@
         </div>
     </div>
 
-    <!-- Slide 3 y 4: KPIs + histórico -->
+    <!-- Slide 3 y 4: KPIs + histórico (MODIFICADA) -->
     <div class="slide slide-3 slide-4">
         <img src="p.png" alt="Propiedades.com" class="brand-mark">
         <div class="slide-content">
@@ -666,6 +659,7 @@
                     </div>
                 </div>
                 <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                    <!-- Bloque con fondo para título + tabla -->
                     <div class="trimestral-block">
                         <p class="trimestral-title" style="margin:0 0 2px 0;">Comportamiento trimestral - leads</p>
                         <table class="compact-table" style="margin-top:2px;">
@@ -1626,7 +1620,7 @@
                 }
             }
 
-            // KPIs
+            // KPIs basados en histórico
             if (histSlice && histSlice.length) {
                 var totalLeads = sumField(histSlice, 'leads');
                 var totalVistas = sumField(histSlice, 'vistas');
@@ -1642,7 +1636,7 @@
             var activas = getPortalActivas(clientId);
             setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' (Meta)'));
 
-            // Gráfico
+            // ---- GRÁFICO con ajustes de escala ----
             var polyHist = document.getElementById('poly-historico');
             var polyMeta = document.getElementById('poly-meta');
             var labelsBox = document.getElementById('chart-month-labels');
@@ -1656,11 +1650,15 @@
             var CHART_W = 400,
                 CHART_H = 165;
             var PAD_L = 6,
-                PAD_R = 4;
+                PAD_R = 4; // Reducido para que el último punto llegue al borde
             var PAD_T = 10,
                 PAD_B = 8;
             var plotW = CHART_W - PAD_L - PAD_R;
             var plotH = CHART_H - PAD_T - PAD_B;
+
+            // --- Línea del eje Y (visible) ---
+            // Se dibuja directamente en el SVG a través de JS añadiendo una línea al grupo y-grid o a un grupo nuevo.
+            // Lo haremos dentro del bloque where we draw the grid.
 
             if (hasHist && histSlice.length) {
                 var pre = histSlice.filter(function(_, i) { return (startIdx + i) < META_START_IDX; });
@@ -1703,7 +1701,7 @@
                     ' leads (periodo orgánico, previo a la activación de pautas en julio 2026).'
                 );
 
-                // Dibujar gráfico
+                // --- Dibujar gráfico ---
                 var n = histSlice.length;
                 var maxVal = Math.max(1, ...histSlice.map(function(s) { return s.leads; }));
                 var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
@@ -1727,9 +1725,10 @@
                 if (polyMeta) { polyMeta.setAttribute('points', metaPts.join(' '));
                     polyMeta.style.display = metaPts.length > 1 ? '' : 'none'; }
 
-                // Eje Y
+                // --- Eje Y: líneas guía + valores, y ahora también la línea vertical del eje ---
                 if (yGrid) {
                     yGrid.innerHTML = '';
+                    // Línea vertical del eje Y
                     var axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
                     axisLine.setAttribute('x1', PAD_L);
                     axisLine.setAttribute('y1', PAD_T);
@@ -1739,6 +1738,7 @@
                     axisLine.setAttribute('stroke-width', '1.2');
                     yGrid.appendChild(axisLine);
 
+                    // Líneas horizontales y etiquetas
                     [0, 0.25, 0.5, 0.75, 1].forEach(function(frac) {
                         var y = PAD_T + plotH * (1 - frac);
                         var val = Math.round(niceMax * frac);
@@ -1761,7 +1761,7 @@
                     });
                 }
 
-                // Marcador
+                // --- Marcador "Comienzo publicidad Meta" ---
                 if (markerGroup) {
                     if (metaLocalIdx >= 0 && metaLocalIdx <= n - 1) {
                         var mx = xAt(metaLocalIdx);
@@ -1794,16 +1794,14 @@
                     }
                 }
 
-                // Etiquetas del eje X (redistribuidas)
+                // --- Etiquetas de meses (eje X) ---
+                // Las etiquetas se distribuyen únicamente sobre el ancho real
+                // de la línea del eje X, sin modificar puntos, escala ni eje.
                 if (labelsBox) {
-                    labelsBox.style.position = 'absolute';
-                    labelsBox.style.bottom = '-16px';
-                    labelsBox.style.left = '52px';  // alineado con el área de dibujo
-                    labelsBox.style.right = '21px'; // alineado con el área de dibujo
-                    labelsBox.style.display = 'flex';
-                    labelsBox.style.justifyContent = 'space-between';
-                    labelsBox.style.fontSize = '9px';
-                    labelsBox.style.color = '#999';
+                    labelsBox.style.left = 'calc(50% - ' + (CHART_W / 2 - PAD_L) + 'px)';
+                    labelsBox.style.right = 'auto';
+                    labelsBox.style.width = plotW + 'px';
+                    labelsBox.style.transform = 'none';
                     labelsBox.innerHTML = '';
                     histSlice.forEach(function(s) {
                         var sp = document.createElement('span');
@@ -1827,7 +1825,7 @@
                 if (labelsBox) labelsBox.innerHTML = '';
             }
 
-            // Ranking
+            // --- Ranking ---
             var ranking = getRanking(clientId);
             for (var r = 0; r < 5; r++) {
                 var p = ranking[r];
@@ -2066,3 +2064,103 @@
                         pdf.save('Presentacion-Ejecutiva-Propiedades.pdf');
                     });
                 })
+                .catch(function(err) {
+                    console.error('Error generando el PDF:', err);
+                    alert('Ocurrió un error generando el PDF. Revisa la consola para más detalles.');
+                })
+                .finally(function() {
+                    noPrintEls.forEach(function(el, i) { el.style.display = previousDisplay[i]; });
+                    hidePdfProgress();
+                    if (btn) btn.disabled = false;
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var clientSel = document.getElementById('client-selector');
+            var startSel = document.getElementById('period-start');
+            var endSel = document.getElementById('period-end');
+            var promoSel = document.getElementById('promo-selector');
+
+            if (clientSel) state.clientId = clientSel.value;
+            if (startSel) state.startIdx = parseInt(startSel.value, 10);
+            if (endSel) state.endIdx = parseInt(endSel.value, 10);
+
+            renderClient();
+            renderPromo(promoSel ? promoSel.value : 'promo_12_4');
+
+            var supabaseTimeout = new Promise(function(resolve) { setTimeout(function() { resolve(false); }, 4000); });
+            Promise.race([loadFromSupabase(), supabaseTimeout]).then(function(loaded) {
+                if (loaded) {
+                    renderClient();
+                    renderPromo(promoSel ? promoSel.value : 'promo_12_4');
+                }
+            });
+
+            if (clientSel) clientSel.addEventListener('change', function() { state.clientId = this.value;
+                renderClient(); });
+            if (startSel) startSel.addEventListener('change', function() {
+                state.startIdx = parseInt(this.value, 10);
+                if (state.startIdx > state.endIdx) { state.endIdx = state.startIdx; if (endSel) endSel.value =
+                        String(state.endIdx); }
+                renderClient();
+            });
+            if (endSel) endSel.addEventListener('change', function() {
+                state.endIdx = parseInt(this.value, 10);
+                if (state.endIdx < state.startIdx) { state.startIdx = state.endIdx; if (startSel) startSel.value =
+                        String(state.startIdx); }
+                renderClient();
+            });
+            if (promoSel) promoSel.addEventListener('change', function() { renderPromo(this.value); });
+
+            document.getElementById('btn-fetch-meta').addEventListener('click', function() {
+                var url = 'https://camilootoya-habi.github.io/tableros-marketing-habi/pauta-propiedades/';
+                var modal = document.getElementById('meta-modal');
+                var statusDiv = document.getElementById('meta-status');
+                var textarea = document.getElementById('meta-json-input');
+
+                modal.classList.add('active');
+                statusDiv.style.display = 'none';
+                textarea.value = '';
+
+                fetchMetaFromUrl(url).then(function(result) {
+                    statusDiv.style.display = 'block';
+                    statusDiv.className = 'status-msg ' + (result.success ? 'success' : 'error');
+                    statusDiv.textContent = result.message;
+                    if (result.success) {
+                        setTimeout(function() { modal.classList.remove('active'); }, 1500);
+                    } else {
+                        textarea.placeholder =
+                            'No se pudo obtener datos automáticamente. Pega aquí el JSON manualmente.';
+                    }
+                });
+            });
+
+            document.getElementById('btn-meta-apply').addEventListener('click', function() {
+                var textarea = document.getElementById('meta-json-input');
+                var statusDiv = document.getElementById('meta-status');
+                var raw = textarea.value.trim();
+                if (!raw) {
+                    statusDiv.style.display = 'block';
+                    statusDiv.className = 'status-msg error';
+                    statusDiv.textContent = 'Por favor, ingresa los datos en formato JSON.';
+                    return;
+                }
+                var result = updateMetaData(raw);
+                statusDiv.style.display = 'block';
+                statusDiv.className = 'status-msg ' + (result.success ? 'success' : 'error');
+                statusDiv.textContent = result.message;
+                if (result.success) {
+                    setTimeout(function() { document.getElementById('meta-modal').classList.remove('active'); },
+                        1500);
+                }
+            });
+
+            document.getElementById('btn-meta-cancel').addEventListener('click', function() {
+                document.getElementById('meta-modal').classList.remove('active');
+            });
+
+            document.getElementById('btn-pdf').addEventListener('click', generatePdf);
+        });
+    </script>
+</body>
+</html>
