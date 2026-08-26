@@ -409,8 +409,24 @@
         }
 
         /* Solo para exportación PDF: evita que el gauge/indicador se recorte. */
-        .pdf-exporting .slide-6 .gauge-wrapper,
+        .pdf-exporting .slide-6 .gauge-card {
+            overflow: visible !important;
+        }
+        .pdf-exporting .slide-6 .gauge-wrapper {
+            width: 100% !important;
+            min-width: 0 !important;
+            overflow: visible !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
         .pdf-exporting .slide-6 .gauge-wrapper svg {
+            display: block !important;
+            width: 200px !important;
+            min-width: 200px !important;
+            max-width: 200px !important;
+            height: auto !important;
+            margin: 0 auto !important;
             overflow: visible !important;
         }
 
