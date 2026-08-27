@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Presentación Ejecutiva - Propiedades.com</title>
+    <!-- Importación de la librería de Supabase para leer datos dinámicos -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
@@ -343,7 +345,6 @@
             margin-top: 2px;
         }
 
-
         /* Ajuste de contención para slide 3: toda la información permanece dentro de márgenes */
         .slide-3 .evolution-grid, .slide-4 .evolution-grid {
             gap: 16px !important;
@@ -365,6 +366,29 @@
             font-size: 7.5px !important;
             white-space: nowrap;
         }
+        
+        /* Clases nuevas para centrar y aumentar tablas Trimestral y Antes/Después */
+        .slide-3 .block-centered-large, 
+        .slide-4 .block-centered-large {
+            margin-top: 30px !important; /* Centrado más hacia abajo */
+            padding: 12px 14px !important;
+        }
+        .table-centered-large {
+            margin: 10px auto !important;
+            width: 100% !important;
+        }
+        .table-centered-large th,
+        .table-centered-large td {
+            font-size: 12.5px !important; /* +3px respecto a los 9.5px anteriores */
+            text-align: center !important;
+            padding: 10px 8px !important;
+        }
+        .title-centered {
+            text-align: center !important;
+            font-size: 14px !important;
+            margin-bottom: 8px !important;
+        }
+
         .slide-3 [data-field="quarter-note"], .slide-4 [data-field="quarter-note"] {
             font-size: 7.5px !important;
             margin-top: 3px !important;
@@ -705,14 +729,14 @@
             <div class="grid-kpi" style="margin-top:6px;">
                 <div class="card-kpi" style="padding:9px;">
                     <div class="kpi-num editable" data-field="kpi-leads" style="font-size:22px;">X</div>
-                    <div class="text-secundario" style="font-size:12px;">Leads</div>
+                    <div class="text-secundario" style="font-size:12px; margin-top:5px;">Leads</div>
                 </div>
                 <div class="card-kpi" style="padding:9px;">
                     <div class="kpi-num editable" data-field="kpi-activas" style="font-size:22px;">X</div>
-                    <div class="text-secundario" style="font-size:12px;">Propiedades activas</div>
+                    <div class="text-secundario" style="font-size:12px; margin-top:5px;">Propiedades activas</div>
                 </div>
             </div>
-            <div class="evolution-grid" style="display:flex; gap:28px; align-items:center; margin-top:4px !important;">
+            <div class="evolution-grid" style="display:flex; gap:28px; align-items:center; margin-top:20px !important;">
                 <div class="chart-box" style="flex:2.2; background:var(--gris-claro); border-radius:8px; padding:6px 16px 28px 44px !important; position:relative;">
                     <p class="chart-title" style="text-align:center; margin:0 0 4px 0;">Comportamiento de leads</p>
                     <div style="height:205px; position:relative;">
@@ -726,6 +750,7 @@
                             <g id="y-grid"></g>
                             <polyline id="poly-historico" fill="none" stroke="#00B36B" stroke-width="3"></polyline>
                             <polyline id="poly-meta" fill="none" stroke="none" stroke-width="0"></polyline>
+                            <g id="chart-data-labels"></g>
                             <g id="meta-marker" style="display:none;">
                                 <rect id="meta-marker-bg" rx="6" ry="6" fill="var(--verde-oscuro)"></rect>
                                 <text id="meta-marker-text" fill="#fff" font-family="Montserrat, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">Socio Fundador</text>
@@ -738,7 +763,7 @@
                 </div>
                 <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
                     <!-- Bloque de tabla mensual integrado -->
-                    <div class="trimestral-block">
+                    <div class="trimestral-block" id="analysis-table-block">
                         <p id="analysis-table-title" class="trimestral-title" style="margin:0 0 2px 0;">Evolución mensual · leads, CPL y crecimiento</p>
                         <table class="compact-table monthly-cpl-table" style="margin-top:2px;">
                             <thead>
@@ -1031,92 +1056,78 @@
         };
 
         var HIST = {
-            "clients": {
-                "catano": {
-                    "id": "catano",
-                    "nombre": "Cataño Bienes Raíces",
-                    "propiedades_activas": 510,
-                    "propiedades_total": 2661,
-                    "avg_score": 63.8,
-                    "series": [
-                        { "mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143,
-                        "vistas": 2005 },
-                        { "mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480,
-                            "vistas": 17212 },
-                        { "mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496,
-                            "vistas": 20753 },
-                        { "mes": "Ago", "leads": 178, "contactos": 0, "eventos": 0, "impresiones": 430292,
-                            "vistas": 12903 }
-                    ]
-                },
-                "cattori": {
-                    "id": "cattori",
-                    "nombre": "Cattori Inmobiliaria Inmobiliaria",
-                    "propiedades_activas": 1,
-                    "propiedades_total": 823,
-                    "avg_score": 62.8,
-                    "series": [
-                        { "mes": "Ene", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Feb", "leads": 12, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Mar", "leads": 20, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Abr", "leads": 43, "contactos": 0, "eventos": 0, "impresiones": 4, "vistas": 0 },
-                        { "mes": "May", "leads": 35, "contactos": 0, "eventos": 0, "impresiones": 59444,
-                        "vistas": 1529 },
-                        { "mes": "Jun", "leads": 28, "contactos": 0, "eventos": 0, "impresiones": 67441,
-                        "vistas": 1860 },
-                        { "mes": "Jul", "leads": 48, "contactos": 0, "eventos": 0, "impresiones": 67336,
-                        "vistas": 2466 },
-                        { "mes": "Ago", "leads": 14, "contactos": 0, "eventos": 0, "impresiones": 18706,
-                        "vistas": 695 }
-                    ]
-                },
-                "mint": {
-                    "id": "mint",
-                    "nombre": "MINT inmobiliaria MINT INMOBILIARIA",
-                    "propiedades_activas": 101,
-                    "propiedades_total": 551,
-                    "avg_score": 61.5,
-                    "series": [
-                        { "mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227 },
-                        { "mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988,
-                        "vistas": 2454 },
-                        { "mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709,
-                            "vistas": 5637 },
-                        { "mes": "Ago", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 117553,
-                            "vistas": 3462 }
-                    ]
-                },
-                "pulppo": {
-                    "id": "pulppo",
-                    "nombre": "Pulppo",
-                    "propiedades_activas": 7594,
-                    "propiedades_total": 76437,
-                    "avg_score": 29.4,
-                    "series": [
-                        { "mes": "Ene", "leads": 922, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Feb", "leads": 518, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Mar", "leads": 496, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "Abr", "leads": 21, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                        { "mes": "May", "leads": 203, "contactos": 0, "eventos": 0, "impresiones": 158895,
-                            "vistas": 7178 },
-                        { "mes": "Jun", "leads": 523, "contactos": 0, "eventos": 0, "impresiones": 357928,
-                            "vistas": 25132 },
-                        { "mes": "Jul", "leads": 823, "contactos": 0, "eventos": 0, "impresiones": 745429,
-                            "vistas": 47979 },
-                        { "mes": "Ago", "leads": 1156, "contactos": 0, "eventos": 0, "impresiones": 1238538,
-                            "vistas": 64970 }
-                    ]
-                }
+          "clients": {
+            "catano": {
+              "id": "catano",
+              "nombre": "Cataño Bienes Raíces",
+              "propiedades_activas": 505,
+              "propiedades_total": 2668,
+              "avg_score": 64.4,
+              "series": [
+                { "mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005 },
+                { "mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212 },
+                { "mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753 },
+                { "mes": "Ago", "leads": 193, "contactos": 0, "eventos": 0, "impresiones": 469625, "vistas": 14554 }
+              ]
+            },
+            "mint": {
+              "id": "mint",
+              "nombre": "MINT inmobiliaria MINT INMOBILIARIA",
+              "propiedades_activas": 101,
+              "propiedades_total": 551,
+              "avg_score": 61.8,
+              "series": [
+                { "mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227 },
+                { "mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454 },
+                { "mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637 },
+                { "mes": "Ago", "leads": 38, "contactos": 0, "eventos": 0, "impresiones": 138956, "vistas": 4085 }
+              ]
+            },
+            "pulppo": {
+              "id": "pulppo",
+              "nombre": "Pulppo",
+              "propiedades_activas": 7615,
+              "propiedades_total": 76584,
+              "avg_score": 29.5,
+              "series": [
+                { "mes": "Ene", "leads": 922, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Feb", "leads": 518, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Mar", "leads": 496, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Abr", "leads": 21, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "May", "leads": 203, "contactos": 0, "eventos": 0, "impresiones": 158592, "vistas": 7177 },
+                { "mes": "Jun", "leads": 523, "contactos": 0, "eventos": 0, "impresiones": 357576, "vistas": 25107 },
+                { "mes": "Jul", "leads": 822, "contactos": 0, "eventos": 0, "impresiones": 744685, "vistas": 47907 },
+                { "mes": "Ago", "leads": 1263, "contactos": 0, "eventos": 0, "impresiones": 1429536, "vistas": 74100 }
+              ]
+            },
+            "cattori": {
+              "id": "cattori",
+              "nombre": "Cattori Inmobiliaria",
+              "propiedades_activas": 233,
+              "propiedades_total": 241,
+              "avg_score": 66.4,
+              "series": [
+                { "mes": "Ene", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Feb", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Mar", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
+                { "mes": "May", "leads": 22, "contactos": 0, "eventos": 0, "impresiones": 96809, "vistas": 831 },
+                { "mes": "Jun", "leads": 46, "contactos": 0, "eventos": 0, "impresiones": 219229, "vistas": 4999 },
+                { "mes": "Jul", "leads": 62, "contactos": 0, "eventos": 0, "impresiones": 251288, "vistas": 12805 },
+                { "mes": "Ago", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 214297, "vistas": 7490 }
+              ]
             }
+          }
         };
+
         var META = {
             "clients": {
                 "catano": {
@@ -1239,6 +1250,7 @@
                 }
             }
         };
+
         var PROMOS = {
             "socio_fundador": { "nombre": "RENOVACIÓN SOCIO FUNDADOR", "avisos": "—", "vigencia": "$90,000 + IVA · Trimestral · Compromiso 5 años", "inversion": "$90,000 + IVA" },
             "plan_impulso": { "nombre": "PLAN IMPULSO", "avisos": "—",
@@ -1246,79 +1258,48 @@
             "plan_crecimiento": { "nombre": "PLAN CRECIMIENTO", "avisos": "—",
                 "vigencia": "Paga 12 meses → recibe 16 meses · 10% de bonificación en Destacados durante 3 meses", "inversion": "—" }
         };
+
         var RANKING = {
-            "catano": [
-                { "codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 31, "impresiones": 3989, "vistas": 507, "score": 73.0 },
-                { "codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0 },
-                { "codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0 },
-                { "codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0 },
-                { "codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0 },
-                { "codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada",
-                    "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0 },
-                { "codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada",
-                    "leads": 14, "impresiones": 25310, "vistas": 818, "score": 36.0 },
-                { "codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada",
-                    "leads": 13, "impresiones": 3027, "vistas": 456, "score": 66.0 }
-            ],
-            "cattori": [
-                { "codigo": "EB-WK8125r", "property_id": 31555943, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 15, "impresiones": 13152, "vistas": 277, "score": 69.0 },
-                { "codigo": "EB-WJ2325r", "property_id": 31524337, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 14, "impresiones": 14837, "vistas": 492, "score": 70.0 },
-                { "codigo": "EB-UZ8649r", "property_id": 30688298, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 9, "impresiones": 0, "vistas": 0, "score": 73.0 },
-                { "codigo": "EB-TN1699s", "property_id": 31304118, "tipo_operacion": "Venta", "estatus": "Vencida",
-                    "leads": 7, "impresiones": 5210, "vistas": 278, "score": 74.0 },
-                { "codigo": "EB-KK8771s", "property_id": 24891898, "tipo_operacion": "Venta", "estatus": "Eliminada",
-                    "leads": 6, "impresiones": 27, "vistas": 10, "score": 65.0 },
-                { "codigo": "EB-UG6140r", "property_id": 30365858, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 6, "impresiones": 0, "vistas": 0, "score": 67.0 },
-                { "codigo": "EB-RA0749s", "property_id": 28495738, "tipo_operacion": "Venta", "estatus": "Eliminada",
-                    "leads": 5, "impresiones": 18, "vistas": 19, "score": 68.0 },
-                { "codigo": "EB-VT1368r", "property_id": 31304053, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 5, "impresiones": 4693, "vistas": 163, "score": 67.0 }
-            ],
-            "mint": [
-                { "codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0 },
-                { "codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida",
-                    "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0 },
-                { "codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada",
-                    "leads": 5, "impresiones": 76932, "vistas": 910, "score": 57.0 },
-                { "codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida",
-                    "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0 },
-                { "codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada",
-                    "leads": 4, "impresiones": 518, "vistas": 40, "score": 54.0 },
-                { "codigo": "EB-UO9148s", "property_id": 30504146, "tipo_operacion": "Venta", "estatus": "Eliminada",
-                    "leads": 4, "impresiones": 0, "vistas": 2, "score": 65.0 },
-                { "codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida",
-                    "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0 },
-                { "codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida",
-                    "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0 }
-            ],
-            "pulppo": [
-                { "codigo": "", "property_id": 28697360, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 26,
-                    "impresiones": 0, "vistas": 0, "score": 61.0 },
-                { "codigo": "", "property_id": 28757872, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 24,
-                    "impresiones": 0, "vistas": 1, "score": 62.0 },
-                { "codigo": "DGD-062", "property_id": 31092169, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 22, "impresiones": 3757, "vistas": 399, "score": 62.0 },
-                { "codigo": "CMS-104", "property_id": 30943671, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 20, "impresiones": 2402, "vistas": 275, "score": 62.0 },
-                { "codigo": "TJB-383", "property_id": 31424969, "tipo_operacion": "Venta", "estatus": "Aprobada",
-                    "leads": 18, "impresiones": 1771, "vistas": 221, "score": 78.0 },
-                { "codigo": "", "property_id": 28662935, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 17,
-                    "impresiones": 0, "vistas": 0, "score": 61.0 },
-                { "codigo": "", "property_id": 28659142, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16,
-                    "impresiones": 0, "vistas": 0, "score": 62.0 },
-                { "codigo": "CPU-248", "property_id": 31578913, "tipo_operacion": "Renta", "estatus": "Vencida",
-                    "leads": 15, "impresiones": 344, "vistas": 176, "score": 72.0 }
-            ]
+          "catano": [
+            { "codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 31, "impresiones": 5048, "vistas": 631, "score": 73.0 },
+            { "codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0 },
+            { "codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0 },
+            { "codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0 },
+            { "codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0 },
+            { "codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 16, "impresiones": 26116, "vistas": 833, "score": 59.0 },
+            { "codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0 },
+            { "codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 15, "impresiones": 3129, "vistas": 469, "score": 64.0 }
+          ],
+          "mint": [
+            { "codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0 },
+            { "codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0 },
+            { "codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0 },
+            { "codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 5, "impresiones": 79738, "vistas": 943, "score": 57.0 },
+            { "codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0 },
+            { "codigo": "EB-VE4966s", "property_id": 31495214, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 667, "vistas": 50, "score": 74.0 },
+            { "codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 4, "impresiones": 653, "vistas": 50, "score": 54.0 },
+            { "codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0 }
+          ],
+          "pulppo": [
+            { "codigo": "", "property_id": 28697360, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 26, "impresiones": 0, "vistas": 0, "score": 61.0 },
+            { "codigo": "", "property_id": 28757872, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 24, "impresiones": 0, "vistas": 1, "score": 62.0 },
+            { "codigo": "DGD-062", "property_id": 31092169, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 3757, "vistas": 399, "score": 62.0 },
+            { "codigo": "CMS-104", "property_id": 30943671, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 20, "impresiones": 2402, "vistas": 275, "score": 62.0 },
+            { "codigo": "TJB-383", "property_id": 31424969, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 19, "impresiones": 1926, "vistas": 230, "score": 78.0 },
+            { "codigo": "", "property_id": 28662935, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 17, "impresiones": 0, "vistas": 0, "score": 61.0 },
+            { "codigo": "", "property_id": 28659142, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 0, "vistas": 0, "score": 62.0 },
+            { "codigo": "CPU-248", "property_id": 31578913, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 15, "impresiones": 344, "vistas": 176, "score": 72.0 }
+          ],
+          "cattori": [
+            { "codigo": "EB-RA0749s", "property_id": 31304176, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 8, "impresiones": 1635, "vistas": 1578, "score": 67.0 },
+            { "codigo": "EB-UC4766s", "property_id": 31304110, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 30089, "vistas": 814, "score": 68.0 },
+            { "codigo": "EB-VO9291s", "property_id": 31304061, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 7, "impresiones": 1783, "vistas": 285, "score": 64.0 },
+            { "codigo": "EB-VL6843r", "property_id": 31304070, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 7, "impresiones": 28832, "vistas": 669, "score": 67.0 },
+            { "codigo": "EB-RV7088s", "property_id": 31304157, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 6, "impresiones": 1530, "vistas": 58, "score": 66.0 },
+            { "codigo": "EB-WH3813r", "property_id": 31488025, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 6, "impresiones": 20681, "vistas": 603, "score": 68.0 },
+            { "codigo": "EB-VX2979s", "property_id": 31304045, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 6, "impresiones": 16066, "vistas": 430, "score": 64.0 },
+            { "codigo": "EB-WO7453r", "property_id": 31619579, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 5, "impresiones": 4907, "vistas": 127, "score": 73.0 }
+          ]
         };
 
         var CLIENT_LOGOS = {
@@ -1681,6 +1662,9 @@
         var ANALYSIS_VIEW = 'before_after';
 
         function getAnalysisConfig(clientId) {
+            if (clientId === 'ALL') {
+                return { fecha: '2026-05-15', costoMensual: 60000 };
+            }
             var cfg = founderConfig(clientId);
             return cfg || null;
         }
@@ -1711,7 +1695,9 @@
 
         function renderMonthlyCplTable(clientId, histFull, startIdx, endIdx) {
             var body = document.getElementById('monthly-cpl-body');
-            var title = document.getElementById('analysis-table-title');
+            var titleEl = document.getElementById('analysis-table-title');
+            var tableEl = document.querySelector('.monthly-cpl-table');
+            var blockEl = document.getElementById('analysis-table-block');
             if (!body) return;
 
             body.innerHTML = '';
@@ -1719,6 +1705,16 @@
 
             var cfg = getAnalysisConfig(clientId);
             var monthlyCost = analysisMonthlyCost(clientId);
+
+            if (ANALYSIS_VIEW === 'monthly') {
+                if (tableEl) tableEl.classList.remove('table-centered-large');
+                if (titleEl) titleEl.classList.remove('title-centered');
+                if (blockEl) blockEl.classList.remove('block-centered-large');
+            } else {
+                if (tableEl) tableEl.classList.add('table-centered-large');
+                if (titleEl) titleEl.classList.add('title-centered');
+                if (blockEl) blockEl.classList.add('block-centered-large');
+            }
 
             function addRow(label, leads, cpl, growth, transition) {
                 var tr = document.createElement('tr');
@@ -1746,7 +1742,7 @@
             }
 
             if (ANALYSIS_VIEW === 'monthly') {
-                if (title) title.textContent = 'Evolución mensual · leads, CPL y crecimiento';
+                if (titleEl) titleEl.textContent = 'Evolución mensual · leads, CPL y crecimiento';
 
                 for (var i = startIdx; i <= endIdx; i++) {
                     var row = histFull[i];
@@ -1768,7 +1764,7 @@
                 }
 
             } else if (ANALYSIS_VIEW === 'quarterly') {
-                if (title) title.textContent = 'Evolución trimestral · leads, CPL y crecimiento';
+                if (titleEl) titleEl.textContent = 'Evolución trimestral · leads, CPL y crecimiento';
 
                 var quarters = [
                     { label: 'Ene–Mar', from: 0, to: 2 },
@@ -1785,14 +1781,16 @@
 
                     var agg = aggregateRange(histFull, from, to);
 
-                    // CPL del periodo: costo mensual * número de meses representados / leads.
-                    // Para un trimestre completo equivale a $60,000 / leads del trimestre.
-                    var monthsRepresented = to - from + 1;
-                    var periodCost = monthlyCost != null ? monthlyCost * monthsRepresented : null;
+                    var periodCost = null;
+                    if (monthlyCost != null && cfg) {
+                        var activationMonthIdx = monthIndexFromDate(cfg.fecha);
+                        var paidMonths = 0;
+                        for (var m = from; m <= to; m++) {
+                            if (m > activationMonthIdx) paidMonths++;
+                        }
+                        if (paidMonths > 0) periodCost = monthlyCost * paidMonths;
+                    }
 
-                    // El trimestre Abr-Jun contiene mayo como transición, por lo que
-                    // se conserva como bloque de datos mensual disponible sin inventar
-                    // un prorrateo diario.
                     var cpl = fmtCplValue(periodCost, agg.leads);
                     var growth = fmtGrowth(agg.leads, previousLeads);
 
@@ -1801,7 +1799,7 @@
                 });
 
             } else {
-                if (title) title.textContent = 'Antes vs. Después · leads, CPL y crecimiento';
+                if (titleEl) titleEl.textContent = 'Antes vs. Después · leads, CPL y crecimiento';
 
                 if (!cfg) {
                     addRow('Histórico', aggregateRange(histFull, startIdx, endIdx).leads, '—', '—', false);
@@ -1821,12 +1819,11 @@
                     ? aggregateRange(histFull, afterFrom, afterTo).leads
                     : 0;
 
-                // Para "Antes vs. Después" se muestra el periodo previo completo
-                // y el periodo limpio posterior (jun-ago), evitando repartir mayo.
-                var beforeMonths = Math.max(0, beforeTo - beforeFrom + 1);
-                var afterMonths = Math.max(0, afterTo - afterFrom + 1);
-                var beforeCost = null;
-                var afterCost = monthlyCost != null ? monthlyCost * afterMonths : null;
+                var afterMonths = 0;
+                for (var m = afterFrom; m <= afterTo; m++) {
+                    if (m > activationIdx) afterMonths++;
+                }
+                var afterCost = (monthlyCost != null && afterMonths > 0) ? monthlyCost * afterMonths : null;
 
                 addRow('Antes · Ene–May', before, '—',
                     '—', false);
@@ -1843,6 +1840,11 @@
             var labelsBox = document.getElementById('chart-month-labels');
             var yGrid = document.getElementById('y-grid');
             var markerGroup = document.getElementById('meta-marker');
+            var markerDot = document.getElementById('meta-marker-dot');
+            var markerBg = document.getElementById('meta-marker-bg');
+            var markerText = document.getElementById('meta-marker-text');
+            var markerLine = document.getElementById('meta-marker-line');
+            var labelsGroup = document.getElementById('chart-data-labels');
 
             if (!polyHist || !histFull || !histFull.length) return;
 
@@ -1894,7 +1896,7 @@
             if (n < 2) return;
 
             var CHART_W = 400, CHART_H = 178;
-            var PAD_L = 36, PAD_R = 10, PAD_T = 12, PAD_B = 16;
+            var PAD_L = 36, PAD_R = 10, PAD_T = 18, PAD_B = 16;
             var plotW = CHART_W - PAD_L - PAD_R;
             var plotH = CHART_H - PAD_T - PAD_B;
             var maxVal = Math.max(1, ...pointsData);
@@ -1950,11 +1952,40 @@
                 });
             }
 
+            if (labelsGroup) {
+                labelsGroup.innerHTML = '';
+                pointsData.forEach(function(val, i) {
+                    var x = xAt(i);
+                    var y = yAt(val);
+                    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+                    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '3.5');
+                    circle.setAttribute('fill', 'var(--verde-principal)');
+                    circle.setAttribute('stroke', '#fff');
+                    circle.setAttribute('stroke-width', '1.5');
+                    g.appendChild(circle);
+
+                    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', x);
+                    text.setAttribute('y', y - 8);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('font-size', '10');
+                    text.setAttribute('font-weight', 'bold');
+                    text.setAttribute('fill', 'var(--verde-oscuro)');
+                    text.setAttribute('font-family', 'Montserrat, sans-serif');
+                    text.textContent = fmtNum(val);
+                    g.appendChild(text);
+
+                    labelsGroup.appendChild(g);
+                });
+            }
+
             if (markerGroup) {
                 markerGroup.style.display = 'none';
 
-                // Mantener el mismo estándar visual del gráfico mensual:
-                // marcador exacto de Socio Fundador sobre la línea, cuando aplica.
                 var founderCfg = getAnalysisConfig(clientId);
                 if (founderCfg && ANALYSIS_VIEW === 'quarterly') {
                     var founderMonth = monthIndexFromDate(founderCfg.fecha);
@@ -1968,8 +1999,7 @@
 
                         var fw = 112, fh = 16;
                         var fX = Math.min(Math.max(fx - fw / 2, PAD_L), CHART_W - PAD_R - fw);
-                        var fAbove = fy > 36;
-                        var fY = fAbove ? fy - 27 : fy + 12;
+                        var fY = fy + 18; // Forzado hacia abajo
 
                         markerBg.setAttribute('x', fX);
                         markerBg.setAttribute('y', fY);
@@ -1981,12 +2011,10 @@
                         markerLine.setAttribute('x1', fx);
                         markerLine.setAttribute('y1', fy);
                         markerLine.setAttribute('x2', fx);
-                        markerLine.setAttribute('y2', fAbove ? fY + fh : fY);
+                        markerLine.setAttribute('y2', fY); 
                         markerGroup.style.display = '';
                     }
                 } else if (founderCfg && ANALYSIS_VIEW === 'before_after') {
-                    // En Antes vs Después, el marcador cae en el límite entre ambos periodos.
-                    // Se coloca sobre el primer punto del bloque "Después".
                     var bx = xAt(n - 1);
                     var by = yAt(pointsData[n - 1]);
 
@@ -1995,8 +2023,7 @@
 
                     var bw = 112, bh = 16;
                     var bX = Math.min(Math.max(bx - bw / 2, PAD_L), CHART_W - PAD_R - bw);
-                    var bAbove = by > 36;
-                    var bY = bAbove ? by - 27 : by + 12;
+                    var bY = by + 18; // Forzado hacia abajo
 
                     markerBg.setAttribute('x', bX);
                     markerBg.setAttribute('y', bY);
@@ -2008,7 +2035,7 @@
                     markerLine.setAttribute('x1', bx);
                     markerLine.setAttribute('y1', by);
                     markerLine.setAttribute('x2', bx);
-                    markerLine.setAttribute('y2', bAbove ? bY + bh : bY);
+                    markerLine.setAttribute('y2', bY);
                     markerGroup.style.display = '';
                 }
             }
@@ -2037,13 +2064,14 @@
             var markerBg = document.getElementById('meta-marker-bg');
             var markerText = document.getElementById('meta-marker-text');
             var markerLine = document.getElementById('meta-marker-line');
+            var labelsGroup = document.getElementById('chart-data-labels');
 
             var histSlice = histFull.slice(startIdx, endIdx + 1);
             var n = histSlice.length;
             if (!n) return;
 
             var CHART_W = 400, CHART_H = 178;
-            var PAD_L = 36, PAD_R = 10, PAD_T = 12;
+            var PAD_L = 36, PAD_R = 10, PAD_T = 18;
             var plotW = CHART_W - PAD_L - PAD_R;
             var plotH = CHART_H - PAD_T - 20;
             var maxVal = Math.max(1, ...histSlice.map(function(s) { return s.leads; }));
@@ -2096,19 +2124,48 @@
                 });
             }
 
+            if (labelsGroup) {
+                labelsGroup.innerHTML = '';
+                histSlice.forEach(function(s, i) {
+                    var x = xAt(i);
+                    var y = yAt(s.leads);
+                    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+                    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '3.5');
+                    circle.setAttribute('fill', 'var(--verde-principal)');
+                    circle.setAttribute('stroke', '#fff');
+                    circle.setAttribute('stroke-width', '1.5');
+                    g.appendChild(circle);
+
+                    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', x);
+                    text.setAttribute('y', y - 8);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('font-size', '9');
+                    text.setAttribute('font-weight', 'bold');
+                    text.setAttribute('fill', 'var(--verde-oscuro)');
+                    text.setAttribute('font-family', 'Montserrat, sans-serif');
+                    text.textContent = fmtNum(s.leads);
+                    g.appendChild(text);
+
+                    labelsGroup.appendChild(g);
+                });
+            }
+
             var cfg = getAnalysisConfig(clientId);
             var activationMonthIdx = cfg ? monthIndexFromDate(cfg.fecha) : -1;
             var activationLocalIdx = activationMonthIdx - startIdx;
 
             if (markerGroup) {
+                var activationFraction = cfg ? dayFractionIntoMonth(cfg.fecha) : 0;
                 if (cfg && activationLocalIdx >= 0 && activationLocalIdx <= n - 1) {
                     var mx;
                     var my;
 
-                    // Coincidir EXACTAMENTE con la línea continua; cuando la fecha
-                    // cae dentro de mayo, interpolar sobre el segmento May-Jun.
                     if (activationLocalIdx < n - 1 && activationMonthIdx === 4) {
-                        var activationFraction = (new Date(cfg.fecha + 'T12:00:00').getDate() - 1) / 30;
                         var x0 = xAt(activationLocalIdx);
                         var x1 = xAt(activationLocalIdx + 1);
                         var y0 = yAt(histSlice[activationLocalIdx].leads);
@@ -2123,8 +2180,7 @@
                     var labelW = 112, labelH = 16;
                     var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L),
                         CHART_W - PAD_R - labelW);
-                    var placeAbove = my > 36;
-                    var labelY = placeAbove ? my - 27 : my + 12;
+                    var labelY = my + 18; // Forzado hacia abajo
 
                     markerDot.setAttribute('cx', mx);
                     markerDot.setAttribute('cy', my);
@@ -2138,7 +2194,7 @@
                     markerLine.setAttribute('x1', mx);
                     markerLine.setAttribute('y1', my);
                     markerLine.setAttribute('x2', mx);
-                    markerLine.setAttribute('y2', placeAbove ? labelY + labelH : labelY);
+                    markerLine.setAttribute('y2', labelY);
                     markerGroup.style.display = '';
                 } else {
                     markerGroup.style.display = 'none';
@@ -2206,7 +2262,6 @@
                 }
             }
 
-            // KPI: conservar únicamente Leads; vistas e impresiones acumuladas se eliminan.
             if (histSlice && histSlice.length) {
                 var totalLeads = sumField(histSlice, 'leads');
                 setField('kpi-leads', fmtNum(totalLeads));
@@ -2216,7 +2271,6 @@
             var activas = getPortalActivas(clientId);
             setField('kpi-activas', activas != null ? fmtNum(activas) : (metaAgg.anuncios + ' (Meta)'));
 
-            // ---- GRÁFICO con ajustes de escala ----
             var polyHist = document.getElementById('poly-historico');
             var polyMeta = document.getElementById('poly-meta');
             var labelsBox = document.getElementById('chart-month-labels');
@@ -2226,19 +2280,16 @@
             var markerBg = document.getElementById('meta-marker-bg');
             var markerText = document.getElementById('meta-marker-text');
             var markerLine = document.getElementById('meta-marker-line');
+            var labelsGroup = document.getElementById('chart-data-labels');
 
             var CHART_W = 400,
                 CHART_H = 178;
             var PAD_L = 6,
-                PAD_R = 4; // Reducido para que el último punto llegue al borde
-            var PAD_T = 10,
+                PAD_R = 4; 
+            var PAD_T = 18,
                 PAD_B = 8;
             var plotW = CHART_W - PAD_L - PAD_R;
             var plotH = CHART_H - PAD_T - PAD_B;
-
-            // --- Línea del eje Y (visible) ---
-            // Se dibuja directamente en el SVG a través de JS añadiendo una línea al grupo y-grid o a un grupo nuevo.
-            // Lo haremos dentro del bloque where we draw the grid.
 
             if (hasHist && histSlice.length) {
                 renderMonthlyCplTable(clientId, histFull, startIdx, endIdx);
@@ -2247,7 +2298,6 @@
                 var activationMonthIdx = founder ? monthIndexFromDate(founder.fecha) : META_START_IDX;
                 var activationFraction = founder ? dayFractionIntoMonth(founder.fecha) : 0;
 
-                // --- Dibujar gráfico mensual: histórico vs. desempeño posterior ---
                 var n = histSlice.length;
                 var maxVal = Math.max(1, ...histSlice.map(function(s) { return s.leads; }));
                 var niceMax = Math.ceil(maxVal / 10) * 10 || 10;
@@ -2291,16 +2341,31 @@
                         yGrid.appendChild(text);
                     });
                 }
+                
+                if (labelsGroup) {
+                    labelsGroup.innerHTML = '';
+                    histSlice.forEach(function(s, i) {
+                        var x = xAt(i);
+                        var y = yAt(s.leads);
+                        var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        circle.setAttribute('cx', x); circle.setAttribute('cy', y); circle.setAttribute('r', '3.5'); circle.setAttribute('fill', 'var(--verde-principal)'); circle.setAttribute('stroke', '#fff'); circle.setAttribute('stroke-width', '1.5');
+                        g.appendChild(circle);
+                        var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        text.setAttribute('x', x); text.setAttribute('y', y - 8); text.setAttribute('text-anchor', 'middle');
+                        text.setAttribute('font-size', '9'); text.setAttribute('font-weight', 'bold'); text.setAttribute('fill', 'var(--verde-oscuro)'); text.setAttribute('font-family', 'Montserrat, sans-serif');
+                        text.textContent = fmtNum(s.leads);
+                        g.appendChild(text);
+                        labelsGroup.appendChild(g);
+                    });
+                }
 
                 if (markerGroup) {
                     var showFounderMarker = !!founder && activationLocalIdx >= 0 && activationLocalIdx < n;
                     if (showFounderMarker) {
-                        // Ubicar el marcador en la fecha exacta dentro de mayo, sin inventar leads diarios.
                         var baseX = xAt(activationLocalIdx);
                         var nextX = activationLocalIdx < n - 1 ? xAt(activationLocalIdx + 1) : baseX;
 
-                        // El punto debe quedar exactamente sobre la polilínea:
-                        // interpolamos también Y, no sólo X.
                         var baseY = yAt(histSlice[activationLocalIdx].leads);
                         var nextY = activationLocalIdx < n - 1
                             ? yAt(histSlice[activationLocalIdx + 1].leads)
@@ -2310,12 +2375,12 @@
                         var my = baseY + (nextY - baseY) * activationFraction;
                         var labelW = 110, labelH = 15;
                         var labelX = Math.min(Math.max(mx - labelW / 2, PAD_L), CHART_W - PAD_R - labelW);
-                        var labelY = my > 30 ? my - 26 : my + 14;
+                        var labelY = my + 18; // Forzado hacia abajo
                         markerDot.setAttribute('cx', mx); markerDot.setAttribute('cy', my);
                         markerBg.setAttribute('x', labelX); markerBg.setAttribute('y', labelY); markerBg.setAttribute('width', labelW); markerBg.setAttribute('height', labelH);
                         markerText.setAttribute('x', labelX + labelW / 2); markerText.setAttribute('y', labelY + labelH / 2 + 3);
                         markerText.textContent = 'Socio Fundador · ' + new Date(founder.fecha + 'T12:00:00').toLocaleDateString('es-MX', {day:'numeric', month:'short'});
-                        markerLine.setAttribute('x1', mx); markerLine.setAttribute('y1', my); markerLine.setAttribute('x2', mx); markerLine.setAttribute('y2', labelY > my ? labelY : labelY + labelH);
+                        markerLine.setAttribute('x1', mx); markerLine.setAttribute('y1', my); markerLine.setAttribute('x2', mx); markerLine.setAttribute('y2', labelY);
                         markerGroup.style.display = '';
                     } else { markerGroup.style.display = 'none'; }
                 }
@@ -2332,6 +2397,7 @@
                 if (markerGroup) markerGroup.style.display = 'none';
                 if (yGrid) yGrid.innerHTML = '';
                 if (labelsBox) labelsBox.innerHTML = '';
+                if (labelsGroup) labelsGroup.innerHTML = '';
             }
 
             renderAnalysisChart(clientId, histFull, startIdx, endIdx);
