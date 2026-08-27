@@ -432,6 +432,26 @@
             overflow: visible !important;
         }
 
+        /* Ajuste exclusivo para el texto descriptivo de las slides de Meta */
+        .slide-7 > .slide-content > h2,
+        .slide-8 > .slide-content > h2 {
+            margin-bottom: 8px !important;
+        }
+
+        .slide-7 > .slide-content > p.text-secundario,
+        .slide-8 > .slide-content > p.text-secundario {
+            text-align: left !important;
+            margin: 0 0 24px 0 !important;
+            font-size: 18px !important;
+            line-height: 1.4 !important;
+            color: var(--gris-oscuro) !important;
+        }
+
+        .slide-7 .posts-container,
+        .slide-8 .stories-container {
+            margin-top: 0 !important;
+        }
+
         /* Solo para exportación PDF: evita que el gauge/indicador se recorte. */
         .pdf-exporting .slide-6 .gauge-card {
             overflow: visible !important;
