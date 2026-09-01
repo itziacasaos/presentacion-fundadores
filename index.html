@@ -666,10 +666,11 @@
         </div>
 
         <div style="width:100%; display:flex; align-items:center; gap:12px; border-top:1px dashed #E5E9EC; padding-top:12px; margin-top:4px;">
-            <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Lectura de resultados:</strong>
+            <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px;">Vista de análisis:</strong>
             <select id="analysis-view-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
                 <option value="monthly">Mensual</option>
                 <option value="quarterly">Trimestral</option>
+                <option value="socio_fundador">Socio Fundador</option>
                 <option value="before_after" selected>Antes vs. Después</option>
             </select>
             <span style="font-size:11px; color:#999; font-style:italic;">Leads · CPL · crecimiento</span>
@@ -1679,7 +1680,127 @@
             return cfg.costoMensual || null;
         }
 
+        // ================================================================
+        // TRIMESTRES PERSONALIZADOS "SOCIO FUNDADOR"
+        // ================================================================
+        // Cada cliente tiene su propio calendario trimestral, anclado en la
+        // fecha exacta de su activación de Socio Fundador (no en el año natural).
+        // Como el histórico disponible (HIST) solo tiene granularidad mensual,
+        // cada mes se asigna al trimestre personalizado con el que más días
+        // comparte, en vez de inventar un reparto diario que no existe en los datos.
+        // Esta lógica alimenta la opción "Socio Fundador" del selector
+        // "Vista de análisis".
+
+        // Último mes con datos reales disponibles (Agosto 2026).
+        var DATA_CUTOFF = new Date(2026, 7, 31, 23, 59, 59, 999);
+
+        function addMonthsDate(date, n) {
+            var d = new Date(date.getTime());
+            d.setMonth(d.getMonth() + n);
+            return d;
+        }
+
+        function monthDateRange(monthIdx) {
+            var start = new Date(2026, monthIdx, 1);
+            var end = new Date(2026, monthIdx + 1, 0, 23, 59, 59, 999);
+            return { start: start, end: end };
+        }
+
+        function overlapDays(aStart, aEnd, bStart, bEnd) {
+            var start = aStart > bStart ? aStart : bStart;
+            var end = aEnd < bEnd ? aEnd : bEnd;
+            var ms = end.getTime() - start.getTime();
+            if (ms < 0) return 0;
+            return Math.floor(ms / 86400000) + 1;
+        }
+
+        // Genera los límites de trimestres de 3 meses hacia atrás y hacia
+        // adelante a partir de la fecha de activación (ancla), cubriendo un
+        // rango amplio de tiempo para no perder ningún dato disponible.
+        function buildQuarterBoundaries(fechaISO) {
+            var anchor = new Date(fechaISO + 'T00:00:00');
+            var boundaries = [];
+
+            var d = new Date(anchor.getTime());
+            var backLimit = new Date(2025, 0, 1);
+            while (d.getTime() > backLimit.getTime()) {
+                boundaries.unshift(new Date(d.getTime()));
+                d = addMonthsDate(d, -3);
+            }
+            boundaries.unshift(new Date(d.getTime()));
+
+            d = addMonthsDate(anchor, 3);
+            var fwdLimit = new Date(2027, 5, 1);
+            while (d.getTime() < fwdLimit.getTime()) {
+                boundaries.push(new Date(d.getTime()));
+                d = addMonthsDate(d, 3);
+            }
+            boundaries.push(new Date(d.getTime()));
+
+            return boundaries;
+        }
+
+        // Calcula los trimestres personalizados a partir de una fecha de
+        // activación (ancla) y asigna cada mes con datos (Ene–Ago 2026) al
+        // trimestre donde cae la mayoría de sus días. Solo se devuelven los
+        // trimestres que efectivamente contienen algún mes con datos.
+        function getPersonalizedQuarters(fechaISO) {
+            var boundaries = buildQuarterBoundaries(fechaISO);
+            var quarters = [];
+            for (var i = 0; i < boundaries.length - 1; i++) {
+                var start = boundaries[i];
+                var end = new Date(boundaries[i + 1].getTime());
+                end.setDate(end.getDate() - 1);
+                end.setHours(23, 59, 59, 999);
+                quarters.push({ start: start, end: end, months: [] });
+            }
+
+            for (var m = 0; m < MONTHS.length; m++) {
+                var range = monthDateRange(m);
+                var bestQ = null, bestOverlap = 0;
+                quarters.forEach(function(q) {
+                    var ov = overlapDays(range.start, range.end, q.start, q.end);
+                    if (ov > bestOverlap) { bestOverlap = ov; bestQ = q; }
+                });
+                if (bestQ) bestQ.months.push(m);
+            }
+
+            var used = quarters.filter(function(q) { return q.months.length > 0; });
+
+            // No cortamos el último mes disponible a la mitad de su calendario
+            // trimestral. Si el mes más reciente con datos (p. ej. agosto) quedó
+            // solo en un trimestre que apenas arranca por unos días de diferencia
+            // en el ancla, lo integramos completo al trimestre vigente anterior
+            // en vez de mostrar un trimestre casi vacío cortado a mitad de mes.
+            var lastMonthIdx = MONTHS.length - 1;
+            if (used.length > 1) {
+                var lastQ = used[used.length - 1];
+                var prevQ = used[used.length - 2];
+                if (lastQ.months.length === 1 && lastQ.months[0] === lastMonthIdx) {
+                    prevQ.months.push(lastMonthIdx);
+                    prevQ.extendedToLastMonth = true;
+                    used.pop();
+                }
+            }
+
+            used.forEach(function(q) {
+                q.complete = q.extendedToLastMonth ? false : (q.end.getTime() <= DATA_CUTOFF.getTime());
+            });
+            return used;
+        }
+
+        function fmtQuarterLabel(q) {
+            var s = q.start.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+            if (q.extendedToLastMonth) {
+                var lastIdx = q.months[q.months.length - 1];
+                return s + '–' + MONTHS[lastIdx] + ' 2026';
+            }
+            var e = q.end.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+            return s + '–' + e;
+        }
+
         var ANALYSIS_VIEW = 'before_after';
+
 
         function getAnalysisConfig(clientId) {
             if (clientId === 'ALL') {
@@ -1818,8 +1939,46 @@
                     previousLeads = agg.leads;
                 });
 
+            } else if (ANALYSIS_VIEW === 'socio_fundador') {
+                if (titleEl) titleEl.textContent = 'Trimestres Socio Fundador · leads, CPL y crecimiento';
+
+                if (!cfg) {
+                    addRow('Este cliente no tiene plan Socio Fundador',
+                        aggregateRange(histFull, startIdx, endIdx).leads, '—', '—', false);
+                    return;
+                }
+
+                var activationMonthIdxSF = monthIndexFromDate(cfg.fecha);
+                var quartersSF = getPersonalizedQuarters(cfg.fecha);
+                var previousLeadsSF = null;
+
+                quartersSF.forEach(function(q) {
+                    var monthsInRange = q.months.filter(function(m) { return m >= startIdx && m <= endIdx; });
+                    if (!monthsInRange.length) return;
+
+                    var leadsSum = 0;
+                    monthsInRange.forEach(function(m) {
+                        if (histFull[m]) leadsSum += Number(histFull[m].leads || 0);
+                    });
+
+                    var paidMonths = 0;
+                    monthsInRange.forEach(function(m) { if (m > activationMonthIdxSF) paidMonths++; });
+                    var periodCost = (monthlyCost != null && paidMonths > 0) ? monthlyCost * paidMonths : null;
+
+                    var cpl = fmtCplValue(periodCost, leadsSum);
+                    var growth = fmtGrowth(leadsSum, previousLeadsSF);
+
+                    var isActivationQ = monthsInRange.indexOf(activationMonthIdxSF) !== -1;
+                    var tagParts = [];
+                    if (isActivationQ) tagParts.push('activación');
+                    if (!q.complete) tagParts.push('en curso');
+                    var tag = tagParts.length ? (' · ' + tagParts.join(' · ')) : '';
+
+                    addRow(fmtQuarterLabel(q) + tag, leadsSum, cpl, growth, isActivationQ);
+                    previousLeadsSF = leadsSum;
+                });
+
             } else {
-                if (titleEl) titleEl.textContent = 'Antes vs. Después · leads, CPL y crecimiento';
 
                 if (!cfg) {
                     addRow('Histórico', aggregateRange(histFull, startIdx, endIdx).leads, '—', '—', false);
@@ -1874,10 +2033,11 @@
                 return;
             }
 
-            // Para las vistas trimestral y antes/después, dibujar una serie agregada
-            // y mantener el mismo componente SVG.
+            // Para las vistas trimestral, Socio Fundador y antes/después, dibujar
+            // una serie agregada y mantener el mismo componente SVG.
             var pointsData = [];
             var labels = [];
+            var socioFundadorMarkerIdx = -1;
 
             if (ANALYSIS_VIEW === 'quarterly') {
                 [
@@ -1892,6 +2052,27 @@
                         labels.push(q.label);
                     }
                 });
+            } else if (ANALYSIS_VIEW === 'socio_fundador') {
+                var cfgSF = getAnalysisConfig(clientId);
+                if (cfgSF) {
+                    var activationMonthIdxChart = monthIndexFromDate(cfgSF.fecha);
+                    getPersonalizedQuarters(cfgSF.fecha).forEach(function(q) {
+                        var monthsInRange = q.months.filter(function(m) { return m >= startIdx && m <= endIdx; });
+                        if (!monthsInRange.length) return;
+
+                        var leadsSum = 0;
+                        monthsInRange.forEach(function(m) {
+                            if (histFull[m]) leadsSum += Number(histFull[m].leads || 0);
+                        });
+
+                        if (monthsInRange.indexOf(activationMonthIdxChart) !== -1) {
+                            socioFundadorMarkerIdx = pointsData.length;
+                        }
+
+                        pointsData.push(leadsSum);
+                        labels.push(fmtQuarterLabel(q));
+                    });
+                }
             } else {
                 var cfg = getAnalysisConfig(clientId);
                 if (cfg) {
@@ -2034,6 +2215,30 @@
                         markerLine.setAttribute('y2', fY); 
                         markerGroup.style.display = '';
                     }
+                } else if (founderCfg && ANALYSIS_VIEW === 'socio_fundador' && socioFundadorMarkerIdx >= 0 &&
+                    socioFundadorMarkerIdx < n) {
+                    var sx = xAt(socioFundadorMarkerIdx);
+                    var sy = yAt(pointsData[socioFundadorMarkerIdx]);
+
+                    markerDot.setAttribute('cx', sx);
+                    markerDot.setAttribute('cy', sy);
+
+                    var sw = 112, sh = 16;
+                    var sX = Math.min(Math.max(sx - sw / 2, PAD_L), CHART_W - PAD_R - sw);
+                    var sY = sy + 18; // Forzado hacia abajo
+
+                    markerBg.setAttribute('x', sX);
+                    markerBg.setAttribute('y', sY);
+                    markerBg.setAttribute('width', sw);
+                    markerBg.setAttribute('height', sh);
+                    markerText.setAttribute('x', sX + sw / 2);
+                    markerText.setAttribute('y', sY + sh / 2 + 3);
+                    markerText.textContent = 'Socio Fundador';
+                    markerLine.setAttribute('x1', sx);
+                    markerLine.setAttribute('y1', sy);
+                    markerLine.setAttribute('x2', sx);
+                    markerLine.setAttribute('y2', sY);
+                    markerGroup.style.display = '';
                 } else if (founderCfg && ANALYSIS_VIEW === 'before_after') {
                     var bx = xAt(n - 1);
                     var by = yAt(pointsData[n - 1]);
