@@ -366,6 +366,10 @@
             font-size: 7.5px !important;
             white-space: nowrap;
         }
+        .monthly-cpl-table.cpl-hidden th:nth-child(3),
+        .monthly-cpl-table.cpl-hidden td:nth-child(3) {
+            display: none;
+        }
         
         /* Clases nuevas para centrar y aumentar tablas Trimestral y Antes/Después */
         .slide-3 .block-centered-large, 
@@ -674,6 +678,7 @@
                 <option value="before_after" selected>Antes vs. Después</option>
             </select>
             <span style="font-size:11px; color:#999; font-style:italic;">Leads · CPL · crecimiento</span>
+            <button id="btn-toggle-cpl" style="padding:6px 12px; border:1px solid var(--verde-principal); border-radius:6px; background:white; color:var(--verde-principal); font-weight:700; cursor:pointer; font-family:'Roboto',sans-serif; font-size:12px;">Ocultar CPL</button>
 
             <strong style="font-family:'Montserrat',sans-serif; color:var(--verde-oscuro); font-size:14px; margin-left:18px;">Propuesta de renovación (slide 10):</strong>
             <select id="promo-selector" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
@@ -1800,6 +1805,7 @@
         }
 
         var ANALYSIS_VIEW = 'before_after';
+        var SHOW_CPL = true;
 
 
         function getAnalysisConfig(clientId) {
@@ -1840,6 +1846,8 @@
             var tableEl = document.querySelector('.monthly-cpl-table');
             var blockEl = document.getElementById('analysis-table-block');
             if (!body) return;
+
+            if (tableEl) tableEl.classList.toggle('cpl-hidden', !SHOW_CPL);
 
             body.innerHTML = '';
             if (!histFull || !histFull.length) return;
@@ -1883,7 +1891,8 @@
             }
 
             if (ANALYSIS_VIEW === 'monthly') {
-                if (titleEl) titleEl.textContent = 'Evolución mensual · leads, CPL y crecimiento';
+                if (titleEl) titleEl.textContent = 'Evolución mensual · leads' + (SHOW_CPL ? ', CPL' : '') +
+                    ' y crecimiento';
 
                 for (var i = startIdx; i <= endIdx; i++) {
                     var row = histFull[i];
@@ -1905,7 +1914,8 @@
                 }
 
             } else if (ANALYSIS_VIEW === 'quarterly') {
-                if (titleEl) titleEl.textContent = 'Evolución trimestral · leads, CPL y crecimiento';
+                if (titleEl) titleEl.textContent = 'Evolución trimestral · leads' + (SHOW_CPL ? ', CPL' : '') +
+                    ' y crecimiento';
 
                 var quarters = [
                     { label: 'Ene–Mar', from: 0, to: 2 },
@@ -1940,7 +1950,8 @@
                 });
 
             } else if (ANALYSIS_VIEW === 'socio_fundador') {
-                if (titleEl) titleEl.textContent = 'Trimestres Socio Fundador · leads, CPL y crecimiento';
+                if (titleEl) titleEl.textContent = 'Trimestres Socio Fundador · leads' + (SHOW_CPL ? ', CPL' : '') +
+                    ' y crecimiento';
 
                 if (!cfg) {
                     addRow('Este cliente no tiene plan Socio Fundador',
@@ -1979,6 +1990,8 @@
                 });
 
             } else {
+                if (titleEl) titleEl.textContent = 'Antes vs. Después · leads' + (SHOW_CPL ? ', CPL' : '') +
+                    ' y crecimiento';
 
                 if (!cfg) {
                     addRow('Histórico', aggregateRange(histFull, startIdx, endIdx).leads, '—', '—', false);
@@ -2986,6 +2999,13 @@
             });
 
             document.getElementById('btn-pdf').addEventListener('click', generatePdf);
+
+            var btnToggleCpl = document.getElementById('btn-toggle-cpl');
+            if (btnToggleCpl) btnToggleCpl.addEventListener('click', function() {
+                SHOW_CPL = !SHOW_CPL;
+                btnToggleCpl.textContent = SHOW_CPL ? 'Ocultar CPL' : 'Mostrar CPL';
+                renderClient();
+            });
         });
     </script>
 </body>
