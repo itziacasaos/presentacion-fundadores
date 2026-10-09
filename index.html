@@ -650,6 +650,7 @@
             <option value="5">Jun 2026</option>
             <option value="6">Jul 2026</option>
             <option value="7">Ago 2026</option>
+            <option value="8">Sep 2026</option>
         </select>
         <span style="font-size:12px; color:#888;">a</span>
         <select id="period-end" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; font-size:14px; font-family:'Roboto',sans-serif;">
@@ -660,9 +661,10 @@
             <option value="4">May 2026</option>
             <option value="5">Jun 2026</option>
             <option value="6">Jul 2026</option>
-            <option value="7" selected>Ago 2026</option>
+            <option value="7">Ago 2026</option>
+            <option value="8" selected>Sep 2026</option>
         </select>
-        <span style="font-size:11px; color:#999; font-style:italic;">(agosto: periodo parcial)</span>
+        <span style="font-size:11px; color:#999; font-style:italic;">(datos cerrados a septiembre 2026)</span>
 
         <div style="display:flex; gap:8px; margin-left:auto; flex-wrap:wrap;">
             <button id="btn-fetch-meta" style="padding:8px 16px; border:none; border-radius:6px; background:var(--verde-principal); color:white; font-weight:700; cursor:pointer; font-family:'Roboto',sans-serif; font-size:13px;">Actualizar datos de Meta</button>
@@ -1081,252 +1083,13 @@
             catano:  { fecha: '2026-05-11', monto: 60000, periodicidad: 'trimestral', costoMensual: 20000 }
         };
 
-        var HIST = {
-          "clients": {
-            "catano": {
-              "id": "catano",
-              "nombre": "Cataño Bienes Raíces",
-              "propiedades_activas": 505,
-              "propiedades_total": 2668,
-              "avg_score": 64.4,
-              "series": [
-                { "mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Feb", "leads": 60, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Mar", "leads": 81, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 120143, "vistas": 2005 },
-                { "mes": "Jun", "leads": 298, "contactos": 0, "eventos": 0, "impresiones": 757480, "vistas": 17212 },
-                { "mes": "Jul", "leads": 219, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 20753 },
-                { "mes": "Ago", "leads": 193, "contactos": 0, "eventos": 0, "impresiones": 469625, "vistas": 14554 }
-              ]
-            },
-            "mint": {
-              "id": "mint",
-              "nombre": "MINT inmobiliaria MINT INMOBILIARIA",
-              "propiedades_activas": 101,
-              "propiedades_total": 551,
-              "avg_score": 61.8,
-              "series": [
-                { "mes": "Ene", "leads": 18, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Feb", "leads": 6, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Mar", "leads": 4, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Abr", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 227 },
-                { "mes": "Jun", "leads": 25, "contactos": 0, "eventos": 0, "impresiones": 88988, "vistas": 2454 },
-                { "mes": "Jul", "leads": 39, "contactos": 0, "eventos": 0, "impresiones": 118709, "vistas": 5637 },
-                { "mes": "Ago", "leads": 38, "contactos": 0, "eventos": 0, "impresiones": 138956, "vistas": 4085 }
-              ]
-            },
-            "pulppo": {
-              "id": "pulppo",
-              "nombre": "Pulppo",
-              "propiedades_activas": 7615,
-              "propiedades_total": 76584,
-              "avg_score": 29.5,
-              "series": [
-                { "mes": "Ene", "leads": 922, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Feb", "leads": 518, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Mar", "leads": 496, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Abr", "leads": 21, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "May", "leads": 203, "contactos": 0, "eventos": 0, "impresiones": 158592, "vistas": 7177 },
-                { "mes": "Jun", "leads": 523, "contactos": 0, "eventos": 0, "impresiones": 357576, "vistas": 25107 },
-                { "mes": "Jul", "leads": 822, "contactos": 0, "eventos": 0, "impresiones": 744685, "vistas": 47907 },
-                { "mes": "Ago", "leads": 1263, "contactos": 0, "eventos": 0, "impresiones": 1429536, "vistas": 74100 }
-              ]
-            },
-            "cattori": {
-              "id": "cattori",
-              "nombre": "Cattori Inmobiliaria",
-              "propiedades_activas": 233,
-              "propiedades_total": 241,
-              "avg_score": 66.4,
-              "series": [
-                { "mes": "Ene", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Feb", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Mar", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0 },
-                { "mes": "May", "leads": 22, "contactos": 0, "eventos": 0, "impresiones": 96809, "vistas": 831 },
-                { "mes": "Jun", "leads": 46, "contactos": 0, "eventos": 0, "impresiones": 219229, "vistas": 4999 },
-                { "mes": "Jul", "leads": 62, "contactos": 0, "eventos": 0, "impresiones": 251288, "vistas": 12805 },
-                { "mes": "Ago", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 214297, "vistas": 7490 }
-              ]
-            }
-          }
-        };
+        var HIST = {"clients": {"catano": {"id": "catano", "nombre": "Cataño Bienes Raíces", "propiedades_activas": 490, "propiedades_total": 2734, "avg_score": 65.6, "series": [{"mes": "Ene", "leads": 59, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 65, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 87, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 61, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Jun", "leads": 299, "contactos": 0, "eventos": 0, "impresiones": 519487, "vistas": 11886}, {"mes": "Jul", "leads": 222, "contactos": 0, "eventos": 0, "impresiones": 776496, "vistas": 24971}, {"mes": "Ago", "leads": 203, "contactos": 0, "eventos": 0, "impresiones": 484733, "vistas": 16821}, {"mes": "Sep", "leads": 66, "contactos": 0, "eventos": 0, "impresiones": 38600, "vistas": 4499}]}, "mint": {"id": "mint", "nombre": "MINT inmobiliaria MINT INMOBILIARIA", "propiedades_activas": 106, "propiedades_total": 594, "avg_score": 63.1, "series": [{"mes": "Ene", "leads": 16, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 9, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 5, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 17, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Jun", "leads": 36, "contactos": 0, "eventos": 0, "impresiones": 93110, "vistas": 2607}, {"mes": "Jul", "leads": 45, "contactos": 0, "eventos": 0, "impresiones": 153487, "vistas": 8871}, {"mes": "Ago", "leads": 57, "contactos": 0, "eventos": 0, "impresiones": 254352, "vistas": 7914}, {"mes": "Sep", "leads": 73, "contactos": 0, "eventos": 0, "impresiones": 320361, "vistas": 5847}]}, "pulppo": {"id": "pulppo", "nombre": "Pulppo", "propiedades_activas": 7894, "propiedades_total": 79280, "avg_score": 30.8, "series": [{"mes": "Ene", "leads": 549, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 538, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 528, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 21, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 205, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Jun", "leads": 529, "contactos": 0, "eventos": 0, "impresiones": 238980, "vistas": 19671}, {"mes": "Jul", "leads": 832, "contactos": 0, "eventos": 0, "impresiones": 749401, "vistas": 52423}, {"mes": "Ago", "leads": 1332, "contactos": 0, "eventos": 0, "impresiones": 1980074, "vistas": 105847}, {"mes": "Sep", "leads": 1330, "contactos": 0, "eventos": 0, "impresiones": 1853558, "vistas": 103636}]}, "cattori": {"id": "cattori", "nombre": "Cattori Inmobiliaria", "propiedades_activas": 214, "propiedades_total": 262, "avg_score": 73.2, "series": [{"mes": "Ene", "leads": 1, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Feb", "leads": 1, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Mar", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Abr", "leads": 0, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "May", "leads": 22, "contactos": 0, "eventos": 0, "impresiones": 0, "vistas": 0}, {"mes": "Jun", "leads": 46, "contactos": 0, "eventos": 0, "impresiones": 143885, "vistas": 3385}, {"mes": "Jul", "leads": 63, "contactos": 0, "eventos": 0, "impresiones": 251288, "vistas": 12805}, {"mes": "Ago", "leads": 79, "contactos": 0, "eventos": 0, "impresiones": 362635, "vistas": 10650}, {"mes": "Sep", "leads": 102, "contactos": 0, "eventos": 0, "impresiones": 538316, "vistas": 9847}]}}};
 
-        var META = {
-            "clients": {
-                "catano": {
-                    "nombre": "Cataño México",
-                    "leads": 143,
-                    "gasto": 276.93,
-                    "eventos": 3162,
-                    "cpa": 0.09,
-                    "evpag": 4.06,
-                    "contactos": 1829,
-                    "cpl": 1.94,
-                    "anuncios": 5,
-                    "impresiones": 404598,
-                    "clics": 2543,
-                    "propiedades_activas_portal": 510,
-                    "detalle": [
-                        { "publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573,
-                            "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84,
-                            "cpc": 0.19 },
-                        { "publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525,
-                            "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9,
-                            "cpc": 0.27 },
-                        { "publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483,
-                            "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11,
-                            "cpc": 0.19 },
-                        { "publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534,
-                            "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85,
-                            "cpc": 0.09 },
-                        { "publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390,
-                            "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27,
-                            "cpc": 0.14 }
-                    ]
-                },
-                "mint": {
-                    "nombre": "MINT Inmobiliaria",
-                    "leads": 163,
-                    "gasto": 274.86,
-                    "eventos": 3036,
-                    "cpa": 0.09,
-                    "evpag": 4.33,
-                    "contactos": 1661,
-                    "cpl": 1.69,
-                    "anuncios": 5,
-                    "impresiones": 340501,
-                    "clics": 2381,
-                    "propiedades_activas_portal": 112,
-                    "detalle": [
-                        { "publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418,
-                            "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1,
-                            "cpc": 0.13 },
-                        { "publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346,
-                            "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34,
-                            "cpc": 0.11 },
-                        { "publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390,
-                            "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06,
-                            "cpc": 0.18 },
-                        { "publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437,
-                            "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01,
-                            "cpc": 0.26 },
-                        { "publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386,
-                            "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95,
-                            "cpc": 0.16 }
-                    ]
-                },
-                "cattori": {
-                    "nombre": "Cattori Inmobiliaria",
-                    "leads": 122,
-                    "gasto": 236.89,
-                    "eventos": 2677,
-                    "cpa": 0.09,
-                    "evpag": 4.28,
-                    "contactos": 1667,
-                    "cpl": 1.94,
-                    "anuncios": 4,
-                    "impresiones": 354563,
-                    "clics": 1729,
-                    "propiedades_activas_portal": 231,
-                    "detalle": [
-                        { "publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461,
-                            "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86,
-                            "cpc": 0.2 },
-                        { "publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433,
-                            "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72,
-                            "cpc": 0.21 },
-                        { "publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504,
-                            "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75,
-                            "cpc": 0.22 },
-                        { "publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465,
-                            "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09,
-                            "cpc": 0.11 }
-                    ]
-                },
-                "pulppo": {
-                    "nombre": "Pulppo",
-                    "leads": 88,
-                    "gasto": 224.17,
-                    "eventos": 2144,
-                    "cpa": 0.1,
-                    "evpag": 5.24,
-                    "contactos": 1249,
-                    "cpl": 2.55,
-                    "anuncios": 4,
-                    "impresiones": 322236,
-                    "clics": 1358,
-                    "propiedades_activas_portal": null,
-                    "detalle": [
-                        { "publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244,
-                            "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79,
-                            "cpc": 0.19 },
-                        { "publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14,
-                            "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15,
-                            "cpm": 0.9, "cpc": 0.2 },
-                        { "publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508,
-                            "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73,
-                            "cpc": 0.23 },
-                        { "publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365,
-                            "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89,
-                            "cpc": 0.17 }
-                    ]
-                }
-            }
-        };
+        var META = {"clients": {"catano": {"nombre": "Cataño México", "leads": 143, "gasto": 276.93, "eventos": 3162, "cpa": 0.09, "evpag": 4.06, "contactos": 1829, "cpl": 1.94, "anuncios": 5, "impresiones": 404598, "clics": 2543, "propiedades_activas_portal": 510, "detalle": [{"publicacion": "31625311", "colonia": "Ampliación Alpes", "leads": 43, "contactos": 573, "impresiones": 93626, "clics": 409, "ctr": 0.51, "gasto": 78.42, "cpm": 0.84, "cpc": 0.19}, {"publicacion": "31598577", "colonia": "Santa Fe Cuajimalpa", "leads": 22, "contactos": 525, "impresiones": 86875, "clics": 288, "ctr": 0.41, "gasto": 78.3, "cpm": 0.9, "cpc": 0.27}, {"publicacion": "31518535", "colonia": "Bosques de las Lomas", "leads": 42, "contactos": 483, "impresiones": 70266, "clics": 408, "ctr": 0.68, "gasto": 78.24, "cpm": 1.11, "cpc": 0.19}, {"publicacion": "31548377", "colonia": "Bellavista", "leads": 45, "contactos": 534, "impresiones": 92362, "clics": 894, "ctr": 1.02, "gasto": 78.17, "cpm": 0.85, "cpc": 0.09}, {"publicacion": "31638830", "colonia": "Olivar de los Padres", "leads": 43, "contactos": 390, "impresiones": 61469, "clics": 544, "ctr": 1.08, "gasto": 78.1, "cpm": 1.27, "cpc": 0.14}]}, "mint": {"nombre": "MINT Inmobiliaria", "leads": 163, "gasto": 274.86, "eventos": 3036, "cpa": 0.09, "evpag": 4.33, "contactos": 1661, "cpl": 1.69, "anuncios": 5, "impresiones": 340501, "clics": 2381, "propiedades_activas_portal": 112, "detalle": [{"publicacion": "31611444", "colonia": "Ampliación Napoles", "leads": 45, "contactos": 418, "impresiones": 66890, "clics": 566, "ctr": 1.01, "gasto": 73.29, "cpm": 1.1, "cpc": 0.13}, {"publicacion": "30842301", "colonia": "Jardines del Ajusco", "leads": 35, "contactos": 346, "impresiones": 54677, "clics": 671, "ctr": 1.33, "gasto": 73.24, "cpm": 1.34, "cpc": 0.11}, {"publicacion": "31434431", "colonia": "Arenal Tepepan", "leads": 37, "contactos": 390, "impresiones": 69278, "clics": 416, "ctr": 0.7, "gasto": 73.1, "cpm": 1.06, "cpc": 0.18}, {"publicacion": "31434430", "colonia": "Jardines en la Montaña", "leads": 36, "contactos": 437, "impresiones": 72422, "clics": 277, "ctr": 0.45, "gasto": 73.09, "cpm": 1.01, "cpc": 0.26}, {"publicacion": "31581816", "colonia": "Napoles", "leads": 34, "contactos": 386, "impresiones": 77234, "clics": 451, "ctr": 0.67, "gasto": 73.07, "cpm": 0.95, "cpc": 0.16}]}, "cattori": {"nombre": "Cattori Inmobiliaria", "leads": 122, "gasto": 236.89, "eventos": 2677, "cpa": 0.09, "evpag": 4.28, "contactos": 1667, "cpl": 1.94, "anuncios": 4, "impresiones": 354563, "clics": 1729, "propiedades_activas_portal": 231, "detalle": [{"publicacion": "28713145", "colonia": "Legaria", "leads": 37, "contactos": 461, "impresiones": 85983, "clics": 369, "ctr": 0.55, "gasto": 73.6, "cpm": 0.86, "cpc": 0.2}, {"publicacion": "31631604", "colonia": "Xoco", "leads": 20, "contactos": 433, "impresiones": 102694, "clics": 342, "ctr": 0.38, "gasto": 73.5, "cpm": 0.72, "cpc": 0.21}, {"publicacion": "31616995", "colonia": "Polanco III Sección", "leads": 38, "contactos": 504, "impresiones": 98413, "clics": 333, "ctr": 0.4, "gasto": 73.44, "cpm": 0.75, "cpc": 0.22}, {"publicacion": "31640054", "colonia": "Tetelpan", "leads": 36, "contactos": 465, "impresiones": 67473, "clics": 685, "ctr": 1.11, "gasto": 73.41, "cpm": 1.09, "cpc": 0.11}]}, "pulppo": {"nombre": "Pulppo", "leads": 88, "gasto": 224.17, "eventos": 2144, "cpa": 0.1, "evpag": 5.24, "contactos": 1249, "cpl": 2.55, "anuncios": 4, "impresiones": 322236, "clics": 1358, "propiedades_activas_portal": null, "detalle": [{"publicacion": "31307357", "colonia": "Tamanché", "leads": 26, "contactos": 244, "impresiones": 83800, "clics": 341, "ctr": 0.46, "gasto": 66.27, "cpm": 0.79, "cpc": 0.19}, {"publicacion": "31625650", "colonia": "Ocoyotepec (Ocoyotepec Centro)", "leads": 14, "contactos": 256, "impresiones": 73317, "clics": 334, "ctr": 0.57, "gasto": 66.15, "cpm": 0.9, "cpc": 0.2}, {"publicacion": "31453188", "colonia": "Juárez", "leads": 24, "contactos": 508, "impresiones": 90751, "clics": 286, "ctr": 0.37, "gasto": 65.87, "cpm": 0.73, "cpc": 0.23}, {"publicacion": "31625643", "colonia": "San Mateo Otzacatipan", "leads": 27, "contactos": 365, "impresiones": 74368, "clics": 397, "ctr": 0.67, "gasto": 65.87, "cpm": 0.89, "cpc": 0.17}]}}};
 
-        var PROMOS = {
-            "socio_fundador": { "nombre": "RENOVACIÓN SOCIO FUNDADOR", "avisos": "—", "vigencia": "$90,000 + IVA · Trimestral · Compromiso 5 años", "inversion": "$90,000 + IVA" },
-            "plan_impulso": { "nombre": "PLAN IMPULSO", "avisos": "—",
-                "vigencia": "Paga 8 meses → recibe 12 meses · 10% de bonificación en Destacados durante 1 mes", "inversion": "—" },
-            "plan_crecimiento": { "nombre": "PLAN CRECIMIENTO", "avisos": "—",
-                "vigencia": "Paga 12 meses → recibe 16 meses · 10% de bonificación en Destacados durante 3 meses", "inversion": "—" }
-        };
+        var PROMOS = {"socio_fundador": {"nombre": "RENOVACIÓN SOCIO FUNDADOR", "avisos": "—", "vigencia": "$90,000 + IVA · Trimestral · Compromiso 5 años", "inversion": "$90,000 + IVA"}, "plan_impulso": {"nombre": "PLAN IMPULSO", "avisos": "—", "vigencia": "Paga 8 meses → recibe 12 meses · 10% de bonificación en Destacados durante 1 mes", "inversion": "—"}, "plan_crecimiento": {"nombre": "PLAN CRECIMIENTO", "avisos": "—", "vigencia": "Paga 12 meses → recibe 16 meses · 10% de bonificación en Destacados durante 3 meses", "inversion": "—"}};
 
-        var RANKING = {
-          "catano": [
-            { "codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 31, "impresiones": 5048, "vistas": 631, "score": 73.0 },
-            { "codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 27, "impresiones": 47149, "vistas": 1051, "score": 67.0 },
-            { "codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 26, "impresiones": 87790, "vistas": 1478, "score": 66.0 },
-            { "codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 49514, "vistas": 1015, "score": 69.0 },
-            { "codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 2502, "vistas": 599, "score": 70.0 },
-            { "codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 16, "impresiones": 26116, "vistas": 833, "score": 59.0 },
-            { "codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 85, "vistas": 3, "score": 64.0 },
-            { "codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 15, "impresiones": 3129, "vistas": 469, "score": 64.0 }
-          ],
-          "mint": [
-            { "codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 0, "score": 68.0 },
-            { "codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 4483, "vistas": 354, "score": 62.0 },
-            { "codigo": "EB-UO9191s", "property_id": 31311223, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 5, "impresiones": 2369, "vistas": 120, "score": 62.0 },
-            { "codigo": "EB-OH9513r", "property_id": 31434440, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 5, "impresiones": 79738, "vistas": 943, "score": 57.0 },
-            { "codigo": "EB-SE0193s", "property_id": 31376848, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 2250, "vistas": 49, "score": 60.0 },
-            { "codigo": "EB-VE4966s", "property_id": 31495214, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 667, "vistas": 50, "score": 74.0 },
-            { "codigo": "EB-WN3164r", "property_id": 31593964, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 4, "impresiones": 653, "vistas": 50, "score": 54.0 },
-            { "codigo": "EB-UO9166s", "property_id": 31311810, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 4, "impresiones": 3652, "vistas": 242, "score": 62.0 }
-          ],
-          "pulppo": [
-            { "codigo": "", "property_id": 28697360, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 26, "impresiones": 0, "vistas": 0, "score": 61.0 },
-            { "codigo": "", "property_id": 28757872, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 24, "impresiones": 0, "vistas": 1, "score": 62.0 },
-            { "codigo": "DGD-062", "property_id": 31092169, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 3757, "vistas": 399, "score": 62.0 },
-            { "codigo": "CMS-104", "property_id": 30943671, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 20, "impresiones": 2402, "vistas": 275, "score": 62.0 },
-            { "codigo": "TJB-383", "property_id": 31424969, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 19, "impresiones": 1926, "vistas": 230, "score": 78.0 },
-            { "codigo": "", "property_id": 28662935, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 17, "impresiones": 0, "vistas": 0, "score": 61.0 },
-            { "codigo": "", "property_id": 28659142, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 0, "vistas": 0, "score": 62.0 },
-            { "codigo": "CPU-248", "property_id": 31578913, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 15, "impresiones": 344, "vistas": 176, "score": 72.0 }
-          ],
-          "cattori": [
-            { "codigo": "EB-RA0749s", "property_id": 31304176, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 8, "impresiones": 1635, "vistas": 1578, "score": 67.0 },
-            { "codigo": "EB-UC4766s", "property_id": 31304110, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 30089, "vistas": 814, "score": 68.0 },
-            { "codigo": "EB-VO9291s", "property_id": 31304061, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 7, "impresiones": 1783, "vistas": 285, "score": 64.0 },
-            { "codigo": "EB-VL6843r", "property_id": 31304070, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 7, "impresiones": 28832, "vistas": 669, "score": 67.0 },
-            { "codigo": "EB-RV7088s", "property_id": 31304157, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 6, "impresiones": 1530, "vistas": 58, "score": 66.0 },
-            { "codigo": "EB-WH3813r", "property_id": 31488025, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 6, "impresiones": 20681, "vistas": 603, "score": 68.0 },
-            { "codigo": "EB-VX2979s", "property_id": 31304045, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 6, "impresiones": 16066, "vistas": 430, "score": 64.0 },
-            { "codigo": "EB-WO7453r", "property_id": 31619579, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 5, "impresiones": 4907, "vistas": 127, "score": 73.0 }
-          ]
-        };
+        var RANKING = {"catano": [{"codigo": "EB-WR6211r", "property_id": 31673338, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 31, "impresiones": 5216, "vistas": 658, "score": 73.0}, {"codigo": "EB-WB3669r", "property_id": 31393930, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 27, "impresiones": 33695, "vistas": 807, "score": 67.0}, {"codigo": "EB-VE8713r", "property_id": 31393730, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 26, "impresiones": 75102, "vistas": 1294, "score": 66.0}, {"codigo": "EB-WD6479r", "property_id": 31394548, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 37154, "vistas": 806, "score": 69.0}, {"codigo": "EB-WD9858r", "property_id": 31413400, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 23, "impresiones": 1855, "vistas": 466, "score": 70.0}, {"codigo": "EB-WD9932r", "property_id": 31413499, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 17, "impresiones": 24842, "vistas": 769, "score": 59.0}, {"codigo": "EB-VQ9817r", "property_id": 31393958, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 16, "impresiones": 3078, "vistas": 520, "score": 72.0}, {"codigo": "EB-SO5127r", "property_id": 30681187, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 16, "impresiones": 0, "vistas": 12, "score": 64.0}], "mint": [{"codigo": "EB-WS5531s", "property_id": 31687359, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 11, "impresiones": 3751, "vistas": 291, "score": 76.0}, {"codigo": "EB-UV7750r", "property_id": 30625364, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 9, "impresiones": 0, "vistas": 2, "score": 68.0}, {"codigo": "EB-WS5498s", "property_id": 31687322, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 8, "impresiones": 3393, "vistas": 194, "score": 76.0}, {"codigo": "EB-UO9159s", "property_id": 31311813, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 4093, "vistas": 325, "score": 62.0}, {"codigo": "EB-UU5409s", "property_id": 30603908, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 7, "impresiones": 5718, "vistas": 402, "score": 71.0}, {"codigo": "EB-XC9109r", "property_id": 31813605, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 7, "impresiones": 911, "vistas": 99, "score": 73.0}, {"codigo": "EB-WQ1471r", "property_id": 31646190, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 6, "impresiones": 54106, "vistas": 932, "score": 71.0}, {"codigo": "EB-WS5596s", "property_id": 31687450, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 6, "impresiones": 3036, "vistas": 164, "score": 76.0}], "pulppo": [{"codigo": "", "property_id": 28697360, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 32, "impresiones": 0, "vistas": 0, "score": 61.0}, {"codigo": "TJB-383", "property_id": 31424969, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 26, "impresiones": 4011, "vistas": 348, "score": 76.0}, {"codigo": "", "property_id": 28757872, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 25, "impresiones": 0, "vistas": 0, "score": 62.0}, {"codigo": "DGD-062", "property_id": 31092169, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 22, "impresiones": 1367, "vistas": 227, "score": 62.0}, {"codigo": "DQP-503", "property_id": 31640064, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 21, "impresiones": 3413, "vistas": 638, "score": 74.0}, {"codigo": "CMS-104", "property_id": 30943671, "tipo_operacion": "Renta", "estatus": "Vencida", "leads": 20, "impresiones": 582, "vistas": 102, "score": 62.0}, {"codigo": "", "property_id": 28662935, "tipo_operacion": "Renta", "estatus": "Eliminada", "leads": 19, "impresiones": 0, "vistas": 4, "score": 61.0}, {"codigo": "DML-211", "property_id": 31644135, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 18, "impresiones": 1713, "vistas": 280, "score": 79.0}], "cattori": [{"codigo": "EB-WT0551r", "property_id": 31695017, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 10, "impresiones": 9803, "vistas": 316, "score": 74.0}, {"codigo": "EB-VL6843r", "property_id": 31304070, "tipo_operacion": "Renta", "estatus": "Aprobada", "leads": 9, "impresiones": 34653, "vistas": 751, "score": 73.0}, {"codigo": "EB-RA0749s", "property_id": 31304176, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 9, "impresiones": 1595, "vistas": 1588, "score": 75.0}, {"codigo": "EB-RV7088s", "property_id": 31304157, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 8, "impresiones": 1235, "vistas": 62, "score": 72.0}, {"codigo": "EB-WG6949s", "property_id": 31467073, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 8, "impresiones": 1262, "vistas": 53, "score": 73.0}, {"codigo": "EB-UC4766s", "property_id": 31304110, "tipo_operacion": "Venta", "estatus": "Vencida", "leads": 8, "impresiones": 24667, "vistas": 775, "score": 68.0}, {"codigo": "EB-RJ7155s", "property_id": 28713145, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 7, "impresiones": 6342, "vistas": 587, "score": 77.0}, {"codigo": "EB-VS7299s", "property_id": 31041781, "tipo_operacion": "Venta", "estatus": "Aprobada", "leads": 7, "impresiones": 3568, "vistas": 205, "score": 75.0}]};
 
         var CLIENT_LOGOS = {
             catano: 'logo-catano.png',
@@ -1578,7 +1341,7 @@
             }
         }
 
-        var MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'];
+        var MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep'];
         var META_START_IDX = 6; // respaldo para clientes sin activación Socio Fundador
         var HIST_CLIENT_IDS = Object.keys(HIST.clients);
         var META_CLIENT_IDS = Object.keys(META.clients);
@@ -1654,7 +1417,7 @@
             return rows.slice(0, 5);
         }
 
-        var state = { clientId: 'ALL', startIdx: 0, endIdx: 6 };
+        var state = { clientId: 'ALL', startIdx: 0, endIdx: 8 };
 
         function founderConfig(clientId) { return SOCIO_FUNDADOR[clientId] || null; }
 
@@ -1696,8 +1459,8 @@
         // Esta lógica alimenta la opción "Socio Fundador" del selector
         // "Vista de análisis".
 
-        // Último mes con datos reales disponibles (Agosto 2026).
-        var DATA_CUTOFF = new Date(2026, 7, 31, 23, 59, 59, 999);
+        // Último mes con datos reales disponibles (Septiembre 2026).
+        var DATA_CUTOFF = new Date(2026, 8, 30, 23, 59, 59, 999);
 
         function addMonthsDate(date, n) {
             var d = new Date(date.getTime());
@@ -1746,7 +1509,7 @@
         }
 
         // Calcula los trimestres personalizados a partir de una fecha de
-        // activación (ancla) y asigna cada mes con datos (Ene–Ago 2026) al
+        // activación (ancla) y asigna cada mes con datos al
         // trimestre donde cae la mayoría de sus días. Solo se devuelven los
         // trimestres que efectivamente contienen algún mes con datos.
         function getPersonalizedQuarters(fechaISO) {
@@ -1773,7 +1536,7 @@
             var used = quarters.filter(function(q) { return q.months.length > 0; });
 
             // No cortamos el último mes disponible a la mitad de su calendario
-            // trimestral. Si el mes más reciente con datos (p. ej. agosto) quedó
+            // trimestral. Si el mes más reciente con datos quedó
             // solo en un trimestre que apenas arranca por unos días de diferencia
             // en el ancla, lo integramos completo al trimestre vigente anterior
             // en vez de mostrar un trimestre casi vacío cortado a mitad de mes.
@@ -2017,10 +1780,13 @@
                 }
                 var afterCost = (monthlyCost != null && afterMonths > 0) ? monthlyCost * afterMonths : null;
 
-                addRow('Antes · Ene–May', before, '—',
+                var beforeLabel = 'Antes · ' + (beforeFrom <= beforeTo ? (MONTHS[beforeFrom] + '–' + MONTHS[beforeTo]) : '—');
+                var afterLabel = 'Después · ' + (afterFrom <= afterTo ? (MONTHS[afterFrom] + '–' + MONTHS[afterTo]) : '—');
+
+                addRow(beforeLabel, before, '—',
                     '—', false);
 
-                addRow('Después · Jun–Ago', after,
+                addRow(afterLabel, after,
                     fmtCplValue(afterCost, after),
                     fmtGrowth(after, before), false);
             }
@@ -2428,7 +2194,7 @@
                     markerBg.setAttribute('height', labelH);
                     markerText.setAttribute('x', labelX + labelW / 2);
                     markerText.setAttribute('y', labelY + labelH / 2 + 3);
-                    markerText.textContent = 'Socio Fundador';
+                    markerText.textContent = 'Socio Fundador · ' + new Date(founder.fecha + 'T12:00:00').toLocaleDateString('es-MX', {day:'numeric', month:'short'});
                     markerLine.setAttribute('x1', mx);
                     markerLine.setAttribute('y1', my);
                     markerLine.setAttribute('x2', mx);
@@ -2441,15 +2207,8 @@
 
             if (labelsBox) {
                 labelsBox.style.left = 'calc(50% - ' + (CHART_W / 2 - PAD_L) + 'px)';
-                labelsBox.style.right = 'auto';
-                labelsBox.style.width = plotW + 'px';
-                labelsBox.style.transform = 'none';
-                labelsBox.innerHTML = '';
-                histSlice.forEach(function(s) {
-                    var sp = document.createElement('span');
-                    sp.textContent = s.mes;
-                    labelsBox.appendChild(sp);
-                });
+                labelsBox.style.right = 'auto'; labelsBox.style.width = plotW + 'px'; labelsBox.style.transform = 'none'; labelsBox.innerHTML = '';
+                histSlice.forEach(function(s) { var sp = document.createElement('span'); sp.textContent = s.mes; labelsBox.appendChild(sp); });
             }
         }
 
